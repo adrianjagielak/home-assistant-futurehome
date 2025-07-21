@@ -2,12 +2,18 @@ import { connectHub, connectHA } from "./client";
 import { publishDiscovery } from "./discovery";
 
 (async () => {
-  const hubIp   = process.env.FH_HUB_IP  || "";
+  const hubIp   = process.env.FH_HUB_IP   || "";
   const user    = process.env.FH_USERNAME || "";
   const pass    = process.env.FH_PASSWORD || "";
 
+  const mqttHost     = process.env.MQTT_HOST || "";
+  const mqttPort     = Number(process.env.MQTT_PORT || "1883");
+  const mqttUsername = process.env.MQTT_USER || "";
+  const mqttPassword = process.env.MQTT_PWD  || "";
+
+
   // 1) Connect to HA broker (for discovery + state)
-  const ha = await connectHA();
+  const ha = await connectHA({ mqttHost, mqttPort, mqttUsername, mqttPassword, });
 
   // 2) Connect to Futurehome hub (FIMP traffic)
   const fimp = await connectHub({ hubIp, username: user, password: pass });

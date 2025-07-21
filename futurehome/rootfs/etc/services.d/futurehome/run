@@ -8,6 +8,12 @@ set -e
 export FH_HUB_IP=$(bashio::config 'hub_ip')
 export FH_USERNAME=$(bashio::config 'username')
 export FH_PASSWORD=$(bashio::config 'password')
+
+export MQTT_HOST=$(bashio::services mqtt "host")
+export MQTT_PORT=$(bashio::services mqtt "port")
+export MQTT_USER=$(bashio::services mqtt "username")
+export MQTT_PWD=$(bashio::services mqtt "password")
+
 export LOG_LEVEL=${LOG_LEVEL:-info}
 
 /usr/bin/node /usr/src/app/dist/index.js
