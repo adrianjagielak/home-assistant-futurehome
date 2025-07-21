@@ -4,10 +4,12 @@ Futurehome add-on for Home Assistant. The add-on aims to be a complete drop-in r
 
 ## Installation
 
-1. In Home Assistant Add-on store install, configure, and start Mosquito MQTT broker.
-2. [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fadrianjagielak%2Fhome-assistant-futurehome)
-3. Search for "Futurehome" in add-on store.
-4. Install, configure, and run Futurehome add-on.
+1. Configure Local API in Smarthub settings in Futurehome app.
+2. Block internet access (WAN) for the hub in your router settings (optional, but strongly recommended to block any future hub firmware updates).
+3. In Home Assistant Add-on store install and start Mosquito MQTT broker (if you haven't already).
+4. [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fadrianjagielak%2Fhome-assistant-futurehome)
+5. Search for "Futurehome" in add-on store.
+6. Install, configure, and run Futurehome add-on.
 
 <!--
 
