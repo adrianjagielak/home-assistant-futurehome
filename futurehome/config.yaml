@@ -1,6 +1,6 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Futurehome add-on
-version: "0.0.1"
+version: "0.0.2"
 slug: example
 description: Futurehome Home Assistant add-on
 url: "https://github.com/adrianjagielak/home-assistant-futurehome"
