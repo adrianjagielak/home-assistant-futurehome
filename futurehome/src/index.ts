@@ -1,3 +1,4 @@
+import { v4 as uuid } from "uuid";
 import { connectHub, connectHA } from "./client";
 import { publishDiscovery } from "./discovery";
 
@@ -37,7 +38,7 @@ import { publishDiscovery } from "./discovery";
   fimp.publish("pt:j1/mt:cmd/rt:app/rn:vinculum/ad:1", JSON.stringify({
     type: "cmd.pd7.request",
     service: "vinculum",
-    uid: crypto.randomUUID(),
+    uid: uuid(),
     val_t: "object",
     val: { cmd: "get", component: "state" },
     resp_to: "pt:j1/mt:rsp/rt:app/rn:ha-futurehome/ad:addon"
