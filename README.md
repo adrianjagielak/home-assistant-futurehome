@@ -2,7 +2,12 @@
 
 Futurehome add-on for Home Assistant. The add-on aims to be a complete drop-in replacement for the official Futurehome app, implementing support for all Futurehome-supported device types.
 
-[![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fadrianjagielak%2Fhome-assistant-futurehome)
+## Installation
+
+1. In Home Assistant Add-on store install, configure, and start Mosquito MQTT broker.
+2. [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fadrianjagielak%2Fhome-assistant-futurehome)
+3. Search for "Futurehome" in add-on store.
+4. Install, configure, and run Futurehome add-on.
 
 <!--
 
