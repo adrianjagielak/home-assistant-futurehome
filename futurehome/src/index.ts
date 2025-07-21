@@ -1,6 +1,7 @@
 import { v4 as uuid } from "uuid";
 import { connectHub, connectHA } from "./client";
 import { publishDiscovery } from "./discovery";
+import { exposeSmarthubTools } from "./admin";
 
 (async () => {
   const hubIp       = process.env.FH_HUB_IP   || "";
@@ -29,6 +30,8 @@ import { publishDiscovery } from "./discovery";
   console.log("Connecting to Futurehome hub...");
   const fimp = await connectHub({ hubIp, username: hubUsername, password: hubPassword });
   console.log("Connected to Futurehome hub");
+
+  exposeSmarthubTools(ha, fimp);
 
   // -- subscribe to FIMP events -----------------------------------------
   fimp.subscribe("#");
