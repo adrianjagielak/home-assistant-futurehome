@@ -35,7 +35,8 @@ import { publishDiscovery } from "./discovery";
   fimp.on("message", (topic, buf) => {
     try {
       const msg = JSON.parse(buf.toString());
-      console.debug("Received a FIMP message", topic, msg);
+      console.debug("Received a FIMP message", topic);
+      console.debug(JSON.stringify(msg, null, 0));
       if (msg.type === "evt.pd7.response") {
         const devices = msg.val?.param?.devices ?? [];
         devices.forEach((d: any) => publishDiscovery(ha, d));
@@ -48,11 +49,17 @@ import { publishDiscovery } from "./discovery";
 
   // -- ask hub for the device list --------------------------------------
   fimp.publish("pt:j1/mt:cmd/rt:app/rn:vinculum/ad:1", JSON.stringify({
+    corid: null,
+    ctime: new Date().toISOString(),
+    props: {},
+    resp_to: "pt:j1/mt:rsp/rt:app/rn:ha-futurehome/ad:addon",
+    serv: "vinculum",
+    src: 'smarthome-app',
+    tags: [],
     type: "cmd.pd7.request",
-    service: "vinculum",
     uid: uuid(),
-    val_t: "object",
     val: { cmd: "get", component: "state" },
-    resp_to: "pt:j1/mt:rsp/rt:app/rn:ha-futurehome/ad:addon"
+    val_t: "object",
+    ver: '1',
   }), { qos: 1 });
 })();
