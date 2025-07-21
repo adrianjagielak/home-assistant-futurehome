@@ -6,6 +6,7 @@ import { handleTempSensor } from './parsers/sensor_temp';
 
 // map Futurehome → Home Assistant MQTT Discovery
 export async function publishDiscovery(client: MqttClient, device: any) {
+  console.log("Publishing a new device", device);
   for (const svc of device.services) {
     switch (svc.name) {
       case 'battery':
