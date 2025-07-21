@@ -1,0 +1,20 @@
+# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
+name: Futurehome add-on
+version: "0.0.1"
+slug: example
+description: Futurehome Home Assistant add-on
+url: "https://github.com/adrianjagielak/home-assistant-futurehome"
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+init: false
+map:
+  - share:rw
+options:
+  message: "Hello world..."
+schema:
+  message: "str?"
+image: "ghcr.io/adrianjagielak/{arch}-home-assistant-futurehome"

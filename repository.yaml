@@ -1,0 +1,4 @@
+# https://developers.home-assistant.io/docs/add-ons/repository#repository-configuration
+name: Futurehome Home Assistant add-on repository
+url: 'https://https://github.com/adrianjagielak/home-assistant-futurehome'
+maintainer: Adrian Jagielak <adrianjagielak@gmail.com
