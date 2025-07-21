@@ -1,12 +1,15 @@
-# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
 ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM ${BUILD_FROM}
 
-# Execute during the build of the image
-ARG TEMPIO_VERSION BUILD_ARCH
-RUN \
-    curl -sSLf -o /usr/bin/tempio \
-    "https://github.com/home-assistant/tempio/releases/download/${TEMPIO_VERSION}/tempio_${BUILD_ARCH}"
+# ---------- install NodeJS ----------
+RUN apk add --no-cache nodejs npm python3 make g++
 
-# Copy root filesystem
+# ---------- copy source -------------
+WORKDIR /usr/src/app
+COPY package.json tsconfig.json ./
+RUN npm install --omit=dev
+COPY src ./src
+RUN npm run build
+
+# ---------- copy s6 service files ---
 COPY rootfs /

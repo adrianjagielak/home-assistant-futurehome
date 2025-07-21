@@ -1,0 +1,3 @@
+#!/usr/bin/with-contenv bashio
+# Nothing special – just allow S6 to stop gracefully
+exit 0

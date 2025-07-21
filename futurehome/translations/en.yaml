@@ -1,4 +1,10 @@
 configuration:
-  message:
-    name: Message
-    description: The message that will be printed to the log when starting this example add-on.
+  hub_ip:
+    name: Hub IP
+    description: Optional – leave blank for automatic discovery.
+  username:
+    name: Username
+    description: Your Futurehome local API/MQTT username.
+  password:
+    name: Password
+    description: Your Futurehome local API/MQTT password.

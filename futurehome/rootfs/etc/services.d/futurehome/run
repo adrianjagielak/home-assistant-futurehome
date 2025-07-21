@@ -1,0 +1,13 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# s6-overlay docs: https://github.com/just-containers/s6-overlay
+# ==============================================================================
+
+set -e
+
+export FH_HUB_IP=$(bashio::config 'hub_ip')
+export FH_USERNAME=$(bashio::config 'username')
+export FH_PASSWORD=$(bashio::config 'password')
+export LOG_LEVEL=${LOG_LEVEL:-info}
+
+/usr/bin/node /usr/src/app/dist/index.js

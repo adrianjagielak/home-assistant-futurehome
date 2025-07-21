@@ -3,3 +3,7 @@
 ## 1.0.0
 
 - Initial release
+
+## 0.0.3
+
+- Added initial version of the add-on code.

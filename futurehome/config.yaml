@@ -1,8 +1,8 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Futurehome add-on
-version: "0.0.3"
+version: "0.0.4"
 slug: futurehome
-description: Futurehome Home Assistant add-on
+description: Local Futurehome Smarthub integration
 url: "https://github.com/adrianjagielak/home-assistant-futurehome"
 arch:
   - armhf
@@ -11,10 +11,18 @@ arch:
   - amd64
   - i386
 init: false
-map:
-  - share:rw
+
+services:
+  - mqtt:need
+
 options:
-  message: "Hello world..."
+  hub_ip: ""
+  username: ""
+  password: ""
+
 schema:
-  message: "str?"
+  hub_ip: "str?"
+  username: "str"
+  password: "str"
+
 image: "ghcr.io/adrianjagielak/{arch}-home-assistant-futurehome"
