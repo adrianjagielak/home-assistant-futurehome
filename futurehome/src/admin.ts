@@ -1,5 +1,5 @@
 import { MqttClient } from "mqtt";
-import { v4 as uuid } from "uuid";
+import { v4 as uuidv4 } from "uuid";
 
 export function exposeSmarthubTools(
   ha: MqttClient,
@@ -25,8 +25,8 @@ export function exposeSmarthubTools(
     { retain: true }
   );
 
-//   // keep last known state locally
-//   let pairingOn = false;
+  //   // keep last known state locally
+  //   let pairingOn = false;
 
   ha.subscribe(`${base}/set`);
   ha.on("message", (topic, payload) => {
@@ -43,7 +43,7 @@ export function exposeSmarthubTools(
       JSON.stringify({
         type: "cmd.pairing_mode.set",
         service: "zigbee",
-        uid: uuid(),
+        uid: uuidv4(),
         val_t: "str",
         val: turnOn ? "start" : "stop",
       }),

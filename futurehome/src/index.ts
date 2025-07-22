@@ -1,68 +1,140 @@
-import { v4 as uuid } from "uuid";
 import { connectHub, connectHA } from "./client";
-import { publishDiscovery } from "./discovery";
 import { exposeSmarthubTools } from "./admin";
+import { log } from "./logger";
+import { FimpResponse, sendFimpMsg, setFimp } from "./fimp/fimp";
+import { getInclusionReport } from "./fimp/inclusion_report";
+import { adapterAddressFromServiceAddress, adapterServiceFromServiceAddress } from "./fimp/helpers";
+import { setHa } from "./ha/globals";
+import { haPublishDevice } from "./ha/publish_device";
+import { haUpdateState } from "./ha/update_state";
+import { VinculumPd7Device } from "./fimp/vinculum_pd7_device";
+import { haUpdateAvailability } from "./ha/update_availability";
 
 (async () => {
-  const hubIp       = process.env.FH_HUB_IP   || "";
+  const hubIp = process.env.FH_HUB_IP || "";
   const hubUsername = process.env.FH_USERNAME || "";
   const hubPassword = process.env.FH_PASSWORD || "";
 
-  const mqttHost     = process.env.MQTT_HOST || "";
-  const mqttPort     = Number(process.env.MQTT_PORT || "1883");
+  const mqttHost = process.env.MQTT_HOST || "";
+  const mqttPort = Number(process.env.MQTT_PORT || "1883");
   const mqttUsername = process.env.MQTT_USER || "";
-  const mqttPassword = process.env.MQTT_PWD  || "";
-
-  console.log("Debug: hub ip", hubIp)
-  console.log("Debug: hub username", hubUsername)
-  console.log("Debug: hub password", hubPassword)
-  console.log("Debug: mqtt host", mqttHost)
-  console.log("Debug: mqtt port", mqttPort)
-  console.log("Debug: mqtt username", mqttUsername)
-  console.log("Debug: mqtt password", mqttPassword)
+  const mqttPassword = process.env.MQTT_PWD || "";
 
   // 1) Connect to HA broker (for discovery + state)
-  console.log("Connecting to HA broker...");
-  const ha = await connectHA({ mqttHost, mqttPort, mqttUsername, mqttPassword, });
-  console.log("Connected to HA broker");
+  log.info("Connecting to HA broker...");
+  const { ha, retainedMessages } = await connectHA({ mqttHost, mqttPort, mqttUsername, mqttPassword, });
+  setHa(ha);
+  log.info("Connected to HA broker");
 
   // 2) Connect to Futurehome hub (FIMP traffic)
-  console.log("Connecting to Futurehome hub...");
+  log.info("Connecting to Futurehome hub...");
   const fimp = await connectHub({ hubIp, username: hubUsername, password: hubPassword });
-  console.log("Connected to Futurehome hub");
-
-  exposeSmarthubTools(ha, fimp);
-
-  // -- subscribe to FIMP events -----------------------------------------
   fimp.subscribe("#");
+  setFimp(fimp);
+  log.info("Connected to Futurehome hub");
+
+  let house = await sendFimpMsg({
+    address: '/rt:app/rn:vinculum/ad:1',
+    service: 'vinculum',
+    cmd: 'cmd.pd7.request',
+    val: { cmd: "get", component: null, param: { components: ['house'] } },
+    val_t: 'object',
+  });
+  let hubId = house.val.param.house.hubId;
+
+  let devices = await sendFimpMsg({
+    address: '/rt:app/rn:vinculum/ad:1',
+    service: 'vinculum',
+    cmd: 'cmd.pd7.request',
+    val: { cmd: "get", component: null, param: { components: ['device'] } },
+    val_t: 'object',
+  });
+
+  const haConfig = retainedMessages.filter(msg => msg.topic.endsWith("/config"));
+
+  const regex = new RegExp(`^homeassistant/device/futurehome_${hubId}_([a-zA-Z0-9]+)/config$`);
+  for (const haDevice of haConfig) {
+    log.debug('Found existing HA device', haDevice.topic)
+
+    const match = haDevice.topic.match(regex);
+
+    if (match) {
+      const deviceId = match[1];
+      const idNumber = Number(deviceId);
+
+      if (!isNaN(idNumber)) {
+        const basicDeviceData: { services?: { [key: string]: any } } = devices.val.param.device.find((d: any) => d?.id === idNumber);
+        const firstServiceAddr = basicDeviceData?.services ? Object.values(basicDeviceData.services)[0]?.addr : undefined;;
+
+        if (!basicDeviceData || !firstServiceAddr) {
+          log.debug('Device was removed, removing from HA.');
+          ha?.publish(haDevice.topic, '', { retain: true, qos: 2 });
+        }
+      } else if (deviceId.toLowerCase() === "hub") {
+        // Hub admin tools, ignore
+      } else {
+        log.debug('Invalid format, removing.');
+        ha?.publish(haDevice.topic, '', { retain: true, qos: 2 });
+      }
+    } else {
+      log.debug('Invalid format, removing.');
+      ha?.publish(haDevice.topic, '', { retain: true, qos: 2 });
+    }
+  }
+
+  for (const device of devices.val.param.device) {
+    const vinculumDeviceData: VinculumPd7Device = device
+    const deviceId = vinculumDeviceData.id.toString()
+    const services: { [key: string]: any } = vinculumDeviceData?.services
+    const firstServiceAddr = services ? Object.values(services)[0]?.addr : undefined;;
+
+    if (!firstServiceAddr) { continue; }
+
+    const adapterAddress = adapterAddressFromServiceAddress(firstServiceAddr)
+    const adapterService = adapterServiceFromServiceAddress(firstServiceAddr)
+
+    // Get additional metadata like manufacutrer or sw/hw version directly from the adapter
+    const deviceInclusionReport = await getInclusionReport({ adapterAddress, adapterService, deviceId });
+
+    haPublishDevice({ hubId, vinculumDeviceData, deviceInclusionReport })
+
+    if (!retainedMessages.some(msg => msg.topic === `homeassistant/device/futurehome_${hubId}_${deviceId}/availability`)) {
+      // Set initial availability
+      haUpdateAvailability({ hubId, deviceAvailability: { address: deviceId, status: 'UP' } });
+    }
+  }
+
+  // todo
+  // exposeSmarthubTools();
+
   fimp.on("message", (topic, buf) => {
     try {
-      const msg = JSON.parse(buf.toString());
-      console.debug("Received a FIMP message", topic);
-      console.debug(JSON.stringify(msg, null, 0));
+      const msg: FimpResponse = JSON.parse(buf.toString());
+      log.debug(JSON.stringify(msg, null, 0));
       if (msg.type === "evt.pd7.response") {
-        const devices = msg.val?.param?.devices ?? [];
-        devices.forEach((d: any) => publishDiscovery(ha, d));
+        const devicesState = msg.val?.param?.state?.devices;
+        if (!devicesState) { return; }
+        for (const deviceState of devicesState) {
+          haUpdateState({ hubId, deviceState });
+        }
+      } else if (msg.type === "evt.network.all_nodes_report") {
+        const devicesAvailability = msg.val;
+        if (!devicesAvailability) { return; }
+        for (const deviceAvailability of devicesAvailability) {
+          haUpdateAvailability({ hubId, deviceAvailability });
+        }
       }
-      // …forward state events as needed…
     } catch (e) {
-      console.warn("Bad FIMP JSON", e, topic, buf);
+      log.warn("Bad FIMP JSON", e, topic, buf);
     }
   });
 
-  // -- ask hub for the device list --------------------------------------
-  fimp.publish("pt:j1/mt:cmd/rt:app/rn:vinculum/ad:1", JSON.stringify({
-    corid: null,
-    ctime: new Date().toISOString(),
-    props: {},
-    resp_to: "pt:j1/mt:rsp/rt:app/rn:ha-futurehome/ad:addon",
-    serv: "vinculum",
-    src: 'smarthome-app',
-    tags: [],
-    type: "cmd.pd7.request",
-    uid: uuid(),
-    val: { cmd: "get", component: "state" },
-    val_t: "object",
-    ver: '1',
-  }), { qos: 1 });
+  // Request initial state
+  await sendFimpMsg({
+    address: '/rt:app/rn:vinculum/ad:1',
+    service: 'vinculum',
+    cmd: 'cmd.pd7.request',
+    val: { cmd: "get", component: null, param: { components: ['state'] } },
+    val_t: 'object',
+  });
 })();

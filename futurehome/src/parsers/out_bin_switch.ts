@@ -1,5 +1,5 @@
 import { MqttClient } from 'mqtt';
-import { v4 as uuid } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 export function handleBinSwitch(client: MqttClient, dev: any, svc: any) {
   const uid = `fh_${dev.id}_${svc.name}`;
@@ -26,7 +26,7 @@ export function handleBinSwitch(client: MqttClient, dev: any, svc: any) {
     client.publish(`pt:j1/mt:cmd/${svc.address}`, JSON.stringify({
       type: "cmd.binary.set",
       service: svc.name,
-      uid: uuid(),
+      uid: uuidv4(),
       val_t: "bool",
       val: target,
       src: "ha-futurehome"
