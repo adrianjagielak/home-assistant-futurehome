@@ -96,12 +96,11 @@ import { haUpdateAvailability } from "./ha/update_availability";
     // Get additional metadata like manufacutrer or sw/hw version directly from the adapter
     const deviceInclusionReport = await getInclusionReport({ adapterAddress, adapterService, deviceId });
 
-    haPublishDevice({ hubId, vinculumDeviceData, deviceInclusionReport })
-
     if (!retainedMessages.some(msg => msg.topic === `homeassistant/device/futurehome_${hubId}_${deviceId}/availability`)) {
       // Set initial availability
       haUpdateAvailability({ hubId, deviceAvailability: { address: deviceId, status: 'UP' } });
     }
+    haPublishDevice({ hubId, vinculumDeviceData, deviceInclusionReport })
   }
 
   // todo
