@@ -5,13 +5,25 @@ import { CMP } from "../ha/publish_device";
 export function cmps_battery(vinculumDeviceData: VinculumPd7Device, svc: InclusionReportService): { [key: string]: CMP } {
   if (!svc.address) { return {}; }
 
-  return {
-    [svc.address]: {
-      p: "sensor",
-      device_class: "battery",
-      unit_of_measurement: "%",
-      value_template: `{{ value_json['${svc.address}'].lvl }}`,
-      unique_id: svc.address,
-    },
+  if (svc.props?.sup_events?.includes('low_battery')) {
+    return {
+      [svc.address]: {
+        p: "binary_sensor",
+        device_class: "battery",
+        value_template: `{{ value_json['${svc.address}'].alarm.status == 'activ' | iif('on', 'off') }}`,
+        unique_id: svc.address,
+      },
+    };
+  }
+  else {
+    return {
+      [svc.address]: {
+        p: "sensor",
+        device_class: "battery",
+        unit_of_measurement: svc.props?.sup_units?.[0] ?? "%",
+        value_template: `{{ value_json['${svc.address}'].lvl }}`,
+        unique_id: svc.address,
+      },
+    }
   };
 }

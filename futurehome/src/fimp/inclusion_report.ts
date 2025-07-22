@@ -17,6 +17,10 @@ export type InclusionReport = {
 export type InclusionReportService = {
   name?: string | null;
   address?: string | null;
+  props?: {
+    sup_units?: string[] | null;
+    sup_events?: string[] | null;
+  } | null
 };
 
 export async function getInclusionReport(parameters: { adapterAddress: string; adapterService: string; deviceId: string }): Promise<InclusionReport> {
