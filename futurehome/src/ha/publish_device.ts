@@ -128,18 +128,6 @@ type NumberComponent = {
   value_template: string;
 }
 
-// todo button reference
-//     "cmps": {
-//     "bla1": {
-//       "p": "device_automation",
-//       "automation_type": "trigger",
-//       "payload": "short_press",
-//       "topic": "foobar/triggers/button1",
-//       "type": "button_short_press",
-//       "subtype": "button_1"
-//     },
-//   },
-
 export type ServiceComponentsCreationResult = {
   components: { [key: string]: HaComponent };
   commandHandlers?: CommandHandlers;

@@ -30,10 +30,8 @@ Devices commonly consist of multiple services: for example, a presence sensor mi
 
 Some services are more common than others. Some are deprecated entirely.
 
-
 todo periodical refresh of devices
 todo periodical refresh of state
-todo handle evt.sensor.report
 
 | Service | Example device | Implementation status |
 | --- | --- | --- |
@@ -143,21 +141,3 @@ todo handle evt.sensor.report
 | technology_specific | | |
 | time | | |
 | version | | |
-
-
-todo add demo mode checkbox? sample data
-<!--
-
-Notes to developers after forking or using the github template feature:
-  - Make sure you adjust the 'version' key in 'example/config.yaml' when you do that.
-  - Make sure you update 'example/CHANGELOG.md' when you do that.
-  - The first time this runs you might need to adjust the image configuration on github container registry to make it public
-  - You may also need to adjust the github Actions configuration (Settings > Actions > General > Workflow > Read & Write)
-- Adjust the 'image' key in 'example/config.yaml' so it points to your username instead of 'home-assistant'.
-  - This is where the build images will be published to.
-- Rename the example directory.
-  - The 'slug' key in 'example/config.yaml' should match the directory name.
-- Adjust all keys/url's that points to 'home-assistant' to now point to your user/fork.
-- Do awesome stuff!
- -->
-
