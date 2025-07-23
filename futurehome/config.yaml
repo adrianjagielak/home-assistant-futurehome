@@ -1,6 +1,6 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Futurehome
-version: "0.0.15"
+version: "0.0.16"
 slug: futurehome
 description: Local Futurehome Smarthub integration
 url: "https://github.com/adrianjagielak/home-assistant-futurehome"
@@ -19,10 +19,12 @@ options:
   hub_ip: ""
   username: ""
   password: ""
+  demo_mode: false
 
 schema:
   hub_ip: "str?"
-  username: "str"
-  password: "str"
+  username: "str?"
+  password: "str?"
+  demo_mode: "bool?"
 
 image: "ghcr.io/adrianjagielak/{arch}-home-assistant-futurehome"

@@ -1,0 +1,2105 @@
+[
+  {
+    "client": {
+      "name": "Boiler 3 cycles"
+    },
+    "fimp": {
+      "adapter": "flow",
+      "address": "XFhAkhMmXNwCt4M",
+      "group": "1"
+    },
+    "functionality": "appliance",
+    "id": 26,
+    "lrn": true,
+    "model": "flow_XFhAkhMmXNwCt4M",
+    "modelAlias": "Stop after",
+    "param": {
+      "power": "off",
+      "timestamp": null
+    },
+    "problem": false,
+    "room": 7,
+    "services": {
+      "out_bin_switch": {
+        "addr": "/rt:dev/rn:flow/ad:1/sv:out_bin_switch/ad:XFhAkhMmXNwCt4M_0",
+        "enabled": true,
+        "intf": [
+          "cmd.binary.set"
+        ],
+        "props": {}
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 26,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "appliance": [],
+        "blinds": [],
+        "boiler": [],
+        "fan": [],
+        "heater": [],
+        "light": [],
+        "siren": [],
+        "water_valve": []
+      },
+      "type": "appliance"
+    }
+  },
+  {
+    "client": {
+      "name": "Heatit - Z-TRM3 ch_0"
+    },
+    "fimp": {
+      "adapter": "zwave-ad",
+      "address": "8",
+      "group": "ch_0"
+    },
+    "functionality": null,
+    "id": 165,
+    "lrn": true,
+    "model": "zw_411_3_515",
+    "modelAlias": "Heatit - Z-TRM3",
+    "param": {
+      "energy": 1594.5,
+      "supportedThermostatModes": [
+        "off",
+        "heat"
+      ],
+      "targetTemperature": 21,
+      "thermostatMode": "heat",
+      "timestamp": "2025-06-16 22:13:38 +0200",
+      "wattage": null,
+      "zwaveConfigParameters": []
+    },
+    "problem": false,
+    "room": null,
+    "services": {
+      "dev_sys": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:8_0",
+        "enabled": true,
+        "intf": [
+          "cmd.config.get_report",
+          "cmd.config.set",
+          "cmd.group.add_members",
+          "cmd.group.delete_members",
+          "cmd.group.get_members",
+          "cmd.ping.send",
+          "evt.config.report",
+          "evt.group.members_report",
+          "evt.ping.report"
+        ],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      "meter_elec": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:8_0",
+        "enabled": true,
+        "intf": [
+          "cmd.meter.get_report",
+          "evt.meter.report"
+        ],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "sup_export_units": [],
+          "sup_units": [
+            "kWh",
+            "W",
+            "V"
+          ]
+        }
+      },
+      "thermostat": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:thermostat/ad:8_0",
+        "enabled": true,
+        "intf": [
+          "cmd.mode.get_report",
+          "cmd.mode.set",
+          "cmd.setpoint.get_report",
+          "cmd.setpoint.set",
+          "evt.mode.report",
+          "evt.setpoint.report"
+        ],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "sup_modes": [
+            "off",
+            "heat"
+          ],
+          "sup_setpoints": [
+            "heat"
+          ],
+          "sup_temperatures": {
+            "heat": {
+              "max": 35,
+              "min": 5
+            }
+          }
+        }
+      },
+      "version": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:version/ad:8_0",
+        "enabled": true,
+        "intf": [
+          "cmd.version.get_report",
+          "evt.version.report"
+        ],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 125,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "thermostat": []
+      },
+      "type": "thermostat"
+    }
+  },
+  {
+    "client": {
+      "name": "Heatit - Z-TRM3 ch_1"
+    },
+    "fimp": {
+      "adapter": "zwave-ad",
+      "address": "8",
+      "group": "ch_1"
+    },
+    "functionality": null,
+    "id": 166,
+    "lrn": true,
+    "model": "zw_411_3_515",
+    "modelAlias": "Heatit - Z-TRM3",
+    "param": {
+      "energy": 3714.10009765625,
+      "supportedThermostatModes": [
+        "off",
+        "heat"
+      ],
+      "targetTemperature": 14,
+      "thermostatMode": "heat",
+      "timestamp": "2025-07-23 19:50:36 +0200",
+      "wattage": 0.419999986886978
+    },
+    "problem": false,
+    "room": 1,
+    "services": {
+      "dev_sys": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:8_1",
+        "enabled": true,
+        "intf": [
+          "cmd.group.add_members",
+          "cmd.group.delete_members",
+          "cmd.group.get_members",
+          "evt.group.members_report"
+        ],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      "meter_elec": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:8_1",
+        "enabled": true,
+        "intf": [
+          "cmd.meter.get_report",
+          "evt.meter.report"
+        ],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "sup_export_units": [],
+          "sup_units": [
+            "kWh",
+            "W",
+            "V"
+          ]
+        }
+      },
+      "thermostat": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:thermostat/ad:8_1",
+        "enabled": true,
+        "intf": [
+          "cmd.mode.get_report",
+          "cmd.mode.set",
+          "cmd.setpoint.get_report",
+          "cmd.setpoint.set",
+          "evt.mode.report",
+          "evt.setpoint.report"
+        ],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "sup_modes": [
+            "off",
+            "heat"
+          ],
+          "sup_setpoints": [
+            "heat"
+          ],
+          "sup_temperatures": {
+            "heat": {
+              "max": 35,
+              "min": 5
+            }
+          }
+        }
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 125,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "thermostat": []
+      },
+      "type": "thermostat"
+    }
+  },
+  {
+    "client": {
+      "name": "Heatit - Z-TRM3 ch_2"
+    },
+    "fimp": {
+      "adapter": "zwave-ad",
+      "address": "8",
+      "group": "ch_2"
+    },
+    "functionality": null,
+    "id": 167,
+    "lrn": true,
+    "model": "zw_411_3_515",
+    "modelAlias": "Heatit - Z-TRM3",
+    "param": {
+      "temperature": 30.7999992370605,
+      "timestamp": "2025-07-23 19:50:36 +0200"
+    },
+    "problem": false,
+    "room": null,
+    "services": {
+      "basic": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:basic/ad:8_2",
+        "enabled": true,
+        "intf": [
+          "cmd.lvl.get_report",
+          "cmd.lvl.set",
+          "evt.lvl.report"
+        ],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      "dev_sys": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:8_2",
+        "enabled": true,
+        "intf": [
+          "cmd.group.add_members",
+          "cmd.group.delete_members",
+          "cmd.group.get_members",
+          "evt.group.members_report"
+        ],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      "sensor_temp": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:sensor_temp/ad:8_2",
+        "enabled": true,
+        "intf": [
+          "cmd.sensor.get_report",
+          "evt.sensor.report"
+        ],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "sup_units": [
+            "C"
+          ]
+        }
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 125,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "sensor": []
+      },
+      "type": "sensor"
+    }
+  },
+  {
+    "client": {
+      "name": "Heatit - Z-TRM3 ch_3"
+    },
+    "fimp": {
+      "adapter": "zwave-ad",
+      "address": "8",
+      "group": "ch_3"
+    },
+    "functionality": null,
+    "id": 168,
+    "lrn": true,
+    "model": "zw_411_3_515",
+    "modelAlias": "Heatit - Z-TRM3",
+    "param": {
+      "temperature": 0,
+      "timestamp": "2025-07-06 16:29:06 +0200"
+    },
+    "problem": false,
+    "room": null,
+    "services": {
+      "basic": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:basic/ad:8_3",
+        "enabled": true,
+        "intf": [
+          "cmd.lvl.get_report",
+          "cmd.lvl.set",
+          "evt.lvl.report"
+        ],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      "dev_sys": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:8_3",
+        "enabled": true,
+        "intf": [
+          "cmd.group.add_members",
+          "cmd.group.delete_members",
+          "cmd.group.get_members",
+          "evt.group.members_report"
+        ],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      "sensor_temp": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:sensor_temp/ad:8_3",
+        "enabled": true,
+        "intf": [
+          "cmd.sensor.get_report",
+          "evt.sensor.report"
+        ],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "sup_units": [
+            "C"
+          ]
+        }
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 125,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "sensor": []
+      },
+      "type": "sensor"
+    }
+  },
+  {
+    "client": {
+      "name": "Heatit - Z-TRM3 ch_4"
+    },
+    "fimp": {
+      "adapter": "zwave-ad",
+      "address": "8",
+      "group": "ch_4"
+    },
+    "functionality": null,
+    "id": 169,
+    "lrn": true,
+    "model": "zw_411_3_515",
+    "modelAlias": "Heatit - Z-TRM3",
+    "param": {
+      "temperature": 29.1000003814697,
+      "timestamp": "2025-07-23 19:50:36 +0200"
+    },
+    "problem": false,
+    "room": 1,
+    "services": {
+      "basic": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:basic/ad:8_4",
+        "enabled": true,
+        "intf": [
+          "cmd.lvl.get_report",
+          "cmd.lvl.set",
+          "evt.lvl.report"
+        ],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      "dev_sys": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:8_4",
+        "enabled": true,
+        "intf": [
+          "cmd.group.add_members",
+          "cmd.group.delete_members",
+          "cmd.group.get_members",
+          "evt.group.members_report"
+        ],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      "sensor_temp": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:sensor_temp/ad:8_4",
+        "enabled": true,
+        "intf": [
+          "cmd.sensor.get_report",
+          "evt.sensor.report"
+        ],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "sup_units": [
+            "C"
+          ],
+          "thing_role": "main"
+        }
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 125,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "sensor": []
+      },
+      "type": "sensor"
+    }
+  },
+  {
+    "client": {
+      "name": "Boiler"
+    },
+    "fimp": {
+      "adapter": "zwave-ad",
+      "address": "9",
+      "group": "ch_0"
+    },
+    "functionality": "appliance",
+    "id": 177,
+    "lrn": true,
+    "model": "zw_134_3_78",
+    "param": {
+      "energy": 2506.001953125,
+      "power": "off",
+      "temperature": 25.4899997711182,
+      "timestamp": "2025-07-23 19:50:00 +0200",
+      "wattage": 0,
+      "zwaveConfigParameters": []
+    },
+    "problem": false,
+    "room": 7,
+    "services": {
+      "basic": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:basic/ad:9_0",
+        "enabled": true,
+        "intf": [
+          "cmd.lvl.get_report",
+          "cmd.lvl.set",
+          "evt.lvl.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": true
+        }
+      },
+      "dev_sys": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:9_0",
+        "enabled": true,
+        "intf": [
+          "cmd.config.get_report",
+          "cmd.config.set",
+          "cmd.group.add_members",
+          "cmd.group.delete_members",
+          "cmd.group.get_members",
+          "cmd.ping.send",
+          "evt.config.report",
+          "evt.group.members_report",
+          "evt.ping.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "meter_elec": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:9_0",
+        "enabled": true,
+        "intf": [
+          "cmd.meter.get_report",
+          "cmd.meter.reset",
+          "evt.meter.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_units": [
+            "kWh",
+            "W",
+            "V",
+            "A"
+          ]
+        }
+      },
+      "out_bin_switch": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:9_0",
+        "enabled": true,
+        "intf": [
+          "cmd.binary.get_report",
+          "cmd.binary.set",
+          "evt.binary.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "scene_ctrl": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:scene_ctrl/ad:9_0",
+        "enabled": true,
+        "intf": [
+          "cmd.scene.get_report",
+          "cmd.scene.set",
+          "evt.scene.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_scenes": null
+        }
+      },
+      "sensor_temp": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:sensor_temp/ad:9_0",
+        "enabled": true,
+        "intf": [
+          "cmd.sensor.get_report",
+          "evt.sensor.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_units": [
+            "C",
+            "F"
+          ],
+          "thing_role": "main"
+        }
+      },
+      "version": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:version/ad:9_0",
+        "enabled": true,
+        "intf": [
+          "cmd.version.get_report",
+          "evt.version.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": true
+        }
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 131,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "appliance": [],
+        "blinds": [],
+        "boiler": [],
+        "fan": [],
+        "heater": [],
+        "light": [],
+        "siren": [],
+        "water_valve": []
+      },
+      "type": "appliance"
+    }
+  },
+  {
+    "client": {
+      "name": "Start boiler 3h"
+    },
+    "fimp": {
+      "adapter": "flow",
+      "address": "tfnGPTUArLR0Vzs",
+      "group": "1"
+    },
+    "functionality": null,
+    "id": 178,
+    "lrn": true,
+    "model": "flow_tfnGPTUArLR0Vzs",
+    "modelAlias": "Start boiler 1.5h",
+    "param": {
+      "timestamp": null
+    },
+    "problem": false,
+    "room": 4,
+    "services": {},
+    "supports": [
+      "clear"
+    ],
+    "thing": 132,
+    "type": {
+      "subtype": null,
+      "supported": {},
+      "type": null
+    }
+  },
+  {
+    "client": {
+      "name": "LOM001"
+    },
+    "fimp": {
+      "adapter": "zigbee",
+      "address": "2",
+      "group": "ch_11"
+    },
+    "functionality": "appliance",
+    "id": 180,
+    "lrn": true,
+    "model": null,
+    "modelAlias": "LOM001",
+    "param": {
+      "dimValue": 1,
+      "power": "on",
+      "timestamp": "2025-07-23 19:38:58 +0200"
+    },
+    "problem": false,
+    "room": 1,
+    "services": {
+      "association": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:association/ad:2_11",
+        "enabled": true,
+        "intf": [],
+        "props": {
+          "in_services": [
+            "out_bin_switch",
+            "out_lvl_switch"
+          ],
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "indicator_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:2_11",
+        "enabled": true,
+        "intf": [
+          "cmd.indicator.set_visual_element"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "out_bin_switch": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:out_bin_switch/ad:2_11",
+        "enabled": true,
+        "intf": [
+          "cmd.binary.get_report",
+          "cmd.binary.set",
+          "evt.binary.report"
+        ],
+        "props": {}
+      },
+      "out_lvl_switch": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:out_lvl_switch/ad:2_11",
+        "enabled": true,
+        "intf": [
+          "cmd.lvl.get_report",
+          "cmd.lvl.set",
+          "cmd.lvl.start",
+          "cmd.lvl.stop",
+          "evt.lvl.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "max_lvl": 254,
+          "min_lvl": 0
+        }
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 134,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "appliance": [],
+        "blinds": [],
+        "fan": [],
+        "heater": [],
+        "light": []
+      },
+      "type": "appliance"
+    }
+  },
+  {
+    "client": {
+      "name": "TRADFRI SHORTCUT Button"
+    },
+    "fimp": {
+      "adapter": "zigbee",
+      "address": "4",
+      "group": "ch_1"
+    },
+    "functionality": null,
+    "id": 182,
+    "lrn": true,
+    "model": null,
+    "modelAlias": "TRADFRI SHORTCUT Button",
+    "param": {
+      "batteryLevel": "ok",
+      "batteryPercentage": 50,
+      "timestamp": "2022-07-15 03:05:46 +0200"
+    },
+    "problem": false,
+    "room": 4,
+    "services": {
+      "association": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:association/ad:4_1",
+        "enabled": true,
+        "intf": [
+          "cmd.association.add",
+          "cmd.association.delete",
+          "cmd.association.delete_all",
+          "cmd.association.get_report",
+          "evt.association.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "out_services": [
+            "out_bin_switch",
+            "out_lvl_switch"
+          ]
+        }
+      },
+      "battery": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:battery/ad:4_1",
+        "enabled": true,
+        "intf": [
+          "evt.lvl.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "indicator_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:4_1",
+        "enabled": true,
+        "intf": [
+          "cmd.indicator.set_visual_element"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "scene_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:scene_ctrl/ad:4_1",
+        "enabled": true,
+        "intf": [
+          "evt.scene.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 136,
+    "type": {
+      "subtype": "scene",
+      "supported": {
+        "input": [
+          "scene"
+        ]
+      },
+      "type": "input"
+    }
+  },
+  {
+    "client": {
+      "name": "TRADFRI on/off switch"
+    },
+    "fimp": {
+      "adapter": "zigbee",
+      "address": "6",
+      "group": "ch_1"
+    },
+    "functionality": null,
+    "id": 188,
+    "lrn": true,
+    "model": "zb - IKEA of Sweden - TRADFRI on/off switch",
+    "modelAlias": "TRADFRI on/off switch",
+    "param": {
+      "batteryLevel": "low",
+      "batteryPercentage": 8,
+      "timestamp": "2022-05-17 21:50:11 +0200"
+    },
+    "problem": false,
+    "room": 1,
+    "services": {
+      "association": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:association/ad:6_1",
+        "enabled": true,
+        "intf": [
+          "cmd.association.add",
+          "cmd.association.delete",
+          "cmd.association.delete_all",
+          "cmd.association.get_report",
+          "evt.association.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "out_services": [
+            "out_bin_switch",
+            "out_lvl_switch"
+          ]
+        }
+      },
+      "battery": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:battery/ad:6_1",
+        "enabled": true,
+        "intf": [
+          "evt.lvl.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "indicator_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:6_1",
+        "enabled": true,
+        "intf": [
+          "cmd.indicator.set_visual_element"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "scene_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:scene_ctrl/ad:6_1",
+        "enabled": true,
+        "intf": [
+          "evt.scene.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 142,
+    "type": {
+      "subtype": "scene",
+      "supported": {
+        "input": [
+          "scene"
+        ]
+      },
+      "type": "input"
+    }
+  },
+  {
+    "client": {
+      "name": "TRADFRI bulb E27 CWS opal 600lm"
+    },
+    "fimp": {
+      "adapter": "zigbee",
+      "address": "3",
+      "group": "ch_1"
+    },
+    "functionality": "lighting",
+    "id": 190,
+    "lrn": true,
+    "model": "zb - IKEA of Sweden - TRADFRI bulb E27 CWS opal 600lm",
+    "modelAlias": "TRADFRI bulb E27 CWS opal 600lm",
+    "param": {
+      "color": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "dimValue": 100,
+      "power": "off",
+      "timestamp": "2023-03-19 16:44:21 +0100"
+    },
+    "problem": false,
+    "room": 1,
+    "services": {
+      "association": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:association/ad:3_1",
+        "enabled": true,
+        "intf": [],
+        "props": {
+          "in_services": [
+            "color",
+            "out_bin_switch",
+            "out_lvl_switch"
+          ],
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "color_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:color_ctrl/ad:3_1",
+        "enabled": true,
+        "intf": [
+          "cmd.color.get_report",
+          "cmd.color.set",
+          "evt.color.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_components": [
+            "red",
+            "green",
+            "blue"
+          ]
+        }
+      },
+      "indicator_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:3_1",
+        "enabled": true,
+        "intf": [
+          "cmd.indicator.set_visual_element"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "out_bin_switch": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:out_bin_switch/ad:3_1",
+        "enabled": true,
+        "intf": [
+          "cmd.binary.get_report",
+          "cmd.binary.set",
+          "evt.binary.report"
+        ],
+        "props": {}
+      },
+      "out_lvl_switch": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:out_lvl_switch/ad:3_1",
+        "enabled": true,
+        "intf": [
+          "cmd.lvl.get_report",
+          "cmd.lvl.set",
+          "cmd.lvl.start",
+          "cmd.lvl.stop",
+          "evt.lvl.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "max_lvl": 254,
+          "min_lvl": 0
+        }
+      },
+      "virtual_meter_elec": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:virtual_meter_elec/ad:3_1",
+        "enabled": true,
+        "intf": [
+          "cmd.config.get_interval",
+          "cmd.config.set_interval",
+          "cmd.meter.add",
+          "cmd.meter.get_report",
+          "cmd.meter.remove",
+          "evt.config.interval_report",
+          "evt.meter.report"
+        ],
+        "props": {
+          "sup_modes": [
+            "off",
+            "on"
+          ],
+          "sup_units": [
+            "W"
+          ]
+        }
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 144,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "light": []
+      },
+      "type": "light"
+    }
+  },
+  {
+    "client": {
+      "name": "Connecte Thermostat"
+    },
+    "fimp": {
+      "adapter": "zigbee",
+      "address": "9",
+      "group": "ch_1"
+    },
+    "functionality": null,
+    "id": 193,
+    "lrn": true,
+    "model": "zb - _TZE200_4hbx5cvx - TS0601",
+    "modelAlias": "Connecte Thermostat",
+    "param": {
+      "targetTemperature": 17,
+      "temperature": 21,
+      "timestamp": "2022-02-23 00:06:14 +0100"
+    },
+    "problem": false,
+    "room": null,
+    "services": {
+      "indicator_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:9_1",
+        "enabled": true,
+        "intf": [
+          "cmd.indicator.set_visual_element"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "sensor_temp": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_temp/ad:9_1",
+        "enabled": true,
+        "intf": [
+          "cmd.sensor.get_report",
+          "evt.sensor.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_units": [
+            "C"
+          ],
+          "thing_role": "main"
+        }
+      },
+      "thermostat": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:thermostat/ad:9_1",
+        "enabled": true,
+        "intf": [
+          "cmd.setpoint.get_report",
+          "cmd.setpoint.set",
+          "evt.setpoint.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_modes": [],
+          "sup_setpoints": [
+            "heat"
+          ]
+        }
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 147,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "thermostat": []
+      },
+      "type": "thermostat"
+    }
+  },
+  {
+    "client": {
+      "name": "TS0121"
+    },
+    "fimp": {
+      "adapter": "zigbee",
+      "address": "7",
+      "group": "ch_1"
+    },
+    "functionality": "lighting",
+    "id": 196,
+    "lrn": true,
+    "model": "zb - _TZ3000_fqoynhku - TS0121",
+    "modelAlias": "TS0121",
+    "param": {
+      "power": "off",
+      "timestamp": "2022-06-11 20:09:09 +0200"
+    },
+    "problem": false,
+    "room": null,
+    "services": {
+      "indicator_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:7_1",
+        "enabled": true,
+        "intf": [
+          "cmd.indicator.set_visual_element"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "meter_elec": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:meter_elec/ad:7_1",
+        "enabled": true,
+        "intf": [
+          "cmd.meter.get_report",
+          "cmd.meter_ext.get_report",
+          "evt.meter.report",
+          "evt.meter_ext.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "out_bin_switch": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:out_bin_switch/ad:7_1",
+        "enabled": true,
+        "intf": [
+          "cmd.binary.get_report",
+          "cmd.binary.set",
+          "evt.binary.report"
+        ],
+        "props": {}
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 150,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "appliance": [],
+        "blinds": [],
+        "boiler": [],
+        "fan": [],
+        "heater": [],
+        "light": [],
+        "siren": [],
+        "water_valve": []
+      },
+      "type": "light"
+    }
+  },
+  {
+    "client": {
+      "name": "lumi.plug.maeu01"
+    },
+    "fimp": {
+      "adapter": "zigbee",
+      "address": "5",
+      "group": "ch_1"
+    },
+    "functionality": "lighting",
+    "id": 197,
+    "lrn": true,
+    "model": "zb - LUMI - lumi.plug.maeu01",
+    "modelAlias": "lumi.plug.maeu01",
+    "param": {
+      "power": "off",
+      "timestamp": "2022-06-02 01:41:04 +0200"
+    },
+    "problem": false,
+    "room": null,
+    "services": {
+      "indicator_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:5_1",
+        "enabled": true,
+        "intf": [
+          "cmd.indicator.set_visual_element"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "meter_elec": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:meter_elec/ad:5_1",
+        "enabled": true,
+        "intf": [
+          "cmd.meter.get_report",
+          "cmd.meter_ext.get_report",
+          "evt.meter.report",
+          "evt.meter_ext.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "out_bin_switch": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:out_bin_switch/ad:5_1",
+        "enabled": true,
+        "intf": [
+          "cmd.binary.get_report",
+          "cmd.binary.set",
+          "evt.binary.report"
+        ],
+        "props": {}
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 151,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "appliance": [],
+        "blinds": [],
+        "boiler": [],
+        "fan": [],
+        "heater": [],
+        "light": [],
+        "siren": [],
+        "water_valve": []
+      },
+      "type": "light"
+    }
+  },
+  {
+    "client": {
+      "name": "4512701"
+    },
+    "fimp": {
+      "adapter": "zigbee",
+      "address": "12",
+      "group": "ch_1"
+    },
+    "functionality": null,
+    "id": 199,
+    "lrn": true,
+    "model": "zb - NAMRON AS - 4512701",
+    "modelAlias": "4512701",
+    "param": {
+      "batteryLevel": "ok",
+      "batteryPercentage": 18,
+      "timestamp": "2025-04-26 03:31:18 +0200"
+    },
+    "problem": false,
+    "room": null,
+    "services": {
+      "association": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:association/ad:12_1",
+        "enabled": true,
+        "intf": [
+          "cmd.association.add",
+          "cmd.association.delete",
+          "cmd.association.delete_all",
+          "cmd.association.get_report",
+          "evt.association.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "out_services": [
+            "color",
+            "out_bin_switch",
+            "out_lvl_switch"
+          ]
+        }
+      },
+      "battery": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:battery/ad:12_1",
+        "enabled": true,
+        "intf": [
+          "evt.lvl.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "indicator_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:12_1",
+        "enabled": true,
+        "intf": [
+          "cmd.indicator.set_visual_element"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "scene_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:scene_ctrl/ad:12_1",
+        "enabled": true,
+        "intf": [
+          "evt.scene.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 153,
+    "type": {
+      "subtype": "scene",
+      "supported": {
+        "input": [
+          "scene"
+        ]
+      },
+      "type": "input"
+    }
+  },
+  {
+    "client": {
+      "name": "4512719"
+    },
+    "fimp": {
+      "adapter": "zigbee",
+      "address": "14",
+      "group": "ch_1"
+    },
+    "functionality": null,
+    "id": 201,
+    "lrn": true,
+    "model": "zb - NAMRON AS - 4512719",
+    "modelAlias": "4512719",
+    "param": {
+      "batteryLevel": "ok",
+      "batteryPercentage": 37,
+      "timestamp": "2023-01-04 16:16:36 +0100"
+    },
+    "problem": false,
+    "room": null,
+    "services": {
+      "association": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:association/ad:14_1",
+        "enabled": true,
+        "intf": [
+          "cmd.association.add",
+          "cmd.association.delete",
+          "cmd.association.delete_all",
+          "cmd.association.get_report",
+          "evt.association.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "out_services": [
+            "color",
+            "out_bin_switch",
+            "out_lvl_switch"
+          ]
+        }
+      },
+      "battery": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:battery/ad:14_1",
+        "enabled": true,
+        "intf": [
+          "evt.lvl.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "indicator_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:14_1",
+        "enabled": true,
+        "intf": [
+          "cmd.indicator.set_visual_element"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "scene_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:scene_ctrl/ad:14_1",
+        "enabled": true,
+        "intf": [
+          "evt.scene.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 155,
+    "type": {
+      "subtype": "scene",
+      "supported": {
+        "input": [
+          "scene"
+        ]
+      },
+      "type": "input"
+    }
+  },
+  {
+    "client": {
+      "name": "HAN sensor"
+    },
+    "fimp": {
+      "adapter": "zigbee",
+      "address": "10",
+      "group": "ch_2"
+    },
+    "functionality": null,
+    "id": 204,
+    "lrn": true,
+    "model": "zb - Develco Products A/S - EMIZB-132",
+    "modelAlias": "HAN sensor",
+    "param": {
+      "energy": 45071.297,
+      "timestamp": "2025-07-23 19:50:51 +0200",
+      "wattage": 164
+    },
+    "problem": false,
+    "room": 6,
+    "services": {
+      "indicator_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:10_2",
+        "enabled": true,
+        "intf": [
+          "cmd.indicator.set_visual_element"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "meter_elec": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:meter_elec/ad:10_2",
+        "enabled": true,
+        "intf": [
+          "cmd.meter.get_export_report",
+          "cmd.meter.get_report",
+          "cmd.meter_ext.get_report",
+          "evt.meter.export_report",
+          "evt.meter.report",
+          "evt.meter_ext.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_extended_vals": [
+            "i1",
+            "p_import_react",
+            "u1",
+            "p_export_react"
+          ],
+          "sup_units": [
+            "kWh",
+            "W"
+          ]
+        }
+      },
+      "ota": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:ota/ad:10_2",
+        "enabled": true,
+        "intf": [
+          "evt.ota_end.report",
+          "evt.ota_progress.report",
+          "evt.ota_start.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 158,
+    "type": {
+      "subtype": "main_elec",
+      "supported": {
+        "meter": [
+          "main_elec"
+        ]
+      },
+      "type": "meter"
+    }
+  },
+  {
+    "client": {
+      "name": "HAN sensor"
+    },
+    "fimp": {
+      "adapter": "zigbee",
+      "address": "11",
+      "group": "ch_2"
+    },
+    "functionality": null,
+    "id": 205,
+    "lrn": true,
+    "model": "zb - frient A/S - EMIZB-132",
+    "modelAlias": "EMIZB-132",
+    "param": {
+      "energy": 37030.806,
+      "timestamp": "2022-11-02 00:02:29 +0100",
+      "wattage": 3320
+    },
+    "problem": false,
+    "room": 6,
+    "services": {
+      "indicator_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:11_2",
+        "enabled": true,
+        "intf": [
+          "cmd.indicator.set_visual_element"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "meter_elec": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:meter_elec/ad:11_2",
+        "enabled": true,
+        "intf": [
+          "cmd.meter.get_export_report",
+          "cmd.meter.get_report",
+          "cmd.meter_ext.get_report",
+          "cmd.meter_metadata.get_report",
+          "evt.meter.export_report",
+          "evt.meter.report",
+          "evt.meter_ext.report",
+          "evt.meter_metadata.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "serial_number": "6970631401991295",
+          "sup_extended_vals": [],
+          "sup_units": [
+            "kWh",
+            "W"
+          ]
+        }
+      },
+      "ota": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:ota/ad:11_2",
+        "enabled": true,
+        "intf": [
+          "evt.ota_end.report",
+          "evt.ota_progress.report",
+          "evt.ota_start.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 160,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "meter": [
+          "main_elec"
+        ]
+      },
+      "type": null
+    }
+  },
+  {
+    "client": {
+      "name": "TRADFRI remote control"
+    },
+    "fimp": {
+      "adapter": "zigbee",
+      "address": "8",
+      "group": "ch_1"
+    },
+    "functionality": null,
+    "id": 206,
+    "lrn": true,
+    "model": "zb - IKEA of Sweden - TRADFRI remote control",
+    "modelAlias": "TRADFRI remote control",
+    "param": {
+      "batteryLevel": "ok",
+      "batteryPercentage": 37,
+      "timestamp": "2024-02-07 16:47:05 +0100"
+    },
+    "problem": false,
+    "room": 1,
+    "services": {
+      "association": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:association/ad:8_1",
+        "enabled": true,
+        "intf": [
+          "cmd.association.add",
+          "cmd.association.delete",
+          "cmd.association.delete_all",
+          "cmd.association.get_report",
+          "evt.association.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "out_services": [
+            "out_bin_switch",
+            "out_lvl_switch"
+          ]
+        }
+      },
+      "battery": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:battery/ad:8_1",
+        "enabled": true,
+        "intf": [
+          "evt.lvl.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "indicator_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:8_1",
+        "enabled": true,
+        "intf": [
+          "cmd.indicator.set_visual_element"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "scene_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:scene_ctrl/ad:8_1",
+        "enabled": true,
+        "intf": [
+          "evt.scene.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 161,
+    "type": {
+      "subtype": "scene",
+      "supported": {
+        "input": [
+          "scene"
+        ]
+      },
+      "type": "input"
+    }
+  },
+  {
+    "client": {
+      "name": "Restart router"
+    },
+    "fimp": {
+      "adapter": "flow",
+      "address": "oYinQN8bgwxeDt9",
+      "group": "ch_0"
+    },
+    "functionality": "appliance",
+    "id": 208,
+    "lrn": true,
+    "model": "flow_oYinQN8bgwxeDt9",
+    "modelAlias": "Restart router",
+    "param": {
+      "power": "off",
+      "timestamp": null
+    },
+    "problem": false,
+    "room": 1,
+    "services": {
+      "out_bin_switch": {
+        "addr": "/rt:dev/rn:flow/ad:1/sv:out_bin_switch/ad:oYinQN8bgwxeDt9_0",
+        "enabled": true,
+        "intf": [
+          "cmd.binary.set"
+        ],
+        "props": {}
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 165,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "appliance": [],
+        "blinds": [],
+        "boiler": [],
+        "fan": [],
+        "heater": [],
+        "light": [],
+        "siren": [],
+        "water_valve": []
+      },
+      "type": "appliance"
+    }
+  },
+  {
+    "client": {
+      "name": "Boiler 5 cycles"
+    },
+    "fimp": {
+      "adapter": "flow",
+      "address": "1bPIbg2So4l3Y6h",
+      "group": "7"
+    },
+    "functionality": "appliance",
+    "id": 209,
+    "lrn": true,
+    "model": "flow_1bPIbg2So4l3Y6h",
+    "modelAlias": "Boiler 5 cycles",
+    "param": {
+      "power": "off",
+      "timestamp": null
+    },
+    "problem": false,
+    "room": 7,
+    "services": {
+      "out_bin_switch": {
+        "addr": "/rt:dev/rn:flow/ad:1/sv:out_bin_switch/ad:tfnGPTUArLR0Vzs_0",
+        "enabled": true,
+        "intf": [
+          "cmd.binary.set"
+        ],
+        "props": {}
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 166,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "appliance": [],
+        "blinds": [],
+        "boiler": [],
+        "fan": [],
+        "heater": [],
+        "light": [],
+        "siren": [],
+        "water_valve": []
+      },
+      "type": "appliance"
+    }
+  },
+  {
+    "client": {
+      "name": "HAN sensor gen1"
+    },
+    "fimp": {
+      "adapter": "zigbee",
+      "address": "1",
+      "group": "ch_1"
+    },
+    "functionality": null,
+    "id": 210,
+    "lrn": true,
+    "model": "zb - Datek - Meter Reader",
+    "modelAlias": "HAN sensor gen1",
+    "param": {
+      "energy": 0,
+      "temperature": 14.55,
+      "timestamp": "2024-03-08 19:58:08 +0100",
+      "wattage": 0
+    },
+    "problem": false,
+    "room": null,
+    "services": {
+      "indicator_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:1_1",
+        "enabled": true,
+        "intf": [
+          "cmd.indicator.set_visual_element"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "meter_elec": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:meter_elec/ad:1_1",
+        "enabled": true,
+        "intf": [
+          "cmd.meter.get_export_report",
+          "cmd.meter.get_report",
+          "cmd.meter_ext.get_report",
+          "cmd.meter_metadata.get_report",
+          "evt.meter.export_report",
+          "evt.meter.report",
+          "evt.meter_ext.report",
+          "evt.meter_metadata.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "serial_number": "6970631401991295",
+          "sup_extended_vals": [
+            "u1",
+            "i1",
+            "p_import_react",
+            "p_export_react"
+          ],
+          "sup_units": [
+            "kWh",
+            "W"
+          ]
+        }
+      },
+      "ota": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:ota/ad:1_1",
+        "enabled": true,
+        "intf": [
+          "evt.ota_end.report",
+          "evt.ota_progress.report",
+          "evt.ota_start.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "sensor_temp": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_temp/ad:1_1",
+        "enabled": true,
+        "intf": [
+          "evt.sensor.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_units": [
+            "C"
+          ],
+          "thing_role": "main"
+        }
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 167,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "meter": [
+          "main_elec"
+        ]
+      },
+      "type": "meter"
+    }
+  },
+  {
+    "client": {
+      "name": "Develco smart plug"
+    },
+    "fimp": {
+      "adapter": "zigbee",
+      "address": "13",
+      "group": "ch_2"
+    },
+    "functionality": "appliance",
+    "id": 211,
+    "lrn": true,
+    "model": "zb - Develco Products A/S - SPLZB-131",
+    "modelAlias": "Develco smart plug",
+    "param": {
+      "energy": 0.855,
+      "power": "off",
+      "timestamp": "2025-07-23 19:35:16 +0200",
+      "wattage": 0
+    },
+    "problem": false,
+    "room": 9,
+    "services": {
+      "association": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:association/ad:13_2",
+        "enabled": true,
+        "intf": [],
+        "props": {
+          "in_services": [
+            "out_bin_switch"
+          ],
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "indicator_ctrl": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:13_2",
+        "enabled": true,
+        "intf": [
+          "cmd.indicator.set_visual_element"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "meter_elec": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:meter_elec/ad:13_2",
+        "enabled": true,
+        "intf": [
+          "cmd.meter.get_export_report",
+          "cmd.meter.get_report",
+          "cmd.meter_ext.get_report",
+          "cmd.meter_metadata.get_report",
+          "evt.meter.export_report",
+          "evt.meter.report",
+          "evt.meter_ext.report",
+          "evt.meter_metadata.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "serial_number": "0015BC002F004932",
+          "sup_extended_vals": [
+            "p_import_react",
+            "freq",
+            "u1",
+            "i1",
+            "p_import",
+            "p_export_react",
+            "p_export"
+          ],
+          "sup_units": [
+            "kWh",
+            "W"
+          ]
+        }
+      },
+      "ota": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:ota/ad:13_2",
+        "enabled": true,
+        "intf": [
+          "evt.ota_end.report",
+          "evt.ota_progress.report",
+          "evt.ota_start.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "out_bin_switch": {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:out_bin_switch/ad:13_2",
+        "enabled": true,
+        "intf": [
+          "cmd.binary.get_report",
+          "cmd.binary.set",
+          "evt.binary.report"
+        ],
+        "props": {}
+      }
+    },
+    "supports": [
+      "clear",
+      "poll"
+    ],
+    "thing": 168,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "appliance": [],
+        "blinds": [],
+        "boiler": [],
+        "fan": [],
+        "heater": [],
+        "light": [],
+        "siren": [],
+        "water_valve": []
+      },
+      "type": "appliance"
+    }
+  }
+]

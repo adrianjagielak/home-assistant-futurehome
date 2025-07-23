@@ -11,24 +11,33 @@ import { VinculumPd7Device } from "./fimp/vinculum_pd7_device";
 import { haUpdateAvailability } from "./ha/update_availability";
 
 (async () => {
-  const hubIp = process.env.FH_HUB_IP || "";
-  const hubUsername = process.env.FH_USERNAME || "";
-  const hubPassword = process.env.FH_PASSWORD || "";
+  const hubIp = process.env.FH_HUB_IP || '';
+  const hubUsername = process.env.FH_USERNAME || '';
+  const hubPassword = process.env.FH_PASSWORD || '';
+  const demoMode = (process.env.DEMO_MODE || '').toLowerCase().includes('true');
 
-  const mqttHost = process.env.MQTT_HOST || "";
-  const mqttPort = Number(process.env.MQTT_PORT || "1883");
-  const mqttUsername = process.env.MQTT_USER || "";
-  const mqttPassword = process.env.MQTT_PWD || "";
+  const mqttHost = process.env.MQTT_HOST || '';
+  const mqttPort = Number(process.env.MQTT_PORT || '1883');
+  const mqttUsername = process.env.MQTT_USER || '';
+  const mqttPassword = process.env.MQTT_PWD || '';
 
-  // 1) Connect to HA broker (for discovery + state)
+  // 1) Connect to HA broker (for discovery + state + availability + commands)
   log.info("Connecting to HA broker...");
   const { ha, retainedMessages } = await connectHA({ mqttHost, mqttPort, mqttUsername, mqttPassword, });
   setHa(ha);
   log.info("Connected to HA broker");
 
+  if (!demoMode && (!hubUsername || !hubPassword)) {
+    log.info("Empty username or password in non-demo mode. Removing all Futurehome devices from Home Assistant...");
+    retainedMessages.forEach((retainedMessage) => {
+      ha?.publish(retainedMessage.topic, '', { retain: true, qos: 2 });
+    });
+    return;
+  }
+
   // 2) Connect to Futurehome hub (FIMP traffic)
   log.info("Connecting to Futurehome hub...");
-  const fimp = await connectHub({ hubIp, username: hubUsername, password: hubPassword });
+  const fimp = await connectHub({ hubIp, username: hubUsername, password: hubPassword, demo: demoMode });
   fimp.subscribe("#");
   setFimp(fimp);
   log.info("Connected to Futurehome hub");
@@ -39,6 +48,7 @@ import { haUpdateAvailability } from "./ha/update_availability";
     cmd: 'cmd.pd7.request',
     val: { cmd: "get", component: null, param: { components: ['house'] } },
     val_t: 'object',
+    timeoutMs: 30000,
   });
   let hubId = house.val.param.house.hubId;
 
@@ -48,6 +58,7 @@ import { haUpdateAvailability } from "./ha/update_availability";
     cmd: 'cmd.pd7.request',
     val: { cmd: "get", component: null, param: { components: ['device'] } },
     val_t: 'object',
+    timeoutMs: 30000,
   });
 
   const haConfig = retainedMessages.filter(msg => msg.topic.endsWith("/config"));
@@ -160,6 +171,7 @@ import { haUpdateAvailability } from "./ha/update_availability";
     cmd: 'cmd.pd7.request',
     val: { cmd: "get", component: null, param: { components: ['state'] } },
     val_t: 'object',
+    timeoutMs: 30000,
   });
 
   ha.on('message', (topic, buf) => {

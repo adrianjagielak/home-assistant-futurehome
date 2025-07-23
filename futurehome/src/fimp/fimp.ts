@@ -1,10 +1,10 @@
-import { MqttClient } from "mqtt/*";
 import { v4 as uuidv4 } from "uuid";
 import { log } from "../logger";
+import { IMqttClient } from "../mqtt/interface";
 
-let fimp: MqttClient | undefined = undefined;
+let fimp: IMqttClient | undefined = undefined;
 
-export function setFimp(client: MqttClient) {
+export function setFimp(client: IMqttClient) {
   fimp = client;
 }
 
@@ -57,14 +57,6 @@ export async function sendFimpMsg({
     },
   );
 
-  // For example for "cmd.foo.set" we would expect to get "evt.foo.report" back (plus the service name must match).
-  let possibleResponseType: string | null = null;
-  if (cmd.split('.').length === 3) {
-    possibleResponseType = cmd.split('.').map(
-      (part, index, array) => index === 0 ? 'evt' : (index === array.length - 1 ? 'report' : part),
-    ).join('.');
-  }
-
   return new Promise((resolve, reject) => {
     const timeout = setTimeout(() => {
       fimp?.removeListener('message', onResponse);
@@ -111,16 +103,6 @@ export async function sendFimpMsg({
         resolve(msg);
         return;
       }
-
-      // TODO(adrianjagielak): is this needed?
-      // if (possibleResponseType != null && msg.type === possibleResponseType && msg.serv === parameters.service) {
-      //   log.debug(`Received FIMP response for message ${uid} (matched using possible response type "${possibleResponseType}").`);
-      //
-      //   clearTimeout(timeout);
-      //   effectiveMqttClient.removeListener('message', onResponse);
-      //   resolve(msg);
-      //   return;
-      // }
 
       const hasValidType = msg.type != null && msg.type.startsWith('evt.');
       const reqCmdParts = cmd.split('.');

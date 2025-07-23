@@ -1,0 +1,1141 @@
+[
+  {
+    "id": 26,
+    "services": []
+  },
+  {
+    "id": 165,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:thermostat/ad:8_0",
+        "attributes": [
+          {
+            "name": "setpoint",
+            "values": [
+              {
+                "ts": "2021-11-15 21:30:00 +0100",
+                "val": {
+                  "temp": "21.000000",
+                  "type": "heat",
+                  "unit": "C"
+                },
+                "val_t": "str_map"
+              }
+            ]
+          },
+          {
+            "name": "mode",
+            "values": [
+              {
+                "ts": "2021-11-15 20:31:03 +0100",
+                "val": "heat",
+                "val_t": "string"
+              }
+            ]
+          }
+        ],
+        "name": "thermostat"
+      },
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:8_0",
+        "attributes": [
+          {
+            "name": "state",
+            "values": [
+              {
+                "ts": "2025-06-16 22:13:38 +0200",
+                "val": "UP",
+                "val_t": "string"
+              }
+            ]
+          }
+        ],
+        "name": "dev_sys"
+      },
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:8_0",
+        "attributes": [
+          {
+            "name": "meter",
+            "values": [
+              {
+                "props": {
+                  "unit": "kWh"
+                },
+                "ts": "2021-11-15 20:31:03 +0100",
+                "val": 1594.5,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "meter_elec"
+      }
+    ]
+  },
+  {
+    "id": 166,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:thermostat/ad:8_1",
+        "attributes": [
+          {
+            "name": "setpoint",
+            "values": [
+              {
+                "ts": "2025-07-22 23:00:00 +0200",
+                "val": {
+                  "temp": "14.00",
+                  "type": "heat",
+                  "unit": "C"
+                },
+                "val_t": "str_map"
+              }
+            ]
+          },
+          {
+            "name": "mode",
+            "values": [
+              {
+                "ts": "2025-07-20 23:00:00 +0200",
+                "val": "heat",
+                "val_t": "string"
+              }
+            ]
+          }
+        ],
+        "name": "thermostat"
+      },
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:8_1",
+        "attributes": [
+          {
+            "name": "meter",
+            "values": [
+              {
+                "props": {
+                  "unit": "pulse_c"
+                },
+                "ts": "2025-06-19 20:54:34 +0200",
+                "val": 0.300000011920929,
+                "val_t": "float"
+              },
+              {
+                "props": {
+                  "unit": "kWh"
+                },
+                "ts": "2025-07-23 19:50:36 +0200",
+                "val": 3714.10009765625,
+                "val_t": "float"
+              },
+              {
+                "props": {
+                  "unit": "V"
+                },
+                "ts": "2025-07-23 19:50:36 +0200",
+                "val": 235.600006103516,
+                "val_t": "float"
+              },
+              {
+                "props": {
+                  "unit": "W"
+                },
+                "ts": "2025-07-23 19:50:36 +0200",
+                "val": 0.419999986886978,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "meter_elec"
+      },
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:basic/ad:8_1",
+        "attributes": [
+          {
+            "name": "lvl",
+            "values": [
+              {
+                "ts": "2025-05-30 22:58:10 +0200",
+                "val": 255,
+                "val_t": "int"
+              }
+            ]
+          }
+        ],
+        "name": "basic"
+      },
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:8_1",
+        "attributes": [
+          {
+            "name": "error",
+            "values": [
+              {
+                "props": {
+                  "msg": "TRANSMIT_COMPLETE_NOROUTE",
+                  "src": "nodeId=8_1;service=thermostat"
+                },
+                "ts": "2024-02-25 16:20:51 +0100",
+                "val": "TX_ERROR",
+                "val_t": "string"
+              }
+            ]
+          }
+        ],
+        "name": "dev_sys"
+      }
+    ]
+  },
+  {
+    "id": 167,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:sensor_temp/ad:8_2",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "props": {
+                  "unit": "C"
+                },
+                "ts": "2025-07-23 19:50:36 +0200",
+                "val": 30.7999992370605,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_temp"
+      }
+    ]
+  },
+  {
+    "id": 168,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:sensor_temp/ad:8_3",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "props": {
+                  "unit": "C"
+                },
+                "ts": "2025-07-06 16:29:06 +0200",
+                "val": 0,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_temp"
+      }
+    ]
+  },
+  {
+    "id": 169,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:sensor_temp/ad:8_4",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "props": {
+                  "unit": "C"
+                },
+                "ts": "2025-07-23 19:50:36 +0200",
+                "val": 29.1000003814697,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_temp"
+      }
+    ]
+  },
+  {
+    "id": 177,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:sensor_temp/ad:9_0",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "props": {
+                  "unit": "C"
+                },
+                "ts": "2021-12-20 02:20:02 +0100",
+                "val": 25.4899997711182,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_temp"
+      },
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:9_0",
+        "attributes": [
+          {
+            "name": "binary",
+            "values": [
+              {
+                "ts": "2025-07-19 06:50:25 +0200",
+                "val": false,
+                "val_t": "bool"
+              }
+            ]
+          }
+        ],
+        "name": "out_bin_switch"
+      },
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:9_0",
+        "attributes": [
+          {
+            "name": "state",
+            "values": [
+              {
+                "ts": "2024-03-08 04:10:23 +0100",
+                "val": "UP",
+                "val_t": "string"
+              }
+            ]
+          },
+          {
+            "name": "error",
+            "values": [
+              {
+                "props": {
+                  "msg": "TRANSMIT_COMPLETE_NO_ACK",
+                  "src": "nodeId=9_0;service=out_bin_switch"
+                },
+                "ts": "2024-03-08 04:08:27 +0100",
+                "val": "TX_ERROR",
+                "val_t": "string"
+              }
+            ]
+          }
+        ],
+        "name": "dev_sys"
+      },
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:9_0",
+        "attributes": [
+          {
+            "name": "meter",
+            "values": [
+              {
+                "props": {
+                  "delta_t": "120",
+                  "prv_data": "2506.001953",
+                  "unit": "kWh"
+                },
+                "ts": "2025-07-23 19:50:00 +0200",
+                "val": 2506.001953125,
+                "val_t": "float"
+              },
+              {
+                "props": {
+                  "unit": "W"
+                },
+                "ts": "2025-07-22 05:12:19 +0200",
+                "val": 0,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "meter_elec"
+      }
+    ]
+  },
+  {
+    "id": 178,
+    "services": []
+  },
+  {
+    "id": 180,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:out_lvl_switch/ad:2_11",
+        "attributes": [
+          {
+            "name": "lvl",
+            "values": [
+              {
+                "ts": "2022-11-07 00:11:17 +0100",
+                "val": 1,
+                "val_t": "int"
+              }
+            ]
+          },
+          {
+            "name": "binary",
+            "values": [
+              {
+                "ts": "2022-05-23 02:22:03 +0200",
+                "val": true,
+                "val_t": "bool"
+              }
+            ]
+          }
+        ],
+        "name": "out_lvl_switch"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:out_bin_switch/ad:2_11",
+        "attributes": [
+          {
+            "name": "binary",
+            "values": [
+              {
+                "ts": "2025-07-23 19:38:58 +0200",
+                "val": true,
+                "val_t": "bool"
+              }
+            ]
+          }
+        ],
+        "name": "out_bin_switch"
+      }
+    ]
+  },
+  {
+    "id": 182,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:scene_ctrl/ad:4_1",
+        "attributes": [
+          {
+            "name": "scene",
+            "values": [
+              {
+                "ts": "2022-07-15 03:05:46 +0200",
+                "val": "on",
+                "val_t": "string"
+              }
+            ]
+          }
+        ],
+        "name": "scene_ctrl"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:battery/ad:4_1",
+        "attributes": [
+          {
+            "name": "lvl",
+            "values": [
+              {
+                "ts": "2022-01-20 23:11:45 +0100",
+                "val": 50,
+                "val_t": "int"
+              }
+            ]
+          }
+        ],
+        "name": "battery"
+      }
+    ]
+  },
+  {
+    "id": 188,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:scene_ctrl/ad:6_1",
+        "attributes": [
+          {
+            "name": "scene",
+            "values": [
+              {
+                "ts": "2022-05-05 00:01:50 +0200",
+                "val": "off",
+                "val_t": "string"
+              }
+            ]
+          }
+        ],
+        "name": "scene_ctrl"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:association/ad:6_1",
+        "attributes": [
+          {
+            "name": "association",
+            "values": [
+              {
+                "ts": "2022-02-19 16:19:10 +0100",
+                "val": {
+                  "members": [
+                    "3_1"
+                  ]
+                },
+                "val_t": "object"
+              }
+            ]
+          }
+        ],
+        "name": "association"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:battery/ad:6_1",
+        "attributes": [
+          {
+            "name": "lvl",
+            "values": [
+              {
+                "ts": "2022-05-17 21:50:11 +0200",
+                "val": 8,
+                "val_t": "int"
+              }
+            ]
+          }
+        ],
+        "name": "battery"
+      }
+    ]
+  },
+  {
+    "id": 190,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:out_lvl_switch/ad:3_1",
+        "attributes": [
+          {
+            "name": "lvl",
+            "values": [
+              {
+                "ts": "2023-01-15 20:44:21 +0100",
+                "val": 254,
+                "val_t": "int"
+              }
+            ]
+          },
+          {
+            "name": "binary",
+            "values": [
+              {
+                "ts": "2023-01-15 20:44:21 +0100",
+                "val": true,
+                "val_t": "bool"
+              }
+            ]
+          }
+        ],
+        "name": "out_lvl_switch"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:color_ctrl/ad:3_1",
+        "attributes": [
+          {
+            "name": "color",
+            "values": [
+              {
+                "ts": "2023-01-05 00:31:31 +0100",
+                "val": {
+                  "blue": 0,
+                  "green": 0,
+                  "red": 0
+                },
+                "val_t": "int_map"
+              }
+            ]
+          }
+        ],
+        "name": "color_ctrl"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:out_bin_switch/ad:3_1",
+        "attributes": [
+          {
+            "name": "binary",
+            "values": [
+              {
+                "ts": "2023-03-19 16:44:21 +0100",
+                "val": false,
+                "val_t": "bool"
+              }
+            ]
+          }
+        ],
+        "name": "out_bin_switch"
+      }
+    ]
+  },
+  {
+    "id": 193,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:thermostat/ad:9_1",
+        "attributes": [
+          {
+            "name": "state",
+            "values": [
+              {
+                "ts": "2022-02-23 00:06:14 +0100",
+                "val": "Idle",
+                "val_t": "string"
+              }
+            ]
+          },
+          {
+            "name": "mode",
+            "values": [
+              {
+                "ts": "2022-02-23 00:06:13 +0100",
+                "val": "Manual",
+                "val_t": "string"
+              }
+            ]
+          },
+          {
+            "name": "setpoint",
+            "values": [
+              {
+                "ts": "2022-02-23 00:06:13 +0100",
+                "val": {
+                  "temp": "17",
+                  "type": "heat",
+                  "unit": "C"
+                },
+                "val_t": "str_map"
+              }
+            ]
+          }
+        ],
+        "name": "thermostat"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_temp/ad:9_1",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "props": {
+                  "unit": "C"
+                },
+                "ts": "2022-02-23 00:06:13 +0100",
+                "val": 21,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_temp"
+      }
+    ]
+  },
+  {
+    "id": 196,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:out_bin_switch/ad:7_1",
+        "attributes": [
+          {
+            "name": "binary",
+            "values": [
+              {
+                "ts": "2022-06-02 01:30:25 +0200",
+                "val": false,
+                "val_t": "bool"
+              }
+            ]
+          }
+        ],
+        "name": "out_bin_switch"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:meter_elec/ad:7_1",
+        "attributes": [
+          {
+            "name": "meter_ext",
+            "values": [
+              {
+                "ts": "2022-06-11 20:09:09 +0200",
+                "val": {
+                  "i1": 0,
+                  "p_import": 0,
+                  "u1": 236
+                },
+                "val_t": "float_map"
+              }
+            ]
+          },
+          {
+            "name": "meter",
+            "values": [
+              {
+                "props": {
+                  "unit": "kWh"
+                },
+                "ts": "2022-06-02 01:36:00 +0200",
+                "val": 0.168,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "meter_elec"
+      }
+    ]
+  },
+  {
+    "id": 197,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:out_bin_switch/ad:5_1",
+        "attributes": [
+          {
+            "name": "binary",
+            "values": [
+              {
+                "ts": "2022-06-02 01:33:01 +0200",
+                "val": false,
+                "val_t": "bool"
+              }
+            ]
+          }
+        ],
+        "name": "out_bin_switch"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:meter_elec/ad:5_1",
+        "attributes": [
+          {
+            "name": "meter_ext",
+            "values": [
+              {
+                "ts": "2022-06-02 01:33:01 +0200",
+                "val": {
+                  "p_import": 0
+                },
+                "val_t": "float_map"
+              }
+            ]
+          },
+          {
+            "name": "meter",
+            "values": [
+              {
+                "props": {
+                  "unit": "kWh"
+                },
+                "ts": "2022-06-02 01:41:04 +0200",
+                "val": 0.053,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "meter_elec"
+      }
+    ]
+  },
+  {
+    "id": 199,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:scene_ctrl/ad:12_1",
+        "attributes": [
+          {
+            "name": "scene",
+            "values": [
+              {
+                "ts": "2025-04-22 21:05:49 +0200",
+                "val": "stop",
+                "val_t": "string"
+              }
+            ]
+          }
+        ],
+        "name": "scene_ctrl"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:association/ad:12_1",
+        "attributes": [
+          {
+            "name": "association",
+            "values": [
+              {
+                "ts": "2022-07-02 15:14:43 +0200",
+                "val": {
+                  "members": []
+                },
+                "val_t": "object"
+              }
+            ]
+          }
+        ],
+        "name": "association"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:battery/ad:12_1",
+        "attributes": [
+          {
+            "name": "lvl",
+            "values": [
+              {
+                "ts": "2025-04-26 03:31:18 +0200",
+                "val": 18,
+                "val_t": "int"
+              }
+            ]
+          }
+        ],
+        "name": "battery"
+      }
+    ]
+  },
+  {
+    "id": 201,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:scene_ctrl/ad:14_1",
+        "attributes": [
+          {
+            "name": "scene",
+            "values": [
+              {
+                "ts": "2022-07-02 15:52:33 +0200",
+                "val": "stop",
+                "val_t": "string"
+              }
+            ]
+          }
+        ],
+        "name": "scene_ctrl"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:association/ad:14_1",
+        "attributes": [
+          {
+            "name": "association",
+            "values": [
+              {
+                "ts": "2022-07-02 15:49:21 +0200",
+                "val": {
+                  "members": []
+                },
+                "val_t": "object"
+              }
+            ]
+          }
+        ],
+        "name": "association"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:battery/ad:14_1",
+        "attributes": [
+          {
+            "name": "lvl",
+            "values": [
+              {
+                "ts": "2023-01-04 16:16:36 +0100",
+                "val": 37,
+                "val_t": "int"
+              }
+            ]
+          }
+        ],
+        "name": "battery"
+      }
+    ]
+  },
+  {
+    "id": 204,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:meter_elec/ad:10_2",
+        "attributes": [
+          {
+            "name": "meter_ext",
+            "values": [
+              {
+                "ts": "2025-07-23 19:50:45 +0200",
+                "val": {
+                  "i1": 0.753,
+                  "p_export_react": 0,
+                  "p_import_react": 13,
+                  "u1": 234.8
+                },
+                "val_t": "float_map"
+              }
+            ]
+          },
+          {
+            "name": "meter",
+            "values": [
+              {
+                "props": {
+                  "unit": "kWh"
+                },
+                "ts": "2025-07-23 19:50:51 +0200",
+                "val": 45071.297,
+                "val_t": "float"
+              },
+              {
+                "props": {
+                  "unit": "W"
+                },
+                "ts": "2025-07-23 19:50:51 +0200",
+                "val": 164,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "meter_elec"
+      }
+    ]
+  },
+  {
+    "id": 205,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:meter_elec/ad:11_2",
+        "attributes": [
+          {
+            "name": "meter_ext",
+            "values": [
+              {
+                "ts": "2022-11-02 00:02:21 +0100",
+                "val": {
+                  "i1": 6.551,
+                  "p_export_react": 417,
+                  "p_import_react": 0,
+                  "u1": 237.2
+                },
+                "val_t": "float_map"
+              }
+            ]
+          },
+          {
+            "name": "meter",
+            "values": [
+              {
+                "props": {
+                  "unit": "kWh"
+                },
+                "ts": "2022-11-02 00:00:11 +0100",
+                "val": 37030.806,
+                "val_t": "float"
+              },
+              {
+                "props": {
+                  "unit": "W"
+                },
+                "ts": "2022-11-02 00:02:29 +0100",
+                "val": 3320,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "meter_elec"
+      }
+    ]
+  },
+  {
+    "id": 206,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:scene_ctrl/ad:8_1",
+        "attributes": [
+          {
+            "name": "scene",
+            "values": [
+              {
+                "ts": "2023-01-15 20:44:23 +0100",
+                "val": "step down",
+                "val_t": "string"
+              }
+            ]
+          }
+        ],
+        "name": "scene_ctrl"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:association/ad:8_1",
+        "attributes": [
+          {
+            "name": "association",
+            "values": [
+              {
+                "ts": "2023-01-05 00:31:29 +0100",
+                "val": {
+                  "members": [
+                    "3_1"
+                  ]
+                },
+                "val_t": "object"
+              }
+            ]
+          }
+        ],
+        "name": "association"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:battery/ad:8_1",
+        "attributes": [
+          {
+            "name": "lvl",
+            "values": [
+              {
+                "ts": "2024-02-07 16:47:05 +0100",
+                "val": 37,
+                "val_t": "int"
+              }
+            ]
+          }
+        ],
+        "name": "battery"
+      }
+    ]
+  },
+  {
+    "id": 208,
+    "services": []
+  },
+  {
+    "id": 209,
+    "services": []
+  },
+  {
+    "id": 210,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_temp/ad:1_1",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "props": {
+                  "unit": "C"
+                },
+                "ts": "2024-03-08 19:11:58 +0100",
+                "val": 14.55,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_temp"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:meter_elec/ad:1_1",
+        "attributes": [
+          {
+            "name": "meter_ext",
+            "values": [
+              {
+                "ts": "2024-03-08 19:42:28 +0100",
+                "val": {
+                  "i1": 1.779,
+                  "p_export_react": 0.001,
+                  "p_import_react": 0,
+                  "u1": 235
+                },
+                "val_t": "float_map"
+              }
+            ]
+          },
+          {
+            "name": "meter",
+            "values": [
+              {
+                "props": {
+                  "unit": "kWh"
+                },
+                "ts": "2024-03-08 19:41:32 +0100",
+                "val": 0,
+                "val_t": "float"
+              },
+              {
+                "props": {
+                  "unit": "W"
+                },
+                "ts": "2024-03-08 19:58:08 +0100",
+                "val": 0,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "meter_elec"
+      }
+    ]
+  },
+  {
+    "id": 211,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:out_bin_switch/ad:13_2",
+        "attributes": [
+          {
+            "name": "binary",
+            "values": [
+              {
+                "ts": "2025-07-23 19:21:49 +0200",
+                "val": false,
+                "val_t": "bool"
+              }
+            ]
+          }
+        ],
+        "name": "out_bin_switch"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:meter_elec/ad:13_2",
+        "attributes": [
+          {
+            "name": "meter_ext",
+            "values": [
+              {
+                "ts": "2025-07-23 19:35:16 +0200",
+                "val": {
+                  "i1": 0,
+                  "p_export": 0,
+                  "p_import": 0,
+                  "u1": 234.13
+                },
+                "val_t": "float_map"
+              }
+            ]
+          },
+          {
+            "name": "meter",
+            "values": [
+              {
+                "props": {
+                  "unit": "kWh"
+                },
+                "ts": "2025-07-23 19:21:49 +0200",
+                "val": 0.855,
+                "val_t": "float"
+              },
+              {
+                "props": {
+                  "unit": "W"
+                },
+                "ts": "2025-07-23 19:21:49 +0200",
+                "val": 0,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "meter_elec"
+      }
+    ]
+  }
+]

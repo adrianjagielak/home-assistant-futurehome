@@ -8,6 +8,7 @@ set -e
 export FH_HUB_IP=$(bashio::config 'hub_ip')
 export FH_USERNAME=$(bashio::config 'username')
 export FH_PASSWORD=$(bashio::config 'password')
+export DEMO_MODE=$(bashio::config 'demo_mode')
 
 export MQTT_HOST=$(bashio::services mqtt "host")
 export MQTT_PORT=$(bashio::services mqtt "port")

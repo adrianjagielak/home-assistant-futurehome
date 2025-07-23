@@ -1,9 +1,9 @@
-import { MqttClient } from "mqtt";
 import { v4 as uuidv4 } from "uuid";
+import { IMqttClient } from "./mqtt/interface";
 
 export function exposeSmarthubTools(
-  ha: MqttClient,
-  fimp: MqttClient,
+  ha: IMqttClient,
+  fimp: IMqttClient,
   hubAddr = "pt:j1/mt:cmd/rt:app/rn:zb/ad:1"
 ) {
   const base = "homeassistant/switch/fh_zb_pairing";
@@ -22,7 +22,7 @@ export function exposeSmarthubTools(
       stat_t: `${base}/state`,
       device,
     }),
-    { retain: true }
+    { retain: true, qos: 2 }
   );
 
   //   // keep last known state locally
@@ -35,7 +35,7 @@ export function exposeSmarthubTools(
 
     // // optimistic update so the UI flips instantly
     // pairingOn = turnOn;
-    ha.publish(`${base}/state`, turnOn ? "ON" : "OFF", { retain: true });
+    ha.publish(`${base}/state`, turnOn ? "ON" : "OFF", { retain: true, qos: 2 });
 
     // placeholder FIMP message – adjust to real API if different
     fimp.publish(
