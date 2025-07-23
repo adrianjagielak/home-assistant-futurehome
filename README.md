@@ -6,16 +6,17 @@ Futurehome add-on for Home Assistant. The add-on aims to be a complete drop-in r
 
 This plugin:
 
-1. Fetches all devices metadata from Futurehome hub and maps them to Home Assistant Devices/Entities.
-2. Fetches and updates devices state.
-3. Fetches and updates devices availability.
+* Fetches all devices metadata from Futurehome hub and maps them to Home Assistant Devices/Entities.
+* Fetches and updates devices state.
+* Fetches and updates devices availability.
+* Supports interacting with the devices as well as the official Futurehome app did.
+* Supports pairing new Zigbee/Z-Wave/Futurehome devices (if an offchance you used any third party integration like Phillips Hue you will be able to interact with it as long as its paired with the hub. However it's recommended to directly use the appropriate Home Asisstant integration for such devices).
 
 ## Installation
 
 1. Configure Local API in Smarthub settings in Futurehome app.
 2. Block internet access (WAN) for the hub in your router settings (optional, but strongly recommended to block any future hub firmware updates).
-3. In Home Assistant Add-on store install and start Mosquito MQTT broker (if you haven't already) (todo: is it really needed? or will it be installed automatically when enabling the mqtt integration?).
-4. In Home Assistant enable MQTT integration (if you haven't already).
+4. In Home Assistant enable MQTT integration.
 5. [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fadrianjagielak%2Fhome-assistant-futurehome)
 6. Search for "Futurehome" in add-on store.
 7. Install, configure, and run Futurehome add-on.
@@ -30,8 +31,10 @@ Devices commonly consist of multiple services: for example, a presence sensor mi
 Some services are more common than others. Some are deprecated entirely.
 
 
-todo add more services
-todo document which services are not documented in github FIMP api and are only present in reverse engineered app code (app store/play store)
+todo periodical refresh of devices
+todo periodical refresh of state
+todo handle evt.sensor.report
+
 | Service | Example device | Implemented in any capacity | Full implementation verified | todo change columns
 | --- | --- | --- | --- |
 | alarm_appliance | | ✅ | |
