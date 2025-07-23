@@ -5,9 +5,9 @@ import { HaComponent } from "../ha/publish_device";
 export function sensor_dew__components(vinculumDeviceData: VinculumPd7Device, svc: InclusionReportService): { [key: string]: HaComponent } {
   if (!svc.address) { return {}; }
 
-  let unit = svc.props?.sup_units?.[0] ?? "℃";
-  if (unit === 'C') unit = '℃';
-  if (unit === 'F') unit = '℉';
+  let unit = svc.props?.sup_units?.[0] ?? "°C";
+  if (unit === 'C') unit = '°C';
+  if (unit === 'F') unit = '°F';
 
   return {
     [svc.address]: {

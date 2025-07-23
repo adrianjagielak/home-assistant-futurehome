@@ -9,7 +9,7 @@ export function handlePresenceSensor(client: MqttClient, dev: any, svc: any) {
     uniq_id: uid,
     dev_cla: "presence",
     stat_t: `${base}/state`,
-    unit_of_meas: "℃",
+    unit_of_meas: "°C",
     device: { identifiers: [dev.id.toString()], name: dev.name, model: dev.model }
   }), { retain: true });
 
