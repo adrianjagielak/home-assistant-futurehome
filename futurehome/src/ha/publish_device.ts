@@ -1,75 +1,85 @@
 import { InclusionReport, InclusionReportService } from "../fimp/inclusion_report";
 import { VinculumPd7Device } from "../fimp/vinculum_pd7_device";
 import { log } from "../logger";
-import { cmps_battery } from "../services/battery";
-import { cmps_out_bin_switch } from "../services/out_bin_switch";
-import { cmps_out_lvl_switch } from "../services/out_lvl_switch";
-import { cmps_sensor_accelx } from "../services/sensor_accelx";
-import { cmps_sensor_accely } from "../services/sensor_accely";
-import { cmps_sensor_accelz } from "../services/sensor_accelz";
-import { cmps_sensor_airflow } from "../services/sensor_airflow";
-import { cmps_sensor_airq } from "../services/sensor_airq";
-import { cmps_sensor_anglepos } from "../services/sensor_anglepos";
-import { cmps_sensor_atmo } from "../services/sensor_atmo";
-import { cmps_sensor_baro } from "../services/sensor_baro";
-import { cmps_sensor_co } from "../services/sensor_co";
-import { cmps_sensor_co2 } from "../services/sensor_co2";
-import { cmps_sensor_contact } from "../services/sensor_contact";
-import { cmps_sensor_current } from "../services/sensor_current";
-import { cmps_sensor_dew } from "../services/sensor_dew";
-import { cmps_sensor_direct } from "../services/sensor_direct";
-import { cmps_sensor_distance } from "../services/sensor_distance";
-import { cmps_sensor_elresist } from "../services/sensor_elresist";
-import { cmps_sensor_freq } from "../services/sensor_freq";
-import { cmps_sensor_gp } from "../services/sensor_gp";
-import { cmps_sensor_gust } from "../services/sensor_gust";
-import { cmps_sensor_humid } from "../services/sensor_humid";
-import { cmps_sensor_lumin } from "../services/sensor_lumin";
-import { cmps_sensor_moist } from "../services/sensor_moist";
-import { cmps_sensor_noise } from "../services/sensor_noise";
-import { cmps_sensor_power } from "../services/sensor_power";
-import { cmps_sensor_presence } from "../services/sensor_presence";
-import { cmps_sensor_rain } from "../services/sensor_rain";
-import { cmps_sensor_rotation } from "../services/sensor_rotation";
-import { cmps_sensor_seismicint } from "../services/sensor_seismicint";
-import { cmps_sensor_seismicmag } from "../services/sensor_seismicmag";
-import { cmps_sensor_solarrad } from "../services/sensor_solarrad";
-import { cmps_sensor_tank } from "../services/sensor_tank";
-import { cmps_sensor_temp } from "../services/sensor_temp";
-import { cmps_sensor_tidelvl } from "../services/sensor_tidelvl";
-import { cmps_sensor_uv } from "../services/sensor_uv";
-import { cmps_sensor_veloc } from "../services/sensor_veloc";
-import { cmps_sensor_voltage } from "../services/sensor_voltage";
-import { cmps_sensor_watflow } from "../services/sensor_watflow";
-import { cmps_sensor_watpressure } from "../services/sensor_watpressure";
-import { cmps_sensor_wattemp } from "../services/sensor_wattemp";
-import { cmps_sensor_weight } from "../services/sensor_weight";
+import { battery__components } from "../services/battery";
+import { out_bin_switch__components } from "../services/out_bin_switch";
+import { out_lvl_switch__components } from "../services/out_lvl_switch";
+import { sensor_accelx__components } from "../services/sensor_accelx";
+import { sensor_accely__components } from "../services/sensor_accely";
+import { sensor_accelz__components } from "../services/sensor_accelz";
+import { sensor_airflow__components } from "../services/sensor_airflow";
+import { sensor_airq__components } from "../services/sensor_airq";
+import { sensor_anglepos__components } from "../services/sensor_anglepos";
+import { sensor_atmo__components } from "../services/sensor_atmo";
+import { sensor_baro__components } from "../services/sensor_baro";
+import { sensor_co__components } from "../services/sensor_co";
+import { sensor_co2__components } from "../services/sensor_co2";
+import { sensor_contact__components } from "../services/sensor_contact";
+import { sensor_current__components } from "../services/sensor_current";
+import { sensor_dew__components } from "../services/sensor_dew";
+import { sensor_direct__components } from "../services/sensor_direct";
+import { sensor_distance__components } from "../services/sensor_distance";
+import { sensor_elresist__components } from "../services/sensor_elresist";
+import { sensor_freq__components } from "../services/sensor_freq";
+import { sensor_gp__components } from "../services/sensor_gp";
+import { sensor_gust__components } from "../services/sensor_gust";
+import { sensor_humid__components } from "../services/sensor_humid";
+import { sensor_lumin__components } from "../services/sensor_lumin";
+import { sensor_moist__components } from "../services/sensor_moist";
+import { sensor_noise__components } from "../services/sensor_noise";
+import { sensor_power__components } from "../services/sensor_power";
+import { sensor_presence__components } from "../services/sensor_presence";
+import { sensor_rain__components } from "../services/sensor_rain";
+import { sensor_rotation__components } from "../services/sensor_rotation";
+import { sensor_seismicint__components } from "../services/sensor_seismicint";
+import { sensor_seismicmag__components } from "../services/sensor_seismicmag";
+import { sensor_solarrad__components } from "../services/sensor_solarrad";
+import { sensor_tank__components } from "../services/sensor_tank";
+import { sensor_temp__components } from "../services/sensor_temp";
+import { sensor_tidelvl__components } from "../services/sensor_tidelvl";
+import { sensor_uv__components } from "../services/sensor_uv";
+import { sensor_veloc__components } from "../services/sensor_veloc";
+import { sensor_voltage__components } from "../services/sensor_voltage";
+import { sensor_watflow__components } from "../services/sensor_watflow";
+import { sensor_watpressure__components } from "../services/sensor_watpressure";
+import { sensor_wattemp__components } from "../services/sensor_wattemp";
+import { sensor_weight__components } from "../services/sensor_weight";
 import { ha } from "./globals";
 
 type HaDeviceConfig = {
+  // device
   dev: {
     ids: string | null | undefined,
     name: string | null | undefined,
+    // manufacturer
     mf: string | null | undefined,
+    // model
     mdl: string | null | undefined,
+    // software version
     sw: string | null | undefined,
+    // serial number
     sn: string | null | undefined,
+    // hardware number
     hw: string | null | undefined,
   };
+  // origin
   o: {
     name: 'futurehome',
-    sw: '1.0',
     url: 'https://github.com/adrianjagielak/home-assistant-futurehome',
   };
+  // components
   cmps: {
-    [key: string]: CMP;
+    [key: string]: HaComponent;
   },
-  state_topic: string,
-  availability_topic: string,
+  // state topic
+  stat_t: string,
+  // availability topic
+  avty_t: string,
   qos: number,
 }
 
-export type CMP = {
+export type HaComponent = {
+  // platform
   p: string;
   device_class?: string;
   unit_of_measurement?: string;
@@ -78,51 +88,51 @@ export type CMP = {
 }
 
 const serviceHandlers: {
-  [name: string]: (vinculumDeviceData: VinculumPd7Device, svc: InclusionReportService) => { [key: string]: CMP }
+  [name: string]: (vinculumDeviceData: VinculumPd7Device, svc: InclusionReportService) => { [key: string]: HaComponent }
 } = {
-  battery: cmps_battery,
-  out_bin_switch: cmps_out_bin_switch,
-  out_lvl_switch: cmps_out_lvl_switch,
-  sensor_accelx: cmps_sensor_accelx,
-  sensor_accely: cmps_sensor_accely,
-  sensor_accelz: cmps_sensor_accelz,
-  sensor_airflow: cmps_sensor_airflow,
-  sensor_airq: cmps_sensor_airq,
-  sensor_anglepos: cmps_sensor_anglepos,
-  sensor_atmo: cmps_sensor_atmo,
-  sensor_baro: cmps_sensor_baro,
-  sensor_co: cmps_sensor_co,
-  sensor_co2: cmps_sensor_co2,
-  sensor_contact: cmps_sensor_contact,
-  sensor_current: cmps_sensor_current,
-  sensor_dew: cmps_sensor_dew,
-  sensor_direct: cmps_sensor_direct,
-  sensor_distance: cmps_sensor_distance,
-  sensor_elresist: cmps_sensor_elresist,
-  sensor_freq: cmps_sensor_freq,
-  sensor_gp: cmps_sensor_gp,
-  sensor_gust: cmps_sensor_gust,
-  sensor_humid: cmps_sensor_humid,
-  sensor_lumin: cmps_sensor_lumin,
-  sensor_moist: cmps_sensor_moist,
-  sensor_noise: cmps_sensor_noise,
-  sensor_power: cmps_sensor_power,
-  sensor_presence: cmps_sensor_presence,
-  sensor_rain: cmps_sensor_rain,
-  sensor_rotation: cmps_sensor_rotation,
-  sensor_seismicint: cmps_sensor_seismicint,
-  sensor_seismicmag: cmps_sensor_seismicmag,
-  sensor_solarrad: cmps_sensor_solarrad,
-  sensor_tank: cmps_sensor_tank,
-  sensor_temp: cmps_sensor_temp,
-  sensor_tidelvl: cmps_sensor_tidelvl,
-  sensor_uv: cmps_sensor_uv,
-  sensor_veloc: cmps_sensor_veloc,
-  sensor_voltage: cmps_sensor_voltage,
-  sensor_watflow: cmps_sensor_watflow,
-  sensor_watpressure: cmps_sensor_watpressure,
-  sensor_wattemp: cmps_sensor_wattemp,
-  sensor_weight: cmps_sensor_weight,
+  battery: battery__components,
+  out_bin_switch: out_bin_switch__components,
+  out_lvl_switch: out_lvl_switch__components,
+  sensor_accelx: sensor_accelx__components,
+  sensor_accely: sensor_accely__components,
+  sensor_accelz: sensor_accelz__components,
+  sensor_airflow: sensor_airflow__components,
+  sensor_airq: sensor_airq__components,
+  sensor_anglepos: sensor_anglepos__components,
+  sensor_atmo: sensor_atmo__components,
+  sensor_baro: sensor_baro__components,
+  sensor_co: sensor_co__components,
+  sensor_co2: sensor_co2__components,
+  sensor_contact: sensor_contact__components,
+  sensor_current: sensor_current__components,
+  sensor_dew: sensor_dew__components,
+  sensor_direct: sensor_direct__components,
+  sensor_distance: sensor_distance__components,
+  sensor_elresist: sensor_elresist__components,
+  sensor_freq: sensor_freq__components,
+  sensor_gp: sensor_gp__components,
+  sensor_gust: sensor_gust__components,
+  sensor_humid: sensor_humid__components,
+  sensor_lumin: sensor_lumin__components,
+  sensor_moist: sensor_moist__components,
+  sensor_noise: sensor_noise__components,
+  sensor_power: sensor_power__components,
+  sensor_presence: sensor_presence__components,
+  sensor_rain: sensor_rain__components,
+  sensor_rotation: sensor_rotation__components,
+  sensor_seismicint: sensor_seismicint__components,
+  sensor_seismicmag: sensor_seismicmag__components,
+  sensor_solarrad: sensor_solarrad__components,
+  sensor_tank: sensor_tank__components,
+  sensor_temp: sensor_temp__components,
+  sensor_tidelvl: sensor_tidelvl__components,
+  sensor_uv: sensor_uv__components,
+  sensor_veloc: sensor_veloc__components,
+  sensor_voltage: sensor_voltage__components,
+  sensor_watflow: sensor_watflow__components,
+  sensor_watpressure: sensor_watpressure__components,
+  sensor_wattemp: sensor_wattemp__components,
+  sensor_weight: sensor_weight__components,
 };
 
 export function haPublishDevice(parameters: { hubId: string, vinculumDeviceData: VinculumPd7Device, deviceInclusionReport: InclusionReport }) {
@@ -130,7 +140,7 @@ export function haPublishDevice(parameters: { hubId: string, vinculumDeviceData:
     return;
   }
 
-  let cmps: { [key: string]: CMP } = {};
+  let cmps: { [key: string]: HaComponent } = {};
 
   for (const svc of parameters.deviceInclusionReport.services) {
     if (!svc.name) { continue; }
@@ -193,12 +203,11 @@ export function haPublishDevice(parameters: { hubId: string, vinculumDeviceData:
     },
     o: {
       name: 'futurehome',
-      sw: '1.0',
       url: 'https://github.com/adrianjagielak/home-assistant-futurehome',
     },
     cmps: cmps,
-    state_topic: stateTopic,
-    availability_topic: availabilityTopic,
+    stat_t: stateTopic,
+    avty_t: availabilityTopic,
     qos: 2,
   };
 

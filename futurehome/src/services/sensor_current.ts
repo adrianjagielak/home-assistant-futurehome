@@ -1,8 +1,8 @@
 import { InclusionReportService } from "../fimp/inclusion_report";
 import { VinculumPd7Device } from "../fimp/vinculum_pd7_device";
-import { CMP } from "../ha/publish_device";
+import { HaComponent } from "../ha/publish_device";
 
-export function cmps_sensor_current(vinculumDeviceData: VinculumPd7Device, svc: InclusionReportService): { [key: string]: CMP } {
+export function sensor_current__components(vinculumDeviceData: VinculumPd7Device, svc: InclusionReportService): { [key: string]: HaComponent } {
   if (!svc.address) { return {}; }
 
   return {
