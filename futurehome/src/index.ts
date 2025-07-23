@@ -223,7 +223,7 @@ import { delay } from "./utils";
   // Request initial state
   pollState();
   // Then poll every 30 seconds
-  setInterval(pollState, 30000);
+  if (!demoMode) { setInterval(pollState, 30 * 1000); }
 
   const pollDevices = () => {
     log.debug("Refreshing Vinculum devices after 30 minutes...");
@@ -238,7 +238,7 @@ import { delay } from "./utils";
     }).catch(e => log.warn("Failed to request state", e));
   };
   // Poll devices every 30 minutes (1800000 ms)
-  setTimeout(pollDevices, 30 * 60 * 1000);
+  if (!demoMode) { setInterval(pollDevices, 30 * 60 * 1000); }
 
   ha.on('message', (topic, buf) => {
     // Handle Home Assistant command messages
