@@ -4,10 +4,10 @@ configuration:
     description: Leave blank for automatic discovery.
   username:
     name: Username
-    description: Your Futurehome local API/MQTT username.
+    description: Your Smarthub local API/MQTT username.
   password:
     name: Password
-    description: Your Futurehome local API/MQTT password.
+    description: Your Smarthub local API/MQTT password.
   demo_mode:
     name: Demo Mode
     description: Use sample recorded state from a real Futurehome Smarthub to simulate devices.

@@ -1,0 +1,13 @@
+configuration:
+  hub_ip:
+    name: Keskittimen IP (valinnainen)
+    description: Jätä tyhjäksi automaattista tunnistusta varten.
+  username:
+    name: Käyttäjätunnus
+    description: Paikallisen Smarthub API/MQTT -yhteyden käyttäjätunnus.
+  password:
+    name: Salasana
+    description: Paikallisen Smarthub API/MQTT -yhteyden salasana.
+  demo_mode:
+    name: Demotila
+    description: Käytä tallennettua esimerkkitilaa oikeasta Futurehome Smarthubista laitteiden simuloimiseen.

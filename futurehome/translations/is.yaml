@@ -1,0 +1,13 @@
+configuration:
+  hub_ip:
+    name: Miðlari IP (valkvæmt)
+    description: Láttu autt til að uppgötva sjálfkrafa.
+  username:
+    name: Notandanafn
+    description: Notandanafn þitt fyrir staðbundið API/MQTT aðgang að Smarthub.
+  password:
+    name: Lykilorð
+    description: Lykilorðið þitt fyrir staðbundið API/MQTT aðgang að Smarthub.
+  demo_mode:
+    name: Sýnishamur
+    description: Notaðu skráða stöðu úr raunverulegum Futurehome Smarthub til að líkja eftir tækjum.

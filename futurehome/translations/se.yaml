@@ -1,0 +1,13 @@
+configuration:
+  hub_ip:
+    name: Hub IP (valfritt)
+    description: Lämna tomt för automatisk upptäckt.
+  username:
+    name: Användarnamn
+    description: Ditt användarnamn för lokal API/MQTT-åtkomst till Smarthub.
+  password:
+    name: Lösenord
+    description: Ditt lösenord för lokal API/MQTT-åtkomst till Smarthub.
+  demo_mode:
+    name: Demoläge
+    description: Använd ett inspelat exempel från en riktig Futurehome Smarthub för att simulera enheter.
