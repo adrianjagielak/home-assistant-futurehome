@@ -7,11 +7,11 @@ export function sensor_co2__components(vinculumDeviceData: VinculumPd7Device, sv
 
   return {
     [svc.address]: {
-      p: "sensor",
-      device_class: "carbon_dioxide",
-      unit_of_measurement: svc.props?.sup_units?.[0] ?? "ppm",
-      value_template: `{{ value_json['${svc.address}'].sensor }}`,
       unique_id: svc.address,
+      p: 'sensor',
+      device_class: 'carbon_dioxide',
+      unit_of_measurement: svc.props?.sup_units?.[0] ?? 'ppm',
+      value_template: `{{ value_json['${svc.address}'].sensor }}`,
     },
   };
 }

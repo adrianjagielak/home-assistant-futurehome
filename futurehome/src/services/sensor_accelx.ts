@@ -7,10 +7,10 @@ export function sensor_accelx__components(vinculumDeviceData: VinculumPd7Device,
 
   return {
     [svc.address]: {
-      p: "sensor",
-      unit_of_measurement: svc.props?.sup_units?.[0] ?? "m/s2",
-      value_template: `{{ value_json['${svc.address}'].sensor }}`,
       unique_id: svc.address,
+      p: 'sensor',
+      unit_of_measurement: svc.props?.sup_units?.[0] ?? 'm/s2',
+      value_template: `{{ value_json['${svc.address}'].sensor }}`,
     },
   };
 }

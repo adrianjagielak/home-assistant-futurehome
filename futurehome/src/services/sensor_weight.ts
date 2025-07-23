@@ -7,11 +7,11 @@ export function sensor_weight__components(vinculumDeviceData: VinculumPd7Device,
 
   return {
     [svc.address]: {
-      p: "sensor",
-      device_class: "weigh",
-      unit_of_measurement: svc.props?.sup_units?.[0] ?? "kg",
-      value_template: `{{ value_json['${svc.address}'].sensor }}`,
       unique_id: svc.address,
+      p: 'sensor',
+      device_class: 'weight',
+      unit_of_measurement: svc.props?.sup_units?.[0] ?? 'kg',
+      value_template: `{{ value_json['${svc.address}'].sensor }}`,
     },
   };
 }

@@ -7,11 +7,11 @@ export function sensor_distance__components(vinculumDeviceData: VinculumPd7Devic
 
   return {
     [svc.address]: {
-      p: "sensor",
-      device_class: "distance",
-      unit_of_measurement: svc.props?.sup_units?.[0] ?? "m",
-      value_template: `{{ value_json['${svc.address}'].sensor }}`,
       unique_id: svc.address,
+      p: 'sensor',
+      device_class: 'distance',
+      unit_of_measurement: svc.props?.sup_units?.[0] ?? 'm',
+      value_template: `{{ value_json['${svc.address}'].sensor }}`,
     },
   };
 }

@@ -10,10 +10,10 @@ export function sensor_gust__components(vinculumDeviceData: VinculumPd7Device, s
 
   return {
     [svc.address]: {
-      p: "sensor",
+      unique_id: svc.address,
+      p: 'sensor',
       unit_of_measurement: unit,
       value_template: `{{ value_json['${svc.address}'].sensor }}`,
-      unique_id: svc.address,
     },
   };
 }

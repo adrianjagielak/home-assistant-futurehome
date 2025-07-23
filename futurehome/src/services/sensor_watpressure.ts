@@ -7,11 +7,11 @@ export function sensor_watpressure__components(vinculumDeviceData: VinculumPd7De
 
   return {
     [svc.address]: {
-      p: "sensor",
-      device_class: "pressure",
-      unit_of_measurement: svc.props?.sup_units?.[0] ?? "kPa",
-      value_template: `{{ value_json['${svc.address}'].sensor }}`,
       unique_id: svc.address,
+      p: 'sensor',
+      device_class: 'pressure',
+      unit_of_measurement: svc.props?.sup_units?.[0] ?? 'kPa',
+      value_template: `{{ value_json['${svc.address}'].sensor }}`,
     },
   };
 }

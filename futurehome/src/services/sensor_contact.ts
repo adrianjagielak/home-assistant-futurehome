@@ -7,10 +7,10 @@ export function sensor_contact__components(vinculumDeviceData: VinculumPd7Device
 
   return {
     [svc.address]: {
-      p: "binary_sensor",
-      device_class: "opening",
-      value_template: `{{ value_json['${svc.address}'].open | iif('ON', 'OFF') }}`,
       unique_id: svc.address,
+      p: 'binary_sensor',
+      device_class: 'opening',
+      value_template: `{{ value_json['${svc.address}'].open | iif('ON', 'OFF') }}`,
     },
   };
 }

@@ -10,11 +10,11 @@ export function sensor_wind__components(vinculumDeviceData: VinculumPd7Device, s
 
   return {
     [svc.address]: {
-      p: "sensor",
-      device_class: "wind_speed",
+      unique_id: svc.address,
+      p: 'sensor',
+      device_class: 'wind_speed',
       unit_of_measurement: unit,
       value_template: `{{ value_json['${svc.address}'].sensor }}`,
-      unique_id: svc.address,
     },
   };
 }

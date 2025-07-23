@@ -78,13 +78,29 @@ type HaDeviceConfig = {
   qos: number,
 }
 
-export type HaComponent = {
+export type HaComponent = SensorComponent | BinarySensorComponent | SwitchComponent;
+
+type SensorComponent = {
+  unique_id: string;
   // platform
-  p: string;
+  p: 'sensor';
   device_class?: string;
   unit_of_measurement?: string;
-  value_template?: string;
+  value_template: string;
+}
+
+type BinarySensorComponent = {
   unique_id: string;
+  // platform
+  p: 'binary_sensor';
+  device_class?: string;
+  value_template: string;
+}
+
+type SwitchComponent = {
+  unique_id: string;
+  // platform
+  p: 'switch';
 }
 
 const serviceHandlers: {

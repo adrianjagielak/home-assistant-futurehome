@@ -11,11 +11,11 @@ export function sensor_temp__components(vinculumDeviceData: VinculumPd7Device, s
 
   return {
     [svc.address]: {
-      p: "sensor",
-      device_class: "temperature",
+      unique_id: svc.address,
+      p: 'sensor',
+      device_class: 'temperature',
       unit_of_measurement: unit,
       value_template: `{{ value_json['${svc.address}'].sensor }}`,
-      unique_id: svc.address,
     },
   };
 }

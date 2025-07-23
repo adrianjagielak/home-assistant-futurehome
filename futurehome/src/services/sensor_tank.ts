@@ -7,11 +7,11 @@ export function sensor_tank__components(vinculumDeviceData: VinculumPd7Device, s
 
   return {
     [svc.address]: {
-      p: "sensor",
-      device_class: "volume_storage",
-      unit_of_measurement: svc.props?.sup_units?.[0] ?? "l",
-      value_template: `{{ value_json['${svc.address}'].sensor }}`,
       unique_id: svc.address,
+      p: 'sensor',
+      device_class: 'volume_storage',
+      unit_of_measurement: svc.props?.sup_units?.[0] ?? 'l',
+      value_template: `{{ value_json['${svc.address}'].sensor }}`,
     },
   };
 }

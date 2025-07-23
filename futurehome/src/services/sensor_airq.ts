@@ -7,11 +7,11 @@ export function sensor_airq__components(vinculumDeviceData: VinculumPd7Device, s
 
   return {
     [svc.address]: {
-      p: "sensor",
-      device_class: "aqi",
-      unit_of_measurement: svc.props?.sup_units?.[0] ?? "pm25",
-      value_template: `{{ value_json['${svc.address}'].sensor }}`,
       unique_id: svc.address,
+      p: 'sensor',
+      device_class: 'aqi',
+      unit_of_measurement: svc.props?.sup_units?.[0] ?? 'pm25',
+      value_template: `{{ value_json['${svc.address}'].sensor }}`,
     },
   };
 }
