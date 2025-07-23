@@ -9,7 +9,7 @@ export function sensor_presence__components(vinculumDeviceData: VinculumPd7Devic
     [svc.address]: {
       unique_id: svc.address,
       p: 'binary_sensor',
-      device_class: 'presence',
+      device_class: 'occupancy',
       value_template: `{{ value_json['${svc.address}'].presence | iif('ON', 'OFF') }}`,
     },
   };
