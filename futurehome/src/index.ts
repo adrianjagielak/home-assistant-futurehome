@@ -4,8 +4,8 @@ import { log } from "./logger";
 import { FimpResponse, sendFimpMsg, setFimp } from "./fimp/fimp";
 import { getInclusionReport } from "./fimp/inclusion_report";
 import { adapterAddressFromServiceAddress, adapterServiceFromServiceAddress } from "./fimp/helpers";
-import { setHa } from "./ha/globals";
-import { haPublishDevice } from "./ha/publish_device";
+import { haCommandHandlers, setHa, setHaCommandHandlers } from "./ha/globals";
+import { CommandHandlers, haPublishDevice } from "./ha/publish_device";
 import { haUpdateState, haUpdateStateSensorReport } from "./ha/update_state";
 import { VinculumPd7Device } from "./fimp/vinculum_pd7_device";
 import { haUpdateAvailability } from "./ha/update_availability";
@@ -82,6 +82,7 @@ import { haUpdateAvailability } from "./ha/update_availability";
     }
   }
 
+  const commandHandlers: CommandHandlers = {};
   for (const device of devices.val.param.device) {
     const vinculumDeviceData: VinculumPd7Device = device
     const deviceId = vinculumDeviceData.id.toString()
@@ -100,8 +101,10 @@ import { haUpdateAvailability } from "./ha/update_availability";
       // Set initial availability
       haUpdateAvailability({ hubId, deviceAvailability: { address: deviceId, status: 'UP' } });
     }
-    haPublishDevice({ hubId, vinculumDeviceData, deviceInclusionReport })
+    const result = haPublishDevice({ hubId, vinculumDeviceData, deviceInclusionReport });
+    Object.assign(commandHandlers, result.commandHandlers);
   }
+  setHaCommandHandlers(commandHandlers);
 
   // todo
   // exposeSmarthubTools();
@@ -120,30 +123,16 @@ import { haUpdateAvailability } from "./ha/update_availability";
           }
           break;
         }
-        case 'evt.sensor.report': {
-          haUpdateStateSensorReport({ topic, value: msg.val, attrName: 'sensor' })
-          break;
-        }
-        case 'evt.presence.report': {
-          if (!(msg.serv === 'sensor_presence')) { return; }
-          haUpdateStateSensorReport({ topic, value: msg.val, attrName: 'presence' })
-          break;
-        }
-        case 'evt.open.report': {
-          if (!(msg.serv === 'sensor_contact')) { return; }
-          haUpdateStateSensorReport({ topic, value: msg.val, attrName: 'open' })
-          break;
-        }
-        case 'evt.lvl.report': {
-          if (!(msg.serv === 'battery')) { return; }
-          haUpdateStateSensorReport({ topic, value: msg.val, attrName: 'lvl' })
-          break;
-        }
-        case 'evt.alarm.report': {
-          if (!(msg.serv === 'battery')) { return; }
-          haUpdateStateSensorReport({ topic, value: msg.val, attrName: 'alarm' })
-          break;
-        }
+        case 'evt.sensor.report':
+        case 'evt.presence.report':
+        case 'evt.open.report':
+        case 'evt.lvl.report':
+        case 'evt.alarm.report':
+        case 'evt.binary.report':
+          {
+            haUpdateStateSensorReport({ topic, value: msg.val, attrName: msg.type.split('.')[1] })
+            break;
+          }
         case 'evt.network.all_nodes_report': {
           const devicesAvailability = msg.val;
           if (!devicesAvailability) { return; }
@@ -166,4 +155,15 @@ import { haUpdateAvailability } from "./ha/update_availability";
     val: { cmd: "get", component: null, param: { components: ['state'] } },
     val_t: 'object',
   });
+
+  ha.on('message', (topic, buf) => {
+    // Handle Home Assistant command messages
+    const handler = haCommandHandlers?.[topic];
+    if (handler) {
+      log.debug(`Handling Home Assistant command topic: ${topic}, payload: ${buf.toString()}`);
+      handler(buf.toString()).catch((e) => {
+        log.warn(`Failed executing handler for topic: ${topic}, payload: ${buf.toString()}`, e);
+      });
+    }
+  })
 })();

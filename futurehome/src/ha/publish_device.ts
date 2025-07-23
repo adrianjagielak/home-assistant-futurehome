@@ -44,7 +44,7 @@ import { sensor_watflow__components } from "../services/sensor_watflow";
 import { sensor_watpressure__components } from "../services/sensor_watpressure";
 import { sensor_wattemp__components } from "../services/sensor_wattemp";
 import { sensor_weight__components } from "../services/sensor_weight";
-import { ha } from "./globals";
+import { ha, setHaCommandHandlers } from "./globals";
 
 type HaDeviceConfig = {
   // device
@@ -85,7 +85,7 @@ type SensorComponent = {
   // platform
   p: 'sensor';
   device_class?: string;
-  unit_of_measurement?: string;
+  unit_of_measurement: string;
   value_template: string;
 }
 
@@ -101,10 +101,32 @@ type SwitchComponent = {
   unique_id: string;
   // platform
   p: 'switch';
+  command_topic: string;
+  optimistic: boolean;
+  value_template: string;
 }
 
+// todo button reference
+//     "cmps": {
+//     "bla1": {
+//       "p": "device_automation",
+//       "automation_type": "trigger",
+//       "payload": "short_press",
+//       "topic": "foobar/triggers/button1",
+//       "type": "button_short_press",
+//       "subtype": "button_1"
+//     },
+//   },
+
+export type ServiceComponentsCreationResult = {
+  components: { [key: string]: HaComponent };
+  commandHandlers?: CommandHandlers;
+}
+
+export type CommandHandlers = { [topic: string]: (payload: string) => Promise<void> }
+
 const serviceHandlers: {
-  [name: string]: (vinculumDeviceData: VinculumPd7Device, svc: InclusionReportService) => { [key: string]: HaComponent }
+  [name: string]: (topicPrefix: string, vinculumDeviceData: VinculumPd7Device, svc: InclusionReportService) => ServiceComponentsCreationResult
 } = {
   battery: battery__components,
   out_bin_switch: out_bin_switch__components,
@@ -151,59 +173,32 @@ const serviceHandlers: {
   sensor_weight: sensor_weight__components,
 };
 
-export function haPublishDevice(parameters: { hubId: string, vinculumDeviceData: VinculumPd7Device, deviceInclusionReport: InclusionReport }) {
+export function haPublishDevice(parameters: { hubId: string, vinculumDeviceData: VinculumPd7Device, deviceInclusionReport: InclusionReport }): { commandHandlers: CommandHandlers } {
   if (!parameters.deviceInclusionReport.services) {
-    return;
+    return { commandHandlers: {} };
   }
 
-  let cmps: { [key: string]: HaComponent } = {};
+  const components: { [key: string]: HaComponent } = {};
+  const handlers: CommandHandlers = {};
+
+  // e.g. "homeassistant/device/futurehome_123456_1"
+  const topicPrefix = `homeassistant/device/futurehome_${parameters.hubId}_${parameters.deviceInclusionReport.address}`;
 
   for (const svc of parameters.deviceInclusionReport.services) {
     if (!svc.name) { continue; }
     const handler = serviceHandlers[svc.name];
     if (handler) {
-      const result = handler(parameters.vinculumDeviceData, svc);
-      for (const key in result) {
-        cmps[key] = result[key];
-      }
+      const result = handler(topicPrefix, parameters.vinculumDeviceData, svc);
+      Object.assign(components, result.components);
+      Object.assign(handlers, result.commandHandlers);
     } else {
       log.error(`No handler for service: ${svc.name}`);
     }
   }
 
-  //     "cmps": {
-  //     "some_unique_component_id1": {
-  //       "p": "sensor",
-  //       "device_class":"temperature",
-  //       "unit_of_measurement":"°C",
-  //       "value_template":"{{ value_json.temperature }}",
-  //       "unique_id":"temp01ae_t"
-  //     },
-  //     "some_unique_id2": {
-  //       "p": "sensor",
-  //       "device_class":"humidity",
-  //       "unit_of_measurement":"%",
-  //       "value_template":"{{ value_json.humidity }}",
-  //       "unique_id":"temp01ae_h"
-  //     },
-  //     "bla1": {
-  //       "p": "device_automation",
-  //       "automation_type": "trigger",
-  //       "payload": "short_press",
-  //       "topic": "foobar/triggers/button1",
-  //       "type": "button_short_press",
-  //       "subtype": "button_1"
-  //     },
-  //     "bla2": {
-  //       "p": "sensor",
-  //       "state_topic": "foobar/sensor/sensor1",
-  //       "unique_id": "bla_sensor001"
-  //     }
-  //   },
-
-  const configTopic = `homeassistant/device/futurehome_${parameters.hubId}_${parameters.deviceInclusionReport.address}/config`
-  const stateTopic = `homeassistant/device/futurehome_${parameters.hubId}_${parameters.deviceInclusionReport.address}/state`
-  const availabilityTopic = `homeassistant/device/futurehome_${parameters.hubId}_${parameters.deviceInclusionReport.address}/availability`
+  const configTopic = `${topicPrefix}/config`
+  const stateTopic = `${topicPrefix}/state`
+  const availabilityTopic = `${topicPrefix}/availability`
   const config: HaDeviceConfig = {
     dev: {
       ids: parameters.deviceInclusionReport.address,
@@ -221,12 +216,14 @@ export function haPublishDevice(parameters: { hubId: string, vinculumDeviceData:
       name: 'futurehome',
       url: 'https://github.com/adrianjagielak/home-assistant-futurehome',
     },
-    cmps: cmps,
+    cmps: components,
     stat_t: stateTopic,
     avty_t: availabilityTopic,
     qos: 2,
   };
 
-  log.debug(`Publishing HA device "${configTopic}"`)
+  log.debug(`Publishing HA device "${configTopic}"`);
   ha?.publish(configTopic, JSON.stringify(config), { retain: true, qos: 2 });
+
+  return { commandHandlers: handlers };
 }

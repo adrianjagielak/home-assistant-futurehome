@@ -17,9 +17,11 @@ export type FimpResponse = {
   type?: string | null;
   uid?: any;
   val?: any;
-  val_t?: string;
+  val_t?: FimpValueType;
   ver?: any;
 };
+
+type FimpValueType = 'string' | 'int' | 'float' | 'bool' | 'null' | 'str_array' | 'int_array' | 'float_array' | 'str_map' | 'int_map' | 'float_map' | 'bool_map' | 'object' | 'bin';
 
 export async function sendFimpMsg({
   address,
@@ -33,7 +35,7 @@ export async function sendFimpMsg({
   service: string;
   cmd: string;
   val: unknown;
-  val_t: string;
+  val_t: FimpValueType;
   timeoutMs?: number;
 }): Promise<FimpResponse> {
   const uid = uuidv4();
@@ -121,13 +123,14 @@ export async function sendFimpMsg({
       // }
 
       const hasValidType = msg.type != null && msg.type.startsWith('evt.');
-      const msgParts = msg.type?.split('.') ?? [];
-      const cmdParts = cmd.split('.');
-      const hasThreeParts = msgParts.length === 3 && cmdParts.length === 3;
-      const middlePartMatches = msgParts[1] === cmdParts[1];
-      const endsWithLastPart = cmd.endsWith(msgParts.at(-1)!);
+      const reqCmdParts = cmd.split('.');
+      const resCmdParts = msg.type?.split('.') ?? [];
+      const hasThreeParts = resCmdParts.length === 3 && reqCmdParts.length === 3;
+      const middlePartMatches = resCmdParts[1] === reqCmdParts[1];
+      const endsWithLastPart = cmd.endsWith(resCmdParts.at(-1)!);
+      const reqEndsWithSetAndResEndsWithReport = reqCmdParts[2] === 'set' && resCmdParts[2] === 'report'
       const sameService = msg.serv === service;
-      if (hasValidType && hasThreeParts && middlePartMatches && endsWithLastPart && sameService) {
+      if (hasValidType && hasThreeParts && middlePartMatches && (endsWithLastPart || reqEndsWithSetAndResEndsWithReport) && sameService) {
         log.debug(`Received FIMP response for message ${uid} (matched using event name).`);
 
         clearTimeout(timeout);
