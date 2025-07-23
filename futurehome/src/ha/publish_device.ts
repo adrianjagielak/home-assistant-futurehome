@@ -78,8 +78,12 @@ type HaDeviceConfig = {
   qos: number,
 }
 
-export type HaComponent = SensorComponent | BinarySensorComponent | SwitchComponent;
+export type HaComponent = SensorComponent | BinarySensorComponent | SwitchComponent | NumberComponent;
 
+// Device class supported values: https://www.home-assistant.io/integrations/homeassistant/#device-class
+
+/// https://www.home-assistant.io/integrations/sensor.mqtt/
+/// https://www.home-assistant.io/integrations/sensor/#device-class
 type SensorComponent = {
   unique_id: string;
   // platform
@@ -89,6 +93,8 @@ type SensorComponent = {
   value_template: string;
 }
 
+/// https://www.home-assistant.io/integrations/binary_sensor.mqtt/
+/// https://www.home-assistant.io/integrations/binary_sensor/#device-class
 type BinarySensorComponent = {
   unique_id: string;
   // platform
@@ -97,10 +103,26 @@ type BinarySensorComponent = {
   value_template: string;
 }
 
+/// https://www.home-assistant.io/integrations/switch.mqtt/
+/// https://www.home-assistant.io/integrations/switch/#device-class
 type SwitchComponent = {
   unique_id: string;
   // platform
   p: 'switch';
+  command_topic: string;
+  optimistic: boolean;
+  value_template: string;
+}
+
+/// https://www.home-assistant.io/integrations/number.mqtt/
+/// https://www.home-assistant.io/integrations/number/#device-class
+type NumberComponent = {
+  unique_id: string;
+  // platform
+  p: 'number';
+  min: number;
+  max: number;
+  step: number;
   command_topic: string;
   optimistic: boolean;
   value_template: string;
@@ -126,7 +148,7 @@ export type ServiceComponentsCreationResult = {
 export type CommandHandlers = { [topic: string]: (payload: string) => Promise<void> }
 
 const serviceHandlers: {
-  [name: string]: (topicPrefix: string, vinculumDeviceData: VinculumPd7Device, svc: InclusionReportService) => ServiceComponentsCreationResult
+  [name: string]: (topicPrefix: string, vinculumDeviceData: VinculumPd7Device, svc: InclusionReportService) => ServiceComponentsCreationResult | undefined
 } = {
   battery: battery__components,
   out_bin_switch: out_bin_switch__components,
@@ -186,14 +208,21 @@ export function haPublishDevice(parameters: { hubId: string, vinculumDeviceData:
 
   for (const svc of parameters.deviceInclusionReport.services) {
     if (!svc.name) { continue; }
+
     const handler = serviceHandlers[svc.name];
-    if (handler) {
-      const result = handler(topicPrefix, parameters.vinculumDeviceData, svc);
-      Object.assign(components, result.components);
-      Object.assign(handlers, result.commandHandlers);
-    } else {
+    if (!handler) {
       log.error(`No handler for service: ${svc.name}`);
+      continue;
     }
+
+    const result = handler(topicPrefix, parameters.vinculumDeviceData, svc);
+    if (!result) {
+      log.error(`Invalid service data prevented component creation: ${parameters.vinculumDeviceData} ${svc}`);
+      continue; 
+    }
+
+    Object.assign(components, result.components);
+    Object.assign(handlers, result.commandHandlers);
   }
 
   const configTopic = `${topicPrefix}/config`

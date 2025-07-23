@@ -2,8 +2,12 @@ import { InclusionReportService } from "../fimp/inclusion_report";
 import { VinculumPd7Device } from "../fimp/vinculum_pd7_device";
 import { ServiceComponentsCreationResult } from "../ha/publish_device";
 
-export function battery__components(topicPrefix: string, vinculumDeviceData: VinculumPd7Device, svc: InclusionReportService): ServiceComponentsCreationResult {
-  if (!svc.address) { return { components: {} }; }
+export function battery__components(
+  topicPrefix: string,
+  vinculumDeviceData: VinculumPd7Device,
+  svc: InclusionReportService
+): ServiceComponentsCreationResult | undefined {
+  if (!svc.address) { return; }
 
   if (svc.props?.sup_events?.includes('low_battery')) {
     return {

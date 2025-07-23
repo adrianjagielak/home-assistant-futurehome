@@ -2,8 +2,12 @@ import { InclusionReportService } from "../fimp/inclusion_report";
 import { VinculumPd7Device } from "../fimp/vinculum_pd7_device";
 import { ServiceComponentsCreationResult } from "../ha/publish_device";
 
-export function sensor_presence__components(topicPrefix: string, vinculumDeviceData: VinculumPd7Device, svc: InclusionReportService): ServiceComponentsCreationResult {
-  if (!svc.address) { return { components: {} }; }
+export function sensor_presence__components(
+  topicPrefix: string,
+  vinculumDeviceData: VinculumPd7Device,
+  svc: InclusionReportService
+): ServiceComponentsCreationResult | undefined {
+  if (!svc.address) { return; }
 
   const device_class = 'occupancy'
 
