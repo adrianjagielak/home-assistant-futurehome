@@ -6,7 +6,7 @@ import { getInclusionReport } from "./fimp/inclusion_report";
 import { adapterAddressFromServiceAddress, adapterServiceFromServiceAddress } from "./fimp/helpers";
 import { setHa } from "./ha/globals";
 import { haPublishDevice } from "./ha/publish_device";
-import { haUpdateState } from "./ha/update_state";
+import { haUpdateState, haUpdateStateSensorReport } from "./ha/update_state";
 import { VinculumPd7Device } from "./fimp/vinculum_pd7_device";
 import { haUpdateAvailability } from "./ha/update_availability";
 
@@ -109,18 +109,48 @@ import { haUpdateAvailability } from "./ha/update_availability";
   fimp.on("message", (topic, buf) => {
     try {
       const msg: FimpResponse = JSON.parse(buf.toString());
-      log.debug(JSON.stringify(msg, null, 0));
-      if (msg.type === "evt.pd7.response") {
-        const devicesState = msg.val?.param?.state?.devices;
-        if (!devicesState) { return; }
-        for (const deviceState of devicesState) {
-          haUpdateState({ hubId, deviceState });
+      log.debug(`Received FIMP message on topic "${topic}":\n${JSON.stringify(msg, null, 0)}`);
+
+      switch (msg.type) {
+        case 'evt.pd7.response': {
+          const devicesState = msg.val?.param?.state?.devices;
+          if (!devicesState) { return; }
+          for (const deviceState of devicesState) {
+            haUpdateState({ hubId, deviceState });
+          }
+          break;
         }
-      } else if (msg.type === "evt.network.all_nodes_report") {
-        const devicesAvailability = msg.val;
-        if (!devicesAvailability) { return; }
-        for (const deviceAvailability of devicesAvailability) {
-          haUpdateAvailability({ hubId, deviceAvailability });
+        case 'evt.sensor.report': {
+          haUpdateStateSensorReport({ topic, value: msg.val, attrName: 'sensor' })
+          break;
+        }
+        case 'evt.presence.report': {
+          if (!(msg.serv === 'sensor_presence')) { return; }
+          haUpdateStateSensorReport({ topic, value: msg.val, attrName: 'presence' })
+          break;
+        }
+        case 'evt.open.report': {
+          if (!(msg.serv === 'sensor_contact')) { return; }
+          haUpdateStateSensorReport({ topic, value: msg.val, attrName: 'open' })
+          break;
+        }
+        case 'evt.lvl.report': {
+          if (!(msg.serv === 'battery')) { return; }
+          haUpdateStateSensorReport({ topic, value: msg.val, attrName: 'lvl' })
+          break;
+        }
+        case 'evt.alarm.report': {
+          if (!(msg.serv === 'battery')) { return; }
+          haUpdateStateSensorReport({ topic, value: msg.val, attrName: 'alarm' })
+          break;
+        }
+        case 'evt.network.all_nodes_report': {
+          const devicesAvailability = msg.val;
+          if (!devicesAvailability) { return; }
+          for (const deviceAvailability of devicesAvailability) {
+            haUpdateAvailability({ hubId, deviceAvailability });
+          }
+          break;
         }
       }
     } catch (e) {

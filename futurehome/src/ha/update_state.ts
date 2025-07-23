@@ -75,15 +75,28 @@ topic: homeassistant/device/futurehome_123456_1/state
 }
 ```
  */
-export function haUpdateState(parameters: { hubId: string, deviceState: DeviceState }) {
-  const stateTopic = `homeassistant/device/futurehome_${parameters.hubId}_${parameters.deviceState.id?.toString()}/state`
 
-  const haState: { [addr: string]: { [attrName: string]: any } } = {};
+const haStateCache: Record<
+  string,                                   // state topic
+  Record<string, Record<string, any>>       // payload (addr → { attr → value })
+> = {};
+
+/**
+ * Publishes the full state of a Futurehome device to Home Assistant and
+ * stores a copy in the private cache above.
+ *
+ * Example MQTT topic produced for hub 123456 and device id 1:
+ *   homeassistant/device/futurehome_123456_1/state
+ */
+export function haUpdateState(parameters: { hubId: string; deviceState: DeviceState }) {
+  const stateTopic = `homeassistant/device/futurehome_${parameters.hubId}_${parameters.deviceState.id?.toString()}/state`;
+
+  const haState: Record<string, Record<string, any>> = {};
 
   for (const service of parameters.deviceState.services || []) {
-    if (!service.addr) { continue; }
+    if (!service.addr) continue;
 
-    const serviceState: { [attrName: string]: any } = {};
+    const serviceState: Record<string, any> = {};
 
     for (const attr of service.attributes || []) {
       const value = attr.values?.[0]?.val;
@@ -93,6 +106,39 @@ export function haUpdateState(parameters: { hubId: string, deviceState: DeviceSt
     haState[service.addr] = serviceState;
   }
 
-  log.debug(`Publishing HA state "${stateTopic}"`)
+  log.debug(`Publishing HA state "${stateTopic}"`);
   ha?.publish(stateTopic, JSON.stringify(haState), { retain: true, qos: 2 });
+
+  // ---- cache state for later incremental updates ----
+  haStateCache[stateTopic] = haState;
+}
+
+/**
+ * Incrementally updates a single sensor value inside cached state payload
+ * that references the given device‑service address and republishes
+ * the modified payload(s).
+ *
+ * @param topic    Full FIMP event topic, e.g.
+ *                 "pt:j1/mt:evt/rt:dev/rn:zigbee/ad:1/sv:sensor_temp/ad:3_1"
+ * @param value    The new sensor reading (number, boolean, string, …)
+ * @param attrName Attribute name to store the reading to
+ *
+ * The prefix "pt:j1/mt:evt" is removed before matching so that the remainder
+ * exactly matches the address keys stored in the cached HA payloads.
+ */
+export function haUpdateStateSensorReport(parameters: { topic: string; value: any, attrName: string }) {
+  // Strip the FIMP envelope so we end up with "/rt:dev/…/ad:x_y"
+  const sensorAddr = parameters.topic.replace(/^pt:j1\/mt:evt/, "");
+
+  for (const [stateTopic, payload] of Object.entries(haStateCache)) {
+    if (!payload[sensorAddr]) continue;
+
+    // Update the reading in‑place
+    payload[sensorAddr][parameters.attrName] = parameters.value;
+
+    log.debug(`Publishing updated sensor value for "${sensorAddr}" to "${stateTopic}"`);
+    ha?.publish(stateTopic, JSON.stringify(payload), { retain: true, qos: 2 });
+
+    haStateCache[stateTopic] = payload;
+  }
 }
