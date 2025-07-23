@@ -3,6 +3,7 @@ import { VinculumPd7Device, VinculumPd7Service } from "../fimp/vinculum_pd7_devi
 import { log } from "../logger";
 import { basic__components } from "../services/basic";
 import { battery__components } from "../services/battery";
+import { fan_ctrl__components } from "../services/fan_ctrl";
 import { out_bin_switch__components } from "../services/out_bin_switch";
 import { out_lvl_switch__components } from "../services/out_lvl_switch";
 import { scene_ctrl__components } from "../services/scene_ctrl";
@@ -81,7 +82,7 @@ type HaDeviceConfig = {
   qos: number,
 }
 
-export type HaComponent = SensorComponent | BinarySensorComponent | SwitchComponent | NumberComponent | ClimateComponent | SelectComponent;
+export type HaComponent = SensorComponent | BinarySensorComponent | SwitchComponent | NumberComponent | ClimateComponent | SelectComponent | FanComponent;
 
 // Device class supported values: https://www.home-assistant.io/integrations/homeassistant/#device-class
 
@@ -160,6 +161,20 @@ export type SelectComponent = {
   value_template: string;
 }
 
+/// https://www.home-assistant.io/integrations/fan.mqtt/
+export type FanComponent = {
+  unique_id: string;
+  // platform
+  p: 'fan';
+  command_topic: string;
+  optimistic: boolean;
+  preset_modes: string[];
+  preset_mode_command_topic: string;
+  preset_mode_state_template: string;
+  state_value_template: string;
+  preset_mode_value_template: string;
+}
+
 export type ServiceComponentsCreationResult = {
   components: { [key: string]: HaComponent };
   commandHandlers?: CommandHandlers;
@@ -172,6 +187,7 @@ const serviceHandlers: {
 } = {
   basic: basic__components,
   battery: battery__components,
+  fan_ctrl: fan_ctrl__components,
   out_bin_switch: out_bin_switch__components,
   out_lvl_switch: out_lvl_switch__components,
   scene_ctrl: scene_ctrl__components,

@@ -62,7 +62,7 @@ todo periodical refresh of state
 | door_lock | |  |
 | doorman | | |
 | fan | | |
-| fan_ctrl | | |
+| fan_ctrl | | ✅ |
 | fire_detector | | |
 | garage_door | | |
 | gas_detector | | |
