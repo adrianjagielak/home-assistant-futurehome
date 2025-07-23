@@ -6,6 +6,7 @@ import { CommandHandlers, haPublishDevice } from "./ha/publish_device";
 import { haUpdateState, haUpdateStateSensorReport } from "./ha/update_state";
 import { VinculumPd7Device } from "./fimp/vinculum_pd7_device";
 import { haUpdateAvailability } from "./ha/update_availability";
+import { delay } from "./utils";
 
 (async () => {
   const hubIp = process.env.FH_HUB_IP || "futurehome-smarthub.local";
@@ -25,15 +26,13 @@ import { haUpdateAvailability } from "./ha/update_availability";
   log.info("Connected to HA broker");
 
   if (!demoMode && (!hubUsername || !hubPassword)) {
-    const delay = 50; // milliseconds between each publish
-
     const publishWithDelay = (messages: RetainedMessage[], index = 0) => {
       if (index >= messages.length) return;
 
       const msg = messages[index];
       ha?.publish(msg.topic, '', { retain: true, qos: 2 });
 
-      setTimeout(() => publishWithDelay(messages, index + 1), delay);
+      setTimeout(() => publishWithDelay(messages, index + 1), 50); // 50 milliseconds between each publish
     };
 
     publishWithDelay(retainedMessages);
