@@ -127,7 +127,7 @@ todo periodical refresh of state
 | sensor_wind | | ✅ |
 | siren | | |
 | siren_ctrl | | |
-| thermostat | [Thermostat](https://www.futurehome.io/en_no/shop/thermostat-w) | |
+| thermostat | [Thermostat](https://www.futurehome.io/en_no/shop/thermostat-w) | ✅ |
 | user_code | | |
 | virtual_meter_elec | | |
 | water_heater | | |

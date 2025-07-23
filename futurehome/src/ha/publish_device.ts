@@ -44,6 +44,7 @@ import { sensor_watflow__components } from "../services/sensor_watflow";
 import { sensor_watpressure__components } from "../services/sensor_watpressure";
 import { sensor_wattemp__components } from "../services/sensor_wattemp";
 import { sensor_weight__components } from "../services/sensor_weight";
+import { thermostat__components } from "../services/thermostat";
 import { ha } from "./globals";
 
 type HaDeviceConfig = {
@@ -78,13 +79,13 @@ type HaDeviceConfig = {
   qos: number,
 }
 
-export type HaComponent = SensorComponent | BinarySensorComponent | SwitchComponent | NumberComponent;
+export type HaComponent = SensorComponent | BinarySensorComponent | SwitchComponent | NumberComponent | ClimateComponent;
 
 // Device class supported values: https://www.home-assistant.io/integrations/homeassistant/#device-class
 
 /// https://www.home-assistant.io/integrations/sensor.mqtt/
 /// https://www.home-assistant.io/integrations/sensor/#device-class
-type SensorComponent = {
+export type SensorComponent = {
   unique_id: string;
   // platform
   p: 'sensor';
@@ -95,7 +96,7 @@ type SensorComponent = {
 
 /// https://www.home-assistant.io/integrations/binary_sensor.mqtt/
 /// https://www.home-assistant.io/integrations/binary_sensor/#device-class
-type BinarySensorComponent = {
+export type BinarySensorComponent = {
   unique_id: string;
   // platform
   p: 'binary_sensor';
@@ -105,7 +106,7 @@ type BinarySensorComponent = {
 
 /// https://www.home-assistant.io/integrations/switch.mqtt/
 /// https://www.home-assistant.io/integrations/switch/#device-class
-type SwitchComponent = {
+export type SwitchComponent = {
   unique_id: string;
   // platform
   p: 'switch';
@@ -116,7 +117,7 @@ type SwitchComponent = {
 
 /// https://www.home-assistant.io/integrations/number.mqtt/
 /// https://www.home-assistant.io/integrations/number/#device-class
-type NumberComponent = {
+export type NumberComponent = {
   unique_id: string;
   // platform
   p: 'number';
@@ -126,6 +127,24 @@ type NumberComponent = {
   command_topic: string;
   optimistic: boolean;
   value_template: string;
+}
+
+/// https://www.home-assistant.io/integrations/climate.mqtt/
+export type ClimateComponent = {
+  unique_id: string;
+  // platform
+  p: 'climate';
+  modes: string[];
+  mode_command_topic: string;
+  mode_state_topic: string;
+  mode_state_template: string;
+  temperature_command_topic: string;
+  temperature_state_topic: string;
+  temperature_state_template: string;
+  min_temp: number;
+  max_temp: number;
+  temp_step: number;
+  optimistic: boolean;
 }
 
 export type ServiceComponentsCreationResult = {
@@ -181,6 +200,7 @@ const serviceHandlers: {
   sensor_watpressure: sensor_watpressure__components,
   sensor_wattemp: sensor_wattemp__components,
   sensor_weight: sensor_weight__components,
+  thermostat: thermostat__components,
 };
 
 export function haPublishDevice(parameters: { hubId: string, vinculumDeviceData: VinculumPd7Device, deviceInclusionReport: InclusionReport | undefined }): { commandHandlers: CommandHandlers } {

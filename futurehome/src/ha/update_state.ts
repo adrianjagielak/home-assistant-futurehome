@@ -142,3 +142,7 @@ export function haUpdateStateSensorReport(parameters: { topic: string; value: an
     haStateCache[stateTopic] = payload;
   }
 }
+
+export function haGetCachedState(parameters: { topic: string }) {
+  return haStateCache[parameters.topic];
+}

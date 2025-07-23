@@ -24,7 +24,7 @@ function makeClient(url: string, port: number, username: string, password: strin
   });
 }
 
-type RetainedMessage = { topic: string; message: string };
+export type RetainedMessage = { topic: string; message: string };
 
 async function waitForHARetainedMessages(
   client: IMqttClient,
