@@ -3,6 +3,7 @@ import { VinculumPd7Device, VinculumPd7Service } from "../fimp/vinculum_pd7_devi
 import { log } from "../logger";
 import { basic__components } from "../services/basic";
 import { battery__components } from "../services/battery";
+import { color_ctrl__components } from "../services/color_ctrl";
 import { fan_ctrl__components } from "../services/fan_ctrl";
 import { out_bin_switch__components } from "../services/out_bin_switch";
 import { out_lvl_switch__components } from "../services/out_lvl_switch";
@@ -82,7 +83,7 @@ type HaDeviceConfig = {
   qos: number,
 }
 
-export type HaComponent = SensorComponent | BinarySensorComponent | SwitchComponent | NumberComponent | ClimateComponent | SelectComponent | FanComponent;
+export type HaComponent = SensorComponent | BinarySensorComponent | SwitchComponent | NumberComponent | ClimateComponent | SelectComponent | FanComponent | LightComponent;
 
 // Device class supported values: https://www.home-assistant.io/integrations/homeassistant/#device-class
 
@@ -173,7 +174,28 @@ export type FanComponent = {
   preset_mode_state_template: string;
   state_value_template: string;
   preset_mode_value_template: string;
-}
+};
+
+/// https://www.home-assistant.io/integrations/light.mqtt/
+export type LightComponent = {
+  unique_id: string;
+  // platform
+  p: "light";
+  command_topic?: string;
+  state_topic?: string;
+  state_value_template?: string;
+  rgb_command_topic?: string;
+  rgb_state_topic?: string;
+  rgb_value_template?: string;
+  brightness_state_topic?: string;
+  brightness_value_template?: string;
+  optimistic?: boolean;
+  color_temp_command_topic?: string;
+  color_temp_state_topic?: string;
+  color_temp_value_template?: string;
+  min_mireds?: number;
+  max_mireds?: number;
+};
 
 export type ServiceComponentsCreationResult = {
   components: { [key: string]: HaComponent };
@@ -187,6 +209,7 @@ const serviceHandlers: {
 } = {
   basic: basic__components,
   battery: battery__components,
+  color_ctrl: color_ctrl__components,
   fan_ctrl: fan_ctrl__components,
   out_bin_switch: out_bin_switch__components,
   out_lvl_switch: out_lvl_switch__components,

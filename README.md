@@ -56,7 +56,7 @@ todo links to the .ts service implementations below
 | blinds | | |
 | boiler | | |
 | chargepoint | [Futurehome Charge](https://www.futurehome.io/en_no/shop/charge) | |
-| color_ctrl | | |
+| color_ctrl | | ✅ |
 | complex_alarm_system | | |
 | door_lock | |  |
 | doorman | | |
