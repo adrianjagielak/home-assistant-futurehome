@@ -52,7 +52,7 @@ todo periodical refresh of state
 | alarm_weather | | |
 | appliance | | |
 | barrier_ctrl | | |
-| basic | | |
+| basic | | ✅ |
 | battery | | ✅ |
 | blinds | | |
 | boiler | | |
@@ -137,7 +137,8 @@ todo periodical refresh of state
 | indicator_ctrl | | |
 | ota | | |
 | parameters | | |
-| dev_sys | | |
 | technology_specific | | |
+
 | time | | |
 | version | | |
+| dev_sys | | |

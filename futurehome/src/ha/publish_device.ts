@@ -1,6 +1,7 @@
 import { InclusionReport } from "../fimp/inclusion_report";
 import { VinculumPd7Device, VinculumPd7Service } from "../fimp/vinculum_pd7_device";
 import { log } from "../logger";
+import { basic__components } from "../services/basic";
 import { battery__components } from "../services/battery";
 import { out_bin_switch__components } from "../services/out_bin_switch";
 import { out_lvl_switch__components } from "../services/out_lvl_switch";
@@ -157,6 +158,7 @@ export type CommandHandlers = { [topic: string]: (payload: string) => Promise<vo
 const serviceHandlers: {
   [name: string]: (topicPrefix: string, device: VinculumPd7Device, svc: VinculumPd7Service) => ServiceComponentsCreationResult | undefined
 } = {
+  basic: basic__components,
   battery: battery__components,
   out_bin_switch: out_bin_switch__components,
   out_lvl_switch: out_lvl_switch__components,
