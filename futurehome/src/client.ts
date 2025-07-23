@@ -2,14 +2,15 @@ import { DemoFimpMqttClient } from "./mqtt/demo_client";
 import { IMqttClient } from "./mqtt/interface";
 import { RealMqttClient } from "./mqtt/real_client";
 
-export function connectHub(opts: { hubIp: string; username: string; password: string; demo: boolean; }): Promise<IMqttClient> {  const url = `mqtt://${opts.hubIp || "futurehome-smarthub.local"}`;
+export function connectHub(opts: { hubIp: string; username: string; password: string; demo: boolean; }): Promise<IMqttClient> {
+  const url = `mqtt://${opts.hubIp}`;
   return makeClient(url, 1884, opts.username, opts.password, opts.demo);
 }
 
 export async function connectHA(opts: { mqttHost: string; mqttPort: number; mqttUsername: string; mqttPassword: string; }): Promise<{ ha: IMqttClient; retainedMessages: RetainedMessage[] }> {
   const url = `mqtt://${opts.mqttHost}`;
-  let ha = await makeClient(url, opts.mqttPort, opts.mqttUsername, opts.mqttPassword, false);
-  let retainedMessages = await waitForHARetainedMessages(ha)
+  const ha = await makeClient(url, opts.mqttPort, opts.mqttUsername, opts.mqttPassword, false);
+  const retainedMessages = await waitForHARetainedMessages(ha)
 
   return { ha, retainedMessages };
 }

@@ -60,7 +60,7 @@ export async function sendFimpMsg({
   return new Promise((resolve, reject) => {
     const timeout = setTimeout(() => {
       fimp?.removeListener('message', onResponse);
-      let error = new Error(`Timeout waiting for FIMP response (uid: ${uid}, service: ${service}, cmd: ${cmd})`);
+      const error = new Error(`Timeout waiting for FIMP response (uid: ${uid}, service: ${service}, cmd: ${cmd})`);
       log.warn(error.message, error.stack);
       reject(error);
     }, timeoutMs);
@@ -72,7 +72,7 @@ export async function sendFimpMsg({
         if (msg.type === 'evt.error.report') {
           fimp?.removeListener('message', onResponse);
 
-          let error = new Error(`Received FIMP response for message ${uid}: error (evt.error.report) (matched using uid)`);
+          const error = new Error(`Received FIMP response for message ${uid}: error (evt.error.report) (matched using uid)`);
           log.warn(error.message, error.stack);
           reject(error);
           return;
@@ -90,7 +90,7 @@ export async function sendFimpMsg({
         if (msg.type === 'evt.error.report') {
           fimp?.removeListener('message', onResponse);
 
-          let error = new Error(`Received FIMP response for message ${uid}: error (evt.error.report) (matched using topic)`);
+          const error = new Error(`Received FIMP response for message ${uid}: error (evt.error.report) (matched using topic)`);
           log.warn(error.message, error.stack);
           reject(error);
           return;

@@ -1,4 +1,4 @@
-import { InclusionReport, InclusionReportService } from "../fimp/inclusion_report";
+import { InclusionReport } from "../fimp/inclusion_report";
 import { VinculumPd7Device, VinculumPd7Service } from "../fimp/vinculum_pd7_device";
 import { log } from "../logger";
 import { battery__components } from "../services/battery";
@@ -44,7 +44,7 @@ import { sensor_watflow__components } from "../services/sensor_watflow";
 import { sensor_watpressure__components } from "../services/sensor_watpressure";
 import { sensor_wattemp__components } from "../services/sensor_wattemp";
 import { sensor_weight__components } from "../services/sensor_weight";
-import { ha, setHaCommandHandlers } from "./globals";
+import { ha } from "./globals";
 
 type HaDeviceConfig = {
   // device

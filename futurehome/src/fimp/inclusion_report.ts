@@ -33,6 +33,6 @@ export async function getInclusionReport(parameters: { adapterAddress: string; a
 
     return inclusionReport.val;
   } catch (e) {
-    log.error(`Failed getting inclusion report for adapterAddress: ${parameters.adapterAddress}, adapterService: ${parameters.adapterService}, deviceId: ${parameters.deviceId}`)
+    log.error(`Failed getting inclusion report for adapterAddress: ${parameters.adapterAddress}, adapterService: ${parameters.adapterService}, deviceId: ${parameters.deviceId}`, e)
   }
 }

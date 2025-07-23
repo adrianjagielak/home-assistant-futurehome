@@ -11,7 +11,7 @@ export class DemoFimpMqttClient implements IMqttClient {
   private onceConnectHandlers: (() => void)[] = [];
   private onceErrorHandlers: OnErrorCallback[] = [];
 
-  connect(url: string, options: {
+  connect(_url: string, _options: {
     port: number;
     username: string;
     password: string;
@@ -23,9 +23,9 @@ export class DemoFimpMqttClient implements IMqttClient {
   }
 
   subscribe(topicObject: string, opts?: { qos: 0 | 1 | 2 }, callback?: (err: Error | null) => void): void;
-  subscribe(topic: string, opts?: any, callback?: any): void { }
+  subscribe(_topic: string, _opts?: any, _callback?: any): void { }
 
-  publish(topic: string, value: string, options: {
+  publish(topic: string, value: string, _options: {
     retain?: boolean;
     qos: 0 | 1 | 2;
   }): void {

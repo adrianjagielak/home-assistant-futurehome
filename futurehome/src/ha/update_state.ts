@@ -82,7 +82,7 @@ const haStateCache: Record<
 > = {};
 
 /**
- * Publishes the full state of a Futurehome device to Home Assistant and
+ * Publishes the full state of a Futurehome device to Home Assistant and
  * stores a copy in the private cache above.
  *
  * Example MQTT topic produced for hub 123456 and device id 1:

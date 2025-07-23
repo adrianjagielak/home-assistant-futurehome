@@ -4,7 +4,7 @@
   "description": "Home Assistant add-on talking to Futurehome Smarthub via FIMP",
   "main": "dist/index.js",
   "scripts": {
-    "lint": "eslint src/**.ts",
+    "lint": "eslint src/**/*.ts",
     "build": "rimraf ./dist && tsc",
     "start": "node dist/index.js"
   },

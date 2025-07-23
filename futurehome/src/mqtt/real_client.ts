@@ -1,4 +1,4 @@
-import { connect, IPublishPacket, MqttClient, OnErrorCallback, OnMessageCallback } from 'mqtt';
+import { connect, MqttClient, OnErrorCallback, OnMessageCallback } from 'mqtt';
 import { IMqttClient } from './interface';
 
 export class RealMqttClient implements IMqttClient {

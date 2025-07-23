@@ -1,9 +1,6 @@
 import { connectHub, connectHA } from "./client";
-import { exposeSmarthubTools } from "./admin";
 import { log } from "./logger";
 import { FimpResponse, sendFimpMsg, setFimp } from "./fimp/fimp";
-import { getInclusionReport } from "./fimp/inclusion_report";
-import { adapterAddressFromServiceAddress, adapterServiceFromServiceAddress } from "./fimp/helpers";
 import { haCommandHandlers, setHa, setHaCommandHandlers } from "./ha/globals";
 import { CommandHandlers, haPublishDevice } from "./ha/publish_device";
 import { haUpdateState, haUpdateStateSensorReport } from "./ha/update_state";
@@ -11,7 +8,7 @@ import { VinculumPd7Device } from "./fimp/vinculum_pd7_device";
 import { haUpdateAvailability } from "./ha/update_availability";
 
 (async () => {
-  const hubIp = process.env.FH_HUB_IP || '';
+  const hubIp = process.env.FH_HUB_IP || "futurehome-smarthub.local";
   const hubUsername = process.env.FH_USERNAME || '';
   const hubPassword = process.env.FH_PASSWORD || '';
   const demoMode = (process.env.DEMO_MODE || '').toLowerCase().includes('true');
@@ -42,7 +39,7 @@ import { haUpdateAvailability } from "./ha/update_availability";
   setFimp(fimp);
   log.info("Connected to Futurehome hub");
 
-  let house = await sendFimpMsg({
+  const house = await sendFimpMsg({
     address: '/rt:app/rn:vinculum/ad:1',
     service: 'vinculum',
     cmd: 'cmd.pd7.request',
@@ -50,9 +47,9 @@ import { haUpdateAvailability } from "./ha/update_availability";
     val_t: 'object',
     timeoutMs: 30000,
   });
-  let hubId = house.val.param.house.hubId;
+  const hubId = house.val.param.house.hubId;
 
-  let devices = await sendFimpMsg({
+  const devices = await sendFimpMsg({
     address: '/rt:app/rn:vinculum/ad:1',
     service: 'vinculum',
     cmd: 'cmd.pd7.request',
