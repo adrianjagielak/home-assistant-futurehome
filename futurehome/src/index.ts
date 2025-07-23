@@ -100,37 +100,42 @@ import { delay } from "./utils";
     }
   }
 
-  const commandHandlers: CommandHandlers = {};
-  for (const device of devices.val.param.device) {
-    try {
-      const vinculumDeviceData: VinculumPd7Device = device
-      const deviceId = vinculumDeviceData.id.toString()
-      const firstServiceAddr = vinculumDeviceData.services ? Object.values(vinculumDeviceData.services)[0]?.addr : undefined;;
+  const vinculumDevicesToHa = async (devices: FimpResponse) => {
+    const commandHandlers: CommandHandlers = {};
+    for (const device of devices.val.param.device) {
+      try {
+        const vinculumDeviceData: VinculumPd7Device = device
+        const deviceId = vinculumDeviceData.id.toString()
+        const firstServiceAddr = vinculumDeviceData.services ? Object.values(vinculumDeviceData.services)[0]?.addr : undefined;;
 
-      if (!firstServiceAddr) { continue; }
+        if (!firstServiceAddr) { continue; }
 
-      // This is problematic when the adapter doesn't respond, so we are not getting the inclusion report for now. I'm leaving it here since we might want it in the future.
-      // // Get additional metadata like manufacutrer or sw/hw version directly from the adapter
-      // const adapterAddress = adapterAddressFromServiceAddress(firstServiceAddr)
-      // const adapterService = adapterServiceFromServiceAddress(firstServiceAddr)
-      // const deviceInclusionReport = await getInclusionReport({ adapterAddress, adapterService, deviceId });
-      const deviceInclusionReport = undefined;
+        // This is problematic when the adapter doesn't respond, so we are not getting the inclusion report for now. I'm leaving it here since we might want it in the future.
+        // // Get additional metadata like manufacutrer or sw/hw version directly from the adapter
+        // const adapterAddress = adapterAddressFromServiceAddress(firstServiceAddr)
+        // const adapterService = adapterServiceFromServiceAddress(firstServiceAddr)
+        // const deviceInclusionReport = await getInclusionReport({ adapterAddress, adapterService, deviceId });
+        const deviceInclusionReport = undefined;
 
-      const result = haPublishDevice({ hubId, vinculumDeviceData, deviceInclusionReport });
-      await delay(50);
-
-      Object.assign(commandHandlers, result.commandHandlers);
-
-      if (!retainedMessages.some(msg => msg.topic === `homeassistant/device/futurehome_${hubId}_${deviceId}/availability`)) {
-        // Set initial availability
-        haUpdateAvailability({ hubId, deviceAvailability: { address: deviceId, status: 'UP' } });
+        const result = haPublishDevice({ hubId, vinculumDeviceData, deviceInclusionReport });
         await delay(50);
+
+        Object.assign(commandHandlers, result.commandHandlers);
+
+        if (!retainedMessages.some(msg => msg.topic === `homeassistant/device/futurehome_${hubId}_${deviceId}/availability`)) {
+          // Set initial availability
+          haUpdateAvailability({ hubId, deviceAvailability: { address: deviceId, status: 'UP' } });
+          await delay(50);
+        }
+      } catch (e) {
+        log.error('Failed publishing device', device, e);
       }
-    } catch (e) {
-      log.error('Failed publishing device', device, e);
     }
-  }
-  setHaCommandHandlers(commandHandlers);
+    setHaCommandHandlers(commandHandlers);
+  };
+  vinculumDevicesToHa(devices);
+
+  let knownDeviceIds = new Set(devices.val.param.device.map((d: any) => d?.id));
 
   // todo
   // exposeSmarthubTools();
@@ -142,11 +147,39 @@ import { delay } from "./utils";
 
       switch (msg.type) {
         case 'evt.pd7.response': {
+          // Handle vinculum 'state'
           const devicesState = msg.val?.param?.state?.devices;
-          if (!devicesState) { return; }
-          for (const deviceState of devicesState) {
-            haUpdateState({ hubId, deviceState });
-            await delay(50);
+          if (devicesState) {
+            for (const deviceState of devicesState) {
+              haUpdateState({ hubId, deviceState });
+              await delay(50);
+            }
+          }
+
+          // Handle vinculum 'device's
+          const devices = msg.val.param.device;
+          if (devices) {
+            const newDeviceIds = new Set(devices.map((d: any) => d?.id));
+
+            const addedDeviceIds = [...newDeviceIds].filter(id => !knownDeviceIds.has(id));
+            const removedDeviceIds = [...knownDeviceIds].filter(id => !newDeviceIds.has(id));
+
+            log.info(`Added devices: ${addedDeviceIds}`);
+            log.info(`Removed devices: ${removedDeviceIds}`);
+
+            for (const id of removedDeviceIds) {
+              const topic = `homeassistant/device/futurehome_${hubId}_${id}/config`;
+              ha?.publish(topic, '', { retain: true, qos: 2 });
+              await delay(50);
+
+              const availTopic = `homeassistant/device/futurehome_${hubId}_${id}/availability`;
+              ha?.publish(availTopic, '', { retain: true, qos: 2 });
+              await delay(50);
+            }
+
+            knownDeviceIds = newDeviceIds;
+
+            vinculumDevicesToHa(msg);
           }
           break;
         }
@@ -176,6 +209,8 @@ import { delay } from "./utils";
   });
 
   const pollState = () => {
+    log.debug("Refreshing Vinculum state after 30 seconds...");
+
     sendFimpMsg({
       address: '/rt:app/rn:vinculum/ad:1',
       service: 'vinculum',
@@ -189,6 +224,21 @@ import { delay } from "./utils";
   pollState();
   // Then poll every 30 seconds
   setInterval(pollState, 30000);
+
+  const pollDevices = () => {
+    log.debug("Refreshing Vinculum devices after 30 minutes...");
+
+    sendFimpMsg({
+      address: '/rt:app/rn:vinculum/ad:1',
+      service: 'vinculum',
+      cmd: 'cmd.pd7.request',
+      val: { cmd: "get", component: null, param: { components: ['device'] } },
+      val_t: 'object',
+      timeoutMs: 30000,
+    }).catch(e => log.warn("Failed to request state", e));
+  };
+  // Poll devices every 30 minutes (1800000 ms)
+  setTimeout(pollDevices, 30 * 60 * 1000);
 
   ha.on('message', (topic, buf) => {
     // Handle Home Assistant command messages
