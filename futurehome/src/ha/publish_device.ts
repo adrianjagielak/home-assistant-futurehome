@@ -5,6 +5,7 @@ import { basic__components } from "../services/basic";
 import { battery__components } from "../services/battery";
 import { out_bin_switch__components } from "../services/out_bin_switch";
 import { out_lvl_switch__components } from "../services/out_lvl_switch";
+import { scene_ctrl__components } from "../services/scene_ctrl";
 import { sensor_accelx__components } from "../services/sensor_accelx";
 import { sensor_accely__components } from "../services/sensor_accely";
 import { sensor_accelz__components } from "../services/sensor_accelz";
@@ -80,7 +81,7 @@ type HaDeviceConfig = {
   qos: number,
 }
 
-export type HaComponent = SensorComponent | BinarySensorComponent | SwitchComponent | NumberComponent | ClimateComponent;
+export type HaComponent = SensorComponent | BinarySensorComponent | SwitchComponent | NumberComponent | ClimateComponent | SelectComponent;
 
 // Device class supported values: https://www.home-assistant.io/integrations/homeassistant/#device-class
 
@@ -148,6 +149,17 @@ export type ClimateComponent = {
   optimistic: boolean;
 }
 
+/// https://www.home-assistant.io/integrations/select.mqtt/
+export type SelectComponent = {
+  unique_id: string;
+  // platform
+  p: 'select';
+  options: string[];
+  command_topic: string;
+  optimistic: boolean;
+  value_template: string;
+}
+
 export type ServiceComponentsCreationResult = {
   components: { [key: string]: HaComponent };
   commandHandlers?: CommandHandlers;
@@ -162,6 +174,7 @@ const serviceHandlers: {
   battery: battery__components,
   out_bin_switch: out_bin_switch__components,
   out_lvl_switch: out_lvl_switch__components,
+  scene_ctrl: scene_ctrl__components,
   sensor_accelx: sensor_accelx__components,
   sensor_accely: sensor_accely__components,
   sensor_accelz: sensor_accelz__components,

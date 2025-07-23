@@ -67,7 +67,6 @@ todo periodical refresh of state
 | garage_door | | |
 | gas_detector | | |
 | gate | | |
-| gateway | | |
 | heat_detector | | |
 | heat_pump | | |
 | heater | | |
@@ -82,8 +81,7 @@ todo periodical refresh of state
 | out_bin_switch | | ✅ |
 | out_lvl_switch | [Smart LED Dimmer](https://www.futurehome.io/en_no/shop/smart-led-dimmer-polar-white) | ✅ |
 | power_regulator | | |
-| scene_ctrl | | |
-| sensor | | |
+| scene_ctrl | | ✅ |
 | sensor_accelx | | ✅ |
 | sensor_accely | | ✅ |
 | sensor_accelz | | ✅ |
@@ -132,13 +130,15 @@ todo periodical refresh of state
 | virtual_meter_elec | | |
 | water_heater | | |
 | water_valve | | |
+
+| gateway | | |
+| sensor | | |
 | association | | |
 | diagnostic | | |
 | indicator_ctrl | | |
 | ota | | |
 | parameters | | |
 | technology_specific | | |
-
 | time | | |
 | version | | |
 | dev_sys | | |
