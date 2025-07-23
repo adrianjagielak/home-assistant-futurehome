@@ -31,7 +31,7 @@ Devices commonly consist of multiple services: for example, a presence sensor mi
 Some services are more common than others. Some are deprecated entirely.
 
 todo periodical refresh of devices
-todo periodical refresh of state
+todo links to the .ts service implementations below
 
 | Service | Example device | Implementation status |
 | --- | --- | --- |

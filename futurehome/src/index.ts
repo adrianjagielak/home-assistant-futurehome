@@ -175,15 +175,20 @@ import { delay } from "./utils";
     }
   });
 
+  const pollState = () => {
+    sendFimpMsg({
+      address: '/rt:app/rn:vinculum/ad:1',
+      service: 'vinculum',
+      cmd: 'cmd.pd7.request',
+      val: { cmd: "get", component: null, param: { components: ['state'] } },
+      val_t: 'object',
+      timeoutMs: 30000,
+    }).catch(e => log.warn("Failed to request state", e));
+  };
   // Request initial state
-  await sendFimpMsg({
-    address: '/rt:app/rn:vinculum/ad:1',
-    service: 'vinculum',
-    cmd: 'cmd.pd7.request',
-    val: { cmd: "get", component: null, param: { components: ['state'] } },
-    val_t: 'object',
-    timeoutMs: 30000,
-  });
+  pollState();
+  // Then poll every 30 seconds
+  setInterval(pollState, 30000);
 
   ha.on('message', (topic, buf) => {
     // Handle Home Assistant command messages
