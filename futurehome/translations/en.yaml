@@ -10,4 +10,4 @@ configuration:
     description: Your Smarthub local API/MQTT password.
   demo_mode:
     name: Demo Mode
-    description: Use sample recorded state from a real Futurehome Smarthub to simulate devices.
+    description: Use a sample recorded state from a real Futurehome Smarthub to simulate devices.
