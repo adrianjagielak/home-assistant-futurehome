@@ -10,7 +10,7 @@ export function battery__components(vinculumDeviceData: VinculumPd7Device, svc: 
       [svc.address]: {
         p: "binary_sensor",
         device_class: "battery",
-        value_template: `{{ value_json['${svc.address}'].alarm.status == 'activ' | iif('on', 'off') }}`,
+        value_template: `{{ (value_json['${svc.address}'].alarm.status == 'activ') | iif('ON', 'OFF') }}`,
         unique_id: svc.address,
       },
     };
