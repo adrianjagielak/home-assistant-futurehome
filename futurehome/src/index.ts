@@ -84,25 +84,31 @@ import { haUpdateAvailability } from "./ha/update_availability";
 
   const commandHandlers: CommandHandlers = {};
   for (const device of devices.val.param.device) {
-    const vinculumDeviceData: VinculumPd7Device = device
-    const deviceId = vinculumDeviceData.id.toString()
-    const services: { [key: string]: any } = vinculumDeviceData?.services
-    const firstServiceAddr = services ? Object.values(services)[0]?.addr : undefined;;
+    try {
+      const vinculumDeviceData: VinculumPd7Device = device
+      const deviceId = vinculumDeviceData.id.toString()
+      const firstServiceAddr = vinculumDeviceData.services ? Object.values(vinculumDeviceData.services)[0]?.addr : undefined;;
 
-    if (!firstServiceAddr) { continue; }
+      if (!firstServiceAddr) { continue; }
 
-    const adapterAddress = adapterAddressFromServiceAddress(firstServiceAddr)
-    const adapterService = adapterServiceFromServiceAddress(firstServiceAddr)
+      // This is problematic when the adapter doesn't respond, so we are not getting the inclusion report for now. I'm leaving it here since we might want it in the future.
+      // // Get additional metadata like manufacutrer or sw/hw version directly from the adapter
+      // const adapterAddress = adapterAddressFromServiceAddress(firstServiceAddr)
+      // const adapterService = adapterServiceFromServiceAddress(firstServiceAddr)
+      // const deviceInclusionReport = await getInclusionReport({ adapterAddress, adapterService, deviceId });
+      const deviceInclusionReport = undefined;
 
-    // Get additional metadata like manufacutrer or sw/hw version directly from the adapter
-    const deviceInclusionReport = await getInclusionReport({ adapterAddress, adapterService, deviceId });
+      const result = haPublishDevice({ hubId, vinculumDeviceData, deviceInclusionReport });
 
-    if (!retainedMessages.some(msg => msg.topic === `homeassistant/device/futurehome_${hubId}_${deviceId}/availability`)) {
-      // Set initial availability
-      haUpdateAvailability({ hubId, deviceAvailability: { address: deviceId, status: 'UP' } });
+      Object.assign(commandHandlers, result.commandHandlers);
+
+      if (!retainedMessages.some(msg => msg.topic === `homeassistant/device/futurehome_${hubId}_${deviceId}/availability`)) {
+        // Set initial availability
+        haUpdateAvailability({ hubId, deviceAvailability: { address: deviceId, status: 'UP' } });
+      }
+    } catch (e) {
+      log.error('Failed publishing device', device, e);
     }
-    const result = haPublishDevice({ hubId, vinculumDeviceData, deviceInclusionReport });
-    Object.assign(commandHandlers, result.commandHandlers);
   }
   setHaCommandHandlers(commandHandlers);
 

@@ -1,5 +1,5 @@
 import { InclusionReport, InclusionReportService } from "../fimp/inclusion_report";
-import { VinculumPd7Device } from "../fimp/vinculum_pd7_device";
+import { VinculumPd7Device, VinculumPd7Service } from "../fimp/vinculum_pd7_device";
 import { log } from "../logger";
 import { battery__components } from "../services/battery";
 import { out_bin_switch__components } from "../services/out_bin_switch";
@@ -148,7 +148,7 @@ export type ServiceComponentsCreationResult = {
 export type CommandHandlers = { [topic: string]: (payload: string) => Promise<void> }
 
 const serviceHandlers: {
-  [name: string]: (topicPrefix: string, vinculumDeviceData: VinculumPd7Device, svc: InclusionReportService) => ServiceComponentsCreationResult | undefined
+  [name: string]: (topicPrefix: string, device: VinculumPd7Device, svc: VinculumPd7Service) => ServiceComponentsCreationResult | undefined
 } = {
   battery: battery__components,
   out_bin_switch: out_bin_switch__components,
@@ -195,30 +195,28 @@ const serviceHandlers: {
   sensor_weight: sensor_weight__components,
 };
 
-export function haPublishDevice(parameters: { hubId: string, vinculumDeviceData: VinculumPd7Device, deviceInclusionReport: InclusionReport }): { commandHandlers: CommandHandlers } {
-  if (!parameters.deviceInclusionReport.services) {
-    return { commandHandlers: {} };
-  }
-
+export function haPublishDevice(parameters: { hubId: string, vinculumDeviceData: VinculumPd7Device, deviceInclusionReport: InclusionReport | undefined }): { commandHandlers: CommandHandlers } {
   const components: { [key: string]: HaComponent } = {};
   const handlers: CommandHandlers = {};
 
   // e.g. "homeassistant/device/futurehome_123456_1"
-  const topicPrefix = `homeassistant/device/futurehome_${parameters.hubId}_${parameters.deviceInclusionReport.address}`;
+  const topicPrefix = `homeassistant/device/futurehome_${parameters.hubId}_${parameters.vinculumDeviceData.id}`;
 
-  for (const svc of parameters.deviceInclusionReport.services) {
-    if (!svc.name) { continue; }
+  for (const [svcName, svc] of Object.entries(parameters.vinculumDeviceData.services ?? {})) {
+    if (!svcName) { continue; }
+    if (!svc.addr) { continue; }
+    if (!svc.enabled) { continue; }
 
-    const handler = serviceHandlers[svc.name];
+    const handler = serviceHandlers[svcName];
     if (!handler) {
-      log.error(`No handler for service: ${svc.name}`);
+      log.error(`No handler for service: ${svcName}`);
       continue;
     }
 
     const result = handler(topicPrefix, parameters.vinculumDeviceData, svc);
     if (!result) {
       log.error(`Invalid service data prevented component creation: ${parameters.vinculumDeviceData} ${svc}`);
-      continue; 
+      continue;
     }
 
     Object.assign(components, result.components);
@@ -230,16 +228,13 @@ export function haPublishDevice(parameters: { hubId: string, vinculumDeviceData:
   const availabilityTopic = `${topicPrefix}/availability`
   const config: HaDeviceConfig = {
     dev: {
-      ids: parameters.deviceInclusionReport.address,
-      name:
-        // User-defined device name
-        parameters.vinculumDeviceData?.client?.name ??
-        parameters.deviceInclusionReport.product_name,
-      mf: parameters.deviceInclusionReport.manufacturer_id,
-      mdl: parameters.deviceInclusionReport.product_id,
-      sw: parameters.deviceInclusionReport.sw_ver,
-      sn: parameters.deviceInclusionReport.product_hash,
-      hw: parameters.deviceInclusionReport.hw_ver,
+      ids: parameters.vinculumDeviceData.id.toString(),
+      name: parameters.vinculumDeviceData?.client?.name ?? parameters.vinculumDeviceData?.modelAlias ?? parameters.deviceInclusionReport?.product_name,
+      mf: parameters.deviceInclusionReport?.manufacturer_id,
+      mdl: parameters.vinculumDeviceData?.modelAlias ?? parameters.deviceInclusionReport?.product_id,
+      sw: parameters.deviceInclusionReport?.sw_ver,
+      sn: parameters.deviceInclusionReport?.product_hash,
+      hw: parameters.deviceInclusionReport?.hw_ver,
     },
     o: {
       name: 'futurehome',

@@ -1,3 +1,4 @@
+import { log } from "../logger";
 import { sendFimpMsg } from "./fimp";
 
 export type InclusionReport = {
@@ -20,14 +21,18 @@ export type InclusionReportService = {
   props?: { [key: string]: any } | null
 };
 
-export async function getInclusionReport(parameters: { adapterAddress: string; adapterService: string; deviceId: string }): Promise<InclusionReport> {
-  const inclusionReport = await sendFimpMsg({
-    address: parameters.adapterAddress,
-    service: parameters.adapterService,
-    cmd: 'cmd.thing.get_inclusion_report',
-    val: parameters.deviceId,
-    val_t: 'string',
-  });
+export async function getInclusionReport(parameters: { adapterAddress: string; adapterService: string; deviceId: string }): Promise<InclusionReport | undefined> {
+  try {
+    const inclusionReport = await sendFimpMsg({
+      address: parameters.adapterAddress,
+      service: parameters.adapterService,
+      cmd: 'cmd.thing.get_inclusion_report',
+      val: parameters.deviceId,
+      val_t: 'string',
+    });
 
-  return inclusionReport.val;
+    return inclusionReport.val;
+  } catch (e) {
+    log.error(`Failed getting inclusion report for adapterAddress: ${parameters.adapterAddress}, adapterService: ${parameters.adapterService}, deviceId: ${parameters.deviceId}`)
+  }
 }
