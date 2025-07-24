@@ -1,6 +1,6 @@
-import { v4 as uuidv4 } from "uuid";
-import { log } from "../logger";
-import { IMqttClient } from "../mqtt/interface";
+import { v4 as uuidv4 } from 'uuid';
+import { log } from '../logger';
+import { IMqttClient } from '../mqtt/interface';
 
 let fimp: IMqttClient | undefined = undefined;
 
@@ -21,7 +21,21 @@ export type FimpResponse = {
   ver?: any;
 };
 
-type FimpValueType = 'string' | 'int' | 'float' | 'bool' | 'null' | 'str_array' | 'int_array' | 'float_array' | 'str_map' | 'int_map' | 'float_map' | 'bool_map' | 'object' | 'bin';
+type FimpValueType =
+  | 'string'
+  | 'int'
+  | 'float'
+  | 'bool'
+  | 'null'
+  | 'str_array'
+  | 'int_array'
+  | 'float_array'
+  | 'str_map'
+  | 'int_map'
+  | 'float_map'
+  | 'bool_map'
+  | 'object'
+  | 'bin';
 
 export async function sendFimpMsg({
   address,
@@ -40,27 +54,27 @@ export async function sendFimpMsg({
 }): Promise<FimpResponse> {
   const uid = uuidv4();
   const topic = `pt:j1/mt:cmd${address}`;
-  const message = JSON.stringify(
-    {
-      corid: null,
-      ctime: new Date().toISOString(),
-      props: {},
-      resp_to: 'pt:j1/mt:rsp/rt:app/rn:ha-futurehome/ad:addon',
-      serv: service,
-      src: 'ha-futurehome',
-      tags: [],
-      'type': cmd,
-      uid: uid,
-      val: val,
-      val_t: val_t,
-      ver: '1',
-    },
-  );
+  const message = JSON.stringify({
+    corid: null,
+    ctime: new Date().toISOString(),
+    props: {},
+    resp_to: 'pt:j1/mt:rsp/rt:app/rn:ha-futurehome/ad:addon',
+    serv: service,
+    src: 'ha-futurehome',
+    tags: [],
+    type: cmd,
+    uid: uid,
+    val: val,
+    val_t: val_t,
+    ver: '1',
+  });
 
   return new Promise((resolve, reject) => {
     const timeout = setTimeout(() => {
       fimp?.removeListener('message', onResponse);
-      const error = new Error(`Timeout waiting for FIMP response (uid: ${uid}, service: ${service}, cmd: ${cmd})`);
+      const error = new Error(
+        `Timeout waiting for FIMP response (uid: ${uid}, service: ${service}, cmd: ${cmd})`,
+      );
       log.warn(error.message, error.stack);
       reject(error);
     }, timeoutMs);
@@ -72,13 +86,17 @@ export async function sendFimpMsg({
         if (msg.type === 'evt.error.report') {
           fimp?.removeListener('message', onResponse);
 
-          const error = new Error(`Received FIMP response for message ${uid}: error (evt.error.report) (matched using uid)`);
+          const error = new Error(
+            `Received FIMP response for message ${uid}: error (evt.error.report) (matched using uid)`,
+          );
           log.warn(error.message, error.stack);
           reject(error);
           return;
         }
 
-        log.debug(`Received FIMP response for message ${uid} (matched using uid).`);
+        log.debug(
+          `Received FIMP response for message ${uid} (matched using uid).`,
+        );
 
         clearTimeout(timeout);
         fimp?.removeListener('message', onResponse);
@@ -90,13 +108,17 @@ export async function sendFimpMsg({
         if (msg.type === 'evt.error.report') {
           fimp?.removeListener('message', onResponse);
 
-          const error = new Error(`Received FIMP response for message ${uid}: error (evt.error.report) (matched using topic)`);
+          const error = new Error(
+            `Received FIMP response for message ${uid}: error (evt.error.report) (matched using topic)`,
+          );
           log.warn(error.message, error.stack);
           reject(error);
           return;
         }
 
-        log.debug(`Received FIMP response for message ${uid} (matched using topic).`);
+        log.debug(
+          `Received FIMP response for message ${uid} (matched using topic).`,
+        );
 
         clearTimeout(timeout);
         fimp?.removeListener('message', onResponse);
@@ -107,13 +129,23 @@ export async function sendFimpMsg({
       const hasValidType = msg.type != null && msg.type.startsWith('evt.');
       const reqCmdParts = cmd.split('.');
       const resCmdParts = msg.type?.split('.') ?? [];
-      const hasThreeParts = resCmdParts.length === 3 && reqCmdParts.length === 3;
+      const hasThreeParts =
+        resCmdParts.length === 3 && reqCmdParts.length === 3;
       const middlePartMatches = resCmdParts[1] === reqCmdParts[1];
       const endsWithLastPart = cmd.endsWith(resCmdParts.at(-1)!);
-      const reqEndsWithSetAndResEndsWithReport = reqCmdParts[2] === 'set' && resCmdParts[2] === 'report'
+      const reqEndsWithSetAndResEndsWithReport =
+        reqCmdParts[2] === 'set' && resCmdParts[2] === 'report';
       const sameService = msg.serv === service;
-      if (hasValidType && hasThreeParts && middlePartMatches && (endsWithLastPart || reqEndsWithSetAndResEndsWithReport) && sameService) {
-        log.debug(`Received FIMP response for message ${uid} (matched using event name).`);
+      if (
+        hasValidType &&
+        hasThreeParts &&
+        middlePartMatches &&
+        (endsWithLastPart || reqEndsWithSetAndResEndsWithReport) &&
+        sameService
+      ) {
+        log.debug(
+          `Received FIMP response for message ${uid} (matched using event name).`,
+        );
 
         clearTimeout(timeout);
         fimp?.removeListener('message', onResponse);

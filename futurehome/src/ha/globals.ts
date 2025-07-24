@@ -1,5 +1,5 @@
-import { IMqttClient } from "../mqtt/interface";
-import { CommandHandlers } from "./publish_device";
+import { IMqttClient } from '../mqtt/interface';
+import { CommandHandlers } from './publish_device';
 
 export let ha: IMqttClient | undefined = undefined;
 

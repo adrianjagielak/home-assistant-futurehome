@@ -1,11 +1,14 @@
-import { VinculumPd7Device, VinculumPd7Service } from "../fimp/vinculum_pd7_device";
-import { HaMqttComponent } from "../ha/mqtt_components/_component";
-import { ServiceComponentsCreationResult } from "../ha/publish_device";
+import {
+  VinculumPd7Device,
+  VinculumPd7Service,
+} from '../fimp/vinculum_pd7_device';
+import { HaMqttComponent } from '../ha/mqtt_components/_component';
+import { ServiceComponentsCreationResult } from '../ha/publish_device';
 
 export function battery__components(
   topicPrefix: string,
   device: VinculumPd7Device,
-  svc: VinculumPd7Service
+  svc: VinculumPd7Service,
 ): ServiceComponentsCreationResult | undefined {
   const components: Record<string, HaMqttComponent> = {};
 

@@ -1,12 +1,18 @@
-import { sendFimpMsg } from "../fimp/fimp";
-import { VinculumPd7Device, VinculumPd7Service } from "../fimp/vinculum_pd7_device";
-import { LightComponent } from "../ha/mqtt_components/light";
-import { ServiceComponentsCreationResult, CommandHandlers } from "../ha/publish_device";
+import { sendFimpMsg } from '../fimp/fimp';
+import {
+  VinculumPd7Device,
+  VinculumPd7Service,
+} from '../fimp/vinculum_pd7_device';
+import { LightComponent } from '../ha/mqtt_components/light';
+import {
+  ServiceComponentsCreationResult,
+  CommandHandlers,
+} from '../ha/publish_device';
 
 export function color_ctrl__components(
   topicPrefix: string,
   device: VinculumPd7Device,
-  svc: VinculumPd7Service
+  svc: VinculumPd7Service,
 ): ServiceComponentsCreationResult | undefined {
   const supComponents: string[] = svc.props?.sup_components ?? [];
 
@@ -15,7 +21,10 @@ export function color_ctrl__components(
   }
 
   // Check if we have RGB support (minimum requirement for a useful light)
-  const hasRgb = supComponents.includes('red') && supComponents.includes('green') && supComponents.includes('blue');
+  const hasRgb =
+    supComponents.includes('red') &&
+    supComponents.includes('green') &&
+    supComponents.includes('blue');
   if (!hasRgb) {
     return undefined; // No RGB support, skip this service
   }
@@ -76,7 +85,10 @@ export function color_ctrl__components(
       lightComponent.color_temp_value_template = `{{ (1000000 / value_json['${svc.addr}'].temp) | round(0) }}`; // Convert Kelvin to mireds
       lightComponent.min_mireds = 153; // ~6500K
       lightComponent.max_mireds = 370; // ~2700K
-    } else if (supComponents.includes('warm_w') && supComponents.includes('cold_w')) {
+    } else if (
+      supComponents.includes('warm_w') &&
+      supComponents.includes('cold_w')
+    ) {
       // Z-Wave style - warm/cold white mix
       lightComponent.color_temp_command_topic = colorTempCommandTopic;
       lightComponent.color_temp_state_topic = stateTopic;
@@ -101,23 +113,23 @@ export function color_ctrl__components(
 
         await sendFimpMsg({
           address: svc.addr!,
-          service: "color_ctrl",
-          cmd: "cmd.color.set",
-          val_t: "int_map",
+          service: 'color_ctrl',
+          cmd: 'cmd.color.set',
+          val_t: 'int_map',
           val: colorMap,
         });
       } else if (payload === 'OFF') {
         // Turn off (all components to 0)
         const colorMap: Record<string, number> = {};
-        supComponents.forEach(component => {
+        supComponents.forEach((component) => {
           colorMap[component] = 0;
         });
 
         await sendFimpMsg({
           address: svc.addr!,
-          service: "color_ctrl",
-          cmd: "cmd.color.set",
-          val_t: "int_map",
+          service: 'color_ctrl',
+          cmd: 'cmd.color.set',
+          val_t: 'int_map',
           val: colorMap,
         });
       }
@@ -132,8 +144,17 @@ export function color_ctrl__components(
       const green = parseInt(parts[1], 10);
       const blue = parseInt(parts[2], 10);
 
-      if (Number.isNaN(red) || Number.isNaN(green) || Number.isNaN(blue)) return;
-      if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255) return;
+      if (Number.isNaN(red) || Number.isNaN(green) || Number.isNaN(blue))
+        return;
+      if (
+        red < 0 ||
+        red > 255 ||
+        green < 0 ||
+        green > 255 ||
+        blue < 0 ||
+        blue > 255
+      )
+        return;
 
       const colorMap: Record<string, number> = {
         red,
@@ -143,9 +164,9 @@ export function color_ctrl__components(
 
       await sendFimpMsg({
         address: svc.addr!,
-        service: "color_ctrl",
-        cmd: "cmd.color.set",
-        val_t: "int_map",
+        service: 'color_ctrl',
+        cmd: 'cmd.color.set',
+        val_t: 'int_map',
         val: colorMap,
       });
     },
@@ -167,12 +188,15 @@ export function color_ctrl__components(
 
         await sendFimpMsg({
           address: svc.addr!,
-          service: "color_ctrl",
-          cmd: "cmd.color.set",
-          val_t: "int_map",
+          service: 'color_ctrl',
+          cmd: 'cmd.color.set',
+          val_t: 'int_map',
           val: colorMap,
         });
-      } else if (supComponents.includes('warm_w') && supComponents.includes('cold_w')) {
+      } else if (
+        supComponents.includes('warm_w') &&
+        supComponents.includes('cold_w')
+      ) {
         // Z-Wave style - convert mireds to warm/cold white mix
         // Linear interpolation between cold (153 mireds) and warm (370 mireds)
         const warmRatio = (mireds - 153) / (370 - 153);
@@ -189,9 +213,9 @@ export function color_ctrl__components(
 
         await sendFimpMsg({
           address: svc.addr!,
-          service: "color_ctrl",
-          cmd: "cmd.color.set",
-          val_t: "int_map",
+          service: 'color_ctrl',
+          cmd: 'cmd.color.set',
+          val_t: 'int_map',
           val: colorMap,
         });
       }

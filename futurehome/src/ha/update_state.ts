@@ -1,6 +1,6 @@
-import { DeviceState } from "../fimp/state";
-import { log } from "../logger";
-import { ha } from "./globals";
+import { DeviceState } from '../fimp/state';
+import { log } from '../logger';
+import { ha } from './globals';
 
 /**
  * Example raw FIMP state input:
@@ -77,8 +77,8 @@ topic: homeassistant/device/futurehome_123456_1/state
  */
 
 const haStateCache: Record<
-  string,                                   // state topic
-  Record<string, Record<string, any>>       // payload (addr → { attr → value })
+  string, // state topic
+  Record<string, Record<string, any>> // payload (addr → { attr → value })
 > = {};
 
 /**
@@ -88,7 +88,10 @@ const haStateCache: Record<
  * Example MQTT topic produced for hub 123456 and device id 1:
  *   homeassistant/device/futurehome_123456_1/state
  */
-export function haUpdateState(parameters: { hubId: string; deviceState: DeviceState }) {
+export function haUpdateState(parameters: {
+  hubId: string;
+  deviceState: DeviceState;
+}) {
   const stateTopic = `homeassistant/device/futurehome_${parameters.hubId}_${parameters.deviceState.id?.toString()}/state`;
 
   const haState: Record<string, Record<string, any>> = {};
@@ -126,9 +129,13 @@ export function haUpdateState(parameters: { hubId: string; deviceState: DeviceSt
  * The prefix "pt:j1/mt:evt" is removed before matching so that the remainder
  * exactly matches the address keys stored in the cached HA payloads.
  */
-export function haUpdateStateSensorReport(parameters: { topic: string; value: any, attrName: string }) {
+export function haUpdateStateSensorReport(parameters: {
+  topic: string;
+  value: any;
+  attrName: string;
+}) {
   // Strip the FIMP envelope so we end up with "/rt:dev/…/ad:x_y"
-  const sensorAddr = parameters.topic.replace(/^pt:j1\/mt:evt/, "");
+  const sensorAddr = parameters.topic.replace(/^pt:j1\/mt:evt/, '');
 
   for (const [stateTopic, payload] of Object.entries(haStateCache)) {
     if (!payload[sensorAddr]) continue;
@@ -136,7 +143,9 @@ export function haUpdateStateSensorReport(parameters: { topic: string; value: an
     // Update the reading in‑place
     payload[sensorAddr][parameters.attrName] = parameters.value;
 
-    log.debug(`Publishing updated sensor value for "${sensorAddr}" to "${stateTopic}"`);
+    log.debug(
+      `Publishing updated sensor value for "${sensorAddr}" to "${stateTopic}"`,
+    );
     ha?.publish(stateTopic, JSON.stringify(payload), { retain: true, qos: 2 });
 
     haStateCache[stateTopic] = payload;

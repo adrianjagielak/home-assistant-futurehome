@@ -1,11 +1,14 @@
-import { sendFimpMsg } from "../fimp/fimp";
-import { VinculumPd7Device, VinculumPd7Service } from "../fimp/vinculum_pd7_device";
-import { ServiceComponentsCreationResult } from "../ha/publish_device";
+import { sendFimpMsg } from '../fimp/fimp';
+import {
+  VinculumPd7Device,
+  VinculumPd7Service,
+} from '../fimp/vinculum_pd7_device';
+import { ServiceComponentsCreationResult } from '../ha/publish_device';
 
 export function fan_ctrl__components(
   topicPrefix: string,
   device: VinculumPd7Device,
-  svc: VinculumPd7Service
+  svc: VinculumPd7Service,
 ): ServiceComponentsCreationResult | undefined {
   const supModes: string[] = svc.props?.sup_modes ?? [];
 
@@ -38,10 +41,10 @@ export function fan_ctrl__components(
           if (supModes.includes(mode) || mode === 'off') {
             await sendFimpMsg({
               address: svc.addr!,
-              service: "fan_ctrl",
-              cmd: "cmd.mode.set",
+              service: 'fan_ctrl',
+              cmd: 'cmd.mode.set',
               val: mode,
-              val_t: "string",
+              val_t: 'string',
             });
           }
         } else {
@@ -49,10 +52,10 @@ export function fan_ctrl__components(
           if (supModes.includes(payload)) {
             await sendFimpMsg({
               address: svc.addr!,
-              service: "fan_ctrl",
-              cmd: "cmd.mode.set",
+              service: 'fan_ctrl',
+              cmd: 'cmd.mode.set',
               val: payload,
-              val_t: "string",
+              val_t: 'string',
             });
           }
         }

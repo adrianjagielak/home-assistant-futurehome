@@ -23,16 +23,11 @@
       "out_bin_switch": {
         "addr": "/rt:dev/rn:flow/ad:1/sv:out_bin_switch/ad:XFhAkhMmXNwCt4M_0",
         "enabled": true,
-        "intf": [
-          "cmd.binary.set"
-        ],
+        "intf": ["cmd.binary.set"],
         "props": {}
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 26,
     "type": {
       "subtype": null,
@@ -65,10 +60,7 @@
     "modelAlias": "Heatit - Z-TRM3",
     "param": {
       "energy": 1594.5,
-      "supportedThermostatModes": [
-        "off",
-        "heat"
-      ],
+      "supportedThermostatModes": ["off", "heat"],
       "targetTemperature": 21,
       "thermostatMode": "heat",
       "timestamp": "2025-06-16 22:13:38 +0200",
@@ -100,19 +92,12 @@
       "meter_elec": {
         "addr": "/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:8_0",
         "enabled": true,
-        "intf": [
-          "cmd.meter.get_report",
-          "evt.meter.report"
-        ],
+        "intf": ["cmd.meter.get_report", "evt.meter.report"],
         "props": {
           "is_secure": false,
           "is_unsecure": true,
           "sup_export_units": [],
-          "sup_units": [
-            "kWh",
-            "W",
-            "V"
-          ]
+          "sup_units": ["kWh", "W", "V"]
         }
       },
       "thermostat": {
@@ -129,13 +114,8 @@
         "props": {
           "is_secure": false,
           "is_unsecure": true,
-          "sup_modes": [
-            "off",
-            "heat"
-          ],
-          "sup_setpoints": [
-            "heat"
-          ],
+          "sup_modes": ["off", "heat"],
+          "sup_setpoints": ["heat"],
           "sup_temperatures": {
             "heat": {
               "max": 35,
@@ -147,20 +127,14 @@
       "version": {
         "addr": "/rt:dev/rn:zw/ad:1/sv:version/ad:8_0",
         "enabled": true,
-        "intf": [
-          "cmd.version.get_report",
-          "evt.version.report"
-        ],
+        "intf": ["cmd.version.get_report", "evt.version.report"],
         "props": {
           "is_secure": false,
           "is_unsecure": true
         }
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 125,
     "type": {
       "subtype": null,
@@ -186,10 +160,7 @@
     "modelAlias": "Heatit - Z-TRM3",
     "param": {
       "energy": 3714.10009765625,
-      "supportedThermostatModes": [
-        "off",
-        "heat"
-      ],
+      "supportedThermostatModes": ["off", "heat"],
       "targetTemperature": 14,
       "thermostatMode": "heat",
       "timestamp": "2025-07-23 19:50:36 +0200",
@@ -215,19 +186,12 @@
       "meter_elec": {
         "addr": "/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:8_1",
         "enabled": true,
-        "intf": [
-          "cmd.meter.get_report",
-          "evt.meter.report"
-        ],
+        "intf": ["cmd.meter.get_report", "evt.meter.report"],
         "props": {
           "is_secure": false,
           "is_unsecure": true,
           "sup_export_units": [],
-          "sup_units": [
-            "kWh",
-            "W",
-            "V"
-          ]
+          "sup_units": ["kWh", "W", "V"]
         }
       },
       "thermostat": {
@@ -244,13 +208,8 @@
         "props": {
           "is_secure": false,
           "is_unsecure": true,
-          "sup_modes": [
-            "off",
-            "heat"
-          ],
-          "sup_setpoints": [
-            "heat"
-          ],
+          "sup_modes": ["off", "heat"],
+          "sup_setpoints": ["heat"],
           "sup_temperatures": {
             "heat": {
               "max": 35,
@@ -260,10 +219,7 @@
         }
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 125,
     "type": {
       "subtype": null,
@@ -297,11 +253,7 @@
       "basic": {
         "addr": "/rt:dev/rn:zw/ad:1/sv:basic/ad:8_2",
         "enabled": true,
-        "intf": [
-          "cmd.lvl.get_report",
-          "cmd.lvl.set",
-          "evt.lvl.report"
-        ],
+        "intf": ["cmd.lvl.get_report", "cmd.lvl.set", "evt.lvl.report"],
         "props": {
           "is_secure": false,
           "is_unsecure": true
@@ -324,23 +276,15 @@
       "sensor_temp": {
         "addr": "/rt:dev/rn:zw/ad:1/sv:sensor_temp/ad:8_2",
         "enabled": true,
-        "intf": [
-          "cmd.sensor.get_report",
-          "evt.sensor.report"
-        ],
+        "intf": ["cmd.sensor.get_report", "evt.sensor.report"],
         "props": {
           "is_secure": false,
           "is_unsecure": true,
-          "sup_units": [
-            "C"
-          ]
+          "sup_units": ["C"]
         }
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 125,
     "type": {
       "subtype": null,
@@ -374,11 +318,7 @@
       "basic": {
         "addr": "/rt:dev/rn:zw/ad:1/sv:basic/ad:8_3",
         "enabled": true,
-        "intf": [
-          "cmd.lvl.get_report",
-          "cmd.lvl.set",
-          "evt.lvl.report"
-        ],
+        "intf": ["cmd.lvl.get_report", "cmd.lvl.set", "evt.lvl.report"],
         "props": {
           "is_secure": false,
           "is_unsecure": true
@@ -401,23 +341,15 @@
       "sensor_temp": {
         "addr": "/rt:dev/rn:zw/ad:1/sv:sensor_temp/ad:8_3",
         "enabled": true,
-        "intf": [
-          "cmd.sensor.get_report",
-          "evt.sensor.report"
-        ],
+        "intf": ["cmd.sensor.get_report", "evt.sensor.report"],
         "props": {
           "is_secure": false,
           "is_unsecure": true,
-          "sup_units": [
-            "C"
-          ]
+          "sup_units": ["C"]
         }
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 125,
     "type": {
       "subtype": null,
@@ -451,11 +383,7 @@
       "basic": {
         "addr": "/rt:dev/rn:zw/ad:1/sv:basic/ad:8_4",
         "enabled": true,
-        "intf": [
-          "cmd.lvl.get_report",
-          "cmd.lvl.set",
-          "evt.lvl.report"
-        ],
+        "intf": ["cmd.lvl.get_report", "cmd.lvl.set", "evt.lvl.report"],
         "props": {
           "is_secure": false,
           "is_unsecure": true
@@ -478,24 +406,16 @@
       "sensor_temp": {
         "addr": "/rt:dev/rn:zw/ad:1/sv:sensor_temp/ad:8_4",
         "enabled": true,
-        "intf": [
-          "cmd.sensor.get_report",
-          "evt.sensor.report"
-        ],
+        "intf": ["cmd.sensor.get_report", "evt.sensor.report"],
         "props": {
           "is_secure": false,
           "is_unsecure": true,
-          "sup_units": [
-            "C"
-          ],
+          "sup_units": ["C"],
           "thing_role": "main"
         }
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 125,
     "type": {
       "subtype": null,
@@ -532,11 +452,7 @@
       "basic": {
         "addr": "/rt:dev/rn:zw/ad:1/sv:basic/ad:9_0",
         "enabled": true,
-        "intf": [
-          "cmd.lvl.get_report",
-          "cmd.lvl.set",
-          "evt.lvl.report"
-        ],
+        "intf": ["cmd.lvl.get_report", "cmd.lvl.set", "evt.lvl.report"],
         "props": {
           "is_secure": true,
           "is_unsecure": true
@@ -564,20 +480,11 @@
       "meter_elec": {
         "addr": "/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:9_0",
         "enabled": true,
-        "intf": [
-          "cmd.meter.get_report",
-          "cmd.meter.reset",
-          "evt.meter.report"
-        ],
+        "intf": ["cmd.meter.get_report", "cmd.meter.reset", "evt.meter.report"],
         "props": {
           "is_secure": true,
           "is_unsecure": false,
-          "sup_units": [
-            "kWh",
-            "W",
-            "V",
-            "A"
-          ]
+          "sup_units": ["kWh", "W", "V", "A"]
         }
       },
       "out_bin_switch": {
@@ -596,11 +503,7 @@
       "scene_ctrl": {
         "addr": "/rt:dev/rn:zw/ad:1/sv:scene_ctrl/ad:9_0",
         "enabled": true,
-        "intf": [
-          "cmd.scene.get_report",
-          "cmd.scene.set",
-          "evt.scene.report"
-        ],
+        "intf": ["cmd.scene.get_report", "cmd.scene.set", "evt.scene.report"],
         "props": {
           "is_secure": true,
           "is_unsecure": false,
@@ -610,37 +513,25 @@
       "sensor_temp": {
         "addr": "/rt:dev/rn:zw/ad:1/sv:sensor_temp/ad:9_0",
         "enabled": true,
-        "intf": [
-          "cmd.sensor.get_report",
-          "evt.sensor.report"
-        ],
+        "intf": ["cmd.sensor.get_report", "evt.sensor.report"],
         "props": {
           "is_secure": true,
           "is_unsecure": false,
-          "sup_units": [
-            "C",
-            "F"
-          ],
+          "sup_units": ["C", "F"],
           "thing_role": "main"
         }
       },
       "version": {
         "addr": "/rt:dev/rn:zw/ad:1/sv:version/ad:9_0",
         "enabled": true,
-        "intf": [
-          "cmd.version.get_report",
-          "evt.version.report"
-        ],
+        "intf": ["cmd.version.get_report", "evt.version.report"],
         "props": {
           "is_secure": true,
           "is_unsecure": true
         }
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 131,
     "type": {
       "subtype": null,
@@ -677,9 +568,7 @@
     "problem": false,
     "room": 4,
     "services": {},
-    "supports": [
-      "clear"
-    ],
+    "supports": ["clear"],
     "thing": 132,
     "type": {
       "subtype": null,
@@ -714,10 +603,7 @@
         "enabled": true,
         "intf": [],
         "props": {
-          "in_services": [
-            "out_bin_switch",
-            "out_lvl_switch"
-          ],
+          "in_services": ["out_bin_switch", "out_lvl_switch"],
           "is_secure": true,
           "is_unsecure": false
         }
@@ -725,9 +611,7 @@
       "indicator_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:2_11",
         "enabled": true,
-        "intf": [
-          "cmd.indicator.set_visual_element"
-        ],
+        "intf": ["cmd.indicator.set_visual_element"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
@@ -761,10 +645,7 @@
         }
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 134,
     "type": {
       "subtype": null,
@@ -813,18 +694,13 @@
         "props": {
           "is_secure": true,
           "is_unsecure": false,
-          "out_services": [
-            "out_bin_switch",
-            "out_lvl_switch"
-          ]
+          "out_services": ["out_bin_switch", "out_lvl_switch"]
         }
       },
       "battery": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:battery/ad:4_1",
         "enabled": true,
-        "intf": [
-          "evt.lvl.report"
-        ],
+        "intf": ["evt.lvl.report"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
@@ -833,9 +709,7 @@
       "indicator_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:4_1",
         "enabled": true,
-        "intf": [
-          "cmd.indicator.set_visual_element"
-        ],
+        "intf": ["cmd.indicator.set_visual_element"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
@@ -844,26 +718,19 @@
       "scene_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:scene_ctrl/ad:4_1",
         "enabled": true,
-        "intf": [
-          "evt.scene.report"
-        ],
+        "intf": ["evt.scene.report"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
         }
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 136,
     "type": {
       "subtype": "scene",
       "supported": {
-        "input": [
-          "scene"
-        ]
+        "input": ["scene"]
       },
       "type": "input"
     }
@@ -903,18 +770,13 @@
         "props": {
           "is_secure": true,
           "is_unsecure": false,
-          "out_services": [
-            "out_bin_switch",
-            "out_lvl_switch"
-          ]
+          "out_services": ["out_bin_switch", "out_lvl_switch"]
         }
       },
       "battery": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:battery/ad:6_1",
         "enabled": true,
-        "intf": [
-          "evt.lvl.report"
-        ],
+        "intf": ["evt.lvl.report"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
@@ -923,9 +785,7 @@
       "indicator_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:6_1",
         "enabled": true,
-        "intf": [
-          "cmd.indicator.set_visual_element"
-        ],
+        "intf": ["cmd.indicator.set_visual_element"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
@@ -934,26 +794,19 @@
       "scene_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:scene_ctrl/ad:6_1",
         "enabled": true,
-        "intf": [
-          "evt.scene.report"
-        ],
+        "intf": ["evt.scene.report"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
         }
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 142,
     "type": {
       "subtype": "scene",
       "supported": {
-        "input": [
-          "scene"
-        ]
+        "input": ["scene"]
       },
       "type": "input"
     }
@@ -973,13 +826,7 @@
     "model": "zb - IKEA of Sweden - TRADFRI bulb E27 CWS opal 600lm",
     "modelAlias": "TRADFRI bulb E27 CWS opal 600lm",
     "param": {
-      "color": [
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
+      "color": [0, 0, 0, 0, 0],
       "dimValue": 100,
       "power": "off",
       "timestamp": "2023-03-19 16:44:21 +0100"
@@ -992,11 +839,7 @@
         "enabled": true,
         "intf": [],
         "props": {
-          "in_services": [
-            "color",
-            "out_bin_switch",
-            "out_lvl_switch"
-          ],
+          "in_services": ["color", "out_bin_switch", "out_lvl_switch"],
           "is_secure": true,
           "is_unsecure": false
         }
@@ -1004,27 +847,17 @@
       "color_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:color_ctrl/ad:3_1",
         "enabled": true,
-        "intf": [
-          "cmd.color.get_report",
-          "cmd.color.set",
-          "evt.color.report"
-        ],
+        "intf": ["cmd.color.get_report", "cmd.color.set", "evt.color.report"],
         "props": {
           "is_secure": true,
           "is_unsecure": false,
-          "sup_components": [
-            "red",
-            "green",
-            "blue"
-          ]
+          "sup_components": ["red", "green", "blue"]
         }
       },
       "indicator_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:3_1",
         "enabled": true,
-        "intf": [
-          "cmd.indicator.set_visual_element"
-        ],
+        "intf": ["cmd.indicator.set_visual_element"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
@@ -1070,20 +903,12 @@
           "evt.meter.report"
         ],
         "props": {
-          "sup_modes": [
-            "off",
-            "on"
-          ],
-          "sup_units": [
-            "W"
-          ]
+          "sup_modes": ["off", "on"],
+          "sup_units": ["W"]
         }
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 144,
     "type": {
       "subtype": null,
@@ -1118,9 +943,7 @@
       "indicator_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:9_1",
         "enabled": true,
-        "intf": [
-          "cmd.indicator.set_visual_element"
-        ],
+        "intf": ["cmd.indicator.set_visual_element"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
@@ -1129,16 +952,11 @@
       "sensor_temp": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_temp/ad:9_1",
         "enabled": true,
-        "intf": [
-          "cmd.sensor.get_report",
-          "evt.sensor.report"
-        ],
+        "intf": ["cmd.sensor.get_report", "evt.sensor.report"],
         "props": {
           "is_secure": true,
           "is_unsecure": false,
-          "sup_units": [
-            "C"
-          ],
+          "sup_units": ["C"],
           "thing_role": "main"
         }
       },
@@ -1154,16 +972,11 @@
           "is_secure": true,
           "is_unsecure": false,
           "sup_modes": [],
-          "sup_setpoints": [
-            "heat"
-          ]
+          "sup_setpoints": ["heat"]
         }
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 147,
     "type": {
       "subtype": null,
@@ -1197,9 +1010,7 @@
       "indicator_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:7_1",
         "enabled": true,
-        "intf": [
-          "cmd.indicator.set_visual_element"
-        ],
+        "intf": ["cmd.indicator.set_visual_element"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
@@ -1230,10 +1041,7 @@
         "props": {}
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 150,
     "type": {
       "subtype": null,
@@ -1274,9 +1082,7 @@
       "indicator_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:5_1",
         "enabled": true,
-        "intf": [
-          "cmd.indicator.set_visual_element"
-        ],
+        "intf": ["cmd.indicator.set_visual_element"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
@@ -1307,10 +1113,7 @@
         "props": {}
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 151,
     "type": {
       "subtype": null,
@@ -1362,19 +1165,13 @@
         "props": {
           "is_secure": true,
           "is_unsecure": false,
-          "out_services": [
-            "color",
-            "out_bin_switch",
-            "out_lvl_switch"
-          ]
+          "out_services": ["color", "out_bin_switch", "out_lvl_switch"]
         }
       },
       "battery": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:battery/ad:12_1",
         "enabled": true,
-        "intf": [
-          "evt.lvl.report"
-        ],
+        "intf": ["evt.lvl.report"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
@@ -1383,9 +1180,7 @@
       "indicator_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:12_1",
         "enabled": true,
-        "intf": [
-          "cmd.indicator.set_visual_element"
-        ],
+        "intf": ["cmd.indicator.set_visual_element"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
@@ -1394,26 +1189,19 @@
       "scene_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:scene_ctrl/ad:12_1",
         "enabled": true,
-        "intf": [
-          "evt.scene.report"
-        ],
+        "intf": ["evt.scene.report"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
         }
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 153,
     "type": {
       "subtype": "scene",
       "supported": {
-        "input": [
-          "scene"
-        ]
+        "input": ["scene"]
       },
       "type": "input"
     }
@@ -1453,19 +1241,13 @@
         "props": {
           "is_secure": true,
           "is_unsecure": false,
-          "out_services": [
-            "color",
-            "out_bin_switch",
-            "out_lvl_switch"
-          ]
+          "out_services": ["color", "out_bin_switch", "out_lvl_switch"]
         }
       },
       "battery": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:battery/ad:14_1",
         "enabled": true,
-        "intf": [
-          "evt.lvl.report"
-        ],
+        "intf": ["evt.lvl.report"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
@@ -1474,9 +1256,7 @@
       "indicator_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:14_1",
         "enabled": true,
-        "intf": [
-          "cmd.indicator.set_visual_element"
-        ],
+        "intf": ["cmd.indicator.set_visual_element"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
@@ -1485,26 +1265,19 @@
       "scene_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:scene_ctrl/ad:14_1",
         "enabled": true,
-        "intf": [
-          "evt.scene.report"
-        ],
+        "intf": ["evt.scene.report"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
         }
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 155,
     "type": {
       "subtype": "scene",
       "supported": {
-        "input": [
-          "scene"
-        ]
+        "input": ["scene"]
       },
       "type": "input"
     }
@@ -1534,9 +1307,7 @@
       "indicator_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:10_2",
         "enabled": true,
-        "intf": [
-          "cmd.indicator.set_visual_element"
-        ],
+        "intf": ["cmd.indicator.set_visual_element"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
@@ -1556,16 +1327,8 @@
         "props": {
           "is_secure": true,
           "is_unsecure": false,
-          "sup_extended_vals": [
-            "i1",
-            "p_import_react",
-            "u1",
-            "p_export_react"
-          ],
-          "sup_units": [
-            "kWh",
-            "W"
-          ]
+          "sup_extended_vals": ["i1", "p_import_react", "u1", "p_export_react"],
+          "sup_units": ["kWh", "W"]
         }
       },
       "ota": {
@@ -1582,17 +1345,12 @@
         }
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 158,
     "type": {
       "subtype": "main_elec",
       "supported": {
-        "meter": [
-          "main_elec"
-        ]
+        "meter": ["main_elec"]
       },
       "type": "meter"
     }
@@ -1622,9 +1380,7 @@
       "indicator_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:11_2",
         "enabled": true,
-        "intf": [
-          "cmd.indicator.set_visual_element"
-        ],
+        "intf": ["cmd.indicator.set_visual_element"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
@@ -1648,10 +1404,7 @@
           "is_unsecure": false,
           "serial_number": "6970631401991295",
           "sup_extended_vals": [],
-          "sup_units": [
-            "kWh",
-            "W"
-          ]
+          "sup_units": ["kWh", "W"]
         }
       },
       "ota": {
@@ -1668,17 +1421,12 @@
         }
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 160,
     "type": {
       "subtype": null,
       "supported": {
-        "meter": [
-          "main_elec"
-        ]
+        "meter": ["main_elec"]
       },
       "type": null
     }
@@ -1718,18 +1466,13 @@
         "props": {
           "is_secure": true,
           "is_unsecure": false,
-          "out_services": [
-            "out_bin_switch",
-            "out_lvl_switch"
-          ]
+          "out_services": ["out_bin_switch", "out_lvl_switch"]
         }
       },
       "battery": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:battery/ad:8_1",
         "enabled": true,
-        "intf": [
-          "evt.lvl.report"
-        ],
+        "intf": ["evt.lvl.report"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
@@ -1738,9 +1481,7 @@
       "indicator_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:8_1",
         "enabled": true,
-        "intf": [
-          "cmd.indicator.set_visual_element"
-        ],
+        "intf": ["cmd.indicator.set_visual_element"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
@@ -1749,26 +1490,19 @@
       "scene_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:scene_ctrl/ad:8_1",
         "enabled": true,
-        "intf": [
-          "evt.scene.report"
-        ],
+        "intf": ["evt.scene.report"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
         }
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 161,
     "type": {
       "subtype": "scene",
       "supported": {
-        "input": [
-          "scene"
-        ]
+        "input": ["scene"]
       },
       "type": "input"
     }
@@ -1797,16 +1531,11 @@
       "out_bin_switch": {
         "addr": "/rt:dev/rn:flow/ad:1/sv:out_bin_switch/ad:oYinQN8bgwxeDt9_0",
         "enabled": true,
-        "intf": [
-          "cmd.binary.set"
-        ],
+        "intf": ["cmd.binary.set"],
         "props": {}
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 165,
     "type": {
       "subtype": null,
@@ -1847,16 +1576,11 @@
       "out_bin_switch": {
         "addr": "/rt:dev/rn:flow/ad:1/sv:out_bin_switch/ad:tfnGPTUArLR0Vzs_0",
         "enabled": true,
-        "intf": [
-          "cmd.binary.set"
-        ],
+        "intf": ["cmd.binary.set"],
         "props": {}
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 166,
     "type": {
       "subtype": null,
@@ -1899,9 +1623,7 @@
       "indicator_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:1_1",
         "enabled": true,
-        "intf": [
-          "cmd.indicator.set_visual_element"
-        ],
+        "intf": ["cmd.indicator.set_visual_element"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
@@ -1924,16 +1646,8 @@
           "is_secure": true,
           "is_unsecure": false,
           "serial_number": "6970631401991295",
-          "sup_extended_vals": [
-            "u1",
-            "i1",
-            "p_import_react",
-            "p_export_react"
-          ],
-          "sup_units": [
-            "kWh",
-            "W"
-          ]
+          "sup_extended_vals": ["u1", "i1", "p_import_react", "p_export_react"],
+          "sup_units": ["kWh", "W"]
         }
       },
       "ota": {
@@ -1952,30 +1666,21 @@
       "sensor_temp": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_temp/ad:1_1",
         "enabled": true,
-        "intf": [
-          "evt.sensor.report"
-        ],
+        "intf": ["evt.sensor.report"],
         "props": {
           "is_secure": true,
           "is_unsecure": false,
-          "sup_units": [
-            "C"
-          ],
+          "sup_units": ["C"],
           "thing_role": "main"
         }
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 167,
     "type": {
       "subtype": null,
       "supported": {
-        "meter": [
-          "main_elec"
-        ]
+        "meter": ["main_elec"]
       },
       "type": "meter"
     }
@@ -2008,9 +1713,7 @@
         "enabled": true,
         "intf": [],
         "props": {
-          "in_services": [
-            "out_bin_switch"
-          ],
+          "in_services": ["out_bin_switch"],
           "is_secure": true,
           "is_unsecure": false
         }
@@ -2018,9 +1721,7 @@
       "indicator_ctrl": {
         "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:13_2",
         "enabled": true,
-        "intf": [
-          "cmd.indicator.set_visual_element"
-        ],
+        "intf": ["cmd.indicator.set_visual_element"],
         "props": {
           "is_secure": true,
           "is_unsecure": false
@@ -2052,10 +1753,7 @@
             "p_export_react",
             "p_export"
           ],
-          "sup_units": [
-            "kWh",
-            "W"
-          ]
+          "sup_units": ["kWh", "W"]
         }
       },
       "ota": {
@@ -2082,10 +1780,7 @@
         "props": {}
       }
     },
-    "supports": [
-      "clear",
-      "poll"
-    ],
+    "supports": ["clear", "poll"],
     "thing": 168,
     "type": {
       "subtype": null,

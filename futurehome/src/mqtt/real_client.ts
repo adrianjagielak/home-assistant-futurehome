@@ -8,16 +8,23 @@ export class RealMqttClient implements IMqttClient {
     this.client = {} as MqttClient; // gets initialized in connect()
   }
 
-  connect(url: string, options: {
-    port: number;
-    username: string;
-    password: string;
-    protocolVersion: 4;
-  }): void {
+  connect(
+    url: string,
+    options: {
+      port: number;
+      username: string;
+      password: string;
+      protocolVersion: 4;
+    },
+  ): void {
     this.client = connect(url, options);
   }
 
-  subscribe(topicObject: string, opts?: { qos: 0 | 1 | 2 }, callback?: (err: Error | null) => void): void;
+  subscribe(
+    topicObject: string,
+    opts?: { qos: 0 | 1 | 2 },
+    callback?: (err: Error | null) => void,
+  ): void;
   subscribe(topic: string, opts?: any, callback?: any): void {
     if (opts) {
       this.client.subscribe(topic, opts, callback);
@@ -26,10 +33,14 @@ export class RealMqttClient implements IMqttClient {
     }
   }
 
-  publish(topic: string, value: string, options: {
-    retain?: boolean;
-    qos: 0 | 1 | 2;
-  }): void {
+  publish(
+    topic: string,
+    value: string,
+    options: {
+      retain?: boolean;
+      qos: 0 | 1 | 2;
+    },
+  ): void {
     this.client.publish(topic, value, options);
   }
 

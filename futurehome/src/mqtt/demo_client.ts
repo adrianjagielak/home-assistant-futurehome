@@ -11,26 +11,37 @@ export class DemoFimpMqttClient implements IMqttClient {
   private onceConnectHandlers: (() => void)[] = [];
   private onceErrorHandlers: OnErrorCallback[] = [];
 
-  connect(_url: string, _options: {
-    port: number;
-    username: string;
-    password: string;
-    protocolVersion: 4;
-  }): void {
+  connect(
+    _url: string,
+    _options: {
+      port: number;
+      username: string;
+      password: string;
+      protocolVersion: 4;
+    },
+  ): void {
     setTimeout(() => {
       this.onceConnectHandlers.forEach((h) => h());
     }, 100);
   }
 
-  subscribe(topicObject: string, opts?: { qos: 0 | 1 | 2 }, callback?: (err: Error | null) => void): void;
-  subscribe(_topic: string, _opts?: any, _callback?: any): void { }
+  subscribe(
+    topicObject: string,
+    opts?: { qos: 0 | 1 | 2 },
+    callback?: (err: Error | null) => void,
+  ): void;
+  subscribe(_topic: string, _opts?: any, _callback?: any): void {}
 
-  publish(topic: string, value: string, _options: {
-    retain?: boolean;
-    qos: 0 | 1 | 2;
-  }): void {
+  publish(
+    topic: string,
+    value: string,
+    _options: {
+      retain?: boolean;
+      qos: 0 | 1 | 2;
+    },
+  ): void {
     setTimeout(() => {
-      const msg = JSON.parse(value)
+      const msg = JSON.parse(value);
 
       const sendResponse = (response: FimpResponse) => {
         response.corid = response.corid ?? msg.uid;
@@ -38,14 +49,35 @@ export class DemoFimpMqttClient implements IMqttClient {
         for (const handler of this.messageHandlers) {
           handler(topic, buffer, { retain: false } as any);
         }
-      }
+      };
 
-      if (msg.serv == 'vinculum' && msg.type == 'cmd.pd7.request' && msg.val?.param?.components?.includes('house')) {
-        sendResponse({ type: 'evt.pd7.response', val: { param: { house: { hubId: '000000004c38b232' } } } })
-      } else if (msg.serv == 'vinculum' && msg.type == 'cmd.pd7.request' && msg.val?.param?.components?.includes('device')) {
-        sendResponse({ type: 'evt.pd7.response', val: { param: { device: demo_data__device } } });
-      } else if (msg.serv == 'vinculum' && msg.type == 'cmd.pd7.request' && msg.val?.param?.components?.includes('state')) {
-        sendResponse({ type: 'evt.pd7.response', val: { param: { state: { devices: demo_data__state } } } })
+      if (
+        msg.serv == 'vinculum' &&
+        msg.type == 'cmd.pd7.request' &&
+        msg.val?.param?.components?.includes('house')
+      ) {
+        sendResponse({
+          type: 'evt.pd7.response',
+          val: { param: { house: { hubId: '000000004c38b232' } } },
+        });
+      } else if (
+        msg.serv == 'vinculum' &&
+        msg.type == 'cmd.pd7.request' &&
+        msg.val?.param?.components?.includes('device')
+      ) {
+        sendResponse({
+          type: 'evt.pd7.response',
+          val: { param: { device: demo_data__device } },
+        });
+      } else if (
+        msg.serv == 'vinculum' &&
+        msg.type == 'cmd.pd7.request' &&
+        msg.val?.param?.components?.includes('state')
+      ) {
+        sendResponse({
+          type: 'evt.pd7.response',
+          val: { param: { state: { devices: demo_data__state } } },
+        });
       }
     }, 100);
   }

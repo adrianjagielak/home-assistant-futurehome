@@ -274,7 +274,8 @@ export function haPublishDevice(parameters: {
     },
     origin: {
       name: 'futurehome',
-      support_url: 'https://github.com/adrianjagielak/home-assistant-futurehome',
+      support_url:
+        'https://github.com/adrianjagielak/home-assistant-futurehome',
     },
     components: components,
     state_topic: stateTopic,
@@ -283,7 +284,10 @@ export function haPublishDevice(parameters: {
   };
 
   log.debug(`Publishing HA device "${configTopic}"`);
-  ha?.publish(configTopic, JSON.stringify(abbreviateHaMqttKeys(config)), { retain: true, qos: 2 });
+  ha?.publish(configTopic, JSON.stringify(abbreviateHaMqttKeys(config)), {
+    retain: true,
+    qos: 2,
+  });
 
   return { commandHandlers: handlers };
 }

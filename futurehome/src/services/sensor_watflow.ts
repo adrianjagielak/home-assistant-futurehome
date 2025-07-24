@@ -1,10 +1,13 @@
-import { VinculumPd7Device, VinculumPd7Service } from "../fimp/vinculum_pd7_device";
-import { ServiceComponentsCreationResult } from "../ha/publish_device";
+import {
+  VinculumPd7Device,
+  VinculumPd7Service,
+} from '../fimp/vinculum_pd7_device';
+import { ServiceComponentsCreationResult } from '../ha/publish_device';
 
 export function sensor_watflow__components(
   topicPrefix: string,
   device: VinculumPd7Device,
-  svc: VinculumPd7Service
+  svc: VinculumPd7Service,
 ): ServiceComponentsCreationResult | undefined {
   const device_class = 'volume_flow_rate';
   const unit = svc.props?.sup_units?.[0] ?? 'l/h';
@@ -18,6 +21,6 @@ export function sensor_watflow__components(
         unit_of_measurement: unit,
         value_template: `{{ value_json['${svc.addr}'].sensor }}`,
       },
-    }
+    },
   };
 }

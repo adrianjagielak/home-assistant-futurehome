@@ -9,26 +9,29 @@
 //   temperature_command_topic → cmd.setpoint.set
 // ─────────────────────────────────────────────────────────────────────────
 
-import { sendFimpMsg } from "../fimp/fimp";
-import { VinculumPd7Device, VinculumPd7Service } from "../fimp/vinculum_pd7_device";
-import { ClimateComponent } from "../ha/mqtt_components/climate";
+import { sendFimpMsg } from '../fimp/fimp';
+import {
+  VinculumPd7Device,
+  VinculumPd7Service,
+} from '../fimp/vinculum_pd7_device';
+import { ClimateComponent } from '../ha/mqtt_components/climate';
 import {
   CommandHandlers,
   ServiceComponentsCreationResult,
-} from "../ha/publish_device";
-import { haGetCachedState } from "../ha/update_state";
+} from '../ha/publish_device';
+import { haGetCachedState } from '../ha/update_state';
 
 export function thermostat__components(
   topicPrefix: string,
   _device: VinculumPd7Device,
-  svc: VinculumPd7Service
+  svc: VinculumPd7Service,
 ): ServiceComponentsCreationResult | undefined {
   const supModes: string[] = svc.props?.sup_modes ?? [];
   const supSetpoints: string[] = svc.props?.sup_setpoints ?? [];
 
   if (!supModes.length) return undefined; // nothing useful to expose
 
-  const defaultSpType = supSetpoints[0] ?? "heat";
+  const defaultSpType = supSetpoints[0] ?? 'heat';
 
   const ranges: Record<string, { min?: number; max?: number }> =
     svc.props?.sup_temperatures ?? {};
@@ -82,9 +85,9 @@ export function thermostat__components(
       if (!supModes.includes(payload)) return;
       await sendFimpMsg({
         address: svc.addr!,
-        service: "thermostat",
-        cmd: "cmd.mode.set",
-        val_t: "string",
+        service: 'thermostat',
+        cmd: 'cmd.mode.set',
+        val_t: 'string',
         val: payload,
       });
     },
@@ -95,13 +98,15 @@ export function thermostat__components(
 
       await sendFimpMsg({
         address: svc.addr!,
-        service: "thermostat",
-        cmd: "cmd.setpoint.set",
-        val_t: "str_map",
+        service: 'thermostat',
+        cmd: 'cmd.setpoint.set',
+        val_t: 'str_map',
         val: {
-          type: haGetCachedState({ topic: `${topicPrefix}/state` })?.[svc.addr]?.mode ?? defaultSpType,
+          type:
+            haGetCachedState({ topic: `${topicPrefix}/state` })?.[svc.addr]
+              ?.mode ?? defaultSpType,
           temp: payload,
-          unit: "C",
+          unit: 'C',
         },
       });
     },

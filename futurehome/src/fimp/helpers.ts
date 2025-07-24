@@ -1,10 +1,12 @@
 /// Returns the adapter address of the device associated with the given service address.
 /// The service address may belong to any service on the device.
-export function adapterAddressFromServiceAddress(serviceAddress: string): string {
+export function adapterAddressFromServiceAddress(
+  serviceAddress: string,
+): string {
   const parts = serviceAddress.split('/');
 
   if (parts.length < 4) {
-    throw new Error("Invalid address format");
+    throw new Error('Invalid address format');
   }
 
   const adapterPart = parts[2]; // e.g., "rn:zigbee"
@@ -16,11 +18,13 @@ export function adapterAddressFromServiceAddress(serviceAddress: string): string
 
 /// Returns the adapter service name of the device associated with the given service address.
 /// The service address may belong to any service on the device.
-export function adapterServiceFromServiceAddress(serviceAddress: string): string {
+export function adapterServiceFromServiceAddress(
+  serviceAddress: string,
+): string {
   const parts = serviceAddress.split('/');
 
   if (parts.length < 3) {
-    throw new Error("Invalid address format");
+    throw new Error('Invalid address format');
   }
 
   const adapterPart = parts[2]; // e.g., "rn:zigbee"
@@ -31,5 +35,4 @@ export function adapterServiceFromServiceAddress(serviceAddress: string): string
   }
 
   return adapterName;
-
 }

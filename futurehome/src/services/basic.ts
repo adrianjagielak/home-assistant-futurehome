@@ -7,14 +7,17 @@
 //   command_topic → cmd.lvl.set
 // ───────────────────────────────────────────────────────────────
 
-import { sendFimpMsg } from "../fimp/fimp";
-import { VinculumPd7Device, VinculumPd7Service } from "../fimp/vinculum_pd7_device";
-import { ServiceComponentsCreationResult } from "../ha/publish_device";
+import { sendFimpMsg } from '../fimp/fimp';
+import {
+  VinculumPd7Device,
+  VinculumPd7Service,
+} from '../fimp/vinculum_pd7_device';
+import { ServiceComponentsCreationResult } from '../ha/publish_device';
 
 export function basic__components(
   topicPrefix: string,
   _device: VinculumPd7Device,
-  svc: VinculumPd7Service
+  svc: VinculumPd7Service,
 ): ServiceComponentsCreationResult | undefined {
   // MQTT topic that HA will publish commands to
   const cmdTopic = `${topicPrefix}${svc.addr}/command`;
@@ -45,9 +48,9 @@ export function basic__components(
 
         await sendFimpMsg({
           address: svc.addr!,
-          service: "basic",
-          cmd: "cmd.lvl.set",
-          val_t: "int",
+          service: 'basic',
+          cmd: 'cmd.lvl.set',
+          val_t: 'int',
           val: lvl,
         });
       },

@@ -8,7 +8,20 @@ export type VinculumPd7Device = {
   model?: string | null;
   // "Model alias", e.g. "TS0202"
   modelAlias?: string | null;
-  functionality?: 'appliance' | 'climate' | 'energy' | 'ev_charger' | 'lighting' | 'media' | 'other' | 'power' | 'safety' | 'security' | 'shading' | string | null;
+  functionality?:
+    | 'appliance'
+    | 'climate'
+    | 'energy'
+    | 'ev_charger'
+    | 'lighting'
+    | 'media'
+    | 'other'
+    | 'power'
+    | 'safety'
+    | 'security'
+    | 'shading'
+    | string
+    | null;
   services?: Record<string, VinculumPd7Service> | null;
   type?: {
     // User-defined device type (e.g. "sensor", "chargepoint", or "light")

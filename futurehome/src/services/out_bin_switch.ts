@@ -1,11 +1,14 @@
-import { sendFimpMsg } from "../fimp/fimp";
-import { VinculumPd7Device, VinculumPd7Service } from "../fimp/vinculum_pd7_device";
-import { ServiceComponentsCreationResult } from "../ha/publish_device";
+import { sendFimpMsg } from '../fimp/fimp';
+import {
+  VinculumPd7Device,
+  VinculumPd7Service,
+} from '../fimp/vinculum_pd7_device';
+import { ServiceComponentsCreationResult } from '../ha/publish_device';
 
 export function out_bin_switch__components(
   topicPrefix: string,
   device: VinculumPd7Device,
-  svc: VinculumPd7Service
+  svc: VinculumPd7Service,
 ): ServiceComponentsCreationResult | undefined {
   const commandTopic = `${topicPrefix}${svc.addr}/command`;
 
@@ -29,6 +32,6 @@ export function out_bin_switch__components(
           val_t: 'bool',
         });
       },
-    }
+    },
   };
 }
