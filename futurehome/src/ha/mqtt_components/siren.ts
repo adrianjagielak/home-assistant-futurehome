@@ -17,7 +17,17 @@ export interface SirenComponent {
    * If two sirens have the same unique ID, Home Assistant will raise an exception.
    * Required when used with device-based discovery.
    */
-  unique_id?: string;
+  unique_id: string;
+
+  /**
+   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
+   */
+  entity_category?: string;
+
+  /**
+   * Picture URL for the entity.
+   */
+  entity_picture?: string;
 
   /**
    * List of available tones the siren supports. When configured, this enables the support for setting a `tone` and enables the `tone` state attribute.
@@ -50,16 +60,6 @@ export interface SirenComponent {
    * Default: "utf-8"
    */
   encoding?: string;
-
-  /**
-   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
-   */
-  entity_category?: string;
-
-  /**
-   * Picture URL for the entity.
-   */
-  entity_picture?: string;
 
   /**
    * [Icon](https://www.home-assistant.io/docs/configuration/customizing-devices/#icon) for the entity.

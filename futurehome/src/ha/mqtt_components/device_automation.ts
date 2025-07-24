@@ -26,6 +26,16 @@ export interface DeviceAutomationComponent {
   unique_id: string;
 
   /**
+   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
+   */
+  entity_category?: string;
+
+  /**
+   * Picture URL for the entity.
+   */
+  entity_picture?: string;
+
+  /**
    * The type of automation, must be 'trigger'.
    */
   automation_type: 'trigger';

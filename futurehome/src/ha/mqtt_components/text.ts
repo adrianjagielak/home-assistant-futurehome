@@ -19,7 +19,17 @@ export interface TextComponent {
    * If two text entities have the same unique ID, Home Assistant will raise an exception.
    * Required when used with device-based discovery.
    */
-  unique_id?: string;
+  unique_id: string;
+
+  /**
+   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
+   */
+  entity_category?: string;
+
+  /**
+   * Picture URL for the entity.
+   */
+  entity_picture?: string;
 
   /**
    * The MQTT topic to publish the text value that is set.
@@ -93,16 +103,6 @@ export interface TextComponent {
    * Default: true
    */
   enabled_by_default?: boolean;
-
-  /**
-   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
-   */
-  entity_category?: string;
-
-  /**
-   * Picture URL for the entity.
-   */
-  entity_picture?: string;
 
   /**
    * Defines a [template](https://www.home-assistant.io/docs/configuration/templating/#using-value-templates-with-mqtt)

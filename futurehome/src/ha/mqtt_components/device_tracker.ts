@@ -22,6 +22,16 @@ export interface DeviceTrackerComponent {
   unique_id: string;
 
   /**
+   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
+   */
+  entity_category?: string;
+
+  /**
+   * Picture URL for the entity.
+   */
+  entity_picture?: string;
+
+  /**
    * The MQTT topic subscribed to receive device tracker state changes.
    * The states defined in `state_topic` override the location states defined by the `json_attributes_topic`.
    * This state override is turned inactive if the `state_topic` receives a message containing `payload_reset`.

@@ -24,6 +24,16 @@ export interface EventComponent {
   unique_id: string;
 
   /**
+   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
+   */
+  entity_category?: string;
+
+  /**
+   * Picture URL for the entity.
+   */
+  entity_picture?: string;
+
+  /**
    * The MQTT topic subscribed to receive JSON event payloads.
    * The JSON payload should contain the `event_type` element.
    * The event type should be one of the configured `event_types`.
@@ -53,16 +63,6 @@ export interface EventComponent {
    * Default: "utf-8"
    */
   encoding?: string;
-
-  /**
-   * The [category](https://developers.home-assistant.io/docs/core/entity/#generic-properties) of the entity.
-   */
-  entity_category?: string;
-
-  /**
-   * Picture URL for the entity.
-   */
-  entity_picture?: string;
 
   /**
    * Defines a [template](https://www.home-assistant.io/docs/configuration/templating/#using-value-templates-with-mqtt)

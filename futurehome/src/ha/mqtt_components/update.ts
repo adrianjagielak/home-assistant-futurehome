@@ -18,7 +18,17 @@ export interface UpdateComponent {
    * An ID that uniquely identifies this update entity.
    * If two update entities have the same unique ID, Home Assistant will raise an exception.
    */
-  unique_id?: string;
+  unique_id: string;
+
+  /**
+   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
+   */
+  entity_category?: string;
+
+  /**
+   * Picture URL for the entity.
+   */
+  entity_picture?: string;
 
   /**
    * The MQTT topic subscribed to receive state updates.
@@ -79,16 +89,6 @@ export interface UpdateComponent {
    * Default: "utf-8"
    */
   encoding?: string;
-
-  /**
-   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
-   */
-  entity_category?: string;
-
-  /**
-   * Picture URL for the entity.
-   */
-  entity_picture?: string;
 
   /**
    * [Icon](https://www.home-assistant.io/docs/configuration/customizing-devices/#icon) for the entity.

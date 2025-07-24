@@ -27,6 +27,16 @@ export interface AlarmControlPanelComponent {
   unique_id: string;
 
   /**
+   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
+   */
+  entity_category?: string;
+
+  /**
+   * Picture URL for the entity.
+   */
+  entity_picture?: string;
+
+  /**
    * The MQTT topic subscribed to receive state updates.
    * A `None` payload resets to an `unknown` state.
    * An empty payload is ignored.
@@ -88,16 +98,6 @@ export interface AlarmControlPanelComponent {
    * Default: "utf-8"
    */
   encoding?: string;
-
-  /**
-   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
-   */
-  entity_category?: string;
-
-  /**
-   * Picture URL for the entity.
-   */
-  entity_picture?: string;
 
   /**
    * [Icon](https://www.home-assistant.io/docs/configuration/customizing-devices/#icon) for the entity.

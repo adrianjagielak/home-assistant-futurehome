@@ -1,6 +1,11 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
 
+## 0.1.1 (24.07.2025)
+
+- Set 'battery' entity category to 'diagnostic' to hide it from the main HA view.
+- Do not expose 'battery' entity twice if it supports both level and low/high binary state.
+
 ## 0.1.0 (24.07.2025)
 
 **Initial stable release**

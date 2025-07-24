@@ -23,7 +23,17 @@ export interface ImageComponent {
    * If two images have the same unique ID Home Assistant will raise an exception.
    * Required when used with device-based discovery.
    */
-  unique_id?: string;
+  unique_id: string;
+
+  /**
+   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
+   */
+  entity_category?: string;
+
+  /**
+   * Picture URL for the entity.
+   */
+  entity_picture?: string;
 
   /**
    * The MQTT topic to subscribe to receive the image payload of the image to be downloaded.
@@ -100,90 +110,7 @@ export interface ImageComponent {
   json_attributes_template?: string;
 
   /**
-   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
-   */
-  entity_category?: string;
-
-  /**
-   * Picture URL for the entity.
-   */
-  entity_picture?: string;
-
-  /**
    * [Icon](https://www.home-assistant.io/docs/configuration/customizing-devices/#icon) for the entity.
    */
   icon?: string;
-
-  /**
-   * Information about the device this image is a part of to tie it into the [device registry](https://developers.home-assistant.io/docs/en/device_registry_index.html).
-   * Only works through [MQTT discovery](https://www.home-assistant.io/integrations/mqtt/#mqtt-discovery) and when [`unique_id`](#unique_id) is set.
-   * At least one of identifiers or connections must be present to identify the device.
-   */
-  device?: {
-    /**
-     * A link to the webpage that can manage the configuration of this device.
-     * Can be either an `http://`, `https://` or an internal `homeassistant://` URL.
-     */
-    configuration_url?: string;
-
-    /**
-     * A list of connections of the device to the outside world as a list of tuples `[connection_type, connection_identifier]`.
-     * For example the MAC address of a network interface:
-     * `"connections": [["mac", "02:5b:26:a8:dc:12"]]`.
-     */
-    connections?: Array<[string, string]>;
-
-    /**
-     * The hardware version of the device.
-     */
-    hw_version?: string;
-
-    /**
-     * A list of IDs that uniquely identify the device.
-     * For example a serial number.
-     */
-    identifiers?: string[];
-
-    /**
-     * The manufacturer of the device.
-     */
-    manufacturer?: string;
-
-    /**
-     * The model of the device.
-     */
-    model?: string;
-
-    /**
-     * The model identifier of the device.
-     */
-    model_id?: string;
-
-    /**
-     * The name of the device.
-     */
-    name?: string;
-
-    /**
-     * The serial number of the device.
-     */
-    serial_number?: string;
-
-    /**
-     * Suggest an area if the device isn’t in one yet.
-     */
-    suggested_area?: string;
-
-    /**
-     * The firmware version of the device.
-     */
-    sw_version?: string;
-
-    /**
-     * Identifier of a device that routes messages between this device and Home Assistant.
-     * Examples of such devices are hubs, or parent devices of a sub-device.
-     * This is used to show device topology in Home Assistant.
-     */
-    via_device?: string;
-  };
 }

@@ -21,6 +21,16 @@ export interface ClimateComponent {
   unique_id: string;
 
   /**
+   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
+   */
+  entity_category?: string;
+
+  /**
+   * Picture URL for the entity.
+   */
+  entity_picture?: string;
+
+  /**
    * A template to render the value received on the `action_topic` with.
    */
   action_template?: string;
@@ -58,79 +68,6 @@ export interface ClimateComponent {
   current_temperature_topic?: string;
 
   /**
-   * Information about the device this HVAC device is a part of to tie it into the [device registry](https://developers.home-assistant.io/docs/en/device_registry_index.html).
-   * Only works when [`unique_id`](#unique_id) is set.
-   * At least one of identifiers or connections must be present to identify the device.
-   */
-  device?: {
-    /**
-     * A link to the webpage that can manage the configuration of this device.
-     * Can be either an `http://`, `https://` or an internal `homeassistant://` URL.
-     */
-    configuration_url?: string;
-
-    /**
-     * A list of connections of the device to the outside world as a list of tuples `[connection_type, connection_identifier]`.
-     * For example the MAC address of a network interface:
-     * `"connections": [["mac", "02:5b:26:a8:dc:12"]]`.
-     */
-    connections?: Array<[string, string]>;
-
-    /**
-     * The hardware version of the device.
-     */
-    hw_version?: string;
-
-    /**
-     * A list of IDs that uniquely identify the device.
-     * For example a serial number.
-     */
-    identifiers?: string[];
-
-    /**
-     * The manufacturer of the device.
-     */
-    manufacturer?: string;
-
-    /**
-     * The model of the device.
-     */
-    model?: string;
-
-    /**
-     * The model identifier of the device.
-     */
-    model_id?: string;
-
-    /**
-     * The name of the device.
-     */
-    name?: string;
-
-    /**
-     * The serial number of the device.
-     */
-    serial_number?: string;
-
-    /**
-     * Suggest an area if the device isn’t in one yet.
-     */
-    suggested_area?: string;
-
-    /**
-     * The firmware version of the device.
-     */
-    sw_version?: string;
-
-    /**
-     * Identifier of a device that routes messages between this device and Home Assistant.
-     * Examples of such devices are hubs, or parent devices of a sub-device.
-     * This is used to show device topology in Home Assistant.
-     */
-    via_device?: string;
-  };
-
-  /**
    * Flag which defines if the entity should be enabled when first added.
    * Default: true.
    */
@@ -142,16 +79,6 @@ export interface ClimateComponent {
    * Default: "utf-8"
    */
   encoding?: string;
-
-  /**
-   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
-   */
-  entity_category?: string;
-
-  /**
-   * Picture URL for the entity.
-   */
-  entity_picture?: string;
 
   /**
    * A template to render the value sent to the `fan_mode_command_topic` with.

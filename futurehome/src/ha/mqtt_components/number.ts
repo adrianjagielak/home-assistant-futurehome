@@ -21,7 +21,17 @@ export interface NumberComponent {
    * If two number entities have the same unique ID Home Assistant will raise an exception.
    * Required when used with device-based discovery.
    */
-  unique_id?: string;
+  unique_id: string;
+
+  /**
+   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
+   */
+  entity_category?: string;
+
+  /**
+   * Picture URL for the entity.
+   */
+  entity_picture?: string;
 
   /**
    * The MQTT topic to publish commands to change the number.
@@ -91,16 +101,6 @@ export interface NumberComponent {
    * Default: "utf-8"
    */
   encoding?: string;
-
-  /**
-   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
-   */
-  entity_category?: string;
-
-  /**
-   * Picture URL for the entity.
-   */
-  entity_picture?: string;
 
   /**
    * [Icon](https://www.home-assistant.io/docs/configuration/customizing-devices/#icon) for the entity.
