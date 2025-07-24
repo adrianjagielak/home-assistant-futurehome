@@ -7,6 +7,7 @@
 - Updated demo mode data.
 - Added extracting device manufacturer name.
 - Updated 'thermostat' service implementation.
+- Added logic to skip redundant services already represented by higher-level entities (e.g., sensor_temp/thermostat, sensor_wattemp/water_heater).
 
 ## 0.1.1 (24.07.2025)
 

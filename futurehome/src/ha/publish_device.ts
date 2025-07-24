@@ -213,6 +213,38 @@ const serviceHandlers: {
   water_heater: water_heater__components,
 };
 
+// Defines service exclusions based on higher-level MQTT entity types.
+// For example, if a device has a `thermostat` service, we skip `sensor_temp`
+// because the thermostat component itself already reads and exposes the
+// temperature internally. Similarly, `sensor_wattemp` is skipped when
+// `water_heater` is present to avoid creating redundant entities.
+const serviceExclusionMap: Record<string, string[]> = {
+  sensor_temp: ['thermostat'],
+  sensor_wattemp: ['water_heater'],
+};
+
+/**
+ * Determines whether a given service should be published as a separate entity.
+ *
+ * Certain services (e.g., `sensor_temp`) are excluded when higher-level
+ * services (e.g., `thermostat`) are present, because those higher-level
+ * services already consume the lower-level state and expose it through
+ * their own MQTT entities.
+ *
+ * @param svcName - The name of the service being evaluated.
+ * @param services - A map of all services available for the device.
+ * @returns `true` if the service should be published, `false` if it is excluded.
+ */
+function shouldPublishService(
+  svcName: string,
+  services: { [name: string]: VinculumPd7Service },
+): boolean {
+  const exclusions = serviceExclusionMap[svcName];
+  if (!exclusions) return true;
+
+  return !exclusions.some((excludedService) => excludedService in services);
+}
+
 export function haPublishDevice(parameters: {
   hubId: string;
   demoMode: boolean;
@@ -235,6 +267,18 @@ export function haPublishDevice(parameters: {
       continue;
     }
     if (!svc.enabled) {
+      continue;
+    }
+    // Skip publishing services that are already represented by higher-level MQTT entities
+    if (
+      !shouldPublishService(
+        svcName,
+        parameters.vinculumDeviceData.services ?? {},
+      )
+    ) {
+      log.debug(
+        `Skipping service ${svcName} because a higher-level service handles its data`,
+      );
       continue;
     }
 
