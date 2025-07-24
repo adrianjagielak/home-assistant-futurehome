@@ -6,6 +6,7 @@
 - Set 'battery' entity category to 'diagnostic' to hide it from the main HA view.
 - Do not expose 'battery' entity twice if it supports both level and low/high binary state.
 - Changed the default 'sensor_lumin' unit from 'Lux' to 'lx'.
+- Added support for 'indicator_ctrl' service (identify devices).
 
 # 0.1.0 (24.07.2025)
 

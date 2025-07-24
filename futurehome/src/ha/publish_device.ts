@@ -8,6 +8,7 @@ import { basic__components } from '../services/basic';
 import { battery__components } from '../services/battery';
 import { color_ctrl__components } from '../services/color_ctrl';
 import { fan_ctrl__components } from '../services/fan_ctrl';
+import { indicator_ctrl__components } from '../services/indicator_ctrl';
 import { out_bin_switch__components } from '../services/out_bin_switch';
 import { out_lvl_switch__components } from '../services/out_lvl_switch';
 import { scene_ctrl__components } from '../services/scene_ctrl';
@@ -161,6 +162,7 @@ const serviceHandlers: {
   battery: battery__components,
   color_ctrl: color_ctrl__components,
   fan_ctrl: fan_ctrl__components,
+  indicator_ctrl: indicator_ctrl__components,
   out_bin_switch: out_bin_switch__components,
   out_lvl_switch: out_lvl_switch__components,
   scene_ctrl: scene_ctrl__components,

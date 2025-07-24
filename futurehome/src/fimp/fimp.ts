@@ -43,6 +43,7 @@ export async function sendFimpMsg({
   cmd,
   val,
   val_t,
+  props = {},
   timeoutMs = 10000,
 }: {
   address: string;
@@ -50,6 +51,7 @@ export async function sendFimpMsg({
   cmd: string;
   val: unknown;
   val_t: FimpValueType;
+  props?: any;
   timeoutMs?: number;
 }): Promise<FimpResponse> {
   const uid = uuidv4();
@@ -57,7 +59,7 @@ export async function sendFimpMsg({
   const message = JSON.stringify({
     corid: null,
     ctime: new Date().toISOString(),
-    props: {},
+    props: props,
     resp_to: 'pt:j1/mt:rsp/rt:app/rn:ha-futurehome/ad:addon',
     serv: service,
     src: 'ha-futurehome',

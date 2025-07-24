@@ -28,7 +28,7 @@ export function scene_ctrl__components(
   svc: VinculumPd7Service,
 ): ServiceComponentsCreationResult | undefined {
   const components: Record<string, HaMqttComponent> = {};
-  const handlers: CommandHandlers = {};
+  const commandHandlers: CommandHandlers = {};
 
   // ───────────── read-only entities ─────────────
   if (svc.intf?.includes('evt.scene.report')) {
@@ -63,7 +63,7 @@ export function scene_ctrl__components(
       value_template: `{{ value_json['${svc.addr}'].scene }}`,
     };
 
-    handlers[commandTopic] = async (payload: string) => {
+    commandHandlers[commandTopic] = async (payload: string) => {
       if (!supScenes.includes(payload)) return; // ignore bogus payloads
 
       await sendFimpMsg({
@@ -81,6 +81,6 @@ export function scene_ctrl__components(
 
   return {
     components,
-    commandHandlers: Object.keys(handlers).length ? handlers : undefined,
+    commandHandlers,
   };
 }

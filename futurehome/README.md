@@ -156,15 +156,15 @@ todo: links to the .ts service implementations below
 
 ## System or meta, not essential services
 
-| Service | Implementation status |
-| --- | --- |
-| gateway | |
-| association | |
-| diagnostic | |
-| indicator_ctrl | |
-| ota | |
-| parameters | |
-| technology_specific | |
-| time | |
-| version | |
-| dev_sys | |
+| Service | Implementation status | Description |
+| --- | --- | --- |
+| gateway | | |
+| association | | |
+| diagnostic | | |
+| indicator_ctrl | ✅ | Identify devices |
+| ota | | |
+| parameters | | |
+| technology_specific | | |
+| time | | |
+| version | | |
+| dev_sys | | |
