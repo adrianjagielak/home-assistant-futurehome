@@ -1,3 +1,5 @@
+import { CoverDeviceClass } from './_enums';
+
 /**
  * Represents a MQTT Cover component for Home Assistant MQTT Discovery.
  *
@@ -38,9 +40,9 @@ export interface CoverComponent {
   /**
    * Sets the [class of the device](https://www.home-assistant.io/integrations/cover/#device_class),
    * changing the device state and icon that is displayed on the frontend.
-   * The `device_class` can be `null`.
+   * The `device_class` can be `null` (generic cover).
    */
-  device_class?: string | null;
+  device_class?: CoverDeviceClass;
 
   /**
    * Flag which defines if the entity should be enabled when first added.

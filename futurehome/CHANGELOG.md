@@ -7,6 +7,7 @@
 - Do not expose 'battery' entity twice if it supports both level and low/high binary state.
 - Changed the default 'sensor_lumin' unit from 'Lux' to 'lx'.
 - Added support for 'indicator_ctrl' service (identify devices).
+- Added support for 'barrier_ctrl' service (devices like garage doors, barriers, and window shades).
 
 # 0.1.0 (24.07.2025)
 

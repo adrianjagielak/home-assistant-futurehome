@@ -238,7 +238,8 @@ import { delay } from './utils';
         case 'evt.presence.report':
         case 'evt.scene.report':
         case 'evt.sensor.report':
-        case 'evt.setpoint.report': {
+        case 'evt.setpoint.report':
+        case 'evt.state.report': {
           haUpdateStateSensorReport({
             topic,
             value: msg.val,

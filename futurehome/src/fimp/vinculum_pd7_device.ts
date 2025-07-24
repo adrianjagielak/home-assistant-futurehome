@@ -24,10 +24,48 @@ export type VinculumPd7Device = {
     | null;
   services?: Record<string, VinculumPd7Service> | null;
   type?: {
-    // User-defined device type (e.g. "sensor", "chargepoint", or "light")
-    type?: string | null;
-    // User-defined device subtype (e.g. "presence" or "car_charger")
-    subtype?: string | null;
+    // User-defined device type
+    type?:
+      | 'appliance'
+      | 'battery'
+      | 'blinds'
+      | 'boiler'
+      | 'chargepoint'
+      | 'door_lock'
+      | 'fan'
+      | 'fire_detector'
+      | 'garage_door'
+      | 'gas_detector'
+      | 'gate'
+      | 'heat_detector'
+      | 'heat_pump'
+      | 'heater'
+      | 'leak_detector'
+      | 'light'
+      | 'media_player'
+      | 'meter'
+      | 'sensor'
+      | 'siren'
+      | 'thermostat'
+      | 'input'
+      | 'water_valve'
+      | string
+      | null;
+    // User-defined device subtype
+    subtype?:
+      | 'car_charger'
+      | 'door'
+      | 'door_lock'
+      | 'garage'
+      | 'lock'
+      | 'main_elec'
+      | 'presence'
+      | 'scene'
+      | 'window'
+      | 'window_lock'
+      | 'inverter'
+      | string
+      | null;
   } | null;
 };
 

@@ -60,7 +60,7 @@ todo: links to the .ts service implementations below
 | Service | Example device | Implementation status |
 | --- | --- | --- |
 | _alarms_ services | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | |
-| barrier_ctrl | | |
+| barrier_ctrl | | ✅ |
 | basic | | ✅ |
 | battery | | ✅ |
 | chargepoint | [Futurehome Charge](https://www.futurehome.io/en_no/shop/charge) | |

@@ -4,6 +4,7 @@ import {
   VinculumPd7Service,
 } from '../fimp/vinculum_pd7_device';
 import { log } from '../logger';
+import { barrier_ctrl__components } from '../services/barrier_ctrl';
 import { basic__components } from '../services/basic';
 import { battery__components } from '../services/battery';
 import { color_ctrl__components } from '../services/color_ctrl';
@@ -158,6 +159,7 @@ const serviceHandlers: {
     svc: VinculumPd7Service,
   ) => ServiceComponentsCreationResult | undefined;
 } = {
+  barrier_ctrl: barrier_ctrl__components,
   basic: basic__components,
   battery: battery__components,
   color_ctrl: color_ctrl__components,
