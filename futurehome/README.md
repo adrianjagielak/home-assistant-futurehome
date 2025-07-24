@@ -2,8 +2,7 @@
 
 Futurehome add-on for Home Assistant. Designed to be a complete drop-in replacement for the official Futurehome app, with support for all device types compatible with the Futurehome hub.
 
-![Home Assistant screenshot](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/assets/home_assistant_screenshot_dark_mode.jpg#gh-dark-mode-only)
-![Home Assistant screenshot](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/assets/home_assistant_screenshot_light_mode.jpg#gh-light-mode-only)
+![Home Assistant screenshot](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/assets/home_assistant_screenshot_dark_mode.jpg)
 
 ## Features
 
@@ -13,11 +12,12 @@ This add-on:
 * Fetches and updates device states.
 * Fetches and updates device availability.
 * Supports interaction with devices comparable to the official Futurehome app.
+* Supports pairing of new Zigbee, Z-Wave, and Futurehome devices (work-in-progress).  
+  (If you’ve previously used third-party integrations—e.g. Philips Hue—you can still interact with those devices, as long as they're paired with the hub. However, it's generally recommended to use the appropriate Home Assistant integration directly for such devices.)
+
 <!--
 todo: pairing
 -->
-* Supports pairing of new Zigbee, Z-Wave, and Futurehome devices (work-in-progress).  
-  (If you’ve previously used third-party integrations—e.g. Philips Hue—you can still interact with those devices, as long as they're paired with the hub. However, it's generally recommended to use the appropriate Home Assistant integration directly for such devices.)
 
 ## Installation
 
