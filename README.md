@@ -10,10 +10,9 @@ Futurehome add-on for Home Assistant. Designed to be a complete drop-in replacem
 This add-on:
 
 * Fetches all device metadata from the Futurehome hub and maps them to Home Assistant devices/entities.
-* Fetches and updates device states.
-* Fetches and updates device availability.
+* Fetches and updates device states and availability in real time.
 * Supports interaction with devices comparable to the official Futurehome app.
-* Supports pairing of new Zigbee, Z-Wave, and Futurehome devices (work-in-progress).  
+* Supports pairing of new Zigbee, Z-Wave, and Futurehome devices (work-in-progress).
   (If you’ve previously used third-party integrations—e.g. Philips Hue—you can still interact with those devices, as long as they're paired with the hub. However, it's generally recommended to use the appropriate Home Assistant integration directly for such devices.)
 
 <!--
