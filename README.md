@@ -24,7 +24,7 @@ todo: pairing
 1. In the Futurehome app, go to Smarthub settings and [enable Local API](https://support.futurehome.no/hc/no/articles/360033256491-Local-API-access-over-MQTT-Beta).
 2. (Optional but highly recommended) Block the hub’s internet (WAN) access in your router settings to prevent future firmware updates.
 3. In Home Assistant, enable the **MQTT** integration.
-4. [Add this add-on repository to Home Assistant](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fadrianjagielak%2Fhome-assistant-futurehome).
+4. [Add this add-on repository to Home Assistant](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fadrianjagielak%2Fhome-assistant-futurehome) and refresh the page.
 5. Open the **Add-on Store** and search for "Futurehome".
 6. Install, configure, and start the Futurehome add-on.
 
