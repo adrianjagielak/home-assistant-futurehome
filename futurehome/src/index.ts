@@ -3,7 +3,7 @@ import { log } from './logger';
 import { FimpResponse, sendFimpMsg, setFimp } from './fimp/fimp';
 import { haCommandHandlers, setHa, setHaCommandHandlers } from './ha/globals';
 import { CommandHandlers, haPublishDevice } from './ha/publish_device';
-import { haUpdateState, haUpdateStateSensorReport } from './ha/update_state';
+import { haUpdateState, haUpdateStateValueReport } from './ha/update_state';
 import { VinculumPd7Device } from './fimp/vinculum_pd7_device';
 import { haUpdateAvailability } from './ha/update_availability';
 import { delay } from './utils';
@@ -229,25 +229,6 @@ import { delay } from './utils';
           break;
         }
 
-        case 'evt.alarm.report':
-        case 'evt.binary.report':
-        case 'evt.color.report':
-        case 'evt.lvl.report':
-        case 'evt.mode.report':
-        case 'evt.open.report':
-        case 'evt.presence.report':
-        case 'evt.scene.report':
-        case 'evt.sensor.report':
-        case 'evt.setpoint.report':
-        case 'evt.state.report': {
-          haUpdateStateSensorReport({
-            topic,
-            value: msg.val,
-            attrName: msg.type.split('.')[1],
-          });
-          break;
-        }
-
         case 'evt.network.all_nodes_report': {
           const devicesAvailability = msg.val;
           if (!devicesAvailability) {
@@ -258,6 +239,17 @@ import { delay } from './utils';
             await delay(50);
           }
           break;
+        }
+
+        default: {
+          // Handle any event that matches the pattern: evt.<something>.report
+          if (/^evt\..+\.report$/.test(msg.type ?? '')) {
+            haUpdateStateValueReport({
+              topic,
+              value: msg.val,
+              attrName: msg.type!.split('.')[1],
+            });
+          }
         }
       }
     } catch (e) {

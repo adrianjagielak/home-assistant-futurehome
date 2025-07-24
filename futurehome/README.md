@@ -120,7 +120,7 @@ todo: links to the .ts service implementations below
 | siren_ctrl | | |
 | thermostat | [Thermostat](https://www.futurehome.io/en_no/shop/thermostat-w) | ✅ |
 | user_code | | |
-| water_heater | | |
+| water_heater | | ✅ |
 
 ## Services that are deprecated, unused, or removed in newer versions of the system.
 

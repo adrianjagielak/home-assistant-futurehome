@@ -8,6 +8,7 @@
 - Changed the default 'sensor_lumin' unit from 'Lux' to 'lx'.
 - Added support for 'indicator_ctrl' service (identify devices).
 - Added support for 'barrier_ctrl' service (devices like garage doors, barriers, and window shades).
+- Added support for 'water_heater' service (devices such as water boiler or a water tank).
 
 # 0.1.0 (24.07.2025)
 
