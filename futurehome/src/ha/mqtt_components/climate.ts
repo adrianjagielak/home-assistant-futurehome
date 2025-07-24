@@ -34,56 +34,6 @@ export interface ClimateComponent {
   action_topic?: string;
 
   /**
-   * A list of MQTT topics subscribed to receive availability (online/offline) updates.
-   * Must not be used together with `availability_topic`.
-   */
-  availability?: Array<{
-    /**
-     * An MQTT topic subscribed to receive availability (online/offline) updates.
-     */
-    topic: string;
-
-    /**
-     * The payload that represents the available state.
-     * Default: "online"
-     */
-    payload_available?: string;
-
-    /**
-     * The payload that represents the unavailable state.
-     * Default: "offline"
-     */
-    payload_not_available?: string;
-
-    /**
-     * Defines a [template](https://www.home-assistant.io/docs/configuration/templating/#using-value-templates-with-mqtt)
-     * to extract device's availability from the `topic`.
-     * To determine the device's availability, result of this template will be compared to `payload_available` and `payload_not_available`.
-     */
-    value_template?: string;
-  }>;
-
-  /**
-   * When `availability` is configured, this controls the conditions needed to set the entity to `available`.
-   * Valid values: "all", "any", "latest".
-   * Default: "latest".
-   */
-  availability_mode?: 'all' | 'any' | 'latest';
-
-  /**
-   * Defines a [template](https://www.home-assistant.io/docs/configuration/templating/#using-value-templates-with-mqtt)
-   * to extract device's availability from the `availability_topic`.
-   * To determine the device's availability, result of this template will be compared to `payload_available` and `payload_not_available`.
-   */
-  availability_template?: string;
-
-  /**
-   * The MQTT topic subscribed to receive availability (online/offline) updates.
-   * Must not be used together with `availability`.
-   */
-  availability_topic?: string;
-
-  /**
    * A template with which the value received on `current_humidity_topic` will be rendered.
    */
   current_humidity_template?: string;
