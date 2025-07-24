@@ -52,6 +52,7 @@ import { sensor_watpressure__components } from '../services/sensor_watpressure';
 import { sensor_wattemp__components } from '../services/sensor_wattemp';
 import { sensor_weight__components } from '../services/sensor_weight';
 import { thermostat__components } from '../services/thermostat';
+import { abbreviateHaMqttKeys } from './abbreviate_ha_mqtt_keys';
 import { ha } from './globals';
 import { HaMqttComponent } from './mqtt_components/_component';
 
@@ -130,7 +131,7 @@ type HaDeviceConfig = {
   };
   origin: {
     name: 'futurehome';
-    url: 'https://github.com/adrianjagielak/home-assistant-futurehome';
+    support_url: 'https://github.com/adrianjagielak/home-assistant-futurehome';
   };
   components: {
     [key: string]: HaMqttComponent;
@@ -273,7 +274,7 @@ export function haPublishDevice(parameters: {
     },
     origin: {
       name: 'futurehome',
-      url: 'https://github.com/adrianjagielak/home-assistant-futurehome',
+      support_url: 'https://github.com/adrianjagielak/home-assistant-futurehome',
     },
     components: components,
     state_topic: stateTopic,
@@ -282,7 +283,7 @@ export function haPublishDevice(parameters: {
   };
 
   log.debug(`Publishing HA device "${configTopic}"`);
-  ha?.publish(configTopic, JSON.stringify(config), { retain: true, qos: 2 });
+  ha?.publish(configTopic, JSON.stringify(abbreviateHaMqttKeys(config)), { retain: true, qos: 2 });
 
   return { commandHandlers: handlers };
 }
