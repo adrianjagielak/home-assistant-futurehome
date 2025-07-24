@@ -209,6 +209,7 @@ const serviceHandlers: {
 
 export function haPublishDevice(parameters: {
   hubId: string;
+  demoMode: boolean;
   vinculumDeviceData: VinculumPd7Device;
   deviceInclusionReport: InclusionReport | undefined;
 }): { commandHandlers: CommandHandlers } {
@@ -249,7 +250,7 @@ export function haPublishDevice(parameters: {
     Object.assign(handlers, result.commandHandlers);
   }
 
-  if (demoMode) {
+  if (parameters.demoMode) {
     // Apply optimistic override
     for (const component of Object.values(components)) {
       if ((component as any).optimistic === false) {

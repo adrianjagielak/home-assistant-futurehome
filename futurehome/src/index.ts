@@ -144,6 +144,7 @@ import { delay } from './utils';
 
         const result = haPublishDevice({
           hubId,
+          demoMode,
           vinculumDeviceData,
           deviceInclusionReport,
         });
