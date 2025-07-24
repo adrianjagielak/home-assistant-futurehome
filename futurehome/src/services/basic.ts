@@ -35,7 +35,7 @@ export function basic__components(
         max: MAX_LVL,
         step: 1,
         command_topic: cmdTopic,
-        optimistic: true,
+        optimistic: false,
         value_template: `{{ value_json['${svc.addr}'].lvl }}`,
       },
     },

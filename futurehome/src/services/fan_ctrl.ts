@@ -22,7 +22,7 @@ export function fan_ctrl__components(
         unique_id: svc.addr,
         platform: 'fan',
         command_topic: commandTopic,
-        optimistic: true,
+        optimistic: false,
         preset_modes: supModes,
         preset_mode_command_topic: commandTopic,
         preset_mode_value_template: `{{ value_json['${svc.addr}'].mode }}`,

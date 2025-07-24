@@ -62,18 +62,18 @@ export function color_ctrl__components(
     // Basic on/off control
     command_topic: commandTopic,
     state_topic: stateTopic,
-    state_value_template: `{{ 'ON' if (value_json['${svc.addr}'].red > 0 or value_json['${svc.addr}'].green > 0 or value_json['${svc.addr}'].blue > 0) else 'OFF' }}`,
+    state_value_template: `{{ 'ON' if (value_json['${svc.addr}'].color.red > 0 or value_json['${svc.addr}'].color.green > 0 or value_json['${svc.addr}'].color.blue > 0) else 'OFF' }}`,
 
     // RGB color control
     rgb_command_topic: rgbCommandTopic,
     rgb_state_topic: stateTopic,
-    rgb_value_template: `{{ value_json['${svc.addr}'].red }},{{ value_json['${svc.addr}'].green }},{{ value_json['${svc.addr}'].blue }}`,
+    rgb_value_template: `{{ value_json['${svc.addr}'].color.red }},{{ value_json['${svc.addr}'].color.green }},{{ value_json['${svc.addr}'].color.blue }}`,
 
     // Brightness support (derived from RGB values)
     brightness_state_topic: stateTopic,
-    brightness_value_template: `{{ [value_json['${svc.addr}'].red, value_json['${svc.addr}'].green, value_json['${svc.addr}'].blue] | max }}`,
+    brightness_value_template: `{{ [value_json['${svc.addr}'].color.red, value_json['${svc.addr}'].color.green, value_json['${svc.addr}'].color.blue] | max }}`,
 
-    optimistic: true,
+    optimistic: false,
   };
 
   // Add color temperature support if available

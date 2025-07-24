@@ -227,12 +227,17 @@ import { delay } from './utils';
           }
           break;
         }
-        case 'evt.sensor.report':
-        case 'evt.presence.report':
-        case 'evt.open.report':
-        case 'evt.lvl.report':
+
         case 'evt.alarm.report':
-        case 'evt.binary.report': {
+        case 'evt.binary.report':
+        case 'evt.color.report':
+        case 'evt.lvl.report':
+        case 'evt.mode.report':
+        case 'evt.open.report':
+        case 'evt.presence.report':
+        case 'evt.scene.report':
+        case 'evt.sensor.report':
+        case 'evt.setpoint.report': {
           haUpdateStateSensorReport({
             topic,
             value: msg.val,
@@ -240,6 +245,7 @@ import { delay } from './utils';
           });
           break;
         }
+
         case 'evt.network.all_nodes_report': {
           const devicesAvailability = msg.val;
           if (!devicesAvailability) {

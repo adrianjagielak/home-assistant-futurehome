@@ -76,7 +76,7 @@ export function thermostat__components(
     max_temp: maxTemp,
     temp_step: step,
 
-    optimistic: true,
+    optimistic: false,
   };
 
   // ───────────── command handlers ─────────────

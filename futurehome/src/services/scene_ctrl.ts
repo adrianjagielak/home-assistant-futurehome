@@ -59,7 +59,7 @@ export function scene_ctrl__components(
       platform: 'select',
       options: supScenes,
       command_topic: commandTopic,
-      optimistic: true,
+      optimistic: false,
       value_template: `{{ value_json['${svc.addr}'].scene }}`,
     };
 
