@@ -10,7 +10,7 @@ export function sensor_lumin__components(
   svc: VinculumPd7Service,
 ): ServiceComponentsCreationResult | undefined {
   const device_class = 'illuminance';
-  const unit = svc.props?.sup_units?.[0] ?? 'Lux';
+  const unit = svc.props?.sup_units?.[0] ?? 'lx';
 
   return {
     components: {
