@@ -1796,5 +1796,215 @@
       },
       "type": "appliance"
     }
+  },
+  {
+    "client": {
+      "name": "Futurehome Charge"
+    },
+    "fimp": {
+      "adapter": "cloud_adapter",
+      "address": "3",
+      "group": "1"
+    },
+    "functionality": null,
+    "id": 96,
+    "lrn": true,
+    "model": "Cloud Adapter - Futurehome - Futurehome Charge",
+    "modelAlias": "Futurehome Charge",
+    "param": {
+      "energy": null,
+      "timestamp": null,
+      "wattage": null
+    },
+    "problem": false,
+    "room": null,
+    "services": {
+      "chargepoint": {
+        "addr": "/rt:dev/rn:cloud_adapter/ad:1/sv:chargepoint/ad:3_1",
+        "enabled": true,
+        "intf": [
+          "cmd.cable_lock.get_report",
+          "cmd.cable_lock.set",
+          "cmd.charge.start",
+          "cmd.charge.stop",
+          "cmd.current_session.get_report",
+          "cmd.current_session.set_current",
+          "cmd.max_current.get_report",
+          "cmd.max_current.set",
+          "cmd.state.get_report",
+          "evt.cable_lock.report",
+          "evt.current_session.report",
+          "evt.error.report",
+          "evt.max_current.report",
+          "evt.state.report"
+        ],
+        "props": {
+          "sup_max_current": 16,
+          "sup_states": [
+            "disconnected",
+            "requesting",
+            "ready_to_charge",
+            "charging",
+            "suspended_by_evse",
+            "suspended_by_ev",
+            "finished",
+            "reserved",
+            "unavailable",
+            "error"
+          ]
+        }
+      },
+      "dev_sys": {
+        "addr": "/rt:dev/rn:cloud_adapter/ad:1/sv:dev_sys/ad:3_1",
+        "enabled": true,
+        "intf": ["cmd.thing.reboot", "evt.error.report", "evt.success.report"],
+        "props": null
+      },
+      "meter_elec": {
+        "addr": "/rt:dev/rn:cloud_adapter/ad:1/sv:meter_elec/ad:3_1",
+        "enabled": true,
+        "intf": [
+          "cmd.meter.get_report",
+          "cmd.meter_ext.get_report",
+          "evt.error.report",
+          "evt.meter.report",
+          "evt.meter_ext.report"
+        ],
+        "props": {
+          "is_virtual": false,
+          "sup_extended_vals": ["i1", "i2", "i3", "u1", "u2", "u3"],
+          "sup_units": ["W", "kWh"]
+        }
+      },
+      "parameters": {
+        "addr": "/rt:dev/rn:cloud_adapter/ad:1/sv:parameters/ad:3_1",
+        "enabled": true,
+        "intf": [
+          "cmd.param.get_report",
+          "cmd.param.set",
+          "cmd.sup_params.get_report",
+          "evt.error.report",
+          "evt.param.report",
+          "evt.sup_params.report"
+        ],
+        "props": null
+      }
+    },
+    "supports": ["clear", "poll"],
+    "thing": 60,
+    "type": {
+      "subtype": "car_charger",
+      "supported": {
+        "chargepoint": ["car_charger"]
+      },
+      "type": "chargepoint"
+    }
+  },
+  {
+    "client": {
+      "name": "Futurehome Boiler"
+    },
+    "id": 223,
+    "model": "Hoiax - Futurehome - Futurehome Boiler",
+    "modelAlias": "Futurehome Boiler",
+    "type": {
+      "subtype": null,
+      "supported": {
+        "boiler": []
+      },
+      "type": "boiler"
+    },
+    "locationRef": {
+      "id": "11",
+      "type": "Room"
+    },
+    "thingRef": {
+      "id": "166"
+    },
+    "origin": "056e610614c848c50b",
+    "services": {
+      "meter_elec": {
+        "name": "meter_elec",
+        "addr": "/rt:dev/rn:hoiax/ad:1/sv:meter_elec/ad:2",
+        "enabled": true,
+        "props": {
+          "sup_units": ["W", "kWh"]
+        },
+        "intf": [
+          "cmd.meter.get_report",
+          "evt.error.report",
+          "evt.meter.report"
+        ],
+        "metadata": null
+      },
+      "sensor_wattemp": {
+        "name": "sensor_wattemp",
+        "addr": "/rt:dev/rn:hoiax/ad:1/sv:sensor_wattemp/ad:2",
+        "enabled": true,
+        "props": {
+          "sup_units": ["C"]
+        },
+        "intf": [
+          "cmd.sensor.get_report",
+          "evt.error.report",
+          "evt.sensor.report"
+        ],
+        "metadata": null
+      },
+      "water_heater": {
+        "name": "water_heater",
+        "addr": "/rt:dev/rn:hoiax/ad:1/sv:water_heater/ad:2",
+        "enabled": true,
+        "props": {
+          "sup_modes": [
+            "off",
+            "eco",
+            "normal",
+            "schedule",
+            "external",
+            "vacation",
+            "boost"
+          ],
+          "sup_range": {
+            "max": 85,
+            "min": 20
+          },
+          "sup_ranges": {
+            "boost": {
+              "max": 85,
+              "min": 60
+            },
+            "external": {
+              "max": 85,
+              "min": 20
+            },
+            "normal": {
+              "max": 85,
+              "min": 20
+            },
+            "vacation": {
+              "max": 60,
+              "min": 20
+            }
+          },
+          "sup_setpoints": ["normal", "vacation", "boost", "external"],
+          "sup_states": ["heat", "idle"],
+          "sup_step": 1
+        },
+        "intf": [
+          "cmd.mode.get_report",
+          "cmd.mode.set",
+          "cmd.setpoint.get_report",
+          "cmd.setpoint.set",
+          "cmd.state.get_report",
+          "evt.error.report",
+          "evt.mode.report",
+          "evt.setpoint.report",
+          "evt.state.report"
+        ],
+        "metadata": null
+      }
+    },
+    "metadata": null
   }
 ]

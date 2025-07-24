@@ -78,6 +78,8 @@ export class DemoFimpMqttClient implements IMqttClient {
           type: 'evt.pd7.response',
           val: { param: { state: { devices: demo_data__state } } },
         });
+      } else {
+        sendResponse({});
       }
     }, 100);
   }

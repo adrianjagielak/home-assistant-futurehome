@@ -1072,42 +1072,57 @@
     ]
   },
   {
-    "id": 211,
+    "id": 96,
     "services": [
       {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:out_bin_switch/ad:13_2",
+        "addr": "/rt:dev/rn:cloud_adapter/ad:1/sv:chargepoint/ad:3_1",
         "attributes": [
           {
-            "name": "binary",
+            "name": "cable_lock",
             "values": [
               {
                 "ts": "2025-07-23 19:21:49 +0200",
-                "val": false,
+                "val": true,
                 "val_t": "bool"
+              }
+            ]
+          },
+          {
+            "name": "current_session",
+            "values": [
+              {
+                "ts": "2025-07-23 19:21:49 +0200",
+                "val": 6.9,
+                "val_t": "float"
+              }
+            ]
+          },
+          {
+            "name": "max_current",
+            "values": [
+              {
+                "ts": "2025-07-23 19:21:49 +0200",
+                "val": 16,
+                "val_t": "int"
+              }
+            ]
+          },
+          {
+            "name": "state",
+            "values": [
+              {
+                "ts": "2025-07-23 19:21:49 +0200",
+                "val": "charging",
+                "val_t": "string"
               }
             ]
           }
         ],
-        "name": "out_bin_switch"
+        "name": "chargepoint"
       },
       {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:meter_elec/ad:13_2",
+        "addr": "/rt:dev/rn:cloud_adapter/ad:1/sv:meter_elec/ad:3_1",
         "attributes": [
-          {
-            "name": "meter_ext",
-            "values": [
-              {
-                "ts": "2025-07-23 19:35:16 +0200",
-                "val": {
-                  "i1": 0,
-                  "p_export": 0,
-                  "p_import": 0,
-                  "u1": 234.13
-                },
-                "val_t": "float_map"
-              }
-            ]
-          },
           {
             "name": "meter",
             "values": [
@@ -1116,7 +1131,7 @@
                   "unit": "kWh"
                 },
                 "ts": "2025-07-23 19:21:49 +0200",
-                "val": 0.855,
+                "val": 123.4,
                 "val_t": "float"
               },
               {
@@ -1131,6 +1146,156 @@
           }
         ],
         "name": "meter_elec"
+      }
+    ]
+  },
+  {
+    "id": 223,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:hoiax/ad:1/sv:water_heater/ad:2",
+        "attributes": [
+          {
+            "name": "state",
+            "values": [
+              {
+                "ts": "2023-04-03 13:37:22 +0200",
+                "val": "idle",
+                "val_t": "string"
+              }
+            ]
+          },
+          {
+            "name": "setpoint",
+            "values": [
+              {
+                "ts": "2023-03-27 14:19:52 +0200",
+                "val": {
+                  "temp": 49,
+                  "type": "vacation",
+                  "unit": "C"
+                },
+                "val_t": "object"
+              },
+              {
+                "ts": "2023-03-27 14:19:52 +0200",
+                "val": {
+                  "temp": 60,
+                  "type": "normal",
+                  "unit": "C"
+                },
+                "val_t": "object"
+              },
+              {
+                "ts": "2023-12-21 09:44:28 +0100",
+                "val": {
+                  "temp": 85.0,
+                  "type": "boost",
+                  "unit": "C"
+                },
+                "val_t": "object"
+              },
+              {
+                "ts": "2023-03-27 14:19:52 +0200",
+                "val": {
+                  "temp": 60,
+                  "type": "external",
+                  "unit": "C"
+                },
+                "val_t": "object"
+              }
+            ]
+          },
+          {
+            "name": "error",
+            "values": [
+              {
+                "props": {
+                  "cmd_service": "water_heater",
+                  "cmd_topic": "pt:j1/mt:cmd/rt:dev/rn:hoiax/ad:1/sv:water_heater/ad:2",
+                  "cmd_type": "cmd.mode.get_report",
+                  "msg": "adapter: service not found under the provided address: 2"
+                },
+                "ts": "2023-12-17 13:17:12 +0100",
+                "val": "failed to process incoming message",
+                "val_t": "string"
+              }
+            ]
+          },
+          {
+            "name": "mode",
+            "values": [
+              {
+                "ts": "2023-04-05 16:08:43 +0200",
+                "val": "off",
+                "val_t": "string"
+              }
+            ]
+          }
+        ],
+        "name": "water_heater"
+      },
+      {
+        "addr": "/rt:dev/rn:hoiax/ad:1/sv:meter_elec/ad:2",
+        "attributes": [
+          {
+            "name": "meter",
+            "values": [
+              {
+                "props": {
+                  "unit": "kWh"
+                },
+                "ts": "2023-04-06 09:46:52 +0200",
+                "val": 329.7,
+                "val_t": "float"
+              },
+              {
+                "props": {
+                  "unit": "W"
+                },
+                "ts": "2023-04-06 09:46:52 +0200",
+                "val": 0,
+                "val_t": "float"
+              }
+            ]
+          },
+          {
+            "name": "error",
+            "values": [
+              {
+                "props": {
+                  "cmd_service": "meter_elec",
+                  "cmd_topic": "pt:j1/mt:cmd/rt:dev/rn:hoiax/ad:1/sv:meter_elec/ad:2",
+                  "cmd_type": "cmd.meter.get_report",
+                  "msg": "adapter: service not found under the provided address: 2"
+                },
+                "ts": "2023-12-17 13:10:12 +0100",
+                "val": "failed to process incoming message",
+                "val_t": "string"
+              }
+            ]
+          }
+        ],
+        "name": "meter_elec"
+      },
+      {
+        "addr": "/rt:dev/rn:hoiax/ad:1/sv:sensor_wattemp/ad:2",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "props": {
+                  "unit": "C"
+                },
+                "ts": "2023-04-06 09:30:22 +0200",
+                "val": 56.9,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_wattemp"
       }
     ]
   }
