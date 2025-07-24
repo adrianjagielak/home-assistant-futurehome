@@ -249,6 +249,15 @@ export function haPublishDevice(parameters: {
     Object.assign(handlers, result.commandHandlers);
   }
 
+  if (demoMode) {
+    // Apply optimistic override
+    for (const component of Object.values(components)) {
+      if ((component as any).optimistic === false) {
+        (component as any).optimistic = true;
+      }
+    }
+  }
+
   const configTopic = `${topicPrefix}/config`;
   const stateTopic = `${topicPrefix}/state`;
   const availabilityTopic = `${topicPrefix}/availability`;
