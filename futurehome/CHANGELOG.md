@@ -6,6 +6,7 @@
 - Added support for 'water_heater' service (devices such as water boiler or a water tank).
 - Updated demo mode data.
 - Added extracting device manufacturer name.
+- Updated 'thermostat' service implementation.
 
 ## 0.1.1 (24.07.2025)
 

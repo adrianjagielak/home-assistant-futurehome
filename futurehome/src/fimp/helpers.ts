@@ -36,3 +36,7 @@ export function adapterServiceFromServiceAddress(
 
   return adapterName;
 }
+
+export function replaceSvcInAddr(addr: string, newService: string): string {
+  return addr.replace(/\/sv:[^/]+/, `/sv:${newService}`);
+}
