@@ -26,6 +26,8 @@ import { delay } from "./utils";
   log.info("Connected to HA broker");
 
   if (!demoMode && (!hubUsername || !hubPassword)) {
+    log.info("Empty username or password in non-demo mode. Removing all Futurehome devices from Home Assistant...");
+
     const publishWithDelay = (messages: RetainedMessage[], index = 0) => {
       if (index >= messages.length) return;
 
