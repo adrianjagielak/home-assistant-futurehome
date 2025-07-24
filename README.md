@@ -61,7 +61,7 @@ todo: links to the .ts service implementations below
 | Service | Example device | Implementation status |
 | --- | --- | --- |
 | _alarms_ services | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | |
-| barrier_ctrl | | |
+| barrier_ctrl | | ✅ |
 | basic | | ✅ |
 | battery | | ✅ |
 | chargepoint | [Futurehome Charge](https://www.futurehome.io/en_no/shop/charge) | |
@@ -121,11 +121,11 @@ todo: links to the .ts service implementations below
 | siren_ctrl | | |
 | thermostat | [Thermostat](https://www.futurehome.io/en_no/shop/thermostat-w) | ✅ |
 | user_code | | |
-| water_heater | | |
+| water_heater | | ✅ |
 
 ## Services that are deprecated, unused, or removed in newer versions of the system.
 
-| Service | Implementation status |
+| Service | Description |
 | --- | --- |
 | appliance | |
 | blinds | |
@@ -145,8 +145,12 @@ todo: links to the .ts service implementations below
 | meter_gas | |
 | meter_heating | |
 | meter_water | |
+| schedule | Not recognized by the official app |
+| schedule_entry | Not recognized by the official app |
 | sensor | |
 | siren | |
+| sound_switch | Not recognized by the official app |
+| time_parameters | Not recognized by the official app |
 | water_valve | |
 
 ## Virtual, unnecessary services (easily reproduced in stock Home Assistant)
@@ -157,15 +161,15 @@ todo: links to the .ts service implementations below
 
 ## System or meta, not essential services
 
-| Service | Implementation status |
-| --- | --- |
-| gateway | |
-| association | |
-| diagnostic | |
-| indicator_ctrl | |
-| ota | |
-| parameters | |
-| technology_specific | |
-| time | |
-| version | |
-| dev_sys | |
+| Service | Implementation status | Description |
+| --- | --- | --- |
+| gateway | | |
+| association | | |
+| diagnostic | | |
+| indicator_ctrl | ✅ | Identify devices |
+| ota | | |
+| parameters | | |
+| technology_specific | | |
+| time | | |
+| version | | |
+| dev_sys | | |

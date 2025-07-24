@@ -124,7 +124,7 @@ todo: links to the .ts service implementations below
 
 ## Services that are deprecated, unused, or removed in newer versions of the system.
 
-| Service | Implementation status |
+| Service | Description |
 | --- | --- |
 | appliance | |
 | blinds | |
@@ -144,8 +144,12 @@ todo: links to the .ts service implementations below
 | meter_gas | |
 | meter_heating | |
 | meter_water | |
+| schedule | Not recognized by the official app |
+| schedule_entry | Not recognized by the official app |
 | sensor | |
 | siren | |
+| sound_switch | Not recognized by the official app |
+| time_parameters | Not recognized by the official app |
 | water_valve | |
 
 ## Virtual, unnecessary services (easily reproduced in stock Home Assistant)
