@@ -131,10 +131,12 @@ export function thermostat__components(
 
   // Add current temperature from paired sensor_temp service
   const sensorTempAddr = replaceSvcInAddr(svc.addr, 'sensor_temp');
+  climateComponent.current_temperature_topic = stateTopic;
   climateComponent.current_temperature_template = `{{ value_json['${sensorTempAddr}'].sensor | default(0) }}`;
 
   // Add action/state reporting if supported
   if (supStates.length > 0) {
+    climateComponent.action_topic = stateTopic;
     climateComponent.action_template = `{% set state = value_json['${svc.addr}'].state | default('idle') %}{{ {'idle': 'idle', 'heat': 'heating', 'cool': 'cooling', 'fan': 'fan'}.get(state, 'off') }}`;
   }
 
