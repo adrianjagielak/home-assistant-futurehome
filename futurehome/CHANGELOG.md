@@ -10,6 +10,7 @@
 - Added support for 'barrier_ctrl' service (devices like garage doors, barriers, and window shades).
 - Added support for 'water_heater' service (devices such as water boiler or a water tank).
 - Updated demo mode data.
+- Added extracting device manufacturer name.
 
 # 0.1.0 (24.07.2025)
 

@@ -259,10 +259,14 @@ export function haPublishDevice(parameters: {
   if (parameters.demoMode) {
     // Apply optimistic override
     for (const component of Object.values(components)) {
-      if ((component as any).optimistic === false) {
-        (component as any).optimistic = true;
-      }
+      (component as any).optimistic = true;
     }
+  }
+
+  let vinculumManufacturer: string | undefined;
+  const parts = (parameters.vinculumDeviceData?.model ?? '').split(' - ');
+  if (parts.length === 3) {
+    vinculumManufacturer = parts[1];
   }
 
   const configTopic = `${topicPrefix}/config`;
@@ -277,7 +281,9 @@ export function haPublishDevice(parameters: {
         parameters.deviceInclusionReport?.product_name ??
         undefined,
       manufacturer:
-        parameters.deviceInclusionReport?.manufacturer_id ?? undefined,
+        vinculumManufacturer ??
+        parameters.deviceInclusionReport?.manufacturer_id ??
+        undefined,
       model:
         parameters.vinculumDeviceData?.modelAlias ??
         parameters.deviceInclusionReport?.product_id ??

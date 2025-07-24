@@ -4,9 +4,10 @@ export type VinculumPd7Device = {
     name?: string | null;
   } | null;
   id: number;
-  // "Model", e.g. "zb - _TZ3040_bb6xaihh - TS0202"
+  // "Model" string, e.g. "zb - _TZ3040_bb6xaihh - TS0202"
+  // The first one is the adapter, the second one is the manufacturer, the third one is the device model.
   model?: string | null;
-  // "Model alias", e.g. "TS0202"
+  // Device model, e.g. "TS0202"
   modelAlias?: string | null;
   functionality?:
     | 'appliance'
