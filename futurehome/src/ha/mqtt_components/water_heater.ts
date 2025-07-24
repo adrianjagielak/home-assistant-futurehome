@@ -1,0 +1,356 @@
+/**
+ * Represents a MQTT Water Heater component for Home Assistant MQTT Discovery.
+ *
+ * The `mqtt` water heater platform lets you control your MQTT enabled water heater devices.
+ *
+ * For detailed documentation see:
+ * https://www.home-assistant.io/integrations/water_heater.mqtt/
+ */
+export interface WaterHeaterComponent {
+  /**
+   * Must be `water_heater`.
+   * Only allowed and required in [MQTT auto discovery device messages](https://www.home-assistant.io/integrations/mqtt/#device-discovery-payload).
+   */
+  platform: 'water_heater';
+
+  /**
+   * An ID that uniquely identifies this water heater.
+   * If two water heaters have the same unique ID, Home Assistant will raise an exception.
+   * Required when used with device-based discovery.
+   */
+  unique_id?: string;
+
+  /**
+   * The name of the water heater.
+   * Can be set to `null` if only the device name is relevant.
+   * Default: "MQTT water heater"
+   */
+  name?: string | null;
+
+  /**
+   * Used instead of `name` for automatic generation of `entity_id`.
+   */
+  object_id?: string;
+
+  /**
+   * Flag which defines if the entity should be enabled when first added.
+   * Default: true
+   */
+  enabled_by_default?: boolean;
+
+  /**
+   * The encoding of the payloads received and published messages.
+   * Set to `""` to disable decoding of incoming payload.
+   * Default: "utf-8"
+   */
+  encoding?: string;
+
+  /**
+   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
+   */
+  entity_category?: string;
+
+  /**
+   * Picture URL for the entity.
+   */
+  entity_picture?: string;
+
+  /**
+   * [Icon](https://www.home-assistant.io/docs/configuration/customizing-devices/#icon) for the entity.
+   */
+  icon?: string;
+
+  /**
+   * Information about the device this water heater device is a part of to tie it into the [device registry](https://developers.home-assistant.io/docs/en/device_registry_index.html).
+   * Only works through [MQTT discovery](https://www.home-assistant.io/integrations/mqtt/#mqtt-discovery) and when [`unique_id`](#unique_id) is set.
+   * At least one of identifiers or connections must be present to identify the device.
+   */
+  device?: {
+    /**
+     * A link to the webpage that can manage the configuration of this device.
+     * Can be either an `http://`, `https://` or an internal `homeassistant://` URL.
+     */
+    configuration_url?: string;
+
+    /**
+     * A list of connections of the device to the outside world as a list of tuples `[connection_type, connection_identifier]`.
+     * For example the MAC address of a network interface:
+     * `"connections": [["mac", "02:5b:26:a8:dc:12"]]`.
+     */
+    connections?: Array<[string, string]>;
+
+    /**
+     * The hardware version of the device.
+     */
+    hw_version?: string;
+
+    /**
+     * A list of IDs that uniquely identify the device. For example a serial number.
+     */
+    identifiers?: string[];
+
+    /**
+     * The manufacturer of the device.
+     */
+    manufacturer?: string;
+
+    /**
+     * The model of the device.
+     */
+    model?: string;
+
+    /**
+     * The model identifier of the device.
+     */
+    model_id?: string;
+
+    /**
+     * The name of the device.
+     */
+    name?: string;
+
+    /**
+     * The serial number of the device.
+     */
+    serial_number?: string;
+
+    /**
+     * Suggest an area if the device isn’t in one yet.
+     */
+    suggested_area?: string;
+
+    /**
+     * The firmware version of the device.
+     */
+    sw_version?: string;
+
+    /**
+     * Identifier of a device that routes messages between this device and Home Assistant.
+     * Examples of such devices are hubs, or parent devices of a sub-device.
+     * This is used to show device topology in Home Assistant.
+     */
+    via_device?: string;
+  };
+
+  /**
+   * A list of MQTT topics subscribed to receive availability (online/offline) updates.
+   * Must not be used together with `availability_topic`.
+   */
+  availability?: Array<{
+    /**
+     * An MQTT topic subscribed to receive availability (online/offline) updates.
+     */
+    topic: string;
+
+    /**
+     * The payload that represents the available state.
+     * Default: "online"
+     */
+    payload_available?: string;
+
+    /**
+     * The payload that represents the unavailable state.
+     * Default: "offline"
+     */
+    payload_not_available?: string;
+
+    /**
+     * Defines a [template](https://www.home-assistant.io/docs/configuration/templating/#using-value-templates-with-mqtt)
+     * to extract device's availability from the `topic`.
+     * To determine the device's availability, result of this template is compared to `payload_available` and `payload_not_available`.
+     */
+    value_template?: string;
+  }>;
+
+  /**
+   * When `availability` is configured, this controls the conditions needed to set the entity to `available`.
+   * Valid values: "all", "any", "latest"
+   * Default: "latest"
+   */
+  availability_mode?: 'all' | 'any' | 'latest';
+
+  /**
+   * Defines a [template](https://www.home-assistant.io/docs/configuration/templating/#using-value-templates-with-mqtt)
+   * to extract device's availability from the `availability_topic`.
+   * To determine the device's availability, result of this template is compared to `payload_available` and `payload_not_available`.
+   */
+  availability_template?: string;
+
+  /**
+   * The MQTT topic subscribed to receive availability (online/offline) updates.
+   * Must not be used together with `availability`.
+   */
+  availability_topic?: string;
+
+  /**
+   * The payload that represents the available state.
+   * Default: "online"
+   */
+  payload_available?: string;
+
+  /**
+   * The payload that represents the unavailable state.
+   * Default: "offline"
+   */
+  payload_not_available?: string;
+
+  /**
+   * The MQTT topic to publish commands to change the water heater operation mode.
+   */
+  mode_command_topic?: string;
+
+  /**
+   * A template to render the value sent to the `mode_command_topic` with.
+   */
+  mode_command_template?: string;
+
+  /**
+   * The MQTT topic to subscribe for changes of the water heater operation mode.
+   * If this is not set, the operation mode works in optimistic mode (see below).
+   * A "None" payload resets to an `unknown` state. An empty payload is ignored.
+   */
+  mode_state_topic?: string;
+
+  /**
+   * A template to render the value received on the `mode_state_topic` with.
+   */
+  mode_state_template?: string;
+
+  /**
+   * A list of supported modes.
+   * Needs to be a subset of the default values.
+   * Default: ['off', 'eco', 'electric', 'gas', 'heat_pump', 'high_demand', 'performance']
+   */
+  modes?: string[];
+
+  /**
+   * The MQTT topic to publish commands to change the water heater power state.
+   * Sends the payload configured with `payload_on` if the water heater is turned on via the `water_heater.turn_on`,
+   * or the payload configured with `payload_off` if the water heater is turned off via the `water_heater.turn_off` action.
+   * Note that `optimistic` mode is not supported through `water_heater.turn_on` and `water_heater.turn_off` actions.
+   * When called, these actions will send a power command to the device but will not optimistically update the state of the water heater.
+   * The water heater device should report its state back via `mode_state_topic`.
+   */
+  power_command_topic?: string;
+
+  /**
+   * A template to render the value sent to the `power_command_topic` with.
+   * The `value` parameter is the payload set for `payload_on` or `payload_off`.
+   */
+  power_command_template?: string;
+
+  /**
+   * The payload that represents enabled state.
+   * Default: "ON"
+   */
+  payload_on?: string;
+
+  /**
+   * The payload that represents disabled state.
+   * Default: "OFF"
+   */
+  payload_off?: string;
+
+  /**
+   * Flag that defines if the water heater works in optimistic mode.
+   * Default: "`true` if no state topic defined, else `false`."
+   */
+  optimistic?: boolean;
+
+  /**
+   * The MQTT topic to publish commands to change the target temperature.
+   */
+  temperature_command_topic?: string;
+
+  /**
+   * A template to render the value sent to the `temperature_command_topic` with.
+   */
+  temperature_command_template?: string;
+
+  /**
+   * The MQTT topic to subscribe for changes in the target temperature.
+   * If this is not set, the target temperature works in optimistic mode (see below).
+   * A `"None"` value received will reset the temperature set point.
+   * Empty values (`'''`) will be ignored.
+   */
+  temperature_state_topic?: string;
+
+  /**
+   * A template to render the value received on the `temperature_state_topic` with.
+   */
+  temperature_state_template?: string;
+
+  /**
+   * Defines the temperature unit of the device, `C` or `F`.
+   * If this is not set, the temperature unit is set to the system temperature unit.
+   */
+  temperature_unit?: string;
+
+  /**
+   * The desired precision for this device.
+   * Can be used to match your actual water heater's precision.
+   * Supported values are `0.1`, `0.5` and `1.0`.
+   * Default: 0.1 for Celsius and 1.0 for Fahrenheit.
+   */
+  precision?: number;
+
+  /**
+   * Set the initial target temperature.
+   * The default value depends on the temperature unit, and will be 43.3°C or 110°F.
+   */
+  initial?: number;
+
+  /**
+   * Maximum set point available.
+   * The default value depends on the temperature unit, and will be 60°C or 140°F.
+   */
+  max_temp?: number;
+
+  /**
+   * Minimum set point available.
+   * The default value depends on the temperature unit, and will be 43.3°C or 110°F.
+   */
+  min_temp?: number;
+
+  /**
+   * A template with which the value received on `current_temperature_topic` will be rendered.
+   */
+  current_temperature_template?: string;
+
+  /**
+   * The MQTT topic on which to listen for the current temperature.
+   * A `"None"` value received will reset the current temperature.
+   * Empty values (`'''`) will be ignored.
+   */
+  current_temperature_topic?: string;
+
+  /**
+   * Defines a [template](https://www.home-assistant.io/docs/configuration/templating/#using-value-templates-with-mqtt)
+   * to extract the JSON dictionary from messages received on the `json_attributes_topic`.
+   * Usage example can be found in [MQTT sensor](https://www.home-assistant.io/integrations/sensor.mqtt/#json-attributes-template-configuration) documentation.
+   */
+  json_attributes_template?: string;
+
+  /**
+   * The MQTT topic subscribed to receive a JSON dictionary payload and then set as sensor attributes.
+   * Usage example can be found in [MQTT sensor](https://www.home-assistant.io/integrations/sensor.mqtt/#json-attributes-topic-configuration) documentation.
+   */
+  json_attributes_topic?: string;
+
+  /**
+   * The maximum QoS level to be used when receiving and publishing messages.
+   * Default: 0
+   */
+  qos?: number;
+
+  /**
+   * Defines if published messages should have the retain flag set.
+   * Default: false
+   */
+  retain?: boolean;
+
+  /**
+   * Default template to render the payloads on *all* `*_state_topic`s with.
+   */
+  value_template?: string;
+}

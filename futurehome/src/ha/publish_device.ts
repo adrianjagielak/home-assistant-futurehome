@@ -50,6 +50,7 @@ import { sensor_wattemp__components } from "../services/sensor_wattemp";
 import { sensor_weight__components } from "../services/sensor_weight";
 import { thermostat__components } from "../services/thermostat";
 import { ha } from "./globals";
+import { HaMqttComponent } from "./mqtt_components/_component";
 
 type HaDeviceConfig = {
   // device
@@ -74,7 +75,7 @@ type HaDeviceConfig = {
   };
   // components
   cmps: {
-    [key: string]: HaComponent;
+    [key: string]: HaMqttComponent;
   },
   // state topic
   stat_t: string,
@@ -83,122 +84,8 @@ type HaDeviceConfig = {
   qos: number,
 }
 
-export type HaComponent = SensorComponent | BinarySensorComponent | SwitchComponent | NumberComponent | ClimateComponent | SelectComponent | FanComponent | LightComponent;
-
-// Device class supported values: https://www.home-assistant.io/integrations/homeassistant/#device-class
-
-/// https://www.home-assistant.io/integrations/sensor.mqtt/
-/// https://www.home-assistant.io/integrations/sensor/#device-class
-export type SensorComponent = {
-  unique_id: string;
-  // platform
-  p: 'sensor';
-  device_class?: string;
-  unit_of_measurement: string;
-  value_template: string;
-}
-
-/// https://www.home-assistant.io/integrations/binary_sensor.mqtt/
-/// https://www.home-assistant.io/integrations/binary_sensor/#device-class
-export type BinarySensorComponent = {
-  unique_id: string;
-  // platform
-  p: 'binary_sensor';
-  device_class?: string;
-  value_template: string;
-}
-
-/// https://www.home-assistant.io/integrations/switch.mqtt/
-/// https://www.home-assistant.io/integrations/switch/#device-class
-export type SwitchComponent = {
-  unique_id: string;
-  // platform
-  p: 'switch';
-  command_topic: string;
-  optimistic: boolean;
-  value_template: string;
-}
-
-/// https://www.home-assistant.io/integrations/number.mqtt/
-/// https://www.home-assistant.io/integrations/number/#device-class
-export type NumberComponent = {
-  unique_id: string;
-  // platform
-  p: 'number';
-  min: number;
-  max: number;
-  step: number;
-  command_topic: string;
-  optimistic: boolean;
-  value_template: string;
-}
-
-/// https://www.home-assistant.io/integrations/climate.mqtt/
-export type ClimateComponent = {
-  unique_id: string;
-  // platform
-  p: 'climate';
-  modes: string[];
-  mode_command_topic: string;
-  mode_state_topic: string;
-  mode_state_template: string;
-  temperature_command_topic: string;
-  temperature_state_topic: string;
-  temperature_state_template: string;
-  min_temp: number;
-  max_temp: number;
-  temp_step: number;
-  optimistic: boolean;
-}
-
-/// https://www.home-assistant.io/integrations/select.mqtt/
-export type SelectComponent = {
-  unique_id: string;
-  // platform
-  p: 'select';
-  options: string[];
-  command_topic: string;
-  optimistic: boolean;
-  value_template: string;
-}
-
-/// https://www.home-assistant.io/integrations/fan.mqtt/
-export type FanComponent = {
-  unique_id: string;
-  // platform
-  p: 'fan';
-  command_topic: string;
-  optimistic: boolean;
-  preset_modes: string[];
-  preset_mode_command_topic: string;
-  preset_mode_state_template: string;
-  state_value_template: string;
-  preset_mode_value_template: string;
-};
-
-/// https://www.home-assistant.io/integrations/light.mqtt/
-export type LightComponent = {
-  unique_id: string;
-  // platform
-  p: "light";
-  command_topic?: string;
-  state_topic?: string;
-  state_value_template?: string;
-  rgb_command_topic?: string;
-  rgb_state_topic?: string;
-  rgb_value_template?: string;
-  brightness_state_topic?: string;
-  brightness_value_template?: string;
-  optimistic?: boolean;
-  color_temp_command_topic?: string;
-  color_temp_state_topic?: string;
-  color_temp_value_template?: string;
-  min_mireds?: number;
-  max_mireds?: number;
-};
-
 export type ServiceComponentsCreationResult = {
-  components: { [key: string]: HaComponent };
+  components: { [key: string]: HaMqttComponent };
   commandHandlers?: CommandHandlers;
 }
 
@@ -258,7 +145,7 @@ const serviceHandlers: {
 };
 
 export function haPublishDevice(parameters: { hubId: string, vinculumDeviceData: VinculumPd7Device, deviceInclusionReport: InclusionReport | undefined }): { commandHandlers: CommandHandlers } {
-  const components: { [key: string]: HaComponent } = {};
+  const components: { [key: string]: HaMqttComponent } = {};
   const handlers: CommandHandlers = {};
 
   // e.g. "homeassistant/device/futurehome_123456_1"

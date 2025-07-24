@@ -13,7 +13,7 @@ export function out_bin_switch__components(
     components: {
       [svc.addr]: {
         unique_id: svc.addr,
-        p: 'switch',
+        platform: 'switch',
         command_topic: commandTopic,
         optimistic: false,
         value_template: `{{ (value_json['${svc.addr}'].binary) | iif('ON', 'OFF') }}`,

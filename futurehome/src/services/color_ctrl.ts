@@ -1,6 +1,7 @@
 import { sendFimpMsg } from "../fimp/fimp";
 import { VinculumPd7Device, VinculumPd7Service } from "../fimp/vinculum_pd7_device";
-import { ServiceComponentsCreationResult, CommandHandlers, LightComponent } from "../ha/publish_device";
+import { LightComponent } from "../ha/mqtt_components/light";
+import { ServiceComponentsCreationResult, CommandHandlers } from "../ha/publish_device";
 
 export function color_ctrl__components(
   topicPrefix: string,
@@ -47,7 +48,7 @@ export function color_ctrl__components(
   // Create the light component configuration
   const lightComponent: LightComponent = {
     unique_id: svc.addr,
-    p: 'light',
+    platform: 'light',
 
     // Basic on/off control
     command_topic: commandTopic,

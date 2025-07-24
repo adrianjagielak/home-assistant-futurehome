@@ -11,8 +11,8 @@
 
 import { sendFimpMsg } from "../fimp/fimp";
 import { VinculumPd7Device, VinculumPd7Service } from "../fimp/vinculum_pd7_device";
+import { ClimateComponent } from "../ha/mqtt_components/climate";
 import {
-  ClimateComponent,
   CommandHandlers,
   ServiceComponentsCreationResult,
 } from "../ha/publish_device";
@@ -54,7 +54,7 @@ export function thermostat__components(
   // ───────────── MQTT climate component ─────────────
   const climate: ClimateComponent = {
     unique_id: svc.addr,
-    p: "climate",
+    platform: 'climate',
 
     // HVAC modes
     modes: supModes,

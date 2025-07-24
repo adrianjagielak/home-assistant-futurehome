@@ -17,15 +17,14 @@ export function fan_ctrl__components(
     components: {
       [svc.addr]: {
         unique_id: svc.addr,
-        p: "fan",
+        platform: 'fan',
         command_topic: commandTopic,
         optimistic: true,
         preset_modes: supModes,
         preset_mode_command_topic: commandTopic,
-        preset_mode_state_template: `{{ value_json['${svc.addr}'].mode }}`,
+        preset_mode_value_template: `{{ value_json['${svc.addr}'].mode }}`,
         // Fan is considered "on" if mode is not off/stop
         state_value_template: `{{ 'ON' if value_json['${svc.addr}'].mode not in ['off', 'stop'] else 'OFF' }}`,
-        preset_mode_value_template: `{{ value_json['${svc.addr}'].mode }}`,
       },
     },
 

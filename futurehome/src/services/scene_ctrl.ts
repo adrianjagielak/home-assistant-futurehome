@@ -10,9 +10,9 @@
 
 import { sendFimpMsg } from "../fimp/fimp";
 import { VinculumPd7Device, VinculumPd7Service } from "../fimp/vinculum_pd7_device";
+import { HaMqttComponent } from "../ha/mqtt_components/_component";
 import {
   CommandHandlers,
-  HaComponent,
   ServiceComponentsCreationResult,
 } from "../ha/publish_device";
 
@@ -24,14 +24,14 @@ export function scene_ctrl__components(
   _device: VinculumPd7Device,
   svc: VinculumPd7Service
 ): ServiceComponentsCreationResult | undefined {
-  const components: Record<string, HaComponent> = {};
+  const components: Record<string, HaMqttComponent> = {};
   const handlers: CommandHandlers = {};
 
   // ───────────── read-only entities ─────────────
   if (svc.intf?.includes("evt.scene.report")) {
     components[`${svc.addr}_scene`] = {
       unique_id: `${svc.addr}_scene`,
-      p: "sensor",
+      platform: 'sensor',
       unit_of_measurement: "",
       value_template: `{{ value_json['${svc.addr}'].scene }}`,
     };
@@ -40,7 +40,7 @@ export function scene_ctrl__components(
   if (svc.intf?.includes("evt.lvl.report")) {
     components[`${svc.addr}_lvl`] = {
       unique_id: `${svc.addr}_lvl`,
-      p: "sensor",
+      platform: 'sensor',
       unit_of_measurement: "",
       value_template: `{{ value_json['${svc.addr}'].lvl }}`,
     };
@@ -53,7 +53,7 @@ export function scene_ctrl__components(
 
     components[`${svc.addr}_select`] = {
       unique_id: `${svc.addr}_select`,
-      p: "select",
+      platform: 'select',
       options: supScenes,
       command_topic: commandTopic,
       optimistic: true,

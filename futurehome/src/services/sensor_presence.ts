@@ -12,7 +12,7 @@ export function sensor_presence__components(
     components: {
       [svc.addr]: {
         unique_id: svc.addr,
-        p: 'binary_sensor',
+        platform: 'binary_sensor',
         device_class: device_class,
         value_template: `{{ value_json['${svc.addr}'].presence | iif('ON', 'OFF') }}`,
       },

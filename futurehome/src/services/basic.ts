@@ -27,7 +27,7 @@ export function basic__components(
     components: {
       [svc.addr]: {
         unique_id: svc.addr,
-        p: "number",
+        platform: 'number',
         min: MIN_LVL,
         max: MAX_LVL,
         step: 1,

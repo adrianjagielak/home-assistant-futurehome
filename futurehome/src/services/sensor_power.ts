@@ -13,7 +13,7 @@ export function sensor_power__components(
     components: {
       [svc.addr]: {
         unique_id: svc.addr,
-        p: 'sensor',
+        platform: 'sensor',
         device_class: device_class,
         unit_of_measurement: unit,
         value_template: `{{ value_json['${svc.addr}'].sensor }}`,
