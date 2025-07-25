@@ -164,7 +164,7 @@ address: "${address}",
 service: "${service}",
 uid: "${uid}",
 cmd: "${cmd}",
-val: "${JSON.stringify(val)}",
+val: ${JSON.stringify(val)},
 val_t: "${val_t}"
 `);
 

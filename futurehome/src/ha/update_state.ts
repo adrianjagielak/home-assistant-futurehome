@@ -273,10 +273,10 @@ export function haUpdateStateValueReport(parameters: {
   attrName: string;
 }) {
   // Strip the FIMP envelope so we end up with "/rt:dev/…/ad:x_y"
-  const sensorAddr = parameters.topic.replace(/^pt:j1\/mt:evt/, '');
+  const addr = parameters.topic.replace(/^pt:j1\/mt:evt/, '');
 
   for (const [stateTopic, payload] of Object.entries(haStateCache)) {
-    if (!payload[sensorAddr]) continue;
+    if (!payload[addr]) continue;
 
     // Check if the new value has a type property
     if (
@@ -289,7 +289,7 @@ export function haUpdateStateValueReport(parameters: {
       const { type: _, ...valueWithoutType } = parameters.value;
 
       // Get current attribute value
-      const currentAttrValue = payload[sensorAddr][parameters.attrName];
+      const currentAttrValue = payload[addr][parameters.attrName];
 
       if (
         currentAttrValue &&
@@ -297,23 +297,23 @@ export function haUpdateStateValueReport(parameters: {
         !Array.isArray(currentAttrValue)
       ) {
         // Current value is already a type map, update the specific type
-        payload[sensorAddr][parameters.attrName] = {
+        payload[addr][parameters.attrName] = {
           ...currentAttrValue,
           [type]: valueWithoutType,
         };
       } else {
         // Current value is not a type map, convert it to one
-        payload[sensorAddr][parameters.attrName] = {
+        payload[addr][parameters.attrName] = {
           [type]: valueWithoutType,
         };
       }
     } else {
       // Handle regular value update (non-typed)
-      payload[sensorAddr][parameters.attrName] = parameters.value;
+      payload[addr][parameters.attrName] = parameters.value;
     }
 
     log.debug(
-      `Publishing updated sensor value for "${sensorAddr}" to "${stateTopic}"`,
+      `Publishing updated state value for "${addr}" to "${stateTopic}"`,
     );
     ha?.publish(stateTopic, JSON.stringify(payload), { retain: true, qos: 2 });
 

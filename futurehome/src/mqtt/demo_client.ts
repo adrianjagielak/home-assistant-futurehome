@@ -40,14 +40,17 @@ export class DemoFimpMqttClient implements IMqttClient {
       qos: 0 | 1 | 2;
     },
   ): void {
+    const responseTopic = topic.replace(/^pt:j1\/mt:cmd/, 'pt:j1/mt:evt');
+
     setTimeout(() => {
       const msg = JSON.parse(value);
 
       const sendResponse = (response: FimpResponse) => {
         response.corid = response.corid ?? msg.uid;
+        response.serv = response.serv ?? msg.serv;
         const buffer = Buffer.from(JSON.stringify(response));
         for (const handler of this.messageHandlers) {
-          handler(topic, buffer, { retain: false } as any);
+          handler(responseTopic, buffer, { retain: false } as any);
         }
       };
 
@@ -78,10 +81,21 @@ export class DemoFimpMqttClient implements IMqttClient {
           type: 'evt.pd7.response',
           val: { param: { state: { devices: demo_data__state } } },
         });
+      } else if (
+        msg.type.split('.').length === 3 &&
+        msg.type.split('.')[0] === 'cmd' &&
+        msg.type.split('.')[2] === 'set'
+      ) {
+        sendResponse({
+          type: `evt.${msg.type.split('.')[1]}.report`,
+          val: msg.val,
+          val_t: msg.val_t,
+          props: msg.props,
+        });
       } else {
         sendResponse({});
       }
-    }, 100);
+    }, 300);
   }
 
   on(event: 'message', handler: OnMessageCallback): void;
