@@ -4,6 +4,7 @@
 ## 0.1.4 (25.07.2025)
 
 - Added support for 'media_player' service.
+- Removed demo mode 'optimistic' override causing switches to look weird.
 
 ## 0.1.3 (25.07.2025)
 

@@ -306,13 +306,6 @@ export function haPublishDevice(parameters: {
     Object.assign(handlers, result.commandHandlers);
   }
 
-  if (parameters.demoMode) {
-    // Apply optimistic override
-    for (const component of Object.values(components)) {
-      (component as any).optimistic = true;
-    }
-  }
-
   let vinculumManufacturer: string | undefined;
   const parts = (parameters.vinculumDeviceData?.model ?? '').split(' - ');
   if (parts.length === 3) {
