@@ -96,6 +96,7 @@ export function water_heater__components(
   const waterHeaterComponent: HaMqttComponent = {
     unique_id: svc.addr,
     platform: 'water_heater',
+    name: 'Water heater',
     modes: haModes.length > 0 ? haModes : ['off', 'heat_pump'],
     mode_command_topic: modeCommandTopic,
     mode_state_topic: stateTopic,

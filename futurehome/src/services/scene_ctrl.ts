@@ -35,17 +35,9 @@ export function scene_ctrl__components(
     components[`${svc.addr}_scene`] = {
       unique_id: `${svc.addr}_scene`,
       platform: 'sensor',
+      name: 'Scene',
       unit_of_measurement: '',
       value_template: `{{ value_json['${svc.addr}'].scene }}`,
-    };
-  }
-
-  if (svc.intf?.includes('evt.lvl.report')) {
-    components[`${svc.addr}_lvl`] = {
-      unique_id: `${svc.addr}_lvl`,
-      platform: 'sensor',
-      unit_of_measurement: '',
-      value_template: `{{ value_json['${svc.addr}'].lvl }}`,
     };
   }
 
@@ -57,6 +49,7 @@ export function scene_ctrl__components(
     components[`${svc.addr}_select`] = {
       unique_id: `${svc.addr}_select`,
       platform: 'select',
+      name: 'Scene',
       options: supScenes,
       command_topic: commandTopic,
       optimistic: false,

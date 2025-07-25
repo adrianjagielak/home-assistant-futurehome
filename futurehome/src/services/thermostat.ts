@@ -119,6 +119,7 @@ export function thermostat__components(
   const climateComponent: ClimateComponent = {
     unique_id: svc.addr,
     platform: 'climate',
+    name: 'Thermostat',
     modes: haModes,
     mode_command_topic: modeCommandTopic,
     // mode_state_topic seems to be required for mode state to be reported correctly in HA

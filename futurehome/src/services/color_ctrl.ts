@@ -58,6 +58,7 @@ export function color_ctrl__components(
   const lightComponent: LightComponent = {
     unique_id: svc.addr,
     platform: 'light',
+    name: 'Light',
 
     // Basic on/off control
     command_topic: commandTopic,

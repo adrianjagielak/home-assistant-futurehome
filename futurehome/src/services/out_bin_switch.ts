@@ -17,6 +17,7 @@ export function out_bin_switch__components(
       [svc.addr]: {
         unique_id: svc.addr,
         platform: 'switch',
+        name: 'Binary Switch',
         command_topic: commandTopic,
         optimistic: false,
         value_template: `{{ (value_json['${svc.addr}'].binary) | iif('ON', 'OFF') }}`,

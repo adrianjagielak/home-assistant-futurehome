@@ -10,6 +10,7 @@ export function sensor_dew__components(
   svc: VinculumPd7Service,
 ): ServiceComponentsCreationResult | undefined {
   const device_class = 'temperature';
+  const name = undefined;
   let unit = svc.props?.sup_units?.[0] ?? '°C';
   if (unit === 'C') unit = '°C';
   if (unit === 'F') unit = '°F';
@@ -19,6 +20,7 @@ export function sensor_dew__components(
       [svc.addr]: {
         unique_id: svc.addr,
         platform: 'sensor',
+        name: name,
         device_class: device_class,
         unit_of_measurement: unit,
         value_template: `{{ value_json['${svc.addr}'].sensor }}`,

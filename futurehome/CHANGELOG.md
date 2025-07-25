@@ -5,6 +5,7 @@
 
 - Added support for 'chargepoint' service (EV chargers).
 - Updated demo mode data to add thermostat with dual setpoint system (heat+cool).
+- Added default entities names.
 
 ## 0.1.2 (24.07.2025)
 

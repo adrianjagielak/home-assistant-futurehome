@@ -10,6 +10,7 @@ export function sensor_co2__components(
   svc: VinculumPd7Service,
 ): ServiceComponentsCreationResult | undefined {
   const device_class = 'carbon_dioxide';
+  const name = undefined;
   const unit = svc.props?.sup_units?.[0] ?? 'ppm';
 
   return {
@@ -17,6 +18,7 @@ export function sensor_co2__components(
       [svc.addr]: {
         unique_id: svc.addr,
         platform: 'sensor',
+        name: name,
         device_class: device_class,
         unit_of_measurement: unit,
         value_template: `{{ value_json['${svc.addr}'].sensor }}`,

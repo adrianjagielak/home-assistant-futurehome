@@ -41,6 +41,7 @@ export function barrier_ctrl__components(
   } else {
     deviceClass = null;
   }
+  const name = deviceClass ? undefined : 'Barrier';
 
   // Check if position control is supported
   const supportsPosition = svc.props?.sup_tposition === true;
@@ -50,6 +51,7 @@ export function barrier_ctrl__components(
     unique_id: svc.addr,
     platform: 'cover',
     device_class: deviceClass,
+    name: name,
     command_topic: commandTopic,
     optimistic: false,
     value_template: `{{ value_json['${svc.addr}'].state }}`,

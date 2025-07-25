@@ -16,7 +16,7 @@ import { ServiceComponentsCreationResult } from '../ha/publish_device';
 
 export function basic__components(
   topicPrefix: string,
-  _device: VinculumPd7Device,
+  device: VinculumPd7Device,
   svc: VinculumPd7Service,
 ): ServiceComponentsCreationResult | undefined {
   // MQTT topic that HA will publish commands to
@@ -31,6 +31,7 @@ export function basic__components(
       [svc.addr]: {
         unique_id: svc.addr,
         platform: 'number',
+        name: device.client?.name ?? device?.modelAlias,
         min: MIN_LVL,
         max: MAX_LVL,
         step: 1,

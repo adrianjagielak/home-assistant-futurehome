@@ -21,6 +21,7 @@ export function fan_ctrl__components(
       [svc.addr]: {
         unique_id: svc.addr,
         platform: 'fan',
+        name: 'Fan',
         command_topic: commandTopic,
         optimistic: false,
         preset_modes: supModes,

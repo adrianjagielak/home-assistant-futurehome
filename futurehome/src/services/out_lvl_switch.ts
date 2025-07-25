@@ -20,6 +20,7 @@ export function out_lvl_switch__components(
       [svc.addr]: {
         unique_id: svc.addr,
         platform: 'number',
+        name: 'Level Switch',
         min: minLvl,
         max: maxLvl,
         step: 1,
