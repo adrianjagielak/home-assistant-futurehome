@@ -117,7 +117,7 @@ todo: links to the .ts service implementations below
 | sensor_wattemp | | ✅ |
 | sensor_weight | | ✅ |
 | sensor_wind | | ✅ |
-| siren_ctrl | | |
+| siren_ctrl | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | ✅ |
 | thermostat | [Thermostat](https://www.futurehome.io/en_no/shop/thermostat-w) | ✅ |
 | user_code | | |
 | water_heater | | ✅ |

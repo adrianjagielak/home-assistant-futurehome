@@ -1314,5 +1314,164 @@
         "name": "media_player"
       }
     ]
+  },
+  {
+    "id": 73,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:alarm_burglar/ad:86_0",
+        "attributes": [
+          {
+            "name": "alarm",
+            "values": [
+              {
+                "ts": "2023-06-22 10:31:28 +0200",
+                "val": {
+                  "event": "tamper_removed_cover",
+                  "status": "deactiv"
+                },
+                "val_t": "str_map"
+              }
+            ]
+          }
+        ],
+        "name": "alarm_burglar"
+      },
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:technology_specific/ad:86_0",
+        "attributes": [
+          {
+            "name": "notification",
+            "values": [
+              {
+                "ts": "2023-06-25 22:04:42 +0200",
+                "val": {
+                  "category": "smoke_alarm",
+                  "domain": "zwave",
+                  "subject": "",
+                  "type": "state",
+                  "value": "unknown_event_state"
+                },
+                "val_t": "str_map"
+              }
+            ]
+          }
+        ],
+        "name": "technology_specific"
+      },
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:battery/ad:86_0",
+        "attributes": [
+          {
+            "name": "lvl",
+            "values": [
+              {
+                "ts": "2023-06-29 09:00:25 +0200",
+                "val": 80,
+                "val_t": "int"
+              }
+            ]
+          }
+        ],
+        "name": "battery"
+      },
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:alarm_fire/ad:86_0",
+        "attributes": [
+          {
+            "name": "alarm",
+            "values": [
+              {
+                "ts": "2023-05-17 10:37:23 +0200",
+                "val": {
+                  "event": "smoke_test",
+                  "status": "deactiv"
+                },
+                "val_t": "str_map"
+              },
+              {
+                "ts": "2023-06-22 10:28:58 +0200",
+                "val": {
+                  "event": "smoke",
+                  "status": "deactiv"
+                },
+                "val_t": "str_map"
+              },
+              {
+                "ts": "2023-03-08 12:37:12 +0100",
+                "val": {
+                  "event": "CO",
+                  "status": "deactiv"
+                },
+                "val_t": "str_map"
+              },
+              {
+                "props": {
+                  "silenced_by": "command"
+                },
+                "ts": "2023-06-22 17:53:19 +0200",
+                "val": {
+                  "event": "silenced",
+                  "status": "activ"
+                },
+                "val_t": "str_map"
+              }
+            ]
+          }
+        ],
+        "name": "alarm_fire"
+      },
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:86_0",
+        "attributes": [
+          {
+            "name": "state",
+            "values": [
+              {
+                "ts": "2023-06-22 16:35:24 +0200",
+                "val": "UP",
+                "val_t": "string"
+              }
+            ]
+          }
+        ],
+        "name": "dev_sys"
+      },
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:siren_ctrl/ad:86_0",
+        "attributes": [
+          {
+            "name": "mode",
+            "values": [
+              {
+                "ts": "2023-06-22 15:49:51 +0200",
+                "val": "on",
+                "val_t": "string"
+              }
+            ]
+          }
+        ],
+        "nam,e": "siren_ctrl"
+      },
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:alarm_heat/ad:86_0",
+        "attributes": [
+          {
+            "name": "alarm",
+            "values": [
+              {
+                "ts": "2022-10-14 17:45:52 +0200",
+                "val": {
+                  "event": "overheat",
+                  "status": "deactiv"
+                },
+                "val_t": "str_map"
+              }
+            ]
+          }
+        ],
+        "name": "alarm_heat"
+      }
+    ]
   }
 ]

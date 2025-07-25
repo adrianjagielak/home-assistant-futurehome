@@ -6,6 +6,7 @@
 - Added support for 'media_player' service.
 - Removed demo mode 'optimistic' override causing switches to look weird.
 - Updated demo mode fake state handling.
+- Added support for 'siren_ctrl' service (alarm sirens).
 
 ## 0.1.3 (25.07.2025)
 

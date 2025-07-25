@@ -1995,5 +1995,175 @@
       }
     },
     "metadata": null
+  },
+  {
+    "client": {
+      "name": "Futurehome SDCO Alarm"
+    },
+    "fimp": {
+      "adapter": "zwave-ad",
+      "address": "86",
+      "group": "ch_0"
+    },
+    "functionality": null,
+    "id": 73,
+    "lrn": true,
+    "model": "Futurehome SDCO Alarm",
+    "modelAlias": "Futurehome SDCO Alarm",
+    "param": {
+      "alarms": {
+        "fire": ["smoke_test"]
+      },
+      "batteryLevel": "ok",
+      "batteryPercentage": 80,
+      "humidity": 38,
+      "siren": "silence",
+      "smoke": false,
+      "supportedAlarms": {
+        "burglar": ["tamper_removed_cover"],
+        "fire": ["smoke", "smoke_test"],
+        "gas": ["CO"],
+        "heat": ["overheat"]
+      },
+      "temperature": 22.9799995422363,
+      "timestamp": "2020-01-30 07:23:39 +0100"
+    },
+    "problem": false,
+    "room": null,
+    "services": {
+      "alarm_burglar": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:alarm_burglar/ad:86_0",
+        "enabled": true,
+        "intf": ["cmd.alarm.get_report", "evt.alarm.report"],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_events": ["tamper_removed_cover"]
+        }
+      },
+      "alarm_fire": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:alarm_fire/ad:86_0",
+        "enabled": true,
+        "intf": ["cmd.alarm.get_report", "evt.alarm.report"],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_events": ["smoke", "smoke_test"]
+        }
+      },
+      "alarm_gas": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:alarm_gas/ad:86_0",
+        "enabled": true,
+        "intf": ["cmd.alarm.get_report", "evt.alarm.report"],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_events": ["CO"]
+        }
+      },
+      "alarm_heat": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:alarm_heat/ad:86_0",
+        "enabled": true,
+        "intf": ["cmd.alarm.get_report", "evt.alarm.report"],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_events": ["overheat"]
+        }
+      },
+      "battery": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:battery/ad:86_0",
+        "enabled": true,
+        "intf": ["cmd.lvl.get_report", "evt.alarm.report", "evt.lvl.report"],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "complex_alarm_system": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:complex_alarm_system/ad:86_0",
+        "enabled": true,
+        "intf": ["cmd.alarm.silence", "evt.alarm.silence"],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "dev_sys": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:86_0",
+        "enabled": true,
+        "intf": [
+          "cmd.group.add_members",
+          "cmd.group.delete_members",
+          "cmd.group.get_members",
+          "cmd.ping.send",
+          "evt.group.members_report",
+          "evt.ping.report"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "indicator_ctrl": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:indicator_ctrl/ad:86_0",
+        "enabled": true,
+        "intf": ["cmd.indicator.set_visual_element"],
+        "props": {
+          "duration": "",
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "scene_ctrl": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:scene_ctrl/ad:86_0",
+        "enabled": true,
+        "intf": ["cmd.scene.get_report", "cmd.scene.set", "evt.scene.report"],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_modes": ["on", "off"]
+        }
+      },
+      "sensor_humid": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:sensor_humid/ad:86_0",
+        "enabled": true,
+        "intf": ["cmd.sensor.get_report", "evt.sensor.report"],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_units": ["g/m3", "%"]
+        }
+      },
+      "sensor_temp": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:sensor_temp/ad:86_0",
+        "enabled": true,
+        "intf": ["cmd.sensor.get_report", "evt.sensor.report"],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_units": ["C", "F"]
+        }
+      },
+      "siren_ctrl": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:siren_ctrl/ad:86_0",
+        "enabled": true,
+        "intf": ["cmd.mode.get_report", "cmd.mode.set", "evt.mode.report"],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_modes": ["on", "off", "fire", "CO"]
+        }
+      }
+    },
+    "supports": ["clear", "poll"],
+    "thing": 56,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "fire_detector": []
+      },
+      "type": null
+    }
   }
 ]

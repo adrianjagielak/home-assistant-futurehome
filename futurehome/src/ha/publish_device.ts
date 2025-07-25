@@ -56,6 +56,7 @@ import { sensor_watpressure__components } from '../services/sensor_watpressure';
 import { sensor_wattemp__components } from '../services/sensor_wattemp';
 import { sensor_weight__components } from '../services/sensor_weight';
 import { sensor_wind__components } from '../services/sensor_wind';
+import { siren_ctrl__components } from '../services/siren_ctrl';
 import { thermostat__components } from '../services/thermostat';
 import { water_heater__components } from '../services/water_heater';
 import { abbreviateHaMqttKeys } from './abbreviate_ha_mqtt_keys';
@@ -215,6 +216,7 @@ const serviceHandlers: {
   sensor_wattemp: sensor_wattemp__components,
   sensor_weight: sensor_weight__components,
   sensor_wind: sensor_wind__components,
+  siren_ctrl: siren_ctrl__components,
   thermostat: thermostat__components,
   water_heater: water_heater__components,
 };
