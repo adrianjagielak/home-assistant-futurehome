@@ -42,24 +42,91 @@ export interface SensorComponent {
    *
    * If a `value_template` is used to parse a JSON payload, a `null` value in the JSON
    * [will be rendered as](https://www.home-assistant.io/docs/configuration/templating/#using-value-templates-with-mqtt) `'None'`.
-   * Note that the `device_class` can be `null`.
    */
   state_topic?: string;
 
   /**
    * The [type/class](https://www.home-assistant.io/integrations/sensor/#device-class) of the sensor to set the icon in the frontend.
-   * The `device_class` can be `null`.
+   * The `device_class` defaults to `null` (generic sensor).
    */
-  device_class?: string | null;
+  device_class?:
+    | 'apparent_power'
+    | 'aqi'
+    | 'area'
+    | 'atmospheric_pressure'
+    | 'battery'
+    | 'blood_glucose_concentration'
+    | 'carbon_dioxide'
+    | 'carbon_monoxide'
+    | 'current'
+    | 'data_rate'
+    | 'data_size'
+    | 'date'
+    | 'distance'
+    | 'duration'
+    | 'energy'
+    | 'energy_distance'
+    | 'energy_storage'
+    | 'enum'
+    | 'frequency'
+    | 'gas'
+    | 'humidity'
+    | 'illuminance'
+    | 'irradiance'
+    | 'moisture'
+    | 'monetary'
+    | 'nitrogen_dioxide'
+    | 'nitrogen_monoxide'
+    | 'nitrous_oxide'
+    | 'ozone'
+    | 'ph'
+    | 'pm1'
+    | 'pm25'
+    | 'pm10'
+    | 'power_factor'
+    | 'power'
+    | 'precipitation'
+    | 'precipitation_intensity'
+    | 'pressure'
+    | 'reactive_energy'
+    | 'reactive_power'
+    | 'signal_strength'
+    | 'sound_pressure'
+    | 'speed'
+    | 'sulphur_dioxide'
+    | 'temperature'
+    | 'timestamp'
+    | 'volatile_organic_compounds'
+    | 'volatile_organic_compounds_parts'
+    | 'voltage'
+    | 'volume'
+    | 'volume_flow_rate'
+    | 'volume_storage'
+    | 'water'
+    | 'weight'
+    | 'wind_direction'
+    | 'wind_speed'
+    | null;
 
   /**
    * The [state_class](https://developers.home-assistant.io/docs/core/entity/sensor#available-state-classes) of the sensor.
+   * Defaults to 'measurement'.
+   *
+   * Possible values:
+   * - `measurement` - The state represents a measurement in present time, such as current temperature or humidity.
+   * - `measurement_angle` - Like `measurement`, but specifically for angles in degrees (°), e.g., wind direction.
+   * - `total` - Represents a total amount that can both increase and decrease, e.g., a net energy meter.
+   * - `total_increasing` - A monotonically increasing total that periodically resets to 0, e.g., daily water consumption.
    */
-  state_class?: string;
+  state_class?:
+    | 'measurement'
+    | 'measurement_angle'
+    | 'total'
+    | 'total_increasing';
 
   /**
    * Defines the units of measurement of the sensor, if any.
-   * The `unit_of_measurement` can be `null`.
+   * The `unit_of_measurement` defaults to `null`.
    */
   unit_of_measurement?: string | null;
 
@@ -76,7 +143,10 @@ export interface SensorComponent {
 
   /**
    * The name of the MQTT sensor.
-   * Can be set to `null` if only the device name is relevant.
+   *
+   * It is recommended to set the name when entity identifiers (such as `device_class` or `state_class`)
+   * do not accurately represent the purpose of the entity, to avoid showing the default 'MQTT' name.
+   *
    * Default: "MQTT Sensor"
    */
   name?: string | null;
@@ -107,6 +177,12 @@ export interface SensorComponent {
 
   /**
    * [Icon](https://www.home-assistant.io/docs/configuration/customizing-devices/#icon) for the entity.
+   *
+   * The icon must be a Material Design Icons (MDI) string identifier, for example: `mdi:thermometer`, `mdi:battery`, or `mdi:water`.
+   *
+   * It is recommended to set the icon when the default icon or other entity identifiers (such as `device_class` or `state_class`)
+   * do not accurately represent the purpose of the entity. In most cases, relying on the automatic icon selection ensures better consistency
+   * and compatibility with future updates.
    */
   icon?: string;
 

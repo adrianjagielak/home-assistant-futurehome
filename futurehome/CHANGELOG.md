@@ -1,6 +1,10 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
 
+## 0.1.3 (25.07.2025)
+
+- Added support for 'chargepoint' service (EV chargers).
+
 ## 0.1.2 (24.07.2025)
 
 - Added support for 'water_heater' service (devices such as water boiler or a water tank).

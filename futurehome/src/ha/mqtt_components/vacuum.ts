@@ -63,7 +63,10 @@ export interface VacuumComponent {
 
   /**
    * The name of the vacuum.
-   * Can be set to `null` if only the device name is relevant.
+   *
+   * It is recommended to set the name when entity identifiers (such as `device_class` or `state_class`)
+   * do not accurately represent the purpose of the entity, to avoid showing the default 'MQTT' name.
+   *
    * Default: "MQTT Vacuum"
    */
   name?: string | null;

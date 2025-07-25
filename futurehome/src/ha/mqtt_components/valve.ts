@@ -64,7 +64,7 @@ export interface ValveComponent {
   value_template?: string;
 
   /**
-   * Flag that defines if the valve works in optimistic mode.
+   * Flag that defines if the valve works in optimistic mode (not waiting for state update before showing the change in Home Assistant).
    * Optimistic mode means the valve immediately changes state after command is sent,
    * without waiting for state update from the device.
    * Defaults to `false` if `state_topic` or position topics are defined; `true` otherwise.
@@ -194,12 +194,21 @@ export interface ValveComponent {
 
   /**
    * [Icon](https://www.home-assistant.io/docs/configuration/customizing-devices/#icon) for the entity.
+   *
+   * The icon must be a Material Design Icons (MDI) string identifier, for example: `mdi:thermometer`, `mdi:battery`, or `mdi:water`.
+   *
+   * It is recommended to set the icon when the default icon or other entity identifiers (such as `device_class` or `state_class`)
+   * do not accurately represent the purpose of the entity. In most cases, relying on the automatic icon selection ensures better consistency
+   * and compatibility with future updates.
    */
   icon?: string;
 
   /**
    * The name of the valve.
-   * Can be set to `null` if only the device name is relevant.
+   *
+   * It is recommended to set the name when entity identifiers (such as `device_class` or `state_class`)
+   * do not accurately represent the purpose of the entity, to avoid showing the default 'MQTT' name.
+   *
    * Default: "MQTT valve"
    */
   name?: string | null;
@@ -212,7 +221,7 @@ export interface ValveComponent {
   /**
    * Sets the [class of the device](https://www.home-assistant.io/integrations/valve/#device_class),
    * changing the device state and icon that is displayed on the frontend.
-   * The `device_class` can be `null`.
+   * The `device_class` defaults to `null`.
    */
   device_class?: string | null;
 }

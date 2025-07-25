@@ -86,8 +86,63 @@ export interface NumberComponent {
 
   /**
    * The [type/class](https://www.home-assistant.io/integrations/number/#device-class) of the number. The `device_class` can be `null`.
+   * The `device_class` defaults to `null` (generic number).
    */
-  device_class?: string | null;
+  device_class?:
+    | 'apparent_power'
+    | 'aqi'
+    | 'area'
+    | 'atmospheric_pressure'
+    | 'battery'
+    | 'blood_glucose_concentration'
+    | 'carbon_dioxide'
+    | 'carbon_monoxide'
+    | 'current'
+    | 'data_rate'
+    | 'data_size'
+    | 'distance'
+    | 'duration'
+    | 'energy'
+    | 'energy_distance'
+    | 'energy_storage'
+    | 'frequency'
+    | 'gas'
+    | 'humidity'
+    | 'illuminance'
+    | 'irradiance'
+    | 'moisture'
+    | 'monetary'
+    | 'nitrogen_dioxide'
+    | 'nitrogen_monoxide'
+    | 'nitrous_oxide'
+    | 'ozone'
+    | 'ph'
+    | 'pm1'
+    | 'pm25'
+    | 'pm10'
+    | 'power_factor'
+    | 'power'
+    | 'precipitation'
+    | 'precipitation_intensity'
+    | 'pressure'
+    | 'reactive_energy'
+    | 'reactive_power'
+    | 'signal_strength'
+    | 'sound_pressure'
+    | 'speed'
+    | 'sulphur_dioxide'
+    | 'temperature'
+    | 'volatile_organic_compounds'
+    | 'volatile_organic_compounds_parts'
+    | 'voltage'
+    | 'volume'
+    | 'volume_flow_rate'
+    | 'volume_storage'
+    | 'water'
+    | 'weight'
+    | 'wind_direction'
+    | 'wind_speed'
+    | null;
 
   /**
    * Flag which defines if the entity should be enabled when first added.
@@ -104,6 +159,12 @@ export interface NumberComponent {
 
   /**
    * [Icon](https://www.home-assistant.io/docs/configuration/customizing-devices/#icon) for the entity.
+   *
+   * The icon must be a Material Design Icons (MDI) string identifier, for example: `mdi:thermometer`, `mdi:battery`, or `mdi:water`.
+   *
+   * It is recommended to set the icon when the default icon or other entity identifiers (such as `device_class` or `state_class`)
+   * do not accurately represent the purpose of the entity. In most cases, relying on the automatic icon selection ensures better consistency
+   * and compatibility with future updates.
    */
   icon?: string;
 
@@ -120,7 +181,7 @@ export interface NumberComponent {
   json_attributes_topic?: string;
 
   /**
-   * Flag that defines if number works in optimistic mode.
+   * Flag that defines if number works in optimistic mode (not waiting for state update before showing the change in Home Assistant).
    * Default: `true` if no `state_topic` defined, else `false`.
    */
   optimistic?: boolean;

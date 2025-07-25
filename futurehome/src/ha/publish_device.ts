@@ -7,6 +7,7 @@ import { log } from '../logger';
 import { barrier_ctrl__components } from '../services/barrier_ctrl';
 import { basic__components } from '../services/basic';
 import { battery__components } from '../services/battery';
+import { chargepoint__components } from '../services/chargepoint';
 import { color_ctrl__components } from '../services/color_ctrl';
 import { fan_ctrl__components } from '../services/fan_ctrl';
 import { indicator_ctrl__components } from '../services/indicator_ctrl';
@@ -163,6 +164,7 @@ const serviceHandlers: {
   barrier_ctrl: barrier_ctrl__components,
   basic: basic__components,
   battery: battery__components,
+  chargepoint: chargepoint__components,
   color_ctrl: color_ctrl__components,
   fan_ctrl: fan_ctrl__components,
   indicator_ctrl: indicator_ctrl__components,

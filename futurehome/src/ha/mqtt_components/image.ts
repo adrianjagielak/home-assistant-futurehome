@@ -88,7 +88,10 @@ export interface ImageComponent {
 
   /**
    * The name of the image.
-   * Can be set to `null` if only the device name is relevant.
+   *
+   * It is recommended to set the name when entity identifiers (such as `device_class` or `state_class`)
+   * do not accurately represent the purpose of the entity, to avoid showing the default 'MQTT' name.
+   *
    */
   name?: string | null;
 
@@ -111,6 +114,12 @@ export interface ImageComponent {
 
   /**
    * [Icon](https://www.home-assistant.io/docs/configuration/customizing-devices/#icon) for the entity.
+   *
+   * The icon must be a Material Design Icons (MDI) string identifier, for example: `mdi:thermometer`, `mdi:battery`, or `mdi:water`.
+   *
+   * It is recommended to set the icon when the default icon or other entity identifiers (such as `device_class` or `state_class`)
+   * do not accurately represent the purpose of the entity. In most cases, relying on the automatic icon selection ensures better consistency
+   * and compatibility with future updates.
    */
   icon?: string;
 }

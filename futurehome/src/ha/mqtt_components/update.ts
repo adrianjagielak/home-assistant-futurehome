@@ -67,7 +67,7 @@ export interface UpdateComponent {
   /**
    * The type/class of the update to set the icon in the frontend.
    * See [device classes](https://www.home-assistant.io/integrations/update/#device-classes).
-   * Can be null.
+   * Defaults to `null`.
    */
   device_class?: string | null;
 
@@ -92,6 +92,12 @@ export interface UpdateComponent {
 
   /**
    * [Icon](https://www.home-assistant.io/docs/configuration/customizing-devices/#icon) for the entity.
+   *
+   * The icon must be a Material Design Icons (MDI) string identifier, for example: `mdi:thermometer`, `mdi:battery`, or `mdi:water`.
+   *
+   * It is recommended to set the icon when the default icon or other entity identifiers (such as `device_class` or `state_class`)
+   * do not accurately represent the purpose of the entity. In most cases, relying on the automatic icon selection ensures better consistency
+   * and compatibility with future updates.
    */
   icon?: string;
 

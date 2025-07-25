@@ -48,7 +48,7 @@ export interface EventComponent {
 
   /**
    * The [type/class](https://www.home-assistant.io/integrations/event/#device-class) of the event to set the icon in the frontend.
-   * The `device_class` can be `null`.
+   * The `device_class` defaults to `null`.
    */
   device_class?: string | null;
 

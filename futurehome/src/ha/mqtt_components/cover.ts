@@ -40,7 +40,7 @@ export interface CoverComponent {
   /**
    * Sets the [class of the device](https://www.home-assistant.io/integrations/cover/#device_class),
    * changing the device state and icon that is displayed on the frontend.
-   * The `device_class` can be `null` (generic cover).
+   * The `device_class` defaults to `null` (generic cover).
    */
   device_class?: CoverDeviceClass;
 
@@ -59,6 +59,12 @@ export interface CoverComponent {
 
   /**
    * [Icon](https://www.home-assistant.io/docs/configuration/customizing-devices/#icon) for the entity.
+   *
+   * The icon must be a Material Design Icons (MDI) string identifier, for example: `mdi:thermometer`, `mdi:battery`, or `mdi:water`.
+   *
+   * It is recommended to set the icon when the default icon or other entity identifiers (such as `device_class` or `state_class`)
+   * do not accurately represent the purpose of the entity. In most cases, relying on the automatic icon selection ensures better consistency
+   * and compatibility with future updates.
    */
   icon?: string;
 
@@ -77,7 +83,10 @@ export interface CoverComponent {
 
   /**
    * The name of the cover.
-   * Can be set to `null` if only the device name is relevant.
+   *
+   * It is recommended to set the name when entity identifiers (such as `device_class` or `state_class`)
+   * do not accurately represent the purpose of the entity, to avoid showing the default 'MQTT' name.
+   *
    * Default: "MQTT Cover"
    */
   name?: string | null;
@@ -88,7 +97,7 @@ export interface CoverComponent {
   object_id?: string;
 
   /**
-   * Flag that defines if switch works in optimistic mode.
+   * Flag that defines if switch works in optimistic mode (not waiting for state update before showing the change in Home Assistant).
    * Default: `false` if `state_topic` or `position_topic` defined, else `true`.
    */
   optimistic?: boolean;
@@ -255,7 +264,7 @@ export interface CoverComponent {
   tilt_opened_value?: number;
 
   /**
-   * Flag that determines if tilt works in optimistic mode.
+   * Flag that determines if tilt works in optimistic mode (not waiting for state update before showing the change in Home Assistant).
    * Default: `true` if `tilt_status_topic` is not defined, else `false`.
    */
   tilt_optimistic?: boolean;

@@ -63,7 +63,7 @@ todo: links to the .ts service implementations below
 | barrier_ctrl | | ✅ |
 | basic | | ✅ |
 | battery | | ✅ |
-| chargepoint | [Futurehome Charge](https://www.futurehome.io/en_no/shop/charge) | |
+| chargepoint | [Futurehome Charge](https://www.futurehome.io/en_no/shop/charge) | ✅ |
 | color_ctrl | | ✅ |
 | complex_alarm_system | | |
 | door_lock | |  |
@@ -74,7 +74,7 @@ todo: links to the .ts service implementations below
 | meter_elec | [HAN-Sensor](https://www.futurehome.io/en/shop/han-sensor) | |
 | out_bin_switch | [16A Puck Relé](https://www.futurehome.io/en_no/shop/puck-relay-16a) | ✅ |
 | out_lvl_switch | [Smart LED Dimmer](https://www.futurehome.io/en_no/shop/smart-led-dimmer-polar-white) | ✅ |
-| power_regulator | | |
+| power_regulator | [16A Puck Relé](https://www.futurehome.io/en_no/shop/puck-relay-16a) | |
 | scene_ctrl | [Modusbryter](https://www.futurehome.io/en_no/shop/modeswitch-white) | ✅ |
 | sensor_accelx | | ✅ |
 | sensor_accely | | ✅ |

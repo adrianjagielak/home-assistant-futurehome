@@ -72,7 +72,7 @@ export interface LightComponent {
   brightness_value_template?: string;
 
   /**
-   * The flag that defines if the light works in optimistic mode.
+   * The flag that defines if the light works in optimistic mode (not waiting for state update before showing the change in Home Assistant).
    * Optimistic mode means the light immediately changes state after command,
    * without waiting for confirmation from state topic.
    * Default: `true` if no state topic defined, else `false`.
@@ -348,6 +348,12 @@ export interface LightComponent {
 
   /**
    * [Icon](https://www.home-assistant.io/docs/configuration/customizing-devices/#icon) for the entity.
+   *
+   * The icon must be a Material Design Icons (MDI) string identifier, for example: `mdi:thermometer`, `mdi:battery`, or `mdi:water`.
+   *
+   * It is recommended to set the icon when the default icon or other entity identifiers (such as `device_class` or `state_class`)
+   * do not accurately represent the purpose of the entity. In most cases, relying on the automatic icon selection ensures better consistency
+   * and compatibility with future updates.
    */
   icon?: string;
 
