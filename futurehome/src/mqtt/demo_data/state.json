@@ -20,6 +20,15 @@
                   "unit": "C"
                 },
                 "val_t": "str_map"
+              },
+              {
+                "ts": "2021-11-15 21:30:00 +0100",
+                "val": {
+                  "temp": "25.000000",
+                  "type": "cool",
+                  "unit": "C"
+                },
+                "val_t": "str_map"
               }
             ]
           },
@@ -28,7 +37,7 @@
             "values": [
               {
                 "ts": "2021-11-15 20:31:03 +0100",
-                "val": "heat",
+                "val": "auto",
                 "val_t": "string"
               }
             ]
@@ -565,70 +574,6 @@
           }
         ],
         "name": "out_bin_switch"
-      }
-    ]
-  },
-  {
-    "id": 193,
-    "services": [
-      {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:thermostat/ad:9_1",
-        "attributes": [
-          {
-            "name": "state",
-            "values": [
-              {
-                "ts": "2022-02-23 00:06:14 +0100",
-                "val": "Idle",
-                "val_t": "string"
-              }
-            ]
-          },
-          {
-            "name": "mode",
-            "values": [
-              {
-                "ts": "2022-02-23 00:06:13 +0100",
-                "val": "Manual",
-                "val_t": "string"
-              }
-            ]
-          },
-          {
-            "name": "setpoint",
-            "values": [
-              {
-                "ts": "2022-02-23 00:06:13 +0100",
-                "val": {
-                  "temp": "17",
-                  "type": "heat",
-                  "unit": "C"
-                },
-                "val_t": "str_map"
-              }
-            ]
-          }
-        ],
-        "name": "thermostat"
-      },
-      {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_temp/ad:9_1",
-        "attributes": [
-          {
-            "name": "sensor",
-            "values": [
-              {
-                "props": {
-                  "unit": "C"
-                },
-                "ts": "2022-02-23 00:06:13 +0100",
-                "val": 21,
-                "val_t": "float"
-              }
-            ]
-          }
-        ],
-        "name": "sensor_temp"
       }
     ]
   },

@@ -114,11 +114,15 @@
         "props": {
           "is_secure": false,
           "is_unsecure": true,
-          "sup_modes": ["off", "heat"],
-          "sup_setpoints": ["heat"],
+          "sup_modes": ["off", "heat", "cool", "auto", "fan", "dry"],
+          "sup_setpoints": ["heat", "cool"],
           "sup_temperatures": {
             "heat": {
-              "max": 35,
+              "max": 40,
+              "min": 10
+            },
+            "cool": {
+              "max": 30,
               "min": 5
             }
           }
@@ -916,74 +920,6 @@
         "light": []
       },
       "type": "light"
-    }
-  },
-  {
-    "client": {
-      "name": "Connecte Thermostat"
-    },
-    "fimp": {
-      "adapter": "zigbee",
-      "address": "9",
-      "group": "ch_1"
-    },
-    "functionality": null,
-    "id": 193,
-    "lrn": true,
-    "model": "zb - _TZE200_4hbx5cvx - TS0601",
-    "modelAlias": "Connecte Thermostat",
-    "param": {
-      "targetTemperature": 17,
-      "temperature": 21,
-      "timestamp": "2022-02-23 00:06:14 +0100"
-    },
-    "problem": false,
-    "room": null,
-    "services": {
-      "indicator_ctrl": {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:9_1",
-        "enabled": true,
-        "intf": ["cmd.indicator.set_visual_element"],
-        "props": {
-          "is_secure": true,
-          "is_unsecure": false
-        }
-      },
-      "sensor_temp": {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_temp/ad:9_1",
-        "enabled": true,
-        "intf": ["cmd.sensor.get_report", "evt.sensor.report"],
-        "props": {
-          "is_secure": true,
-          "is_unsecure": false,
-          "sup_units": ["C"],
-          "thing_role": "main"
-        }
-      },
-      "thermostat": {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:thermostat/ad:9_1",
-        "enabled": true,
-        "intf": [
-          "cmd.setpoint.get_report",
-          "cmd.setpoint.set",
-          "evt.setpoint.report"
-        ],
-        "props": {
-          "is_secure": true,
-          "is_unsecure": false,
-          "sup_modes": [],
-          "sup_setpoints": ["heat"]
-        }
-      }
-    },
-    "supports": ["clear", "poll"],
-    "thing": 147,
-    "type": {
-      "subtype": null,
-      "supported": {
-        "thermostat": []
-      },
-      "type": "thermostat"
     }
   },
   {
