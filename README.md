@@ -128,13 +128,13 @@ todo: links to the .ts service implementations below
 | Service | Description |
 | --- | --- |
 | appliance | |
-| blinds | |
-| boiler | |
-| fan | |
-| fire_detector | |
-| garage_door | |
-| gas_detector | |
-| gate | |
+| blinds | Replaced by barrier_ctrl |
+| boiler | Replaced by water_heater |
+| fan | Replaced by fan_ctrl|
+| fire_detector | Replaced by alarm_fire|
+| garage_door | Replaced by barrier_ctrl|
+| gas_detector | Replaced by alarm_gas |
+| gate | Replaced by barrier_ctrl |
 | heat_detector | |
 | heat_pump | |
 | heater | |
@@ -148,16 +148,16 @@ todo: links to the .ts service implementations below
 | schedule | Not recognized by the official app |
 | schedule_entry | Not recognized by the official app |
 | sensor | |
-| siren | |
+| siren | Replaced by siren_ctrl|
 | sound_switch | Not recognized by the official app |
 | time_parameters | Not recognized by the official app |
 | water_valve | |
 
 ## Virtual, unnecessary services (easily reproduced in stock Home Assistant)
 
-| Service | Implementation status |
+| Service | Description |
 | --- | --- |
-| virtual_meter_elec | |
+| virtual_meter_elec | A virtual electricity meter that estimates energy usage by multiplying the device's configured average power consumption with its operating duration. |
 
 ## System or meta, not essential services
 
