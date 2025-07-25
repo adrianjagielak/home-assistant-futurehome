@@ -11,6 +11,7 @@ import { chargepoint__components } from '../services/chargepoint';
 import { color_ctrl__components } from '../services/color_ctrl';
 import { fan_ctrl__components } from '../services/fan_ctrl';
 import { indicator_ctrl__components } from '../services/indicator_ctrl';
+import { media_player__components } from '../services/media_player';
 import { out_bin_switch__components } from '../services/out_bin_switch';
 import { out_lvl_switch__components } from '../services/out_lvl_switch';
 import { scene_ctrl__components } from '../services/scene_ctrl';
@@ -54,6 +55,7 @@ import { sensor_watflow__components } from '../services/sensor_watflow';
 import { sensor_watpressure__components } from '../services/sensor_watpressure';
 import { sensor_wattemp__components } from '../services/sensor_wattemp';
 import { sensor_weight__components } from '../services/sensor_weight';
+import { sensor_wind__components } from '../services/sensor_wind';
 import { thermostat__components } from '../services/thermostat';
 import { water_heater__components } from '../services/water_heater';
 import { abbreviateHaMqttKeys } from './abbreviate_ha_mqtt_keys';
@@ -168,6 +170,7 @@ const serviceHandlers: {
   color_ctrl: color_ctrl__components,
   fan_ctrl: fan_ctrl__components,
   indicator_ctrl: indicator_ctrl__components,
+  media_player: media_player__components,
   out_bin_switch: out_bin_switch__components,
   out_lvl_switch: out_lvl_switch__components,
   scene_ctrl: scene_ctrl__components,
@@ -211,6 +214,7 @@ const serviceHandlers: {
   sensor_watpressure: sensor_watpressure__components,
   sensor_wattemp: sensor_wattemp__components,
   sensor_weight: sensor_weight__components,
+  sensor_wind: sensor_wind__components,
   thermostat: thermostat__components,
   water_heater: water_heater__components,
 };

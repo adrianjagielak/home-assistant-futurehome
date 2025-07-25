@@ -1,6 +1,10 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
 
+## 0.1.4 (25.07.2025)
+
+- Added support for 'media_player' service.
+
 ## 0.1.3 (25.07.2025)
 
 - Added support for 'chargepoint' service (EV chargers).

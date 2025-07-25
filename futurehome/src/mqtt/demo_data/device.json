@@ -1942,5 +1942,58 @@
       }
     },
     "metadata": null
+  },
+  {
+    "client": {
+      "name": "Smart Speaker"
+    },
+    "id": 1001,
+    "model": "zigbee - Futurehome - Smart Speaker",
+    "modelAlias": "Smart Speaker",
+    "type": {
+      "subtype": null,
+      "supported": {
+        "boiler": []
+      },
+      "type": null
+    },
+    "locationRef": {
+      "id": "11",
+      "type": "Room"
+    },
+    "thingRef": {
+      "id": "166"
+    },
+    "origin": "056e610614c848c50b",
+    "services": {
+      "media_player": {
+        "name": "media_player",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:media_player/ad:1001_0",
+        "enabled": true,
+        "props": {
+          "sup_playback": ["play", "pause", "next_track", "previous_track"],
+          "sup_modes": ["repeat", "repeat_one", "shuffle", "crossfade"],
+          "sup_metadata": ["album", "track", "artist", "image_url"]
+        },
+        "intf": [
+          "cmd.playback.set",
+          "cmd.playback.get_report",
+          "evt.playback.report",
+          "cmd.playbackmode.set",
+          "cmd.playbackmode.get_report",
+          "evt.playbackmode.report",
+          "cmd.volume.set",
+          "cmd.volume.get_report",
+          "evt.volume.report",
+          "cmd.mute.set",
+          "cmd.mute.get_report",
+          "evt.mute.report",
+          "cmd.metadata.get_report",
+          "evt.metadata.report"
+        ],
+        "metadata": null
+      }
+    },
+    "metadata": null
   }
 ]

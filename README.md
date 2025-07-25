@@ -67,11 +67,11 @@ todo: links to the .ts service implementations below
 | chargepoint | [Futurehome Charge](https://www.futurehome.io/en_no/shop/charge) | ✅ |
 | color_ctrl | | ✅ |
 | complex_alarm_system | | |
-| door_lock | |  |
+| door_lock | | |
 | doorman | | |
 | fan_ctrl | | ✅ |
 | light | | ✅ |
-| media_player | | |
+| media_player | | ✅ |
 | meter_elec | [HAN-Sensor](https://www.futurehome.io/en/shop/han-sensor) | |
 | out_bin_switch | [16A Puck Relé](https://www.futurehome.io/en_no/shop/puck-relay-16a) | ✅ |
 | out_lvl_switch | [Smart LED Dimmer](https://www.futurehome.io/en_no/shop/smart-led-dimmer-polar-white) | ✅ |

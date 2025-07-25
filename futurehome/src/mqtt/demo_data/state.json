@@ -1243,5 +1243,76 @@
         "name": "sensor_wattemp"
       }
     ]
+  },
+  {
+    "id": 1001,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:media_player/ad:1001_0",
+        "attributes": [
+          {
+            "name": "playback",
+            "values": [
+              {
+                "ts": "2022-05-05 00:01:50 +0200",
+                "val": "play",
+                "val_t": "string"
+              }
+            ]
+          },
+          {
+            "name": "playbackmode",
+            "values": [
+              {
+                "ts": "2022-05-05 00:01:50 +0200",
+                "val": {
+                  "repeat": true,
+                  "repeat_one": false,
+                  "shuffle": false,
+                  "crossfade": false
+                },
+                "val_t": "bool_map"
+              }
+            ]
+          },
+          {
+            "name": "volume",
+            "values": [
+              {
+                "ts": "2022-05-05 00:01:50 +0200",
+                "val": 69,
+                "val_t": "int"
+              }
+            ]
+          },
+          {
+            "name": "mute",
+            "values": [
+              {
+                "ts": "2022-05-05 00:01:50 +0200",
+                "val": false,
+                "val_t": "bool"
+              }
+            ]
+          },
+          {
+            "name": "metadata",
+            "values": [
+              {
+                "ts": "2022-05-05 00:01:50 +0200",
+                "val": {
+                  "album": "The Dark Side of the Moon",
+                  "track": "Money",
+                  "artist": "Pink Floyd",
+                  "image_url": "https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png"
+                },
+                "val_t": "str_map"
+              }
+            ]
+          }
+        ],
+        "name": "media_player"
+      }
+    ]
   }
 ]
