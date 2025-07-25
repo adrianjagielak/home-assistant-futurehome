@@ -122,35 +122,22 @@ todo: links to the .ts service implementations below
 | user_code | | |
 | water_heater | | ✅ |
 
-## Services that are deprecated, unused, or removed in newer versions of the system.
+## Problematic services
 
 | Service | Description |
 | --- | --- |
-| appliance | |
-| blinds | Replaced by barrier_ctrl |
-| boiler | Replaced by water_heater |
-| fan | Replaced by fan_ctrl|
-| fire_detector | Replaced by alarm_fire|
-| garage_door | Replaced by barrier_ctrl|
-| gas_detector | Replaced by alarm_gas |
-| gate | Replaced by barrier_ctrl |
-| heat_detector | |
-| heat_pump | |
-| heater | |
-| input | |
-| leak_detector | |
-| meter | |
 | meter_cooling | |
 | meter_gas | |
-| meter_heating | |
 | meter_water | |
-| schedule | Not recognized by the official app |
-| schedule_entry | Not recognized by the official app |
-| sensor | |
-| siren | Replaced by siren_ctrl|
-| sound_switch | Not recognized by the official app |
-| time_parameters | Not recognized by the official app |
-| water_valve | |
+| meter_heating | |
+| schedule | |
+| schedule_entry | |
+| sound_switch | |
+| time_parameters | |
+| battery_charge_ctrl | |
+| inverter_consumer_conn | |
+| inverter_grid_conn | |
+| inverter_solar_conn | |
 
 ## Virtual, unnecessary services (easily reproduced in stock Home Assistant)
 

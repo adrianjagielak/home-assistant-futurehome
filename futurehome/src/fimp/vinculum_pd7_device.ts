@@ -33,6 +33,7 @@ export type VinculumPd7Device = {
       | 'boiler'
       | 'chargepoint'
       | 'door_lock'
+      | 'energy_storage'
       | 'fan'
       | 'fire_detector'
       | 'garage_door'
@@ -41,14 +42,16 @@ export type VinculumPd7Device = {
       | 'heat_detector'
       | 'heat_pump'
       | 'heater'
+      | 'input'
+      | 'inverter'
       | 'leak_detector'
       | 'light'
       | 'media_player'
       | 'meter'
+      | 'none'
       | 'sensor'
       | 'siren'
       | 'thermostat'
-      | 'input'
       | 'water_valve'
       | string
       | null;
@@ -60,11 +63,12 @@ export type VinculumPd7Device = {
       | 'garage'
       | 'lock'
       | 'main_elec'
+      | 'none'
+      | 'other'
       | 'presence'
       | 'scene'
       | 'window'
       | 'window_lock'
-      | 'inverter'
       | string
       | null;
   } | null;
