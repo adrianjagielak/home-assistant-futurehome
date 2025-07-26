@@ -1472,5 +1472,260 @@
         "name": "alarm_heat"
       }
     ]
+  },
+  {
+    "id": 145,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:meter_elec/ad:145_1",
+        "attributes": [
+          {
+            "name": "meter",
+            "values": [
+              {
+                "props": {
+                  "unit": "kWh"
+                },
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 1245.168,
+                "val_t": "float"
+              },
+              {
+                "props": {
+                  "unit": "W"
+                },
+                "ts": "2025-01-15 10:30:05 +0100",
+                "val": 850,
+                "val_t": "int"
+              }
+            ]
+          },
+          {
+            "name": "meter_ext",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:05 +0100",
+                "val": {
+                  "p_import": 850,
+                  "u1": 236.5,
+                  "i1": 3.6,
+                  "freq": 50.02,
+                  "p_factor": 0.98
+                },
+                "val_t": "float_map"
+              }
+            ]
+          }
+        ],
+        "name": "meter_elec"
+      }
+    ]
+  },
+  {
+    "id": 246,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:tibber/ad:1/sv:meter_elec/ad:246",
+        "attributes": [
+          {
+            "name": "meter",
+            "values": [
+              {
+                "props": {
+                  "unit": "kWh"
+                },
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 15420.891,
+                "val_t": "float"
+              },
+              {
+                "props": {
+                  "unit": "W"
+                },
+                "ts": "2025-01-15 10:30:05 +0100",
+                "val": 2450,
+                "val_t": "int"
+              }
+            ]
+          },
+          {
+            "name": "meter_export",
+            "values": [
+              {
+                "props": {
+                  "unit": "kWh"
+                },
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 892.456,
+                "val_t": "float"
+              },
+              {
+                "props": {
+                  "unit": "W"
+                },
+                "ts": "2025-01-15 10:30:05 +0100",
+                "val": 0,
+                "val_t": "int"
+              }
+            ]
+          },
+          {
+            "name": "meter_ext",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:05 +0100",
+                "val": {
+                  "p_import": 2450,
+                  "p_export": 0,
+                  "u1": 235.8,
+                  "u2": 236.1,
+                  "u3": 235.4,
+                  "i1": 10.4,
+                  "i2": 10.1,
+                  "i3": 10.8,
+                  "p1": 800,
+                  "p2": 825,
+                  "p3": 825,
+                  "freq": 50.01,
+                  "p_factor": 0.97,
+                  "e_import": 15420891,
+                  "e_export": 892456
+                },
+                "val_t": "float_map"
+              }
+            ]
+          }
+        ],
+        "name": "meter_elec"
+      }
+    ]
+  },
+  {
+    "id": 189,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:meter_gas/ad:189",
+        "attributes": [
+          {
+            "name": "meter",
+            "values": [
+              {
+                "props": {
+                  "unit": "cub_m"
+                },
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 1847.362,
+                "val_t": "float"
+              },
+              {
+                "props": {
+                  "unit": "pulse_c"
+                },
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 184736,
+                "val_t": "int"
+              }
+            ]
+          }
+        ],
+        "name": "meter_gas"
+      }
+    ]
+  },
+  {
+    "id": 222,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:meter_water/ad:222",
+        "attributes": [
+          {
+            "name": "meter",
+            "values": [
+              {
+                "props": {
+                  "unit": "cub_m"
+                },
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 94.127,
+                "val_t": "float"
+              },
+              {
+                "props": {
+                  "unit": "gallon"
+                },
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 24872.5,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "meter_water"
+      }
+    ]
+  },
+  {
+    "id": 298,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:hoiax/ad:1/sv:meter_heat/ad:298",
+        "attributes": [
+          {
+            "name": "meter",
+            "values": [
+              {
+                "props": {
+                  "unit": "kWh"
+                },
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 2847.92,
+                "val_t": "float"
+              },
+              {
+                "props": {
+                  "unit": "W"
+                },
+                "ts": "2025-01-15 10:30:05 +0100",
+                "val": 12500,
+                "val_t": "int"
+              }
+            ]
+          }
+        ],
+        "name": "meter_heat"
+      }
+    ]
+  },
+  {
+    "id": 312,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:hoiax/ad:1/sv:meter_cooling/ad:312",
+        "attributes": [
+          {
+            "name": "meter",
+            "values": [
+              {
+                "props": {
+                  "unit": "kWh"
+                },
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 1456.73,
+                "val_t": "float"
+              },
+              {
+                "props": {
+                  "unit": "W"
+                },
+                "ts": "2025-01-15 10:30:05 +0100",
+                "val": 8750,
+                "val_t": "int"
+              }
+            ]
+          }
+        ],
+        "name": "meter_cooling"
+      }
+    ]
   }
 ]

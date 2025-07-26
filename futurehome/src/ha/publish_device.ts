@@ -5,6 +5,7 @@ import {
 } from '../fimp/vinculum_pd7_device';
 import { log } from '../logger';
 import { _alarm__components } from '../services/_alarm';
+import { _meter__components } from '../services/_meter';
 import { _sensor_binary__components } from '../services/_sensor_binary';
 import { _sensor_numeric__components } from '../services/_sensor_numeric';
 import { barrier_ctrl__components } from '../services/barrier_ctrl';
@@ -150,6 +151,11 @@ const serviceHandlers: {
   fan_ctrl: fan_ctrl__components,
   indicator_ctrl: indicator_ctrl__components,
   media_player: media_player__components,
+  meter_elec: _meter__components,
+  meter_gas: _meter__components,
+  meter_water: _meter__components,
+  meter_heating: _meter__components,
+  meter_cooling: _meter__components,
   out_bin_switch: out_bin_switch__components,
   out_lvl_switch: out_lvl_switch__components,
   scene_ctrl: scene_ctrl__components,

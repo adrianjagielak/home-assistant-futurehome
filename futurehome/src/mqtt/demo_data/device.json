@@ -2165,5 +2165,176 @@
       },
       "type": null
     }
+  },
+  {
+    "client": {
+      "name": "Smart Electric Meter"
+    },
+    "id": 145,
+    "model": "zb - _TZ3040_bb6xaihh - TS0601",
+    "modelAlias": "Smart Electric Meter",
+    "type": {
+      "subtype": "main_elec",
+      "type": "meter"
+    },
+    "services": {
+      "meter_elec": {
+        "name": "meter_elec",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:meter_elec/ad:145_1",
+        "enabled": true,
+        "props": {
+          "sup_units": ["kWh", "W"],
+          "sup_extended_vals": ["p_import", "u1", "i1", "freq", "p_factor"]
+        },
+        "intf": [
+          "cmd.meter.get_report",
+          "evt.meter.report",
+          "cmd.meter_ext.get_report",
+          "evt.meter_ext.report",
+          "cmd.meter.reset"
+        ]
+      }
+    }
+  },
+  {
+    "client": {
+      "name": "3-Phase Smart Meter"
+    },
+    "id": 246,
+    "model": "Tibber - Tibber - Pulse Bridge",
+    "modelAlias": "Tibber Pulse Bridge",
+    "type": {
+      "subtype": "main_elec",
+      "type": "meter"
+    },
+    "services": {
+      "meter_elec": {
+        "name": "meter_elec",
+        "addr": "/rt:dev/rn:tibber/ad:1/sv:meter_elec/ad:246",
+        "enabled": true,
+        "props": {
+          "sup_units": ["kWh", "W"],
+          "sup_export_units": ["kWh", "W"],
+          "sup_extended_vals": [
+            "p_import",
+            "p_export",
+            "u1",
+            "u2",
+            "u3",
+            "i1",
+            "i2",
+            "i3",
+            "p1",
+            "p2",
+            "p3",
+            "freq",
+            "p_factor",
+            "e_import",
+            "e_export"
+          ]
+        },
+        "intf": [
+          "cmd.meter.get_report",
+          "evt.meter.report",
+          "cmd.meter_export.get_report",
+          "evt.meter_export.report",
+          "cmd.meter_ext.get_report",
+          "evt.meter_ext.report",
+          "cmd.meter.reset"
+        ]
+      }
+    }
+  },
+  {
+    "client": {
+      "name": "Smart Gas Meter"
+    },
+    "id": 189,
+    "model": "zb - _TZ3000_h4yw2xn6 - TS0601",
+    "modelAlias": "Smart Gas Meter",
+    "type": {
+      "subtype": null,
+      "type": "meter"
+    },
+    "services": {
+      "meter_gas": {
+        "name": "meter_gas",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:meter_gas/ad:189",
+        "enabled": true,
+        "props": {
+          "sup_units": ["cub_m", "pulse_c"]
+        },
+        "intf": ["cmd.meter.get_report", "evt.meter.report", "cmd.meter.reset"]
+      }
+    }
+  },
+  {
+    "client": {
+      "name": "Smart Water Meter"
+    },
+    "id": 222,
+    "model": "zw - Qubino - ZMNHWD1",
+    "modelAlias": "Qubino Water Meter",
+    "type": {
+      "subtype": null,
+      "type": "meter"
+    },
+    "services": {
+      "meter_water": {
+        "name": "meter_water",
+        "addr": "/rt:dev/rn:zw/ad:1/sv:meter_water/ad:222",
+        "enabled": true,
+        "props": {
+          "sup_units": ["cub_m", "gallon"]
+        },
+        "intf": ["cmd.meter.get_report", "evt.meter.report", "cmd.meter.reset"]
+      }
+    }
+  },
+  {
+    "client": {
+      "name": "Heat Meter"
+    },
+    "id": 298,
+    "model": "Hoiax - Futurehome - Heat Meter",
+    "modelAlias": "Futurehome Heat Meter",
+    "type": {
+      "subtype": null,
+      "type": "meter"
+    },
+    "services": {
+      "meter_heat": {
+        "name": "meter_heat",
+        "addr": "/rt:dev/rn:hoiax/ad:1/sv:meter_heat/ad:298",
+        "enabled": true,
+        "props": {
+          "sup_units": ["kWh", "W"]
+        },
+        "intf": ["cmd.meter.get_report", "evt.meter.report", "cmd.meter.reset"]
+      }
+    }
+  },
+  {
+    "client": {
+      "name": "Cooling Meter"
+    },
+    "id": 312,
+    "model": "Hoiax - Futurehome - Cooling Meter",
+    "modelAlias": "Futurehome Cooling Meter",
+    "type": {
+      "subtype": null,
+      "type": "meter"
+    },
+    "services": {
+      "meter_cooling": {
+        "name": "meter_cooling",
+        "addr": "/rt:dev/rn:hoiax/ad:1/sv:meter_cooling/ad:312",
+        "enabled": true,
+        "props": {
+          "sup_units": ["kWh", "W"]
+        },
+        "intf": ["cmd.meter.get_report", "evt.meter.report", "cmd.meter.reset"]
+      }
+    }
   }
 ]

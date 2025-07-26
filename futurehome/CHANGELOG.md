@@ -4,6 +4,7 @@
 
 - Improved MQTT components interfaces.
 - Refactored sensors.
+- Added support for 'meter_*' services (electricity meter, gas meter, water meter, heating meter, cooling meter).
 
 ## 0.1.5 (25.07.2025)
 

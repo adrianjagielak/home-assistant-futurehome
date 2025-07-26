@@ -12,7 +12,7 @@ export interface BaseComponent {
    * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
    * When set, the entity category must be `diagnostic` for sensors.
    */
-  entity_category?: string;
+  entity_category?: null | 'config' | 'diagnostic';
 
   /**
    * Picture URL for the entity.

@@ -177,11 +177,30 @@ const haStateCache: Record<
 
 const attributeTypeKeyMap: Record<string, string> = {
   alarm: 'event',
+  meter: 'props.unit',
+  meter_export: 'props.unit',
 };
 
+function getNestedValue(obj: any, path: string): any {
+  if (!obj) return undefined;
+  return path
+    .split('.')
+    .reduce((acc, key) => (acc != null ? acc[key] : undefined), obj);
+}
+
 function getTypeKey(attrName: string): string {
-  // Default key is 'type', but override for certain attributes
   return attributeTypeKeyMap[attrName] || 'type';
+}
+
+function extractTypeDiscriminator(
+  entry: any,
+  typeKeyPath: string,
+): string | undefined {
+  // Try to read the discriminator from the whole entry first (meter.props.unit),
+  // then fall back to inside val (e.g. val.type)
+  return (
+    getNestedValue(entry, typeKeyPath) ?? getNestedValue(entry.val, typeKeyPath)
+  );
 }
 
 /**
@@ -199,27 +218,28 @@ function processAttributeValues(values: any[], attrName?: string): any {
     return tsB - tsA; // Latest first
   });
 
-  const typeKey = getTypeKey(attrName || '');
+  const typeKeyPath = getTypeKey(attrName || '');
 
-  const hasTypedValues = sortedValues.some(
-    (v) => v.val && typeof v.val === 'object' && v.val[typeKey],
-  );
+  // Build list of entries that carry a discriminator
+  const entriesWithType = sortedValues
+    .map((v) => ({ v, key: extractTypeDiscriminator(v, typeKeyPath) }))
+    .filter((x) => !!x.key) as Array<{ v: any; key: string }>;
 
-  if (!hasTypedValues) {
-    // No typed values, return the latest value
+  if (entriesWithType.length === 0) {
+    // Not a typed attribute → just return latest value
     return sortedValues[0].val;
   }
 
-  // Group by type, keeping only the latest value for each type
+  // Group by (normalized) discriminator, keeping only the latest per type
   const typeMap: Record<string, any> = {};
 
-  for (const value of sortedValues) {
-    if (value.val && typeof value.val === 'object' && value.val[typeKey]) {
-      const key = value.val[typeKey];
-      if (!typeMap[key]) {
-        const { [typeKey]: _, ...valueWithoutType } = value.val;
-        typeMap[key] = valueWithoutType;
-      }
+  for (const { v, key } of entriesWithType) {
+    if (!typeMap[key]) {
+      const payload =
+        v && typeof v.val === 'object' && v.val !== null
+          ? { ...v.val }
+          : { val: v.val }; // wrap primitives like meter readings
+      typeMap[key] = payload;
     }
   }
 
@@ -284,6 +304,14 @@ export function haUpdateStateValueReport(parameters: {
   value: any;
   attrName: string;
 }) {
+  if (
+    parameters.attrName === 'meter' ||
+    parameters.attrName === 'meter_export'
+  ) {
+    // Ignore meter readings for now, relying on periodical site state updates
+    return;
+  }
+
   // Strip the FIMP envelope so we end up with "/rt:dev/…/ad:x_y"
   const addr = parameters.topic.replace(/^pt:j1\/mt:evt/, '');
   const typeKey = getTypeKey(parameters.attrName);
@@ -295,13 +323,14 @@ export function haUpdateStateValueReport(parameters: {
     if (
       parameters.value &&
       typeof parameters.value === 'object' &&
-      parameters.value[typeKey]
+      getNestedValue(parameters.value, typeKey)
     ) {
-      // Handle typed value update
-      const key = parameters.value[typeKey];
-      const { [typeKey]: _, ...valueWithoutType } = parameters.value;
+      const key = getNestedValue(parameters.value, typeKey);
+      const valueWithoutType =
+        typeof parameters.value === 'object' && parameters.value !== null
+          ? { ...parameters.value }
+          : { val: parameters.value };
 
-      // Get current attribute value
       const currentAttrValue = payload[addr][parameters.attrName];
 
       if (
