@@ -14,6 +14,7 @@ import { battery__components } from '../services/battery';
 import { chargepoint__components } from '../services/chargepoint';
 import { color_ctrl__components } from '../services/color_ctrl';
 import { complex_alarm_system__components } from '../services/complex_alarm_system';
+import { dev_sys__components } from '../services/dev_sys';
 import { door_lock__components } from '../services/door_lock';
 import { doorman__components } from '../services/doorman';
 import { fan_ctrl__components } from '../services/fan_ctrl';
@@ -155,6 +156,7 @@ const serviceHandlers: {
   chargepoint: chargepoint__components,
   color_ctrl: color_ctrl__components,
   complex_alarm_system: complex_alarm_system__components,
+  dev_sys: dev_sys__components,
   door_lock: door_lock__components,
   doorman: doorman__components,
   fan_ctrl: fan_ctrl__components,

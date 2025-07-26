@@ -11,6 +11,7 @@
 - Added support for 'schedule_entry' service (for scheduling access).
 - Added support for 'doorman' service (Yale door locks).
 - Added support for 'complex_alarm_system' service (part of alarm sirens control).
+- Added support for 'dev_sys' service (reboot device).
 
 ## 0.1.5 (25.07.2025)
 

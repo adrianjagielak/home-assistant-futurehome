@@ -60,35 +60,30 @@ todo add info about factory reset hub to restore 30 day trial
 | Keypad | [user_code](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/user_code.ts) | | ✅ | [Sensor](https://www.home-assistant.io/integrations/sensor/), [Binary sensor](https://www.home-assistant.io/integrations/binary_sensor/), [Button](https://www.home-assistant.io/integrations/button/), [Text](https://www.home-assistant.io/integrations/text/)|
 | Water heater | [water_heater](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/water_heater.ts) | | ✅ | [Water heater](https://www.home-assistant.io/integrations/water_heater/) |
 
-## Problematic services
+## Implemented system services
+
+| Name | Service | Implementation status | Home Assistant entity |
+| --- | --- | --- | --- |
+| Identify device | [indicator_ctrl](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/indicator_ctrl.ts) | | ✅ | [Button](https://www.home-assistant.io/integrations/button/) |
+| Reboot device | [dev_sys](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/dev_sys.ts) | | ✅ | [Button](https://www.home-assistant.io/integrations/button/) |
+
+## Other system, meta, unused, or not essential services
 
 | Service | Description |
 | --- | --- |
-| schedule | No devices or hub support this stub service. |
+| association | |
 | battery_charge_ctrl | No devices or hub support this stub service. |
+| diagnostic | Diagnostic (logging, etc) |
+| gateway | |
 | inverter_consumer_conn | No devices or hub support this stub service. |
 | inverter_grid_conn | No devices or hub support this stub service. |
 | inverter_solar_conn | No devices or hub support this stub service. |
-
-## Virtual, unnecessary services (easily reproduced in stock Home Assistant)
-
-| Service | Description |
-| --- | --- |
-| virtual_meter_elec | A virtual electricity meter that estimates energy usage by multiplying the device's configured average power consumption with its operating duration. |
-
-## System or meta, not essential services
-
-| Service | Implementation status | Description |
-| --- | --- | --- |
-| gateway | | |
-| association | | |
-| diagnostic | | |
-| indicator_ctrl | ✅ | Identify devices |
-| ota | | |
-| parameters | | |
+| ota | Managing OTA updates of devices |
+| parameters | |
 | Power regulator | [power_regulator](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/power_regulator.ts) | [16A Puck Relé](https://www.futurehome.io/en_no/shop/puck-relay-16a) | | |
-| technology_specific | | |
-| time | | |
-| time_parameters | |
-| version | | |
-| dev_sys | | |
+| schedule | No devices or hub support this stub service. |
+| technology_specific | |
+| time | Z-wave service for setting and reading time |
+| time_parameters | Z-wave service for setting and reading time |
+| version | Device hardware and software versions. Exposed through other means. |
+| virtual_meter_elec | A virtual electricity meter that estimates energy usage by multiplying the device's configured average power consumption with its operating duration. Easily reproducible using Home Assistant's built-in configuration. |
