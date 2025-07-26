@@ -5,6 +5,8 @@ import {
 } from '../fimp/vinculum_pd7_device';
 import { log } from '../logger';
 import { _alarm__components } from '../services/_alarm';
+import { _sensor_binary__components } from '../services/_sensor_binary';
+import { _sensor_numeric__components } from '../services/_sensor_numeric';
 import { barrier_ctrl__components } from '../services/barrier_ctrl';
 import { basic__components } from '../services/basic';
 import { battery__components } from '../services/battery';
@@ -16,47 +18,6 @@ import { media_player__components } from '../services/media_player';
 import { out_bin_switch__components } from '../services/out_bin_switch';
 import { out_lvl_switch__components } from '../services/out_lvl_switch';
 import { scene_ctrl__components } from '../services/scene_ctrl';
-import { sensor_accelx__components } from '../services/sensor_accelx';
-import { sensor_accely__components } from '../services/sensor_accely';
-import { sensor_accelz__components } from '../services/sensor_accelz';
-import { sensor_airflow__components } from '../services/sensor_airflow';
-import { sensor_airq__components } from '../services/sensor_airq';
-import { sensor_anglepos__components } from '../services/sensor_anglepos';
-import { sensor_atmo__components } from '../services/sensor_atmo';
-import { sensor_baro__components } from '../services/sensor_baro';
-import { sensor_co__components } from '../services/sensor_co';
-import { sensor_co2__components } from '../services/sensor_co2';
-import { sensor_contact__components } from '../services/sensor_contact';
-import { sensor_current__components } from '../services/sensor_current';
-import { sensor_dew__components } from '../services/sensor_dew';
-import { sensor_direct__components } from '../services/sensor_direct';
-import { sensor_distance__components } from '../services/sensor_distance';
-import { sensor_elresist__components } from '../services/sensor_elresist';
-import { sensor_freq__components } from '../services/sensor_freq';
-import { sensor_gp__components } from '../services/sensor_gp';
-import { sensor_gust__components } from '../services/sensor_gust';
-import { sensor_humid__components } from '../services/sensor_humid';
-import { sensor_lumin__components } from '../services/sensor_lumin';
-import { sensor_moist__components } from '../services/sensor_moist';
-import { sensor_noise__components } from '../services/sensor_noise';
-import { sensor_power__components } from '../services/sensor_power';
-import { sensor_presence__components } from '../services/sensor_presence';
-import { sensor_rain__components } from '../services/sensor_rain';
-import { sensor_rotation__components } from '../services/sensor_rotation';
-import { sensor_seismicint__components } from '../services/sensor_seismicint';
-import { sensor_seismicmag__components } from '../services/sensor_seismicmag';
-import { sensor_solarrad__components } from '../services/sensor_solarrad';
-import { sensor_tank__components } from '../services/sensor_tank';
-import { sensor_temp__components } from '../services/sensor_temp';
-import { sensor_tidelvl__components } from '../services/sensor_tidelvl';
-import { sensor_uv__components } from '../services/sensor_uv';
-import { sensor_veloc__components } from '../services/sensor_veloc';
-import { sensor_voltage__components } from '../services/sensor_voltage';
-import { sensor_watflow__components } from '../services/sensor_watflow';
-import { sensor_watpressure__components } from '../services/sensor_watpressure';
-import { sensor_wattemp__components } from '../services/sensor_wattemp';
-import { sensor_weight__components } from '../services/sensor_weight';
-import { sensor_wind__components } from '../services/sensor_wind';
 import { siren_ctrl__components } from '../services/siren_ctrl';
 import { thermostat__components } from '../services/thermostat';
 import { water_heater__components } from '../services/water_heater';
@@ -192,47 +153,47 @@ const serviceHandlers: {
   out_bin_switch: out_bin_switch__components,
   out_lvl_switch: out_lvl_switch__components,
   scene_ctrl: scene_ctrl__components,
-  sensor_accelx: sensor_accelx__components,
-  sensor_accely: sensor_accely__components,
-  sensor_accelz: sensor_accelz__components,
-  sensor_airflow: sensor_airflow__components,
-  sensor_airq: sensor_airq__components,
-  sensor_anglepos: sensor_anglepos__components,
-  sensor_atmo: sensor_atmo__components,
-  sensor_baro: sensor_baro__components,
-  sensor_co: sensor_co__components,
-  sensor_co2: sensor_co2__components,
-  sensor_contact: sensor_contact__components,
-  sensor_current: sensor_current__components,
-  sensor_dew: sensor_dew__components,
-  sensor_direct: sensor_direct__components,
-  sensor_distance: sensor_distance__components,
-  sensor_elresist: sensor_elresist__components,
-  sensor_freq: sensor_freq__components,
-  sensor_gp: sensor_gp__components,
-  sensor_gust: sensor_gust__components,
-  sensor_humid: sensor_humid__components,
-  sensor_lumin: sensor_lumin__components,
-  sensor_moist: sensor_moist__components,
-  sensor_noise: sensor_noise__components,
-  sensor_power: sensor_power__components,
-  sensor_presence: sensor_presence__components,
-  sensor_rain: sensor_rain__components,
-  sensor_rotation: sensor_rotation__components,
-  sensor_seismicint: sensor_seismicint__components,
-  sensor_seismicmag: sensor_seismicmag__components,
-  sensor_solarrad: sensor_solarrad__components,
-  sensor_tank: sensor_tank__components,
-  sensor_temp: sensor_temp__components,
-  sensor_tidelvl: sensor_tidelvl__components,
-  sensor_uv: sensor_uv__components,
-  sensor_veloc: sensor_veloc__components,
-  sensor_voltage: sensor_voltage__components,
-  sensor_watflow: sensor_watflow__components,
-  sensor_watpressure: sensor_watpressure__components,
-  sensor_wattemp: sensor_wattemp__components,
-  sensor_weight: sensor_weight__components,
-  sensor_wind: sensor_wind__components,
+  sensor_accelx: _sensor_numeric__components,
+  sensor_accely: _sensor_numeric__components,
+  sensor_accelz: _sensor_numeric__components,
+  sensor_airflow: _sensor_numeric__components,
+  sensor_airq: _sensor_numeric__components,
+  sensor_anglepos: _sensor_numeric__components,
+  sensor_atmo: _sensor_numeric__components,
+  sensor_baro: _sensor_numeric__components,
+  sensor_co: _sensor_numeric__components,
+  sensor_co2: _sensor_numeric__components,
+  sensor_contact: _sensor_binary__components,
+  sensor_current: _sensor_numeric__components,
+  sensor_dew: _sensor_numeric__components,
+  sensor_direct: _sensor_numeric__components,
+  sensor_distance: _sensor_numeric__components,
+  sensor_elresist: _sensor_numeric__components,
+  sensor_freq: _sensor_numeric__components,
+  sensor_gp: _sensor_numeric__components,
+  sensor_gust: _sensor_numeric__components,
+  sensor_humid: _sensor_numeric__components,
+  sensor_lumin: _sensor_numeric__components,
+  sensor_moist: _sensor_numeric__components,
+  sensor_noise: _sensor_numeric__components,
+  sensor_power: _sensor_numeric__components,
+  sensor_presence: _sensor_binary__components,
+  sensor_rain: _sensor_numeric__components,
+  sensor_rotation: _sensor_numeric__components,
+  sensor_seismicint: _sensor_numeric__components,
+  sensor_seismicmag: _sensor_numeric__components,
+  sensor_solarrad: _sensor_numeric__components,
+  sensor_tank: _sensor_numeric__components,
+  sensor_temp: _sensor_numeric__components,
+  sensor_tidelvl: _sensor_numeric__components,
+  sensor_uv: _sensor_numeric__components,
+  sensor_veloc: _sensor_numeric__components,
+  sensor_voltage: _sensor_numeric__components,
+  sensor_watflow: _sensor_numeric__components,
+  sensor_watpressure: _sensor_numeric__components,
+  sensor_wattemp: _sensor_numeric__components,
+  sensor_weight: _sensor_numeric__components,
+  sensor_wind: _sensor_numeric__components,
   siren_ctrl: siren_ctrl__components,
   thermostat: thermostat__components,
   water_heater: water_heater__components,

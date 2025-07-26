@@ -1,4 +1,5 @@
 import { BaseComponent } from './_base_component';
+import { SensorDeviceClass, SensorStateClass } from './_enums';
 
 /**
  * Represents an MQTT Sensor component for Home Assistant MQTT Discovery.
@@ -33,64 +34,7 @@ export interface SensorComponent extends BaseComponent {
    * The [type/class](https://www.home-assistant.io/integrations/sensor/#device-class) of the sensor to set the icon in the frontend.
    * The `device_class` defaults to `null` (generic sensor).
    */
-  device_class?:
-    | 'apparent_power'
-    | 'aqi'
-    | 'area'
-    | 'atmospheric_pressure'
-    | 'battery'
-    | 'blood_glucose_concentration'
-    | 'carbon_dioxide'
-    | 'carbon_monoxide'
-    | 'current'
-    | 'data_rate'
-    | 'data_size'
-    | 'date'
-    | 'distance'
-    | 'duration'
-    | 'energy'
-    | 'energy_distance'
-    | 'energy_storage'
-    | 'enum'
-    | 'frequency'
-    | 'gas'
-    | 'humidity'
-    | 'illuminance'
-    | 'irradiance'
-    | 'moisture'
-    | 'monetary'
-    | 'nitrogen_dioxide'
-    | 'nitrogen_monoxide'
-    | 'nitrous_oxide'
-    | 'ozone'
-    | 'ph'
-    | 'pm1'
-    | 'pm25'
-    | 'pm10'
-    | 'power_factor'
-    | 'power'
-    | 'precipitation'
-    | 'precipitation_intensity'
-    | 'pressure'
-    | 'reactive_energy'
-    | 'reactive_power'
-    | 'signal_strength'
-    | 'sound_pressure'
-    | 'speed'
-    | 'sulphur_dioxide'
-    | 'temperature'
-    | 'timestamp'
-    | 'volatile_organic_compounds'
-    | 'volatile_organic_compounds_parts'
-    | 'voltage'
-    | 'volume'
-    | 'volume_flow_rate'
-    | 'volume_storage'
-    | 'water'
-    | 'weight'
-    | 'wind_direction'
-    | 'wind_speed'
-    | null;
+  device_class?: SensorDeviceClass;
 
   /**
    * The [state_class](https://developers.home-assistant.io/docs/core/entity/sensor#available-state-classes) of the sensor.
@@ -102,11 +46,7 @@ export interface SensorComponent extends BaseComponent {
    * - `total` - Represents a total amount that can both increase and decrease, e.g., a net energy meter.
    * - `total_increasing` - A monotonically increasing total that periodically resets to 0, e.g., daily water consumption.
    */
-  state_class?:
-    | 'measurement'
-    | 'measurement_angle'
-    | 'total'
-    | 'total_increasing';
+  state_class?: SensorStateClass;
 
   /**
    * Defines the units of measurement of the sensor, if any.
