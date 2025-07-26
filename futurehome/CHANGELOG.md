@@ -8,6 +8,7 @@
 - Added support for 'sound_switch' service (sound emitters).
 - Added support for 'door_lock' service (door locks).
 - Added support for 'user_code' service (keypads).
+- Added support for 'schedule_entry' service (for scheduling access).
 
 ## 0.1.5 (25.07.2025)
 

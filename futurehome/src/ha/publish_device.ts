@@ -20,6 +20,7 @@ import { media_player__components } from '../services/media_player';
 import { out_bin_switch__components } from '../services/out_bin_switch';
 import { out_lvl_switch__components } from '../services/out_lvl_switch';
 import { scene_ctrl__components } from '../services/scene_ctrl';
+import { schedule_entry__components } from '../services/schedule_entry';
 import { siren_ctrl__components } from '../services/siren_ctrl';
 import { sound_switch__components } from '../services/sound_switch';
 import { thermostat__components } from '../services/thermostat';
@@ -163,6 +164,7 @@ const serviceHandlers: {
   out_bin_switch: out_bin_switch__components,
   out_lvl_switch: out_lvl_switch__components,
   scene_ctrl: scene_ctrl__components,
+  schedule_entry: schedule_entry__components,
   sensor_accelx: _sensor_numeric__components,
   sensor_accely: _sensor_numeric__components,
   sensor_accelz: _sensor_numeric__components,
