@@ -15,13 +15,9 @@ This add-on:
 * Supports pairing of new Zigbee, Z-Wave, and Futurehome devices (work-in-progress).
   (If you’ve previously used third-party integrations—e.g. Philips Hue—you can still interact with those devices, as long as they're paired with the hub. However, it's generally recommended to use the appropriate Home Assistant integration directly for such devices.)
 
-<!--
-todo: pairing
--->
-
 ## Installation
 
-1. In the Futurehome app, go to Smarthub settings and [enable Local API](https://support.futurehome.no/hc/no/articles/360033256491-Local-API-access-over-MQTT-Beta).
+1. In the Futurehome app, go to Settings > My household > Smarthub and enable Local API.
 2. (Optional but highly recommended) Block the hub’s internet (WAN) access in your router settings to prevent future firmware updates.
 3. In Home Assistant, enable the **MQTT** integration.
 4. [Add this add-on repository to Home Assistant](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fadrianjagielak%2Fhome-assistant-futurehome) and refresh the page.
@@ -37,88 +33,37 @@ Devices commonly consist of multiple services: for example, a presence sensor mi
 Some services are more common than others; some are deprecated entirely.
 
 <!--
+todo: pairing
+todo add info about factory reset hub to restore 30 day trial
 todo: links to the .ts service implementations below
 todo: service names and not just raw service identifiers?
 -->
 
-| Service | Example device | Implementation status |
-| --- | --- | --- |
-| alarm_appliance | | ✅ |
-| alarm_burglar | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | ✅ |
-| alarm_emergency | | ✅ |
-| alarm_fire | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | ✅ |
-| alarm_gas | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | ✅ |
-| alarm_health | | ✅ |
-| alarm_heat | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | ✅ |
-| alarm_lock | | ✅ |
-| alarm_power | | ✅ |
-| alarm_siren | | ✅ |
-| alarm_system | | ✅ |
-| alarm_time | | ✅ |
-| alarm_water | | ✅ |
-| alarm_water_valve | | ✅ |
-| alarm_weather | | ✅ |
-| barrier_ctrl | | ✅ |
-| basic | | ✅ |
-| battery | | ✅ |
-| chargepoint | [Futurehome Charge](https://www.futurehome.io/en_no/shop/charge) | ✅ |
-| color_ctrl | | ✅ |
-| complex_alarm_system | | |
-| door_lock | | |
-| doorman | | |
-| fan_ctrl | | ✅ |
-| light | | ✅ |
-| media_player | | ✅ |
-| meter_elec | [HAN-Sensor](https://www.futurehome.io/en/shop/han-sensor) | |
-| out_bin_switch | [16A Puck Relé](https://www.futurehome.io/en_no/shop/puck-relay-16a) | ✅ |
-| out_lvl_switch | [Smart LED Dimmer](https://www.futurehome.io/en_no/shop/smart-led-dimmer-polar-white) | ✅ |
-| power_regulator | [16A Puck Relé](https://www.futurehome.io/en_no/shop/puck-relay-16a) | |
-| scene_ctrl | [Modusbryter](https://www.futurehome.io/en_no/shop/modeswitch-white) | ✅ |
-| sensor_accelx | | ✅ |
-| sensor_accely | | ✅ |
-| sensor_accelz | | ✅ |
-| sensor_airflow | | ✅ |
-| sensor_airq | | ✅ |
-| sensor_anglepos | | ✅ |
-| sensor_atmo | | ✅ |
-| sensor_baro | | ✅ |
-| sensor_co | | ✅ |
-| sensor_co2 | | ✅ |
-| sensor_contact | | ✅ |
-| sensor_current | | ✅ |
-| sensor_dew | | ✅ |
-| sensor_direct | | ✅ |
-| sensor_distance | | ✅ |
-| sensor_elresist | | ✅ |
-| sensor_freq | | ✅ |
-| sensor_gp | | ✅ |
-| sensor_gust | | ✅ |
-| sensor_humid | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | ✅ |
-| sensor_lumin | | ✅ |
-| sensor_moist | | ✅ |
-| sensor_noise | | ✅ |
-| sensor_power | | ✅ |
-| sensor_presence | | ✅ |
-| sensor_rain | | ✅ |
-| sensor_rotation | | ✅ |
-| sensor_seismicint | | ✅ |
-| sensor_seismicmag | | ✅ |
-| sensor_solarrad | | ✅ |
-| sensor_tank | | ✅ |
-| sensor_temp | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | ✅ |
-| sensor_tidelvl | | ✅ |
-| sensor_uv | | ✅ |
-| sensor_veloc | | ✅ |
-| sensor_voltage | | ✅ |
-| sensor_watflow | | ✅ |
-| sensor_watpressure | | ✅ |
-| sensor_wattemp | | ✅ |
-| sensor_weight | | ✅ |
-| sensor_wind | | ✅ |
-| siren_ctrl | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | ✅ |
-| thermostat | [Thermostat](https://www.futurehome.io/en_no/shop/thermostat-w) | ✅ |
-| user_code | | |
-| water_heater | | ✅ |
+| Name | Service | Example device | Implementation status | Home Assistant entity |
+| --- | --- | --- | --- | --- |
+| Alarm | [alarm_appliance](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_burglar](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_emergency](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_fire](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_gas](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_health](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_heat](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_lock](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_power](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_siren](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_system](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_time](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_water](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_water_valve](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_weather](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts) | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | ✅ | [Binary sensor](https://www.home-assistant.io/integrations/binary_sensor/), [Button](https://www.home-assistant.io/integrations/button/) |
+| Blinds/door | [barrier_ctrl](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/barrier_ctrl.ts) | | ✅ | [Cover](https://www.home-assistant.io/integrations/cover/) |
+| Basic | [basic](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/basic.ts) | | ✅ | [Number](https://www.home-assistant.io/integrations/number/) |
+| Battery | [battery](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/battery.ts)| | ✅ | [Sensor](https://www.home-assistant.io/integrations/sensor/), [Binary sensor](https://www.home-assistant.io/integrations/binary_sensor/) |
+| Chargepoint | [chargepoint](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/chargepoint.ts) | [Futurehome Charge](https://www.futurehome.io/en_no/shop/charge) | ✅ | [Sensor](https://www.home-assistant.io/integrations/sensor/), [Switch](https://www.home-assistant.io/integrations/switch/), [Number](https://www.home-assistant.io/integrations/number/), [Select](https://www.home-assistant.io/integrations/select/) |
+| Color control | [color_ctrl](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/color_ctrl.ts) | | ✅ | [Light](https://www.home-assistant.io/integrations/light/) | 
+| Complex Alarm System | [complex_alarm_system](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/complex_alarm_system.ts) | | |
+| Door lock| [door_lock](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/door_lock.ts) | | |
+| ??? | [doorman](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/doorman.ts) | | |
+| Fan | [fan_ctrl](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/fan_ctrl.ts) | | ✅ | [Fan](https://www.home-assistant.io/integrations/fan/) |
+| Light | [light](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/light.ts) | | |
+| Media player | [media_player](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/media_player.ts) | | ✅ | [Select](https://www.home-assistant.io/integrations/select/), [Number](https://www.home-assistant.io/integrations/number/), [Switch](https://www.home-assistant.io/integrations/switch/), [Image](https://www.home-assistant.io/integrations/image/), [Sensor](https://www.home-assistant.io/integrations/sensor/) |
+| Meter (electricity) | [meter_elec](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/meter_elec.ts) | [HAN-Sensor](https://www.futurehome.io/en/shop/han-sensor) | | | 
+| Binary switch | [out_bin_switch](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/out_bin_switch.ts) | [16A Puck Relé](https://www.futurehome.io/en_no/shop/puck-relay-16a) | ✅ | [Switch](https://www.home-assistant.io/integrations/switch/) |
+| Level switch | [out_lvl_switch](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/out_lvl_switch.ts) | [Smart LED Dimmer](https://www.futurehome.io/en_no/shop/smart-led-dimmer-polar-white) | ✅ | [Number](https://www.home-assistant.io/integrations/number/) |
+| ??? | [power_regulator](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/power_regulator.ts) | [16A Puck Relé](https://www.futurehome.io/en_no/shop/puck-relay-16a) | | |
+| ??? | [scene_ctrl](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/scene_ctrl.ts) | [Modusbryter](https://www.futurehome.io/en_no/shop/modeswitch-white) | ✅ | [Sensor](https://www.home-assistant.io/integrations/sensor/), [Select](https://www.home-assistant.io/integrations/select/) |
+| Binary sensor | [sensor_contact](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_contact.ts), [sensor_presence](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_presence.ts) | | ✅ | [Binary sensor](https://www.home-assistant.io/integrations/binary_sensor/) |
+| Numeric sensor | [sensor_accelx](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_accelx.ts), [sensor_accely](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_accely.ts), [sensor_accelz](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_accelz.ts), [sensor_airflow](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_airflow.ts), [sensor_airq](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_airq.ts), [sensor_anglepos](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_anglepos.ts), [sensor_atmo](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_atmo.ts), [sensor_baro](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_baro.ts), [sensor_co](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_co.ts), [sensor_co2](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_co2.ts), [sensor_current](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_current.ts), [sensor_dew](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_dew.ts), [sensor_direct](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_direct.ts), [sensor_distance](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_distance.ts), [sensor_elresist](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_elresist.ts), [sensor_freq](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_freq.ts), [sensor_gp](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_gp.ts), [sensor_gust](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_gust.ts), [sensor_humid](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_humid.ts), [sensor_lumin](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_lumin.ts), [sensor_moist](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_moist.ts), [sensor_noise](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_noise.ts), [sensor_power](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_power.ts), [sensor_rain](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_rain.ts), [sensor_rotation](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_rotation.ts), [sensor_seismicint](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_seismicint.ts), [sensor_seismicmag](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_seismicmag.ts), [sensor_solarrad](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_solarrad.ts), [sensor_tank](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_tank.ts), [sensor_temp](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_temp.ts), [sensor_tidelvl](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_tidelvl.ts), [sensor_uv](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_uv.ts), [sensor_veloc](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_veloc.ts), [sensor_voltage](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_voltage.ts), [sensor_watflow](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_watflow.ts), [sensor_watpressure](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_watpressure.ts), [sensor_wattemp](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_wattemp.ts), [sensor_weight](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_weight.ts), [sensor_wind](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/sensor_wind.ts) | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | ✅ | [Sensor](https://www.home-assistant.io/integrations/sensor/) |
+| Siren | [siren_ctrl](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/siren_ctrl.ts) | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | ✅ | [Siren](https://www.home-assistant.io/integrations/siren/) |
+| Thermostat | [thermostat](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/thermostat.ts) | [Thermostat](https://www.futurehome.io/en_no/shop/thermostat-w) | ✅ | [Climate](https://www.home-assistant.io/integrations/climate/) |
+| ??? | [user_code](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/user_code.ts) | | | |
+| Water heater | [water_heater](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/water_heater.ts) | | ✅ | [Water heater](https://www.home-assistant.io/integrations/water_heater/) |
 
 ## Problematic services
 
