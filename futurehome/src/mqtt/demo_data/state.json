@@ -1727,5 +1727,50 @@
         "name": "meter_cooling"
       }
     ]
+  },
+  {
+    "id": 1002,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:sound_switch/ad:1002_0",
+        "attributes": [
+          {
+            "name": "config",
+            "values": [
+              {
+                "ts": "2025-07-26 14:30:15 +0200",
+                "val": {
+                  "default_tone_id": 1,
+                  "volume": 75
+                },
+                "val_t": "int_map"
+              }
+            ]
+          },
+          {
+            "name": "play",
+            "values": [
+              {
+                "ts": "2025-07-26 14:32:45 +0200",
+                "val": {
+                  "tone_id": 2,
+                  "volume": 80
+                },
+                "val_t": "int_map"
+              },
+              {
+                "ts": "2025-07-26 14:30:22 +0200",
+                "val": {
+                  "tone_id": 1,
+                  "volume": 75
+                },
+                "val_t": "int_map"
+              }
+            ]
+          }
+        ],
+        "name": "sound_switch"
+      }
+    ]
   }
 ]

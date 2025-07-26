@@ -20,6 +20,7 @@ import { out_bin_switch__components } from '../services/out_bin_switch';
 import { out_lvl_switch__components } from '../services/out_lvl_switch';
 import { scene_ctrl__components } from '../services/scene_ctrl';
 import { siren_ctrl__components } from '../services/siren_ctrl';
+import { sound_switch__components } from '../services/sound_switch';
 import { thermostat__components } from '../services/thermostat';
 import { water_heater__components } from '../services/water_heater';
 import { abbreviateHaMqttKeys } from './abbreviate_ha_mqtt_keys';
@@ -201,6 +202,7 @@ const serviceHandlers: {
   sensor_weight: _sensor_numeric__components,
   sensor_wind: _sensor_numeric__components,
   siren_ctrl: siren_ctrl__components,
+  sound_switch: sound_switch__components,
   thermostat: thermostat__components,
   water_heater: water_heater__components,
 };
