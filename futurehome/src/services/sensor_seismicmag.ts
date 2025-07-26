@@ -8,6 +8,7 @@ export function sensor_seismicmag__components(
   topicPrefix: string,
   device: VinculumPd7Device,
   svc: VinculumPd7Service,
+  _svcName: string,
 ): ServiceComponentsCreationResult | undefined {
   const device_class = undefined;
   const name = 'Seismic magnitude';

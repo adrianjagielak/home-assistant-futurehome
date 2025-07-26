@@ -175,10 +175,19 @@ const haStateCache: Record<
   Record<string, Record<string, any>> // payload (addr → { attr → value })
 > = {};
 
+const attributeTypeKeyMap: Record<string, string> = {
+  alarm: 'event',
+};
+
+function getTypeKey(attrName: string): string {
+  // Default key is 'type', but override for certain attributes
+  return attributeTypeKeyMap[attrName] || 'type';
+}
+
 /**
  * Helper function to process multiple values for an attribute, handling typed values
  */
-function processAttributeValues(values: any[]): any {
+function processAttributeValues(values: any[], attrName?: string): any {
   if (!values || values.length === 0) {
     return undefined;
   }
@@ -190,9 +199,10 @@ function processAttributeValues(values: any[]): any {
     return tsB - tsA; // Latest first
   });
 
-  // Check if any value has a 'type' property in its val object
+  const typeKey = getTypeKey(attrName || '');
+
   const hasTypedValues = sortedValues.some(
-    (v) => v.val && typeof v.val === 'object' && v.val.type,
+    (v) => v.val && typeof v.val === 'object' && v.val[typeKey],
   );
 
   if (!hasTypedValues) {
@@ -204,12 +214,11 @@ function processAttributeValues(values: any[]): any {
   const typeMap: Record<string, any> = {};
 
   for (const value of sortedValues) {
-    if (value.val && typeof value.val === 'object' && value.val.type) {
-      const type = value.val.type;
-      if (!typeMap[type]) {
-        // Create a copy without the 'type' property
-        const { type: _, ...valueWithoutType } = value.val;
-        typeMap[type] = valueWithoutType;
+    if (value.val && typeof value.val === 'object' && value.val[typeKey]) {
+      const key = value.val[typeKey];
+      if (!typeMap[key]) {
+        const { [typeKey]: _, ...valueWithoutType } = value.val;
+        typeMap[key] = valueWithoutType;
       }
     }
   }
@@ -238,7 +247,10 @@ export function haUpdateState(parameters: {
     const serviceState: Record<string, any> = {};
 
     for (const attr of service.attributes || []) {
-      const processedValue = processAttributeValues(attr.values || []);
+      const processedValue = processAttributeValues(
+        attr.values || [],
+        attr.name,
+      );
       if (processedValue !== undefined) {
         serviceState[attr.name] = processedValue;
       }
@@ -274,6 +286,7 @@ export function haUpdateStateValueReport(parameters: {
 }) {
   // Strip the FIMP envelope so we end up with "/rt:dev/…/ad:x_y"
   const addr = parameters.topic.replace(/^pt:j1\/mt:evt/, '');
+  const typeKey = getTypeKey(parameters.attrName);
 
   for (const [stateTopic, payload] of Object.entries(haStateCache)) {
     if (!payload[addr]) continue;
@@ -282,11 +295,11 @@ export function haUpdateStateValueReport(parameters: {
     if (
       parameters.value &&
       typeof parameters.value === 'object' &&
-      parameters.value.type
+      parameters.value[typeKey]
     ) {
       // Handle typed value update
-      const type = parameters.value.type;
-      const { type: _, ...valueWithoutType } = parameters.value;
+      const key = parameters.value[typeKey];
+      const { [typeKey]: _, ...valueWithoutType } = parameters.value;
 
       // Get current attribute value
       const currentAttrValue = payload[addr][parameters.attrName];
@@ -299,12 +312,12 @@ export function haUpdateStateValueReport(parameters: {
         // Current value is already a type map, update the specific type
         payload[addr][parameters.attrName] = {
           ...currentAttrValue,
-          [type]: valueWithoutType,
+          [key]: valueWithoutType,
         };
       } else {
         // Current value is not a type map, convert it to one
         payload[addr][parameters.attrName] = {
-          [type]: valueWithoutType,
+          [key]: valueWithoutType,
         };
       }
     } else {

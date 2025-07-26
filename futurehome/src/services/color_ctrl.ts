@@ -13,6 +13,7 @@ export function color_ctrl__components(
   topicPrefix: string,
   device: VinculumPd7Device,
   svc: VinculumPd7Service,
+  _svcName: string,
 ): ServiceComponentsCreationResult | undefined {
   const supComponents: string[] = svc.props?.sup_components ?? [];
 

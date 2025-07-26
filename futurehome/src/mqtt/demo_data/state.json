@@ -1303,8 +1303,7 @@
                 "val": {
                   "album": "The Dark Side of the Moon",
                   "track": "Money",
-                  "artist": "Pink Floyd",
-                  "image_url": "https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png"
+                  "artist": "Pink Floyd"
                 },
                 "val_t": "str_map"
               }

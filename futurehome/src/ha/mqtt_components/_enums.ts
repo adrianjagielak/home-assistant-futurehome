@@ -1,5 +1,36 @@
 export type EntityCategory = undefined | 'config' | 'diagnostic';
 
+export type BinarySensorDeviceClass =
+  | 'battery'
+  | 'battery_charging'
+  | 'carbon_monoxide'
+  | 'cold'
+  | 'connectivity'
+  | 'door'
+  | 'garage_door'
+  | 'gas'
+  | 'heat'
+  | 'light'
+  | 'lock'
+  | 'moisture'
+  | 'motion'
+  | 'moving'
+  | 'occupancy'
+  | 'opening'
+  | 'plug'
+  | 'power'
+  | 'presence'
+  | 'problem'
+  | 'running'
+  | 'safety'
+  | 'smoke'
+  | 'sound'
+  | 'tamper'
+  | 'update'
+  | 'vibration'
+  | 'window'
+  | null;
+
 export type CoverDeviceClass =
   | 'awning'
   | 'blind'

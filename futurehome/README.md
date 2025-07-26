@@ -37,29 +37,26 @@ Some services are more common than others; some are deprecated entirely.
 
 <!--
 todo: links to the .ts service implementations below
+todo: service names and not just raw service identifiers?
 -->
-
-<!--
-| alarm_appliance | | |
-| alarm_burglar | | |
-| alarm_emergency | | |
-| alarm_fire | | |
-| alarm_gas | | |
-| alarm_health | | |
-| alarm_heat | | |
-| alarm_lock | | |
-| alarm_power | | |
-| alarm_siren | | |
-| alarm_system | | |
-| alarm_time | | |
-| alarm_water | | |
-| alarm_water_valve | | |
-| alarm_weather | | |
- -->
 
 | Service | Example device | Implementation status |
 | --- | --- | --- |
-| _alarms_ services | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | |
+| alarm_appliance | | ✅ |
+| alarm_burglar | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | ✅ |
+| alarm_emergency | | ✅ |
+| alarm_fire | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | ✅ |
+| alarm_gas | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | ✅ |
+| alarm_health | | ✅ |
+| alarm_heat | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | ✅ |
+| alarm_lock | | ✅ |
+| alarm_power | | ✅ |
+| alarm_siren | | ✅ |
+| alarm_system | | ✅ |
+| alarm_time | | ✅ |
+| alarm_water | | ✅ |
+| alarm_water_valve | | ✅ |
+| alarm_weather | | ✅ |
 | barrier_ctrl | | ✅ |
 | basic | | ✅ |
 | battery | | ✅ |
@@ -95,7 +92,7 @@ todo: links to the .ts service implementations below
 | sensor_freq | | ✅ |
 | sensor_gp | | ✅ |
 | sensor_gust | | ✅ |
-| sensor_humid | | ✅ |
+| sensor_humid | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | ✅ |
 | sensor_lumin | | ✅ |
 | sensor_moist | | ✅ |
 | sensor_noise | | ✅ |
@@ -107,7 +104,7 @@ todo: links to the .ts service implementations below
 | sensor_seismicmag | | ✅ |
 | sensor_solarrad | | ✅ |
 | sensor_tank | | ✅ |
-| sensor_temp | | ✅ |
+| sensor_temp | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | ✅ |
 | sensor_tidelvl | | ✅ |
 | sensor_uv | | ✅ |
 | sensor_veloc | | ✅ |

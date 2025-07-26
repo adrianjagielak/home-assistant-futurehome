@@ -9,6 +9,7 @@ export function out_lvl_switch__components(
   topicPrefix: string,
   device: VinculumPd7Device,
   svc: VinculumPd7Service,
+  _svcName: string,
 ): ServiceComponentsCreationResult | undefined {
   const commandTopic = `${topicPrefix}${svc.addr}/command`;
 

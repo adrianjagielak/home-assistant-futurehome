@@ -24,8 +24,9 @@ import {
  */
 export function scene_ctrl__components(
   topicPrefix: string,
-  _device: VinculumPd7Device,
+  device: VinculumPd7Device,
   svc: VinculumPd7Service,
+  _svcName: string,
 ): ServiceComponentsCreationResult | undefined {
   const components: Record<string, HaMqttComponent> = {};
   const commandHandlers: CommandHandlers = {};

@@ -8,6 +8,7 @@ export function sensor_baro__components(
   topicPrefix: string,
   device: VinculumPd7Device,
   svc: VinculumPd7Service,
+  _svcName: string,
 ): ServiceComponentsCreationResult | undefined {
   const device_class = 'atmospheric_pressure';
   const name = undefined;

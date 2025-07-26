@@ -1,3 +1,5 @@
+import { BinarySensorDeviceClass } from "./_enums";
+
 /**
  * Represents a MQTT Binary Sensor component for Home Assistant MQTT Discovery.
  *
@@ -41,9 +43,9 @@ export interface BinarySensorComponent {
   /**
    * Sets the [class of the device](https://www.home-assistant.io/integrations/binary_sensor/#device-class),
    * changing the device state and icon that is displayed on the frontend.
-   * The `device_class` defaults to `null`.
+   * The `device_class` defaults to `null` (generic binary sensor).
    */
-  device_class?: string | null;
+  device_class?: BinarySensorDeviceClass;
 
   /**
    * The string that represents the `on` state.

@@ -1,6 +1,10 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
 
+## 0.1.5 (25.07.2025)
+
+- Added support for 'alarm_*' services (alarms).
+
 ## 0.1.4 (25.07.2025)
 
 - Added support for 'media_player' service.

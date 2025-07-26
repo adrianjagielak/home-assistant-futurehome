@@ -17,6 +17,7 @@ export function chargepoint__components(
   topicPrefix: string,
   device: VinculumPd7Device,
   svc: VinculumPd7Service,
+  _svcName: string,
 ): ServiceComponentsCreationResult | undefined {
   const components: Record<string, HaMqttComponent> = {};
   const commandHandlers: CommandHandlers = {};

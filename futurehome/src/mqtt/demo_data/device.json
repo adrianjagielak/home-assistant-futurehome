@@ -2054,7 +2054,7 @@
       "alarm_gas": {
         "addr": "/rt:dev/rn:zw/ad:1/sv:alarm_gas/ad:86_0",
         "enabled": true,
-        "intf": ["cmd.alarm.get_report", "evt.alarm.report"],
+        "intf": ["cmd.alarm.get_report", "evt.alarm.report", "cmd.alarm.clear"],
         "props": {
           "is_secure": true,
           "is_unsecure": false,

@@ -4,6 +4,7 @@ import {
   VinculumPd7Service,
 } from '../fimp/vinculum_pd7_device';
 import { log } from '../logger';
+import { _alarm__components } from '../services/_alarm';
 import { barrier_ctrl__components } from '../services/barrier_ctrl';
 import { basic__components } from '../services/basic';
 import { battery__components } from '../services/battery';
@@ -162,8 +163,24 @@ const serviceHandlers: {
     topicPrefix: string,
     device: VinculumPd7Device,
     svc: VinculumPd7Service,
+    svcName: string,
   ) => ServiceComponentsCreationResult | undefined;
 } = {
+  alarm_appliance: _alarm__components,
+  alarm_burglar: _alarm__components,
+  alarm_emergency: _alarm__components,
+  alarm_fire: _alarm__components,
+  alarm_gas: _alarm__components,
+  alarm_health: _alarm__components,
+  alarm_heat: _alarm__components,
+  alarm_lock: _alarm__components,
+  alarm_power: _alarm__components,
+  alarm_siren: _alarm__components,
+  alarm_system: _alarm__components,
+  alarm_time: _alarm__components,
+  alarm_water_valve: _alarm__components,
+  alarm_water: _alarm__components,
+  alarm_weather: _alarm__components,
   barrier_ctrl: barrier_ctrl__components,
   basic: basic__components,
   battery: battery__components,
@@ -296,7 +313,12 @@ export function haPublishDevice(parameters: {
       continue;
     }
 
-    const result = handler(topicPrefix, parameters.vinculumDeviceData, svc);
+    const result = handler(
+      topicPrefix,
+      parameters.vinculumDeviceData,
+      svc,
+      svcName,
+    );
     if (!result) {
       log.error(
         `Invalid service data prevented component creation: ${parameters.vinculumDeviceData} ${svc}`,

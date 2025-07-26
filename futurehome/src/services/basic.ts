@@ -18,6 +18,7 @@ export function basic__components(
   topicPrefix: string,
   device: VinculumPd7Device,
   svc: VinculumPd7Service,
+  _svcName: string,
 ): ServiceComponentsCreationResult | undefined {
   // MQTT topic that HA will publish commands to
   const cmdTopic = `${topicPrefix}${svc.addr}/command`;

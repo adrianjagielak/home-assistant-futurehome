@@ -9,6 +9,7 @@ export function fan_ctrl__components(
   topicPrefix: string,
   device: VinculumPd7Device,
   svc: VinculumPd7Service,
+  _svcName: string,
 ): ServiceComponentsCreationResult | undefined {
   const supModes: string[] = svc.props?.sup_modes ?? [];
 

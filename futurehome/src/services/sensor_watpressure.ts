@@ -8,6 +8,7 @@ export function sensor_watpressure__components(
   topicPrefix: string,
   device: VinculumPd7Device,
   svc: VinculumPd7Service,
+  _svcName: string,
 ): ServiceComponentsCreationResult | undefined {
   const device_class = 'pressure';
   const name = undefined;
