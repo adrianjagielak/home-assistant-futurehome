@@ -1091,6 +1091,26 @@
           }
         ],
         "name": "meter_elec"
+      },
+      {
+        "addr": "/rt:dev/rn:cloud_adapter/ad:1/sv:parameters/ad:3_1",
+        "attributes": [
+          {
+            "name": "param",
+            "values": [
+              {
+                "parameter_id": "cable_always_locked",
+                "value_type": "bool",
+                "value": false
+              },
+              {
+                "parameter_id": "free_charging",
+                "value_type": "bool",
+                "value": true
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -1668,7 +1688,7 @@
     "id": 298,
     "services": [
       {
-        "addr": "/rt:dev/rn:hoiax/ad:1/sv:meter_heat/ad:298",
+        "addr": "/rt:dev/rn:hoiax/ad:1/sv:meter_heating/ad:298",
         "attributes": [
           {
             "name": "meter",
@@ -1692,7 +1712,7 @@
             ]
           }
         ],
-        "name": "meter_heat"
+        "name": "meter_heating"
       }
     ]
   },

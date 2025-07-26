@@ -2303,9 +2303,9 @@
       "type": "meter"
     },
     "services": {
-      "meter_heat": {
-        "name": "meter_heat",
-        "addr": "/rt:dev/rn:hoiax/ad:1/sv:meter_heat/ad:298",
+      "meter_heating": {
+        "name": "meter_heating",
+        "addr": "/rt:dev/rn:hoiax/ad:1/sv:meter_heating/ad:298",
         "enabled": true,
         "props": {
           "sup_units": ["kWh", "W"]

@@ -22,6 +22,7 @@ import { indicator_ctrl__components } from '../services/indicator_ctrl';
 import { media_player__components } from '../services/media_player';
 import { out_bin_switch__components } from '../services/out_bin_switch';
 import { out_lvl_switch__components } from '../services/out_lvl_switch';
+import { parameters__components } from '../services/parameters';
 import { scene_ctrl__components } from '../services/scene_ctrl';
 import { schedule_entry__components } from '../services/schedule_entry';
 import { siren_ctrl__components } from '../services/siren_ctrl';
@@ -169,6 +170,7 @@ const serviceHandlers: {
   meter_cooling: _meter__components,
   out_bin_switch: out_bin_switch__components,
   out_lvl_switch: out_lvl_switch__components,
+  parameters: parameters__components,
   scene_ctrl: scene_ctrl__components,
   schedule_entry: schedule_entry__components,
   sensor_accelx: _sensor_numeric__components,
@@ -301,9 +303,6 @@ export function haPublishDevice(parameters: {
       svcName,
     );
     if (!result) {
-      log.error(
-        `Invalid service data prevented component creation: ${parameters.vinculumDeviceData} ${svc}`,
-      );
       continue;
     }
 

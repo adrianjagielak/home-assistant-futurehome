@@ -12,6 +12,7 @@
 - Added support for 'doorman' service (Yale door locks).
 - Added support for 'complex_alarm_system' service (part of alarm sirens control).
 - Added support for 'dev_sys' service (reboot device).
+- Added support for 'parameters' service (advanced configuration of a device).
 
 ## 0.1.5 (25.07.2025)
 

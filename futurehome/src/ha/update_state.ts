@@ -179,6 +179,7 @@ const attributeTypeKeyMap: Record<string, string> = {
   alarm: 'event',
   meter: 'props.unit',
   meter_export: 'props.unit',
+  param: 'parameter_id',
 };
 
 function getNestedValue(obj: any, path: string): any {
@@ -211,10 +212,21 @@ function processAttributeValues(values: any[], attrName?: string): any {
     return undefined;
   }
 
-  // Sort by timestamp to get the latest values first
+  // Special handling for "param" attributes
+  if (attrName === 'param') {
+    const paramMap: Record<string, any> = {};
+    for (const entry of values) {
+      if (entry.parameter_id) {
+        paramMap[entry.parameter_id] = { ...entry };
+      }
+    }
+    return paramMap;
+  }
+
+  // Sort by timestamp to get the latest values first (only if ts exists)
   const sortedValues = [...values].sort((a, b) => {
-    const tsA = new Date(a.ts).getTime();
-    const tsB = new Date(b.ts).getTime();
+    const tsA = a.ts ? new Date(a.ts).getTime() : 0;
+    const tsB = b.ts ? new Date(b.ts).getTime() : 0;
     return tsB - tsA; // Latest first
   });
 

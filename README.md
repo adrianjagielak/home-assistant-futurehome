@@ -65,8 +65,9 @@ todo add info about factory reset hub to restore 30 day trial
 
 | Name | Service | Implementation status | Home Assistant entity |
 | --- | --- | --- | --- |
-| Identify device | [indicator_ctrl](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/indicator_ctrl.ts) | | ✅ | [Button](https://www.home-assistant.io/integrations/button/) |
 | Reboot device | [dev_sys](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/dev_sys.ts) | | ✅ | [Button](https://www.home-assistant.io/integrations/button/) |
+| Identify device | [indicator_ctrl](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/indicator_ctrl.ts) | | ✅ | [Button](https://www.home-assistant.io/integrations/button/) |
+| Advanced configuration of a device | [parameters](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/parameters.ts) | | ✅ | [Button](https://www.home-assistant.io/integrations/button/), [Sensor](https://www.home-assistant.io/integrations/sensor/), [Number](https://www.home-assistant.io/integrations/number/), [Select](https://www.home-assistant.io/integrations/select/), [Text](https://www.home-assistant.io/integrations/text/) |
 
 ## Other system, meta, unused, or not essential services
 
@@ -80,10 +81,9 @@ todo add info about factory reset hub to restore 30 day trial
 | inverter_grid_conn | No devices or hub support this stub service. |
 | inverter_solar_conn | No devices or hub support this stub service. |
 | ota | Managing OTA updates of devices |
-| parameters | |
-| Power regulator | [power_regulator](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/power_regulator.ts) | [16A Puck Relé](https://www.futurehome.io/en_no/shop/puck-relay-16a) | | |
+| power_regulator | Automation. Easily reproducible using Home Assistant's built-in configuration. |
 | schedule | No devices or hub support this stub service. |
-| technology_specific | |
+| technology_specific | Should be covered by other services |
 | time | Z-wave service for setting and reading time |
 | time_parameters | Z-wave service for setting and reading time |
 | version | Device hardware and software versions. Exposed through other means. |
