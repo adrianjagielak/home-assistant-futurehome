@@ -23,6 +23,7 @@ import { scene_ctrl__components } from '../services/scene_ctrl';
 import { siren_ctrl__components } from '../services/siren_ctrl';
 import { sound_switch__components } from '../services/sound_switch';
 import { thermostat__components } from '../services/thermostat';
+import { user_code__components } from '../services/user_code';
 import { water_heater__components } from '../services/water_heater';
 import { abbreviateHaMqttKeys } from './abbreviate_ha_mqtt_keys';
 import { ha } from './globals';
@@ -206,6 +207,7 @@ const serviceHandlers: {
   siren_ctrl: siren_ctrl__components,
   sound_switch: sound_switch__components,
   thermostat: thermostat__components,
+  user_code: user_code__components,
   water_heater: water_heater__components,
 };
 
