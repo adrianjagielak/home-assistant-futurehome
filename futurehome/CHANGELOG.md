@@ -13,6 +13,7 @@
 - Added support for 'complex_alarm_system' service (part of alarm sirens control).
 - Added support for 'dev_sys' service (reboot device).
 - Added support for 'parameters' service (advanced configuration of a device).
+- Hide the fallback 'basic' Z-Wave service unless it is the only service present.
 
 ## 0.1.5 (25.07.2025)
 

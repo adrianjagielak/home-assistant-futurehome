@@ -128,6 +128,15 @@ export type CommandHandlers = {
   [topic: string]: (payload: string) => Promise<void>;
 };
 
+function ignoreService(
+  topicPrefix: string,
+  device: VinculumPd7Device,
+  svc: VinculumPd7Service,
+  svcName: string,
+): ServiceComponentsCreationResult | undefined {
+  return undefined;
+}
+
 const serviceHandlers: {
   [name: string]: (
     topicPrefix: string,
@@ -148,30 +157,39 @@ const serviceHandlers: {
   alarm_siren: _alarm__components,
   alarm_system: _alarm__components,
   alarm_time: _alarm__components,
-  alarm_water_valve: _alarm__components,
   alarm_water: _alarm__components,
+  alarm_water_valve: _alarm__components,
   alarm_weather: _alarm__components,
+  association: ignoreService,
   barrier_ctrl: barrier_ctrl__components,
   basic: basic__components,
   battery: battery__components,
+  battery_charge_ctrl: ignoreService,
   chargepoint: chargepoint__components,
   color_ctrl: color_ctrl__components,
   complex_alarm_system: complex_alarm_system__components,
   dev_sys: dev_sys__components,
+  diagnostic: ignoreService,
   door_lock: door_lock__components,
   doorman: doorman__components,
   fan_ctrl: fan_ctrl__components,
   indicator_ctrl: indicator_ctrl__components,
+  inverter_consumer_conn: ignoreService,
+  inverter_grid_conn: ignoreService,
+  inverter_solar_conn: ignoreService,
   media_player: media_player__components,
+  meter_cooling: _meter__components,
   meter_elec: _meter__components,
   meter_gas: _meter__components,
-  meter_water: _meter__components,
   meter_heating: _meter__components,
-  meter_cooling: _meter__components,
+  meter_water: _meter__components,
+  ota: ignoreService,
   out_bin_switch: out_bin_switch__components,
   out_lvl_switch: out_lvl_switch__components,
   parameters: parameters__components,
+  power_regulator: ignoreService,
   scene_ctrl: scene_ctrl__components,
+  schedule: ignoreService,
   schedule_entry: schedule_entry__components,
   sensor_accelx: _sensor_numeric__components,
   sensor_accely: _sensor_numeric__components,
@@ -181,8 +199,8 @@ const serviceHandlers: {
   sensor_anglepos: _sensor_numeric__components,
   sensor_atmo: _sensor_numeric__components,
   sensor_baro: _sensor_numeric__components,
-  sensor_co: _sensor_numeric__components,
   sensor_co2: _sensor_numeric__components,
+  sensor_co: _sensor_numeric__components,
   sensor_contact: _sensor_binary__components,
   sensor_current: _sensor_numeric__components,
   sensor_dew: _sensor_numeric__components,
@@ -216,8 +234,13 @@ const serviceHandlers: {
   sensor_wind: _sensor_numeric__components,
   siren_ctrl: siren_ctrl__components,
   sound_switch: sound_switch__components,
+  technology_specific: ignoreService,
   thermostat: thermostat__components,
+  time: ignoreService,
+  time_parameters: ignoreService,
   user_code: user_code__components,
+  version: ignoreService,
+  virtual_meter_elec: ignoreService,
   water_heater: water_heater__components,
 };
 
@@ -247,6 +270,10 @@ function shouldPublishService(
   svcName: string,
   services: { [name: string]: VinculumPd7Service },
 ): boolean {
+  if (svcName === 'basic' && Object.entries(services).length > 1) {
+    return false;
+  }
+
   const exclusions = serviceExclusionMap[svcName];
   if (!exclusions) return true;
 

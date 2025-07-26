@@ -32,6 +32,7 @@ export function basic__components(
       [svc.addr]: {
         unique_id: svc.addr,
         platform: 'number',
+        entity_category: 'config',
         name: device.client?.name ?? device?.modelAlias,
         min: MIN_LVL,
         max: MAX_LVL,

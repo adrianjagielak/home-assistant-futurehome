@@ -40,7 +40,6 @@ todo add info about factory reset hub to restore 30 day trial
 | --- | --- | --- | --- | --- |
 | Alarm | [alarm_appliance](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_burglar](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_emergency](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_fire](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_gas](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_health](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_heat](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_lock](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_power](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_siren](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_system](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_time](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_water](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_water_valve](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_weather](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts) | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | ✅ | [Binary sensor](https://www.home-assistant.io/integrations/binary_sensor/), [Button](https://www.home-assistant.io/integrations/button/) |
 | Blinds/door | [barrier_ctrl](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/barrier_ctrl.ts) | | ✅ | [Cover](https://www.home-assistant.io/integrations/cover/) |
-| Basic | [basic](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/basic.ts) | | ✅ | [Number](https://www.home-assistant.io/integrations/number/) |
 | Battery | [battery](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/battery.ts)| | ✅ | [Sensor](https://www.home-assistant.io/integrations/sensor/), [Binary sensor](https://www.home-assistant.io/integrations/binary_sensor/) |
 | Chargepoint | [chargepoint](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/chargepoint.ts) | [Futurehome Charge](https://www.futurehome.io/en_no/shop/charge) | ✅ | [Sensor](https://www.home-assistant.io/integrations/sensor/), [Switch](https://www.home-assistant.io/integrations/switch/), [Number](https://www.home-assistant.io/integrations/number/), [Select](https://www.home-assistant.io/integrations/select/) |
 | Color control | [color_ctrl](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/color_ctrl.ts) | | ✅ | [Light](https://www.home-assistant.io/integrations/light/) |
@@ -64,18 +63,24 @@ todo add info about factory reset hub to restore 30 day trial
 
 | Name | Service | Implementation status | Home Assistant entity |
 | --- | --- | --- | --- |
+| Fall-back Z-wave 'basic' service | [basic](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/basic.ts) | | ✅ | [Number](https://www.home-assistant.io/integrations/number/) |
 | Reboot device | [dev_sys](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/dev_sys.ts) | | ✅ | [Button](https://www.home-assistant.io/integrations/button/) |
 | Identify device | [indicator_ctrl](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/indicator_ctrl.ts) | | ✅ | [Button](https://www.home-assistant.io/integrations/button/) |
 | Advanced configuration of a device | [parameters](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/parameters.ts) | | ✅ | [Button](https://www.home-assistant.io/integrations/button/), [Sensor](https://www.home-assistant.io/integrations/sensor/), [Number](https://www.home-assistant.io/integrations/number/), [Select](https://www.home-assistant.io/integrations/select/), [Text](https://www.home-assistant.io/integrations/text/) |
+
+## Hub
+
+| Name | Service | Implementation status | Home Assistant entity |
+| --- | --- | --- | --- |
+| Futurehome Smarthub | gateway | | |
 
 ## Other system, meta, unused, or not essential services
 
 | Service | Description |
 | --- | --- |
-| association | |
+| association | Virtual association between devices. Easily reproducible using Home Assistant's built-in configuration. |
 | battery_charge_ctrl | No devices or hub support this stub service. |
 | diagnostic | Diagnostic (logging, etc) |
-| gateway | |
 | inverter_consumer_conn | No devices or hub support this stub service. |
 | inverter_grid_conn | No devices or hub support this stub service. |
 | inverter_solar_conn | No devices or hub support this stub service. |
