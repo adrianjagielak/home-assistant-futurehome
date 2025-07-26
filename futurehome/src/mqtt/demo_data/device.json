@@ -1947,7 +1947,7 @@
     "client": {
       "name": "Smart Speaker"
     },
-    "id": 1001,
+    "id": 1003,
     "model": "zigbee - Futurehome - Smart Speaker",
     "modelAlias": "Smart Speaker",
     "type": {
@@ -1968,12 +1968,12 @@
     "services": {
       "media_player": {
         "name": "media_player",
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:media_player/ad:1001_0",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:media_player/ad:1003_0",
         "enabled": true,
         "props": {
           "sup_playback": ["play", "pause", "next_track", "previous_track"],
           "sup_modes": ["repeat", "repeat_one", "shuffle", "crossfade"],
-          "sup_metadata": ["album", "track", "artist", "image_url"]
+          "sup_metadata": ["album", "track", "artist"]
         },
         "intf": [
           "cmd.playback.set",
@@ -2412,5 +2412,135 @@
       }
     },
     "metadata": null
+  },
+  {
+    "client": {
+      "name": "Door lock"
+    },
+    "fimp": {
+      "adapter": "zwave-ad",
+      "address": "92",
+      "group": "ch_0"
+    },
+    "functionality": "security",
+    "id": 74,
+    "lrn": true,
+    "model": "zw_560_3_1",
+    "modelAlias": "Door lock",
+    "param": {
+      "alarms": {
+        "lock": ["manual_lock", "manual_unlock"]
+      },
+      "autoLock": "on",
+      "batteryLevel": "ok",
+      "batteryPercentage": 100,
+      "lockState": "unlocked",
+      "openState": "open",
+      "presence": false,
+      "supportedAlarms": {
+        "lock": ["rf_not_locked"]
+      },
+      "timestamp": "2020-02-11 15:38:12 +0100",
+      "zwaveConfigParameters": [
+        {
+          "parameter": 1,
+          "size": 1,
+          "value": 1
+        }
+      ]
+    },
+    "problem": false,
+    "room": null,
+    "services": {
+      "alarm_lock": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:alarm_lock/ad:92_0",
+        "enabled": true,
+        "intf": ["cmd.alarm.get_report", "evt.alarm.report"],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_events": ["rf_not_locked"]
+        }
+      },
+      "basic": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:basic/ad:92_0",
+        "enabled": true,
+        "intf": ["cmd.lvl.get_report", "cmd.lvl.set", "evt.lvl.report"],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": true
+        }
+      },
+      "battery": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:battery/ad:92_0",
+        "enabled": true,
+        "intf": ["cmd.lvl.get_report", "evt.alarm.report", "evt.lvl.report"],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      "dev_sys": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:92_0",
+        "enabled": true,
+        "intf": [
+          "cmd.config.get_report",
+          "cmd.config.set",
+          "cmd.group.add_members",
+          "cmd.group.delete_members",
+          "cmd.group.get_members",
+          "cmd.ping.send",
+          "evt.config.report",
+          "evt.group.members_report",
+          "evt.ping.report"
+        ],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      "door_lock": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:door_lock/ad:92_0",
+        "enabled": true,
+        "intf": ["cmd.lock.get_report", "cmd.lock.set", "evt.lock.report"],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "sensor_presence": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:sensor_presence/ad:92_0",
+        "enabled": true,
+        "intf": ["cmd.presence.get_report", "evt.presence.report"],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      "user_code": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:user_code/ad:92_0",
+        "enabled": true,
+        "intf": [
+          "cmd.usercode.clear",
+          "cmd.usercode.clear_all",
+          "cmd.usercode.get",
+          "cmd.usercode.set"
+        ],
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_users": 52
+        }
+      }
+    },
+    "supports": ["clear", "poll"],
+    "thing": 57,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "door_lock": []
+      },
+      "type": null
+    }
   }
 ]

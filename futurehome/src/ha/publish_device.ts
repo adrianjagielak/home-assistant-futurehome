@@ -13,6 +13,7 @@ import { basic__components } from '../services/basic';
 import { battery__components } from '../services/battery';
 import { chargepoint__components } from '../services/chargepoint';
 import { color_ctrl__components } from '../services/color_ctrl';
+import { door_lock__components } from '../services/door_lock';
 import { fan_ctrl__components } from '../services/fan_ctrl';
 import { indicator_ctrl__components } from '../services/indicator_ctrl';
 import { media_player__components } from '../services/media_player';
@@ -149,6 +150,7 @@ const serviceHandlers: {
   battery: battery__components,
   chargepoint: chargepoint__components,
   color_ctrl: color_ctrl__components,
+  door_lock: door_lock__components,
   fan_ctrl: fan_ctrl__components,
   indicator_ctrl: indicator_ctrl__components,
   media_player: media_player__components,

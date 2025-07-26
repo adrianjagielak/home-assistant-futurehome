@@ -6,6 +6,7 @@
 - Refactored sensors.
 - Added support for 'meter_*' services (electricity meters, gas meters, water meters, heating meters, cooling meters).
 - Added support for 'sound_switch' service (sound emitters).
+- Added support for 'door_lock' service (door locks).
 
 ## 0.1.5 (25.07.2025)
 

@@ -1245,10 +1245,10 @@
     ]
   },
   {
-    "id": 1001,
+    "id": 1003,
     "services": [
       {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:media_player/ad:1001_0",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:media_player/ad:1003_0",
         "attributes": [
           {
             "name": "playback",
@@ -1770,6 +1770,66 @@
           }
         ],
         "name": "sound_switch"
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:door_lock/ad:92_0",
+        "attributes": [
+          {
+            "name": "lock",
+            "values": [
+              {
+                "props": {
+                  "timeout_s": "254",
+                  "unsecured_desc": ""
+                },
+                "ts": "2020-02-11 15:38:12 +0100",
+                "val": {
+                  "bolt_is_locked": false,
+                  "door_is_closed": false,
+                  "is_secured": false,
+                  "latch_is_closed": false
+                },
+                "val_t": "bool_map"
+              }
+            ]
+          }
+        ],
+        "name": "door_lock"
+      },
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:92_0",
+        "attributes": [
+          {
+            "name": "state",
+            "values": [
+              {
+                "ts": "2020-01-29 17:35:54 +0100",
+                "val": "DOWN",
+                "val_t": "string"
+              }
+            ]
+          },
+          {
+            "name": "error",
+            "values": [
+              {
+                "props": {
+                  "msg": "TRANSMIT_COMPLETE_NO_ACK",
+                  "src": "nodeId=92_0;service=door_lock"
+                },
+                "ts": "2020-01-23 14:58:07 +0100",
+                "val": "TX_ERROR",
+                "val_t": "string"
+              }
+            ]
+          }
+        ],
+        "name": "dev_sys"
       }
     ]
   }

@@ -35,8 +35,6 @@ Some services are more common than others; some are deprecated entirely.
 <!--
 todo: pairing
 todo add info about factory reset hub to restore 30 day trial
-todo: links to the .ts service implementations below
-todo: service names and not just raw service identifiers?
 -->
 
 | Name | Service | Example device | Implementation status | Home Assistant entity |
@@ -48,7 +46,7 @@ todo: service names and not just raw service identifiers?
 | Chargepoint | [chargepoint](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/chargepoint.ts) | [Futurehome Charge](https://www.futurehome.io/en_no/shop/charge) | ✅ | [Sensor](https://www.home-assistant.io/integrations/sensor/), [Switch](https://www.home-assistant.io/integrations/switch/), [Number](https://www.home-assistant.io/integrations/number/), [Select](https://www.home-assistant.io/integrations/select/) |
 | Color control | [color_ctrl](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/color_ctrl.ts) | | ✅ | [Light](https://www.home-assistant.io/integrations/light/) |
 | Complex Alarm System | [complex_alarm_system](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/complex_alarm_system.ts) | | |
-| Door lock| [door_lock](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/door_lock.ts) | | |
+| Door lock | [door_lock](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/door_lock.ts) | | ✅ | [Lock](https://www.home-assistant.io/integrations/lock/), [Binary sensor](https://www.home-assistant.io/integrations/binary_sensor/), [Switch](https://www.home-assistant.io/integrations/switch/), [Number](https://www.home-assistant.io/integrations/number/), [Button](https://www.home-assistant.io/integrations/button/), [Select](https://www.home-assistant.io/integrations/select/) |
 | ??? | [doorman](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/doorman.ts) | | |
 | Fan | [fan_ctrl](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/fan_ctrl.ts) | | ✅ | [Fan](https://www.home-assistant.io/integrations/fan/) |
 | Light | [light](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/light.ts) | | |
