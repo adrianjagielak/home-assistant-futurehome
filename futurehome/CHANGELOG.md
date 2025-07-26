@@ -9,6 +9,7 @@
 - Added support for 'door_lock' service (door locks).
 - Added support for 'user_code' service (keypads).
 - Added support for 'schedule_entry' service (for scheduling access).
+- Added support for 'doorman' service (Yale door locks).
 
 ## 0.1.5 (25.07.2025)
 
