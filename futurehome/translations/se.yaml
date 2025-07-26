@@ -11,3 +11,5 @@ configuration:
   demo_mode:
     name: Demoläge
     description: Använd ett inspelat exempel från en riktig Futurehome Smarthub för att simulera enheter.
+  show_debug_log:
+    name: Čájet divrrodagaslogu

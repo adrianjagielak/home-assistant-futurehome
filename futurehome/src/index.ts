@@ -1,5 +1,5 @@
 import { connectHub, connectHA, RetainedMessage } from './client';
-import { log } from './logger';
+import { log, setupLogger } from './logger';
 import { FimpResponse, sendFimpMsg, setFimp } from './fimp/fimp';
 import { haCommandHandlers, setHa, setHaCommandHandlers } from './ha/globals';
 import { CommandHandlers, haPublishDevice } from './ha/publish_device';
@@ -13,11 +13,16 @@ import { delay } from './utils';
   const hubUsername = process.env.FH_USERNAME || '';
   const hubPassword = process.env.FH_PASSWORD || '';
   const demoMode = (process.env.DEMO_MODE || '').toLowerCase().includes('true');
+  const showDebugLog = (process.env.SHOW_DEBUG_LOG || '')
+    .toLowerCase()
+    .includes('true');
 
   const mqttHost = process.env.MQTT_HOST || '';
   const mqttPort = Number(process.env.MQTT_PORT || '1883');
   const mqttUsername = process.env.MQTT_USER || '';
   const mqttPassword = process.env.MQTT_PWD || '';
+
+  setupLogger({ showDebugLog });
 
   // 1) Connect to HA broker (for discovery + state + availability + commands)
   log.info('Connecting to HA broker...');

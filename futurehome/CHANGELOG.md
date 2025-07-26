@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.1.7 (26.07.2025)
+
+- Added setting for enabling debug log.
+
 ## 0.1.6 (26.07.2025)
 
 - Improved MQTT components interfaces.

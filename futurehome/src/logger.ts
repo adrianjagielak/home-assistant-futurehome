@@ -4,13 +4,17 @@ function getTimestamp(): string {
   return new Date().toISOString();
 }
 
+let shouldShowDebugLog = false;
+
 function _log(level: LogLevel, ...args: unknown[]): void {
   const timestamp = getTimestamp();
   const prefix = `[${timestamp}] [${level.toUpperCase()}]`;
 
   switch (level) {
     case 'debug':
-      console.debug(prefix, ...args);
+      if (shouldShowDebugLog) {
+        console.debug(prefix, ...args);
+      }
       break;
     case 'info':
       console.info(prefix, ...args);
@@ -32,3 +36,7 @@ export const log = {
   error: (...args: unknown[]) => _log('error', ...args),
   fatal: (...args: unknown[]) => _log('fatal', ...args),
 };
+
+export function setupLogger({ showDebugLog }: { showDebugLog: boolean }): void {
+  shouldShowDebugLog = showDebugLog;
+}

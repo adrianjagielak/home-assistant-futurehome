@@ -11,3 +11,5 @@ configuration:
   demo_mode:
     name: Tryb demo
     description: Użyj przykładowego zapisanego stanu z prawdziwego Futurehome Smarthub, aby symulować urządzenia.
+  show_debug_log:
+    name: Pokaż dziennik debugowania

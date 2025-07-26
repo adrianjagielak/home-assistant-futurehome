@@ -11,3 +11,5 @@ configuration:
   demo_mode:
     name: Sýnishamur
     description: Notaðu skráða stöðu úr raunverulegum Futurehome Smarthub til að líkja eftir tækjum.
+  show_debug_log:
+    name: Sýna aflúsunarskrá

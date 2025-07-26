@@ -11,3 +11,5 @@ configuration:
   demo_mode:
     name: Demotila
     description: Käytä tallennettua esimerkkitilaa oikeasta Futurehome Smarthubista laitteiden simuloimiseen.
+  show_debug_log:
+    name: Näytä vianmääritysloki

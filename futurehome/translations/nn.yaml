@@ -11,3 +11,5 @@ configuration:
   demo_mode:
     name: Demomodus
     description: Bruk eit førehandsopptak frå ein ekte Futurehome Smarthub for å simulere einingar.
+  show_debug_log:
+    name: Vis feillogg
