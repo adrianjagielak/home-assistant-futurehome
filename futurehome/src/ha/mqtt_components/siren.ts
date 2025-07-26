@@ -1,3 +1,5 @@
+import { BaseComponent } from './_base_component';
+
 /**
  * Represents a MQTT Siren component for Home Assistant MQTT Discovery.
  *
@@ -6,28 +8,11 @@
  * For detailed documentation see:
  * https://www.home-assistant.io/integrations/siren.mqtt/
  */
-export interface SirenComponent {
+export interface SirenComponent extends BaseComponent {
   /**
    * Must be `siren`. Only allowed and required in [MQTT auto discovery device messages](https://www.home-assistant.io/integrations/mqtt/#device-discovery-payload).
    */
   platform: 'siren';
-
-  /**
-   * An ID that uniquely identifies this siren.
-   * If two sirens have the same unique ID, Home Assistant will raise an exception.
-   * Required when used with device-based discovery.
-   */
-  unique_id: string;
-
-  /**
-   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
-   */
-  entity_category?: string;
-
-  /**
-   * Picture URL for the entity.
-   */
-  entity_picture?: string;
 
   /**
    * List of available tones the siren supports. When configured, this enables the support for setting a `tone` and enables the `tone` state attribute.
@@ -50,29 +35,6 @@ export interface SirenComponent {
   command_topic?: string;
 
   /**
-   * Flag which defines if the entity should be enabled when first added.
-   * Default: true
-   */
-  enabled_by_default?: boolean;
-
-  /**
-   * The encoding of the payloads received and published messages. Set to `""` to disable decoding of incoming payload.
-   * Default: "utf-8"
-   */
-  encoding?: string;
-
-  /**
-   * [Icon](https://www.home-assistant.io/docs/configuration/customizing-devices/#icon) for the entity.
-   *
-   * The icon must be a Material Design Icons (MDI) string identifier, for example: `mdi:thermometer`, `mdi:battery`, or `mdi:water`.
-   *
-   * It is recommended to set the icon when the default icon or other entity identifiers (such as `device_class` or `state_class`)
-   * do not accurately represent the purpose of the entity. In most cases, relying on the automatic icon selection ensures better consistency
-   * and compatibility with future updates.
-   */
-  icon?: string;
-
-  /**
    * Defines a [template](https://www.home-assistant.io/docs/configuration/templating/#using-value-templates-with-mqtt) to extract the JSON dictionary from messages received on the `json_attributes_topic`. Usage example can be found in [MQTT sensor](https://www.home-assistant.io/integrations/sensor.mqtt/#json-attributes-template-configuration) documentation.
    */
   json_attributes_template?: string;
@@ -81,17 +43,6 @@ export interface SirenComponent {
    * The MQTT topic subscribed to receive a JSON dictionary payload and then set as sensor attributes. Usage example can be found in [MQTT sensor](https://www.home-assistant.io/integrations/sensor.mqtt/#json-attributes-topic-configuration) documentation.
    */
   json_attributes_topic?: string;
-
-  /**
-   * The name to use when displaying this siren. Can be set to `null` if only the device name is relevant.
-   * Default: "MQTT Siren"
-   */
-  name?: string | null;
-
-  /**
-   * Used instead of `name` for automatic generation of `entity_id`.
-   */
-  object_id?: string;
 
   /**
    * Flag that defines if siren works in optimistic mode (not waiting for state update before showing the change in Home Assistant).
@@ -122,18 +73,6 @@ export interface SirenComponent {
    * Default: "ON"
    */
   payload_on?: string;
-
-  /**
-   * The maximum QoS level to be used when receiving and publishing messages.
-   * Default: 0
-   */
-  qos?: number;
-
-  /**
-   * If the published message should have the retain flag on or not.
-   * Default: false
-   */
-  retain?: boolean;
 
   /**
    * The payload that represents the `off` state. Used when value that represents `off` state in the `state_topic` is different from value that should be sent to the `command_topic` to turn the device `off`.

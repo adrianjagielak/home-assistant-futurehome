@@ -1,3 +1,5 @@
+import { BaseComponent } from './_base_component';
+
 /**
  * Represents a MQTT Scene component for Home Assistant MQTT Discovery.
  *
@@ -6,28 +8,11 @@
  * For detailed documentation see:
  * https://www.home-assistant.io/integrations/scene.mqtt/
  */
-export interface SceneComponent {
+export interface SceneComponent extends BaseComponent {
   /**
    * Must be `scene`. Only allowed and required in [MQTT auto discovery device messages](https://www.home-assistant.io/integrations/mqtt/#device-discovery-payload).
    */
   platform: 'scene';
-
-  /**
-   * An ID that uniquely identifies this scene entity.
-   * If two scenes have the same unique ID, Home Assistant will raise an exception.
-   * Required when used with device-based discovery.
-   */
-  unique_id: string;
-
-  /**
-   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
-   */
-  entity_category?: string;
-
-  /**
-   * Picture URL for the entity.
-   */
-  entity_picture?: string;
 
   /**
    * The MQTT topic to publish `payload_on` to activate the scene.
@@ -53,23 +38,6 @@ export interface SceneComponent {
   payload_not_available?: string;
 
   /**
-   * Flag which defines if the entity should be enabled when first added.
-   * Default: true
-   */
-  enabled_by_default?: boolean;
-
-  /**
-   * The encoding of the published messages.
-   * Default: "utf-8"
-   */
-  encoding?: string;
-
-  /**
-   * Icon for the scene.
-   */
-  icon?: string;
-
-  /**
    * Defines a [template](https://www.home-assistant.io/docs/configuration/templating/#using-value-templates-with-mqtt)
    * to extract the JSON dictionary from messages received on the `json_attributes_topic`.
    * Usage example can be found in [MQTT sensor](https://www.home-assistant.io/integrations/sensor.mqtt/#json-attributes-template-configuration) documentation.
@@ -87,21 +55,4 @@ export interface SceneComponent {
    * Default: "MQTT Scene"
    */
   name?: string;
-
-  /**
-   * Used instead of `name` for automatic generation of `entity_id`.
-   */
-  object_id?: string;
-
-  /**
-   * The maximum QoS level to be used when receiving and publishing messages.
-   * Default: 0
-   */
-  qos?: number;
-
-  /**
-   * If the published message should have the retain flag on or not.
-   * Default: false
-   */
-  retain?: boolean;
 }

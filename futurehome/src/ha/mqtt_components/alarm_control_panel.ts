@@ -1,3 +1,5 @@
+import { BaseComponent } from './_base_component';
+
 /**
  * Represents an MQTT Alarm Control Panel component for Home Assistant MQTT Discovery.
  *
@@ -12,29 +14,12 @@
  * For full documentation see:
  * https://www.home-assistant.io/integrations/alarm_control_panel.mqtt/
  */
-export interface AlarmControlPanelComponent {
+export interface AlarmControlPanelComponent extends BaseComponent {
   /**
    * Must be `alarm_control_panel`.
    * Only allowed and required in [MQTT auto discovery device messages](https://www.home-assistant.io/integrations/mqtt/#device-discovery-payload).
    */
   platform: 'alarm_control_panel';
-
-  /**
-   * An ID that uniquely identifies this alarm panel.
-   * If two alarm panels have the same unique ID, Home Assistant will raise an exception.
-   * Required when used with device-based discovery.
-   */
-  unique_id: string;
-
-  /**
-   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
-   */
-  entity_category?: string;
-
-  /**
-   * Picture URL for the entity.
-   */
-  entity_picture?: string;
 
   /**
    * The MQTT topic subscribed to receive state updates.
@@ -87,30 +72,6 @@ export interface AlarmControlPanelComponent {
   command_template?: string;
 
   /**
-   * Flag which defines if the entity should be enabled when first added.
-   * Default: true
-   */
-  enabled_by_default?: boolean;
-
-  /**
-   * The encoding of the payloads received and published messages.
-   * Set to `""` to disable decoding of incoming payload.
-   * Default: "utf-8"
-   */
-  encoding?: string;
-
-  /**
-   * [Icon](https://www.home-assistant.io/docs/configuration/customizing-devices/#icon) for the entity.
-   *
-   * The icon must be a Material Design Icons (MDI) string identifier, for example: `mdi:thermometer`, `mdi:battery`, or `mdi:water`.
-   *
-   * It is recommended to set the icon when the default icon or other entity identifiers (such as `device_class` or `state_class`)
-   * do not accurately represent the purpose of the entity. In most cases, relying on the automatic icon selection ensures better consistency
-   * and compatibility with future updates.
-   */
-  icon?: string;
-
-  /**
    * Defines a [template](https://www.home-assistant.io/docs/configuration/templating/#using-value-templates-with-mqtt)
    * to extract the JSON dictionary from messages received on the `json_attributes_topic`.
    * Usage example can be found in [MQTT sensor](https://www.home-assistant.io/integrations/sensor.mqtt/#json-attributes-template-configuration) documentation.
@@ -122,21 +83,6 @@ export interface AlarmControlPanelComponent {
    * Usage example can be found in [MQTT sensor](https://www.home-assistant.io/integrations/sensor.mqtt/#json-attributes-topic-configuration) documentation.
    */
   json_attributes_topic?: string;
-
-  /**
-   * The name of the alarm.
-   *
-   * It is recommended to set the name when entity identifiers (such as `device_class` or `state_class`)
-   * do not accurately represent the purpose of the entity, to avoid showing the default 'MQTT' name.
-   *
-   * Default: "MQTT Alarm"
-   */
-  name?: string | null;
-
-  /**
-   * Used instead of `name` for automatic generation of `entity_id`.
-   */
-  object_id?: string;
 
   /**
    * The payload to set armed-away mode on your Alarm Panel.
@@ -191,18 +137,6 @@ export interface AlarmControlPanelComponent {
    * Default: "TRIGGER"
    */
   payload_trigger?: string;
-
-  /**
-   * The maximum QoS level to be used when receiving and publishing messages.
-   * Default: 0
-   */
-  qos?: number;
-
-  /**
-   * If the published message should have the retain flag on or not.
-   * Default: false
-   */
-  retain?: boolean;
 
   /**
    * A list of features that the alarm control panel supports.

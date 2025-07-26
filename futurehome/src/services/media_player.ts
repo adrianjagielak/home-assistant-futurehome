@@ -13,6 +13,7 @@ import {
   CommandHandlers,
   ServiceComponentsCreationResult,
 } from '../ha/publish_device';
+import { MaterialDesignIcon } from '../ha/mqtt_components/_material_design_icon';
 
 export function media_player__components(
   topicPrefix: string,
@@ -203,8 +204,8 @@ export function media_player__components(
 /**
  * Get appropriate icon for playback mode
  */
-function getPlaybackModeIcon(mode: string): string {
-  const iconMap: Record<string, string> = {
+function getPlaybackModeIcon(mode: string): MaterialDesignIcon {
+  const iconMap: Record<string, MaterialDesignIcon> = {
     repeat: 'mdi:repeat',
     repeat_one: 'mdi:repeat-once',
     shuffle: 'mdi:shuffle',
@@ -216,8 +217,8 @@ function getPlaybackModeIcon(mode: string): string {
 /**
  * Get appropriate icon for metadata type
  */
-function getMetadataIcon(metadata: string): string {
-  const iconMap: Record<string, string> = {
+function getMetadataIcon(metadata: string): MaterialDesignIcon {
+  const iconMap: Record<string, MaterialDesignIcon> = {
     album: 'mdi:album',
     track: 'mdi:music-note',
     artist: 'mdi:account-music',

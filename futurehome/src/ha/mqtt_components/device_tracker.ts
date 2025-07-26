@@ -1,3 +1,5 @@
+import { BaseComponent } from './_base_component';
+
 /**
  * Represents a MQTT Device Tracker component for Home Assistant MQTT Discovery.
  *
@@ -7,29 +9,12 @@
  * For detailed documentation see:
  * https://www.home-assistant.io/integrations/device_tracker.mqtt/
  */
-export interface DeviceTrackerComponent {
+export interface DeviceTrackerComponent extends BaseComponent {
   /**
    * Must be `device_tracker`.
    * Only allowed and required in [MQTT auto discovery device messages](https://www.home-assistant.io/integrations/mqtt/#device-discovery-payload).
    */
   platform: 'device_tracker';
-
-  /**
-   * An ID that uniquely identifies this device tracker.
-   * If two device trackers have the same unique ID, Home Assistant will raise an exception.
-   * Required when used with device-based discovery.
-   */
-  unique_id: string;
-
-  /**
-   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
-   */
-  entity_category?: string;
-
-  /**
-   * Picture URL for the entity.
-   */
-  entity_picture?: string;
 
   /**
    * The MQTT topic subscribed to receive device tracker state changes.
@@ -76,17 +61,6 @@ export interface DeviceTrackerComponent {
   name?: string;
 
   /**
-   * Used instead of `name` for automatic generation of `entity_id`.
-   */
-  object_id?: string;
-
-  /**
-   * The maximum QoS level to be used when receiving and publishing messages.
-   * Default: 0
-   */
-  qos?: number;
-
-  /**
    * Attribute of a device tracker that affects state when being used to track a [person](https://www.home-assistant.io/integrations/person/).
    * Valid options are `gps`, `router`, `bluetooth`, or `bluetooth_le`.
    */
@@ -121,15 +95,4 @@ export interface DeviceTrackerComponent {
    * Default: "offline"
    */
   payload_not_available?: string;
-
-  /**
-   * [Icon](https://www.home-assistant.io/docs/configuration/customizing-devices/#icon) for the entity.
-   *
-   * The icon must be a Material Design Icons (MDI) string identifier, for example: `mdi:thermometer`, `mdi:battery`, or `mdi:water`.
-   *
-   * It is recommended to set the icon when the default icon or other entity identifiers (such as `device_class` or `state_class`)
-   * do not accurately represent the purpose of the entity. In most cases, relying on the automatic icon selection ensures better consistency
-   * and compatibility with future updates.
-   */
-  icon?: string;
 }

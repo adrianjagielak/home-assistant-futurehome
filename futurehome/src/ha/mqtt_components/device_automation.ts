@@ -1,3 +1,5 @@
+import { BaseComponent } from './_base_component';
+
 /**
  * Represents a MQTT Device Trigger component for Home Assistant MQTT Discovery.
  *
@@ -12,28 +14,11 @@
  * For detailed documentation see:
  * https://www.home-assistant.io/integrations/device_automation.mqtt/
  */
-export interface DeviceAutomationComponent {
+export interface DeviceAutomationComponent extends BaseComponent {
   /**
    * Must be `device_automation`. Only allowed and required in [MQTT auto discovery device messages](https://www.home-assistant.io/integrations/mqtt/#device-discovery-payload).
    */
   platform: 'device_automation';
-
-  /**
-   * An ID that uniquely identifies this device trigger.
-   * If two device triggers have the same unique ID, Home Assistant will raise an exception.
-   * Required when used with device-based discovery.
-   */
-  unique_id: string;
-
-  /**
-   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
-   */
-  entity_category?: string;
-
-  /**
-   * Picture URL for the entity.
-   */
-  entity_picture?: string;
 
   /**
    * The type of automation, must be 'trigger'.
@@ -44,12 +29,6 @@ export interface DeviceAutomationComponent {
    * Optional payload to match the payload being sent over the topic.
    */
   payload?: string;
-
-  /**
-   * The maximum QoS level to be used when receiving and publishing messages.
-   * Default: 0
-   */
-  qos?: number;
 
   /**
    * The MQTT topic subscribed to receive trigger events.

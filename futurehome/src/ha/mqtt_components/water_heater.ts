@@ -1,3 +1,5 @@
+import { BaseComponent } from './_base_component';
+
 /**
  * Represents a MQTT Water Heater component for Home Assistant MQTT Discovery.
  *
@@ -6,68 +8,12 @@
  * For detailed documentation see:
  * https://www.home-assistant.io/integrations/water_heater.mqtt/
  */
-export interface WaterHeaterComponent {
+export interface WaterHeaterComponent extends BaseComponent {
   /**
    * Must be `water_heater`.
    * Only allowed and required in [MQTT auto discovery device messages](https://www.home-assistant.io/integrations/mqtt/#device-discovery-payload).
    */
   platform: 'water_heater';
-
-  /**
-   * An ID that uniquely identifies this water heater.
-   * If two water heaters have the same unique ID, Home Assistant will raise an exception.
-   * Required when used with device-based discovery.
-   */
-  unique_id: string;
-
-  /**
-   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
-   */
-  entity_category?: string;
-
-  /**
-   * Picture URL for the entity.
-   */
-  entity_picture?: string;
-
-  /**
-   * The name of the water heater.
-   *
-   * It is recommended to set the name when entity identifiers (such as `device_class` or `state_class`)
-   * do not accurately represent the purpose of the entity, to avoid showing the default 'MQTT' name.
-   *
-   * Default: "MQTT water heater"
-   */
-  name?: string | null;
-
-  /**
-   * Used instead of `name` for automatic generation of `entity_id`.
-   */
-  object_id?: string;
-
-  /**
-   * Flag which defines if the entity should be enabled when first added.
-   * Default: true
-   */
-  enabled_by_default?: boolean;
-
-  /**
-   * The encoding of the payloads received and published messages.
-   * Set to `""` to disable decoding of incoming payload.
-   * Default: "utf-8"
-   */
-  encoding?: string;
-
-  /**
-   * [Icon](https://www.home-assistant.io/docs/configuration/customizing-devices/#icon) for the entity.
-   *
-   * The icon must be a Material Design Icons (MDI) string identifier, for example: `mdi:thermometer`, `mdi:battery`, or `mdi:water`.
-   *
-   * It is recommended to set the icon when the default icon or other entity identifiers (such as `device_class` or `state_class`)
-   * do not accurately represent the purpose of the entity. In most cases, relying on the automatic icon selection ensures better consistency
-   * and compatibility with future updates.
-   */
-  icon?: string;
 
   /**
    * The payload that represents the available state.
@@ -223,18 +169,6 @@ export interface WaterHeaterComponent {
    * Usage example can be found in [MQTT sensor](https://www.home-assistant.io/integrations/sensor.mqtt/#json-attributes-topic-configuration) documentation.
    */
   json_attributes_topic?: string;
-
-  /**
-   * The maximum QoS level to be used when receiving and publishing messages.
-   * Default: 0
-   */
-  qos?: number;
-
-  /**
-   * Defines if published messages should have the retain flag set.
-   * Default: false
-   */
-  retain?: boolean;
 
   /**
    * Default template to render the payloads on *all* `*_state_topic`s with.

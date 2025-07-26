@@ -1,3 +1,5 @@
+import { BaseComponent } from './_base_component';
+
 /**
  * Represents a MQTT manual alarm control panel component for Home Assistant MQTT Discovery.
  *
@@ -11,29 +13,12 @@
  * For detailed documentation see:
  * https://www.home-assistant.io/integrations/manual_mqtt.mqtt/
  */
-export interface ManualMqttComponent {
+export interface ManualMqttComponent extends BaseComponent {
   /**
    * Must be `button`.
    * Only allowed and required in [MQTT auto discovery device messages](https://www.home-assistant.io/integrations/mqtt/#device-discovery-payload).
    */
   platform: 'manual_mqtt';
-
-  /**
-   * An ID that uniquely identifies this manual alarm control panel.
-   * If two manual alarm control panels have the same unique ID, Home Assistant will raise an exception.
-   * Required when used with device-based discovery.
-   */
-  unique_id: string;
-
-  /**
-   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
-   */
-  entity_category?: string;
-
-  /**
-   * Picture URL for the entity.
-   */
-  entity_picture?: string;
 
   /**
    * The MQTT topic Home Assistant will publish state updates to.
@@ -106,12 +91,6 @@ export interface ManualMqttComponent {
    * Default: false
    */
   disarm_after_trigger?: boolean;
-
-  /**
-   * The maximum QoS level to be used when receiving and publishing messages.
-   * Default: 0
-   */
-  qos?: number;
 
   /**
    * The payload to disarm this Alarm Panel.

@@ -1,3 +1,5 @@
+import { BaseComponent } from './_base_component';
+
 /**
  * Represents a MQTT Vacuum component for Home Assistant MQTT Discovery.
  *
@@ -7,7 +9,7 @@
  * For detailed documentation see:
  * https://www.home-assistant.io/integrations/vacuum.mqtt/
  */
-export interface VacuumComponent {
+export interface VacuumComponent extends BaseComponent {
   /**
    * Must be `vacuum`.
    * Only allowed and required in [MQTT auto discovery device messages](https://www.home-assistant.io/integrations/mqtt/#device-discovery-payload).
@@ -15,33 +17,9 @@ export interface VacuumComponent {
   platform: 'vacuum';
 
   /**
-   * An ID that uniquely identifies this vacuum.
-   * If two vacuums have the same unique ID, Home Assistant will raise an exception.
-   * Required when used with device-based discovery.
-   */
-  unique_id: string;
-
-  /**
-   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
-   */
-  entity_category?: string;
-
-  /**
-   * Picture URL for the entity.
-   */
-  entity_picture?: string;
-
-  /**
    * The MQTT topic to publish commands to control the vacuum.
    */
   command_topic?: string;
-
-  /**
-   * The encoding of the payloads received and published messages.
-   * Set to `""` to disable decoding of incoming payload.
-   * Default: "utf-8"
-   */
-  encoding?: string;
 
   /**
    * List of possible fan speeds for the vacuum.
@@ -60,21 +38,6 @@ export interface VacuumComponent {
    * Usage example can be found in [MQTT sensor](https://www.home-assistant.io/integrations/sensor.mqtt/#json-attributes-topic-configuration) documentation.
    */
   json_attributes_topic?: string;
-
-  /**
-   * The name of the vacuum.
-   *
-   * It is recommended to set the name when entity identifiers (such as `device_class` or `state_class`)
-   * do not accurately represent the purpose of the entity, to avoid showing the default 'MQTT' name.
-   *
-   * Default: "MQTT Vacuum"
-   */
-  name?: string | null;
-
-  /**
-   * Used instead of `name` for automatic generation of `entity_id`.
-   */
-  object_id?: string;
 
   /**
    * The payload that represents the available state.
@@ -123,18 +86,6 @@ export interface VacuumComponent {
    * Default: "stop"
    */
   payload_stop?: string;
-
-  /**
-   * The maximum QoS level to be used when receiving and publishing messages.
-   * Default: 0
-   */
-  qos?: number;
-
-  /**
-   * If the published message should have the retain flag on or not.
-   * Default: false
-   */
-  retain?: boolean;
 
   /**
    * The MQTT topic to publish custom commands to the vacuum.

@@ -1,3 +1,5 @@
+import { BaseComponent } from './_base_component';
+
 /**
  * Represents a MQTT Event component for Home Assistant MQTT Discovery.
  *
@@ -9,29 +11,12 @@
  * For detailed documentation see:
  * https://www.home-assistant.io/integrations/event.mqtt/
  */
-export interface EventComponent {
+export interface EventComponent extends BaseComponent {
   /**
    * Must be `event`.
    * Only allowed and required in [MQTT auto discovery device messages](https://www.home-assistant.io/integrations/mqtt/#device-discovery-payload).
    */
   platform: 'event';
-
-  /**
-   * An ID that uniquely identifies this event entity.
-   * If two events have the same unique ID, Home Assistant will raise an exception.
-   * Required when used with device-based discovery.
-   */
-  unique_id: string;
-
-  /**
-   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
-   */
-  entity_category?: string;
-
-  /**
-   * Picture URL for the entity.
-   */
-  entity_picture?: string;
 
   /**
    * The MQTT topic subscribed to receive JSON event payloads.
@@ -53,18 +38,6 @@ export interface EventComponent {
   device_class?: string | null;
 
   /**
-   * Flag which defines if the entity should be enabled when first added.
-   * Default: true
-   */
-  enabled_by_default?: boolean;
-
-  /**
-   * The encoding of the published messages.
-   * Default: "utf-8"
-   */
-  encoding?: string;
-
-  /**
    * Defines a [template](https://www.home-assistant.io/docs/configuration/templating/#using-value-templates-with-mqtt)
    * to extract the JSON dictionary from messages received on the `json_attributes_topic`.
    * Usage example can be found in [MQTT sensor](https://www.home-assistant.io/integrations/sensor.mqtt/#json-attributes-template-configuration) documentation.
@@ -84,11 +57,6 @@ export interface EventComponent {
   name?: string;
 
   /**
-   * Used instead of `name` for automatic generation of `entity_id`.
-   */
-  object_id?: string;
-
-  /**
    * The payload that represents the available state.
    * Default: "online"
    */
@@ -99,12 +67,6 @@ export interface EventComponent {
    * Default: "offline"
    */
   payload_not_available?: string;
-
-  /**
-   * The maximum QoS level to be used when receiving and publishing messages.
-   * Default: 0
-   */
-  qos?: number;
 
   /**
    * Defines a [template](https://www.home-assistant.io/docs/configuration/templating/#using-value-templates-with-mqtt)

@@ -1,3 +1,5 @@
+import { BaseComponent } from './_base_component';
+
 /**
  * Represents a MQTT Light component for Home Assistant MQTT Discovery.
  *
@@ -7,29 +9,12 @@
  * For detailed documentation see:
  * https://www.home-assistant.io/integrations/light.mqtt/
  */
-export interface LightComponent {
+export interface LightComponent extends BaseComponent {
   /**
    * Must be `light`.
    * Only allowed and required in [MQTT auto discovery device messages](https://www.home-assistant.io/integrations/mqtt/#device-discovery-payload).
    */
   platform: 'light';
-
-  /**
-   * An ID that uniquely identifies this light.
-   * If two lights have the same unique ID, Home Assistant will raise an exception.
-   * Required when used with device-based discovery.
-   */
-  unique_id: string;
-
-  /**
-   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
-   */
-  entity_category?: string;
-
-  /**
-   * Picture URL for the entity.
-   */
-  entity_picture?: string;
 
   /**
    * Flag that defines if light supports brightness when the `rgb`, `rgbw`, or `rgbww` color mode is supported.
@@ -321,41 +306,6 @@ export interface LightComponent {
    * The MQTT topic to publish commands to change the switch state.
    */
   command_topic: string;
-
-  /**
-   * The maximum QoS level to be used when receiving and publishing messages.
-   * Default: 0
-   */
-  qos?: number;
-
-  /**
-   * Flag to indicate if the published messages should have the retain flag set.
-   * Default: false
-   */
-  retain?: boolean;
-
-  /**
-   * The name of the light.
-   * Can be set to null if only the device name is relevant.
-   * Default: "MQTT Light" or "MQTT JSON Light" or "MQTT Template Light" depending on schema.
-   */
-  name?: string | null;
-
-  /**
-   * Used instead of `name` for automatic generation of `entity_id`.
-   */
-  object_id?: string;
-
-  /**
-   * [Icon](https://www.home-assistant.io/docs/configuration/customizing-devices/#icon) for the entity.
-   *
-   * The icon must be a Material Design Icons (MDI) string identifier, for example: `mdi:thermometer`, `mdi:battery`, or `mdi:water`.
-   *
-   * It is recommended to set the icon when the default icon or other entity identifiers (such as `device_class` or `state_class`)
-   * do not accurately represent the purpose of the entity. In most cases, relying on the automatic icon selection ensures better consistency
-   * and compatibility with future updates.
-   */
-  icon?: string;
 
   /**
    * Defines a [template](https://www.home-assistant.io/docs/configuration/templating/#using-value-templates-with-mqtt)

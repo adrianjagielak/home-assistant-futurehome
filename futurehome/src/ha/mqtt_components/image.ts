@@ -1,3 +1,5 @@
+import { BaseComponent } from './_base_component';
+
 /**
  * Represents an MQTT Image component for Home Assistant MQTT Discovery.
  *
@@ -11,29 +13,12 @@
  * For detailed documentation see:
  * https://www.home-assistant.io/integrations/image.mqtt/
  */
-export interface ImageComponent {
+export interface ImageComponent extends BaseComponent {
   /**
    * Must be `image`.
    * Only allowed and required in [MQTT auto discovery device messages](https://www.home-assistant.io/integrations/mqtt/#device-discovery-payload).
    */
   platform: 'image';
-
-  /**
-   * An ID that uniquely identifies this image.
-   * If two images have the same unique ID Home Assistant will raise an exception.
-   * Required when used with device-based discovery.
-   */
-  unique_id: string;
-
-  /**
-   * The [category](https://developers.home-assistant.io/docs/core/entity#generic-properties) of the entity.
-   */
-  entity_category?: string;
-
-  /**
-   * Picture URL for the entity.
-   */
-  entity_picture?: string;
 
   /**
    * The MQTT topic to subscribe to receive the image payload of the image to be downloaded.
@@ -73,34 +58,6 @@ export interface ImageComponent {
   image_encoding?: string;
 
   /**
-   * The encoding of the payloads received.
-   * Set to `""` to disable decoding of incoming payload.
-   * Use `image_encoding` to enable `Base64` decoding on `image_topic`.
-   * Default: "utf-8"
-   */
-  encoding?: string;
-
-  /**
-   * Flag which defines if the entity should be enabled when first added.
-   * Default: true
-   */
-  enabled_by_default?: boolean;
-
-  /**
-   * The name of the image.
-   *
-   * It is recommended to set the name when entity identifiers (such as `device_class` or `state_class`)
-   * do not accurately represent the purpose of the entity, to avoid showing the default 'MQTT' name.
-   *
-   */
-  name?: string | null;
-
-  /**
-   * Used instead of `name` for automatic generation of `entity_id`.
-   */
-  object_id?: string;
-
-  /**
    * The MQTT topic subscribed to receive a JSON dictionary payload and then set as sensor attributes.
    * Implies `force_update` of the current sensor state when a message is received on this topic.
    */
@@ -111,15 +68,4 @@ export interface ImageComponent {
    * to extract the JSON dictionary from messages received on the `json_attributes_topic`.
    */
   json_attributes_template?: string;
-
-  /**
-   * [Icon](https://www.home-assistant.io/docs/configuration/customizing-devices/#icon) for the entity.
-   *
-   * The icon must be a Material Design Icons (MDI) string identifier, for example: `mdi:thermometer`, `mdi:battery`, or `mdi:water`.
-   *
-   * It is recommended to set the icon when the default icon or other entity identifiers (such as `device_class` or `state_class`)
-   * do not accurately represent the purpose of the entity. In most cases, relying on the automatic icon selection ensures better consistency
-   * and compatibility with future updates.
-   */
-  icon?: string;
 }
