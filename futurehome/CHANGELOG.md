@@ -3,6 +3,7 @@
 ## 0.1.7 (26.07.2025)
 
 - Added setting for enabling debug log.
+- Reset all devices each time when starting in demo mode.
 
 ## 0.1.6 (26.07.2025)
 

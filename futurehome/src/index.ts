@@ -92,6 +92,12 @@ import { delay } from './utils';
     `^homeassistant/device/futurehome_${hubId}_([a-zA-Z0-9]+)/config$`,
   );
   for (const haDevice of haConfig) {
+    if (demoMode) {
+      log.debug('Resetting all devices for demo mode');
+      ha?.publish(haDevice.topic, '', { retain: true, qos: 2 });
+      continue;
+    }
+
     log.debug('Found existing HA device', haDevice.topic);
 
     const match = haDevice.topic.match(regex);
