@@ -62,6 +62,7 @@ export class RealMqttClient implements IMqttClient {
 
   once(event: 'connect', handler: () => void): void;
   once(event: 'error', handler: OnErrorCallback): void;
+  once(event: 'disconnect', handler: () => void): void;
   once(event: any, handler: any): void {
     this.client.once(event, handler);
   }

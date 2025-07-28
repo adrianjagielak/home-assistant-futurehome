@@ -124,11 +124,14 @@ export class DemoFimpMqttClient implements IMqttClient {
 
   once(event: 'connect', handler: () => void): void;
   once(event: 'error', handler: OnErrorCallback): void;
+  once(event: 'disconnect', handler: () => void): void;
   once(event: any, handler: any): void {
     if (event === 'connect') {
       this.onceConnectHandlers.push(handler);
     } else if (event === 'error') {
       this.onceErrorHandlers.push(handler);
+    } else if (event === 'disconnect') {
+      // not possible in demo mode
     }
   }
 

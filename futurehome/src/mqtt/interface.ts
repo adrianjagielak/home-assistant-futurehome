@@ -40,4 +40,5 @@ export interface IMqttClient {
 
   once(event: 'connect', handler: () => void): void;
   once(event: 'error', handler: OnErrorCallback): void;
+  once(event: 'disconnect', handler: () => void): void;
 }

@@ -1,15 +1,29 @@
+import { exit } from 'process';
 import { DemoFimpMqttClient } from './mqtt/demo_client';
 import { IMqttClient } from './mqtt/interface';
 import { RealMqttClient } from './mqtt/real_client';
+import { log } from './logger';
 
-export function connectHub(opts: {
+export async function connectHub(opts: {
   hubIp: string;
   username: string;
   password: string;
   demo: boolean;
 }): Promise<IMqttClient> {
   const url = `mqtt://${opts.hubIp}`;
-  return makeClient(url, 1884, opts.username, opts.password, opts.demo);
+  const fimp = await makeClient(
+    url,
+    1884,
+    opts.username,
+    opts.password,
+    opts.demo,
+  );
+  fimp.once('disconnect', () => {
+    log.error('Disconnected from Futurehome Smarthub');
+    exit(1);
+  });
+
+  return fimp;
 }
 
 export async function connectHA(opts: {
@@ -26,6 +40,11 @@ export async function connectHA(opts: {
     opts.mqttPassword,
     false,
   );
+  ha.once('disconnect', () => {
+    log.error("Disconnected from Home Assistant's MQTT broker");
+    exit(1);
+  });
+
   const retainedMessages = await waitForHARetainedMessages(ha);
 
   return { ha, retainedMessages };
