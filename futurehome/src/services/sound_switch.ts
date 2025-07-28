@@ -8,6 +8,7 @@ import {
   CommandHandlers,
   ServiceComponentsCreationResult,
 } from '../ha/publish_device';
+import { log } from '../logger';
 
 export function sound_switch__components(
   topicPrefix: string,
@@ -90,6 +91,7 @@ export function sound_switch__components(
           });
         }
       } catch (e) {
+        log.error('sound_switch: Failed setting the siren', e);
         // Fallback for simple ON/OFF commands
         if (payload === 'ON') {
           await sendFimpMsg({

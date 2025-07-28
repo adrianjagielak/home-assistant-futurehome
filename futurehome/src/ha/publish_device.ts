@@ -1,4 +1,3 @@
-import { sendFimpMsg } from '../fimp/fimp';
 import { InclusionReport } from '../fimp/inclusion_report';
 import {
   VinculumPd7Device,
@@ -36,7 +35,7 @@ import {
   loginToThingsplex,
 } from '../thingsplex/thingsplex';
 import { abbreviateHaMqttKeys } from './abbreviate_ha_mqtt_keys';
-import { ha, haCommandHandlers } from './globals';
+import { ha } from './globals';
 import { HaDeviceConfig } from './ha_device_config';
 import { HaMqttComponent } from './mqtt_components/_component';
 
@@ -50,10 +49,10 @@ export type CommandHandlers = {
 };
 
 function ignoreService(
-  topicPrefix: string,
-  device: VinculumPd7Device,
-  svc: VinculumPd7Service,
-  svcName: string,
+  _topicPrefix: string,
+  _device: VinculumPd7Device,
+  _svc: VinculumPd7Service,
+  _svcName: string,
 ): ServiceComponentsCreationResult | undefined {
   return undefined;
 }

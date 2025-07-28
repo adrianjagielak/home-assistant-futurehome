@@ -183,6 +183,7 @@ export function exposeSmarthubTools(parameters: {
           ],
         );
       } catch (e) {
+        log.error('Failed trying to start inclusion', e);
         ha?.publish(
           `${topicPrefix}/inclusion_exclusion_status/state`,
           'Failed trying to start inclusion.',
@@ -254,9 +255,10 @@ export function exposeSmarthubTools(parameters: {
           qos: 2,
         });
       } catch (e) {
+        log.error('Failed trying to stop inclusion/exclusion', e);
         ha?.publish(
           `${topicPrefix}/inclusion_exclusion_status/state`,
-          'Failed trying to stop inclusion.',
+          'Failed trying to stop inclusion/exclusion.',
           {
             retain: true,
             qos: 2,
@@ -312,6 +314,7 @@ export function exposeSmarthubTools(parameters: {
           ],
         );
       } catch (e) {
+        log.error('Failed trying to start exclusion', e);
         ha?.publish(
           `${topicPrefix}/inclusion_exclusion_status/state`,
           'Failed trying to start exclusion.',

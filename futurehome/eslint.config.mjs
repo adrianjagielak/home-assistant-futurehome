@@ -29,6 +29,5 @@ export default defineConfig([
         },
       ],
     },
-    quotes: ['error', 'single'],
   },
 ]);
