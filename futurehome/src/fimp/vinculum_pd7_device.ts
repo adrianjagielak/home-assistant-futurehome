@@ -3,7 +3,10 @@ export type VinculumPd7Device = {
     // User-defined device name
     name?: string | null;
   } | null;
+  // FIMP Device ID.
   id: number;
+  // FIMP Thing Address (ID).
+  thing?: number | null;
   // "Model" string, e.g. "zb - _TZ3040_bb6xaihh - TS0202"
   // The first one is the adapter, the second one is the manufacturer, the third one is the device model.
   model?: string | null;

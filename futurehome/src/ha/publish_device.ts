@@ -1,3 +1,4 @@
+import { sendFimpMsg } from '../fimp/fimp';
 import { InclusionReport } from '../fimp/inclusion_report';
 import {
   VinculumPd7Device,
@@ -30,8 +31,9 @@ import { sound_switch__components } from '../services/sound_switch';
 import { thermostat__components } from '../services/thermostat';
 import { user_code__components } from '../services/user_code';
 import { water_heater__components } from '../services/water_heater';
+import { connectThingsplexWebSocketAndSend, loginToThingsplex } from '../thingsplex/thingsplex';
 import { abbreviateHaMqttKeys } from './abbreviate_ha_mqtt_keys';
-import { ha } from './globals';
+import { ha, haCommandHandlers } from './globals';
 import { HaDeviceConfig } from './ha_device_config';
 import { HaMqttComponent } from './mqtt_components/_component';
 
@@ -199,8 +201,11 @@ function shouldPublishService(
 export function haPublishDevice(parameters: {
   hubId: string;
   demoMode: boolean;
+  hubIp: string;
   vinculumDeviceData: VinculumPd7Device;
   deviceInclusionReport: InclusionReport | undefined;
+  thingsplexUsername: string;
+  thingsplexPassword: string;
 }): { commandHandlers: CommandHandlers } {
   const components: { [key: string]: HaMqttComponent } = {};
   const handlers: CommandHandlers = {};
@@ -251,6 +256,71 @@ export function haPublishDevice(parameters: {
 
     Object.assign(components, result.components);
     Object.assign(handlers, result.commandHandlers);
+  }
+
+  const firstSvcAddr =
+    Object.entries(parameters.vinculumDeviceData.services ?? {})?.[0]?.[1]
+      .addr ?? '';
+  if (
+    parameters.thingsplexUsername &&
+    parameters.thingsplexPassword &&
+    parameters.vinculumDeviceData.thing &&
+    (firstSvcAddr.includes('/rn:zigbee/ad:1/') ||
+      firstSvcAddr.includes('/rn:zw/ad:1/'))
+  ) {
+    const deleteCommandTopic = `${topicPrefix}/delete/command`;
+    const availabilityTopic = `${topicPrefix}/delete/availability`;
+    components[`${topicPrefix}_delete_button`] = {
+      unique_id: `${topicPrefix}_delete_button`,
+      platform: 'button',
+      entity_category: 'diagnostic',
+      name: firstSvcAddr.includes('/rn:zigbee/ad:1/')
+        ? 'ZigBee: Unpair Device'
+        : 'Z-Wave: Unpair Device',
+      icon: 'mdi:delete-forever',
+      command_topic: deleteCommandTopic,
+      availability_topic: availabilityTopic,
+      availability_template: `{% if value == "online" or value == "" %}online{% else %}offline{% endif %}`,
+    } as any;
+    handlers[deleteCommandTopic] = async (_payload: string) => {
+      ha?.publish(availabilityTopic, 'offline', {
+        retain: true,
+        qos: 2,
+      });
+      try {
+        const token = await loginToThingsplex({
+          host: parameters.hubIp,
+          username: parameters.thingsplexUsername,
+          password: parameters.thingsplexPassword,
+        });
+        await connectThingsplexWebSocketAndSend(
+          {
+            host: parameters.hubIp,
+            token: token,
+          },
+          [
+            {
+              address: firstSvcAddr.includes('/rn:zigbee/ad:1/')
+                ? 'pt:j1/mt:cmd/rt:ad/rn:zigbee/ad:1'
+                : 'pt:j1/mt:evt/rt:ad/rn:zw/ad:1',
+              service: firstSvcAddr.includes('/rn:zigbee/ad:1/')
+                ? 'zigbee'
+                : 'zwave-ad',
+              cmd: 'cmd.thing.delete',
+              val_t: 'str_map',
+              val: {
+                address: parameters.vinculumDeviceData.thing,
+              },
+            },
+          ],
+        );
+      } catch (e) {
+        ha?.publish(availabilityTopic, 'online', {
+          retain: true,
+          qos: 2,
+        });
+      }
+    };
   }
 
   let vinculumManufacturer: string | undefined;

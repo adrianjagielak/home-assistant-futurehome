@@ -12,7 +12,7 @@ This add-on:
 * Fetches all device metadata from the Futurehome hub and maps them to Home Assistant devices/entities.
 * Fetches and updates device states and availability in real time.
 * Supports interaction with devices comparable to the official Futurehome app.
-* Supports pairing and unpairing of devices.
+* Supports pairing and unpairing devices.
 
 ## Installation
 
