@@ -5,6 +5,7 @@
 - Added logo.
 - Added support for pairing new devices.
 - Added support for unpairing devices.
+- Fixed using the unit reported by the numerical sensor.
 
 ## 0.1.7 (26.07.2025)
 

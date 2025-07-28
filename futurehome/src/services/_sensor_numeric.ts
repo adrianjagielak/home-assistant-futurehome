@@ -74,7 +74,7 @@ export function _sensor_numeric__components(
 
   const device_class = data[0];
   const name = data[1];
-  let unit = data[2];
+  let unit = svc.props?.sup_units?.[0] ?? data[2];
   if (unit === 'C') unit = '°C';
   if (unit === 'F') unit = '°F';
   if (unit === 'kph') unit = 'km/h';
