@@ -1,5 +1,13 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.0.0 (28.07.2025)
+
+**Initial stable release**
+
+## 0.1.15 (28.07.2025)
+
+- Added updated installation guide.
+
 ## 0.1.10 (28.07.2025)
 
 - Allowed unpairing of devices using any adapter.
@@ -71,9 +79,9 @@
 - Added support for 'indicator_ctrl' service (identify devices).
 - Added support for 'barrier_ctrl' service (devices like garage doors, barriers, and window shades).
 
-# 0.1.0 (24.07.2025)
+## 0.1.0 (24.07.2025)
 
-**Initial stable release**
+**Initial beta release**
 
 * Integration with Futurehome hub: maps all device metadata to Home Assistant devices/entities.
 * Real-time updates for device states and availability.
