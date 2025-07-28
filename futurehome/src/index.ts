@@ -85,6 +85,7 @@ import { pollVinculum } from './fimp/vinculum';
     if (demoMode) {
       log.debug('Resetting all devices for demo mode');
       ha?.publish(haDevice.topic, '', { retain: true, qos: 2 });
+      await delay(50);
       continue;
     }
 
@@ -120,6 +121,11 @@ import { pollVinculum } from './fimp/vinculum';
       ha?.publish(haDevice.topic, '', { retain: true, qos: 2 });
       await delay(50);
     }
+  }
+
+  if (demoMode) {
+    // Wait for the devices to be fully removed from Home Assistant
+    await delay(1000);
   }
 
   const vinculumDevicesToHa = async (devices: FimpResponse) => {

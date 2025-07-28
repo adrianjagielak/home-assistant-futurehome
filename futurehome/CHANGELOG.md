@@ -8,6 +8,7 @@
 - Fixed using the unit reported by the numerical sensor.
 - Added restarting the add-on when disconnected from the hub or Home Assistant
 - Updated demo mode data.
+- Added more delays when initializing the demo mode.
 
 ## 0.1.7 (26.07.2025)
 
