@@ -27,10 +27,6 @@ Devices commonly consist of multiple services: for example, a presence sensor mi
 
 Some services are more common than others; some are deprecated entirely.
 
-<!--
-todo add info about factory reset hub to restore 30 day trial
--->
-
 | Name | Service | Example device | Implementation status | Home Assistant entity |
 | --- | --- | --- | --- | --- |
 | Alarm | [alarm_appliance](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_burglar](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_emergency](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_fire](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_gas](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_health](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_heat](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_lock](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_power](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_siren](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_system](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_time](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_water](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_water_valve](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts), [alarm_weather](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/_alarm.ts) | [Brannvarsler](https://www.futurehome.io/en_no/shop/brannvarsler-230v) | ✅ | [Binary sensor](https://www.home-assistant.io/integrations/binary_sensor/), [Button](https://www.home-assistant.io/integrations/button/) |
@@ -63,11 +59,18 @@ todo add info about factory reset hub to restore 30 day trial
 | Identify device | [indicator_ctrl](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/indicator_ctrl.ts) | ✅ | [Button](https://www.home-assistant.io/integrations/button/) |
 | Advanced configuration of a device | [parameters](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/futurehome/src/services/parameters.ts) | ✅ | [Button](https://www.home-assistant.io/integrations/button/), [Sensor](https://www.home-assistant.io/integrations/sensor/), [Number](https://www.home-assistant.io/integrations/number/), [Select](https://www.home-assistant.io/integrations/select/), [Text](https://www.home-assistant.io/integrations/text/) |
 
+<!--
+
 ## Hub
 
-| Name | Service | Implementation status | Home Assistant entity |
+| Name | Service | Implementation status | Description |
 | --- | --- | --- | --- |
-| Futurehome Smarthub | gateway | | |
+| Futurehome Smarthub | gateway | ✅ | Rebooting the hub.(wip) |
+| ZigBee adapter | zigbee | ✅ | Pairing and unpairing devices. |
+| Z-Wave adapter | zwave-ad | ✅ | Pairing and unpairing devices. |
+| Other adapters | | ✅ | Unpairing devices. |
+
+-->
 
 ## Other system, meta, unused, or not essential services
 
