@@ -2,10 +2,10 @@
 
 Futurehome add-on for Home Assistant. Designed to be a complete drop-in replacement for the official Futurehome app, with support for all device types compatible with the Futurehome hub.
 
-![Home Assistant screenshot](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/assets/home_assistant_screenshot_dark_mode.jpg#gh-dark-mode-only)
-![Home Assistant screenshot](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/assets/home_assistant_screenshot_light_mode.jpg#gh-light-mode-only)
+![Home Assistant screenshot](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/docs/assets/home_assistant_screenshot_dark_mode.jpg#gh-dark-mode-only)
+![Home Assistant screenshot](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/docs/assets/home_assistant_screenshot_light_mode.jpg#gh-light-mode-only)
 
-![Pairing example](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/assets/pairing.gif)
+![Pairing example](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/docs/assets/pairing.gif)
 
 ## Features
 
@@ -16,17 +16,9 @@ This add-on:
 * Supports interaction with devices comparable to the official Futurehome app.
 * Supports pairing and unpairing devices.
 
-## Installation
+## Installation Guide
 
-todo: rewrite the installation instructions
-
-1. In the Futurehome app, go to Settings > My household > Smarthub and enable Local API.
-2. (Optional) In the Futurehome app go to Settings > ??? > ??? and install Thingsplex integration (Needed for support of pairing new devices).
-3. (Optional but highly recommended) Block the hub’s internet (WAN) access in your router settings to prevent future firmware updates.
-4. In Home Assistant, enable the **MQTT** integration.
-5. [Add this add-on repository to Home Assistant](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fadrianjagielak%2Fhome-assistant-futurehome) and refresh the page.
-6. Open the **Add-on Store** and search for "Futurehome".
-7. Install, configure, and start the Futurehome add-on.
+See the full [Installation Guide](https://github.com/adrianjagielak/home-assistant-futurehome/blob/master/docs/installation.md) for step-by-step setup instructions.
 
 # Futurehome Device Services Compatibility Chart
 
