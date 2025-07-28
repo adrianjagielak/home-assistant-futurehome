@@ -5,6 +5,10 @@ Futurehome add-on for Home Assistant. Designed to be a complete drop-in replacem
 ![Home Assistant screenshot](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/assets/home_assistant_screenshot_dark_mode.jpg#gh-dark-mode-only)
 ![Home Assistant screenshot](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/assets/home_assistant_screenshot_light_mode.jpg#gh-light-mode-only)
 
+![Pairing example](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/assets/pairing.gif)
+
+<p align="center">Pairing example</p>
+
 ## Features
 
 This add-on:
