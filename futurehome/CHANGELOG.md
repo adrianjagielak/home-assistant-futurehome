@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.1.10 (28.07.2025)
+
+- Allowed unpairing of devices using any adapter.
+
 ## 0.1.9 (28.07.2025)
 
 - Added icon.

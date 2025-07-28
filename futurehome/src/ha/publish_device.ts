@@ -265,22 +265,52 @@ export function haPublishDevice(parameters: {
     parameters.thingsplexUsername &&
     parameters.thingsplexPassword &&
     parameters.vinculumDeviceData.fimp?.address &&
-    (parameters.vinculumDeviceData.fimp?.adapter === 'zigbee' ||
-      parameters.vinculumDeviceData.fimp?.adapter === 'zwave-ad')
+    parameters.vinculumDeviceData.fimp?.adapter
   ) {
     const deleteCommandTopic = `${topicPrefix}/delete/command`;
+
+    const rawAdapterName = parameters.vinculumDeviceData.fimp?.adapter;
+
+    let adapterName: string;
+    switch (rawAdapterName) {
+      case 'zigbee':
+        adapterName = 'ZigBee';
+        break;
+      case 'zwave-ad':
+        adapterName = 'Z-Wave';
+        break;
+      default:
+        adapterName = rawAdapterName
+          // Split the string by underscores
+          .split('_')
+          // Capitalize each word
+          .map(
+            (word) =>
+              word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
+          )
+          // Join words with spaces
+          .join(' ');
+        break;
+    }
+
+    let adapterServiceAddr = `pt:j1/mt:evt/rt:ad/rn:${rawAdapterName}/ad:1`;
+    if (rawAdapterName === 'zwave-ad') {
+      adapterServiceAddr = 'pt:j1/mt:evt/rt:ad/rn:zw/ad:1';
+    }
+
     components[`${topicPrefix}_delete_button`] = {
       unique_id: `${topicPrefix}_delete_button`,
       platform: 'button',
       entity_category: 'diagnostic',
-      name:
-        parameters.vinculumDeviceData.fimp?.adapter === 'zigbee'
-          ? 'ZigBee: Unpair Device'
-          : 'Z-Wave: Unpair Device',
+      name: `${adapterName}: Unpair Device`,
       icon: 'mdi:delete-forever',
       command_topic: deleteCommandTopic,
     } as any;
     handlers[deleteCommandTopic] = async (_payload: string) => {
+      if (parameters.demoMode) {
+        return;
+      }
+
       try {
         const token = await loginToThingsplex({
           host: parameters.hubIp,
@@ -294,14 +324,8 @@ export function haPublishDevice(parameters: {
           },
           [
             {
-              address:
-                parameters.vinculumDeviceData.fimp?.adapter === 'zigbee'
-                  ? 'pt:j1/mt:cmd/rt:ad/rn:zigbee/ad:1'
-                  : 'pt:j1/mt:evt/rt:ad/rn:zw/ad:1',
-              service:
-                parameters.vinculumDeviceData.fimp?.adapter === 'zigbee'
-                  ? 'zigbee'
-                  : 'zwave-ad',
+              address: adapterServiceAddr,
+              service: rawAdapterName,
               cmd: 'cmd.thing.delete',
               val_t: 'str_map',
               val: {
