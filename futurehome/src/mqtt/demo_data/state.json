@@ -1,9 +1,5 @@
 [
   {
-    "id": 26,
-    "services": []
-  },
-  {
     "id": 165,
     "services": [
       {
@@ -684,116 +680,6 @@
     ]
   },
   {
-    "id": 199,
-    "services": [
-      {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:scene_ctrl/ad:12_1",
-        "attributes": [
-          {
-            "name": "scene",
-            "values": [
-              {
-                "ts": "2025-04-22 21:05:49 +0200",
-                "val": "stop",
-                "val_t": "string"
-              }
-            ]
-          }
-        ],
-        "name": "scene_ctrl"
-      },
-      {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:association/ad:12_1",
-        "attributes": [
-          {
-            "name": "association",
-            "values": [
-              {
-                "ts": "2022-07-02 15:14:43 +0200",
-                "val": {
-                  "members": []
-                },
-                "val_t": "object"
-              }
-            ]
-          }
-        ],
-        "name": "association"
-      },
-      {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:battery/ad:12_1",
-        "attributes": [
-          {
-            "name": "lvl",
-            "values": [
-              {
-                "ts": "2025-04-26 03:31:18 +0200",
-                "val": 18,
-                "val_t": "int"
-              }
-            ]
-          }
-        ],
-        "name": "battery"
-      }
-    ]
-  },
-  {
-    "id": 201,
-    "services": [
-      {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:scene_ctrl/ad:14_1",
-        "attributes": [
-          {
-            "name": "scene",
-            "values": [
-              {
-                "ts": "2022-07-02 15:52:33 +0200",
-                "val": "stop",
-                "val_t": "string"
-              }
-            ]
-          }
-        ],
-        "name": "scene_ctrl"
-      },
-      {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:association/ad:14_1",
-        "attributes": [
-          {
-            "name": "association",
-            "values": [
-              {
-                "ts": "2022-07-02 15:49:21 +0200",
-                "val": {
-                  "members": []
-                },
-                "val_t": "object"
-              }
-            ]
-          }
-        ],
-        "name": "association"
-      },
-      {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:battery/ad:14_1",
-        "attributes": [
-          {
-            "name": "lvl",
-            "values": [
-              {
-                "ts": "2023-01-04 16:16:36 +0100",
-                "val": 37,
-                "val_t": "int"
-              }
-            ]
-          }
-        ],
-        "name": "battery"
-      }
-    ]
-  },
-  {
     "id": 204,
     "services": [
       {
@@ -941,14 +827,6 @@
         "name": "battery"
       }
     ]
-  },
-  {
-    "id": 208,
-    "services": []
-  },
-  {
-    "id": 209,
-    "services": []
   },
   {
     "id": 210,
@@ -1850,6 +1728,656 @@
           }
         ],
         "name": "dev_sys"
+      }
+    ]
+  },
+  {
+    "id": 1010,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:fan_ctrl/ad:1010",
+        "attributes": [
+          {
+            "name": "mode",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": "medium",
+                "val_t": "string"
+              }
+            ]
+          }
+        ],
+        "name": "fan_ctrl"
+      }
+    ]
+  },
+  {
+    "id": 1009,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_accelx/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_accelx"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_accely/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_accely"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_accelz/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_accelz"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_airflow/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_airflow"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_airq/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_airq"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_anglepos/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_anglepos"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_atmo/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_atmo"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_baro/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_baro"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_co/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_co"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_co2/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_co2"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_current/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_current"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_dew/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_dew"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_direct/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_direct"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_distance/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_distance"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_elresist/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_elresist"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_freq/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_freq"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_gp/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_gp"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_gust/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_gust"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_humid/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_humid"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_lumin/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_lumin"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_moist/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_moist"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_noise/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_noise"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_power/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_power"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_rain/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_rain"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_rotation/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_rotation"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_seismicint/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_seismicint"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_seismicmag/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_seismicmag"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_solarrad/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_solarrad"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_tank/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_tank"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_temp/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_temp"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_tidelvl/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_tidelvl"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_uv/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_uv"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_veloc/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_veloc"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_voltage/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_voltage"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_watflow/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_watflow"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_watpressure/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_watpressure"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_wattemp/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_wattemp"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_weight/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_weight"
+      },
+      {
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_wind/ad:1009",
+        "attributes": [
+          {
+            "name": "sensor",
+            "values": [
+              {
+                "ts": "2025-01-15 10:30:00 +0100",
+                "val": 12.3,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "sensor_wind"
       }
     ]
   }

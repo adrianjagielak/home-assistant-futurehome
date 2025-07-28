@@ -1,52 +1,7 @@
 [
   {
     "client": {
-      "name": "Boiler 3 cycles"
-    },
-    "fimp": {
-      "adapter": "flow",
-      "address": "XFhAkhMmXNwCt4M",
-      "group": "1"
-    },
-    "functionality": "appliance",
-    "id": 26,
-    "lrn": true,
-    "model": "flow_XFhAkhMmXNwCt4M",
-    "modelAlias": "Stop after",
-    "param": {
-      "power": "off",
-      "timestamp": null
-    },
-    "problem": false,
-    "room": 7,
-    "services": {
-      "out_bin_switch": {
-        "addr": "/rt:dev/rn:flow/ad:1/sv:out_bin_switch/ad:XFhAkhMmXNwCt4M_0",
-        "enabled": true,
-        "intf": ["cmd.binary.set"],
-        "props": {}
-      }
-    },
-    "supports": ["clear", "poll"],
-    "thing": 26,
-    "type": {
-      "subtype": null,
-      "supported": {
-        "appliance": [],
-        "blinds": [],
-        "boiler": [],
-        "fan": [],
-        "heater": [],
-        "light": [],
-        "siren": [],
-        "water_valve": []
-      },
-      "type": "appliance"
-    }
-  },
-  {
-    "client": {
-      "name": "Heatit - Z-TRM3 ch_0"
+      "name": "Heatit Bathroom"
     },
     "fimp": {
       "adapter": "zwave-ad",
@@ -150,7 +105,7 @@
   },
   {
     "client": {
-      "name": "Heatit - Z-TRM3 ch_1"
+      "name": "Heatit Living Room"
     },
     "fimp": {
       "adapter": "zwave-ad",
@@ -1068,158 +1023,6 @@
   },
   {
     "client": {
-      "name": "4512701"
-    },
-    "fimp": {
-      "adapter": "zigbee",
-      "address": "12",
-      "group": "ch_1"
-    },
-    "functionality": null,
-    "id": 199,
-    "lrn": true,
-    "model": "zb - NAMRON AS - 4512701",
-    "modelAlias": "4512701",
-    "param": {
-      "batteryLevel": "ok",
-      "batteryPercentage": 18,
-      "timestamp": "2025-04-26 03:31:18 +0200"
-    },
-    "problem": false,
-    "room": null,
-    "services": {
-      "association": {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:association/ad:12_1",
-        "enabled": true,
-        "intf": [
-          "cmd.association.add",
-          "cmd.association.delete",
-          "cmd.association.delete_all",
-          "cmd.association.get_report",
-          "evt.association.report"
-        ],
-        "props": {
-          "is_secure": true,
-          "is_unsecure": false,
-          "out_services": ["color", "out_bin_switch", "out_lvl_switch"]
-        }
-      },
-      "battery": {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:battery/ad:12_1",
-        "enabled": true,
-        "intf": ["evt.lvl.report"],
-        "props": {
-          "is_secure": true,
-          "is_unsecure": false
-        }
-      },
-      "indicator_ctrl": {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:12_1",
-        "enabled": true,
-        "intf": ["cmd.indicator.set_visual_element"],
-        "props": {
-          "is_secure": true,
-          "is_unsecure": false
-        }
-      },
-      "scene_ctrl": {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:scene_ctrl/ad:12_1",
-        "enabled": true,
-        "intf": ["evt.scene.report"],
-        "props": {
-          "is_secure": true,
-          "is_unsecure": false
-        }
-      }
-    },
-    "supports": ["clear", "poll"],
-    "thing": 153,
-    "type": {
-      "subtype": "scene",
-      "supported": {
-        "input": ["scene"]
-      },
-      "type": "input"
-    }
-  },
-  {
-    "client": {
-      "name": "4512719"
-    },
-    "fimp": {
-      "adapter": "zigbee",
-      "address": "14",
-      "group": "ch_1"
-    },
-    "functionality": null,
-    "id": 201,
-    "lrn": true,
-    "model": "zb - NAMRON AS - 4512719",
-    "modelAlias": "4512719",
-    "param": {
-      "batteryLevel": "ok",
-      "batteryPercentage": 37,
-      "timestamp": "2023-01-04 16:16:36 +0100"
-    },
-    "problem": false,
-    "room": null,
-    "services": {
-      "association": {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:association/ad:14_1",
-        "enabled": true,
-        "intf": [
-          "cmd.association.add",
-          "cmd.association.delete",
-          "cmd.association.delete_all",
-          "cmd.association.get_report",
-          "evt.association.report"
-        ],
-        "props": {
-          "is_secure": true,
-          "is_unsecure": false,
-          "out_services": ["color", "out_bin_switch", "out_lvl_switch"]
-        }
-      },
-      "battery": {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:battery/ad:14_1",
-        "enabled": true,
-        "intf": ["evt.lvl.report"],
-        "props": {
-          "is_secure": true,
-          "is_unsecure": false
-        }
-      },
-      "indicator_ctrl": {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:indicator_ctrl/ad:14_1",
-        "enabled": true,
-        "intf": ["cmd.indicator.set_visual_element"],
-        "props": {
-          "is_secure": true,
-          "is_unsecure": false
-        }
-      },
-      "scene_ctrl": {
-        "addr": "/rt:dev/rn:zigbee/ad:1/sv:scene_ctrl/ad:14_1",
-        "enabled": true,
-        "intf": ["evt.scene.report"],
-        "props": {
-          "is_secure": true,
-          "is_unsecure": false
-        }
-      }
-    },
-    "supports": ["clear", "poll"],
-    "thing": 155,
-    "type": {
-      "subtype": "scene",
-      "supported": {
-        "input": ["scene"]
-      },
-      "type": "input"
-    }
-  },
-  {
-    "client": {
       "name": "HAN sensor"
     },
     "fimp": {
@@ -1441,96 +1244,6 @@
         "input": ["scene"]
       },
       "type": "input"
-    }
-  },
-  {
-    "client": {
-      "name": "Restart router"
-    },
-    "fimp": {
-      "adapter": "flow",
-      "address": "oYinQN8bgwxeDt9",
-      "group": "ch_0"
-    },
-    "functionality": "appliance",
-    "id": 208,
-    "lrn": true,
-    "model": "flow_oYinQN8bgwxeDt9",
-    "modelAlias": "Restart router",
-    "param": {
-      "power": "off",
-      "timestamp": null
-    },
-    "problem": false,
-    "room": 1,
-    "services": {
-      "out_bin_switch": {
-        "addr": "/rt:dev/rn:flow/ad:1/sv:out_bin_switch/ad:oYinQN8bgwxeDt9_0",
-        "enabled": true,
-        "intf": ["cmd.binary.set"],
-        "props": {}
-      }
-    },
-    "supports": ["clear", "poll"],
-    "thing": 165,
-    "type": {
-      "subtype": null,
-      "supported": {
-        "appliance": [],
-        "blinds": [],
-        "boiler": [],
-        "fan": [],
-        "heater": [],
-        "light": [],
-        "siren": [],
-        "water_valve": []
-      },
-      "type": "appliance"
-    }
-  },
-  {
-    "client": {
-      "name": "Boiler 5 cycles"
-    },
-    "fimp": {
-      "adapter": "flow",
-      "address": "1bPIbg2So4l3Y6h",
-      "group": "7"
-    },
-    "functionality": "appliance",
-    "id": 209,
-    "lrn": true,
-    "model": "flow_1bPIbg2So4l3Y6h",
-    "modelAlias": "Boiler 5 cycles",
-    "param": {
-      "power": "off",
-      "timestamp": null
-    },
-    "problem": false,
-    "room": 7,
-    "services": {
-      "out_bin_switch": {
-        "addr": "/rt:dev/rn:flow/ad:1/sv:out_bin_switch/ad:tfnGPTUArLR0Vzs_0",
-        "enabled": true,
-        "intf": ["cmd.binary.set"],
-        "props": {}
-      }
-    },
-    "supports": ["clear", "poll"],
-    "thing": 166,
-    "type": {
-      "subtype": null,
-      "supported": {
-        "appliance": [],
-        "blinds": [],
-        "boiler": [],
-        "fan": [],
-        "heater": [],
-        "light": [],
-        "siren": [],
-        "water_valve": []
-      },
-      "type": "appliance"
     }
   },
   {
@@ -2541,6 +2254,269 @@
         "door_lock": []
       },
       "type": null
+    }
+  },
+  {
+    "client": {
+      "name": "Living Room Fan"
+    },
+    "id": 1010,
+    "model": "TS0601",
+    "modelAlias": "Living Room Fan",
+    "services": {
+      "fan_ctrl": {
+        "name": "fan_ctrl",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:fan_ctrl/ad:1010",
+        "enabled": true,
+        "props": {
+          "sup_modes": ["quiet", "low", "medium", "high", "auto"]
+        },
+        "intf": ["cmd.mode.set"]
+      }
+    }
+  },
+  {
+    "client": {
+      "name": "Sensor Test"
+    },
+    "id": 1009,
+    "model": "TS0601",
+    "modelAlias": "Sensor Test",
+    "services": {
+      "sensor_accelx": {
+        "name": "sensor_accelx",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_accelx/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["m/s2"] }
+      },
+      "sensor_accely": {
+        "name": "sensor_accely",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_accely/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["m/s2"] }
+      },
+      "sensor_accelz": {
+        "name": "sensor_accelz",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_accelz/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["m/s2"] }
+      },
+      "sensor_airflow": {
+        "name": "sensor_airflow",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_airflow/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["m3/h"] }
+      },
+      "sensor_airq": {
+        "name": "sensor_airq",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_airq/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["pm25"] }
+      },
+      "sensor_anglepos": {
+        "name": "sensor_anglepos",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_anglepos/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["%"] }
+      },
+      "sensor_atmo": {
+        "name": "sensor_atmo",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_atmo/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["kPa"] }
+      },
+      "sensor_baro": {
+        "name": "sensor_baro",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_baro/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["kPa"] }
+      },
+      "sensor_co": {
+        "name": "sensor_co",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_co/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["mol/m3"] }
+      },
+      "sensor_co2": {
+        "name": "sensor_co2",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_co2/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["ppm"] }
+      },
+      "sensor_current": {
+        "name": "sensor_current",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_current/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["A"] }
+      },
+      "sensor_dew": {
+        "name": "sensor_dew",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_dew/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["°C"] }
+      },
+      "sensor_direct": {
+        "name": "sensor_direct",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_direct/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["°"] }
+      },
+      "sensor_distance": {
+        "name": "sensor_distance",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_distance/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["m"] }
+      },
+      "sensor_elresist": {
+        "name": "sensor_elresist",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_elresist/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["ohm/m"] }
+      },
+      "sensor_freq": {
+        "name": "sensor_freq",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_freq/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["Hz"] }
+      },
+      "sensor_gp": {
+        "name": "sensor_gp",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_gp/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["%"] }
+      },
+      "sensor_gust": {
+        "name": "sensor_gust",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_gust/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["km/h"] }
+      },
+      "sensor_humid": {
+        "name": "sensor_humid",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_humid/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["%"] }
+      },
+      "sensor_lumin": {
+        "name": "sensor_lumin",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_lumin/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["lx"] }
+      },
+      "sensor_moist": {
+        "name": "sensor_moist",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_moist/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["%"] }
+      },
+      "sensor_noise": {
+        "name": "sensor_noise",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_noise/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["dB"] }
+      },
+      "sensor_power": {
+        "name": "sensor_power",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_power/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["W"] }
+      },
+      "sensor_rain": {
+        "name": "sensor_rain",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_rain/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["mm/h"] }
+      },
+      "sensor_rotation": {
+        "name": "sensor_rotation",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_rotation/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["rpm"] }
+      },
+      "sensor_seismicint": {
+        "name": "sensor_seismicint",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_seismicint/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["EMCRO"] }
+      },
+      "sensor_seismicmag": {
+        "name": "sensor_seismicmag",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_seismicmag/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["MB"] }
+      },
+      "sensor_solarrad": {
+        "name": "sensor_solarrad",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_solarrad/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["W/m2"] }
+      },
+      "sensor_tank": {
+        "name": "sensor_tank",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_tank/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["l"] }
+      },
+      "sensor_temp": {
+        "name": "sensor_temp",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_temp/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["°C"] }
+      },
+      "sensor_tidelvl": {
+        "name": "sensor_tidelvl",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_tidelvl/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["m"] }
+      },
+      "sensor_uv": {
+        "name": "sensor_uv",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_uv/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["index"] }
+      },
+      "sensor_veloc": {
+        "name": "sensor_veloc",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_veloc/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["m/2"] }
+      },
+      "sensor_voltage": {
+        "name": "sensor_voltage",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_voltage/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["V"] }
+      },
+      "sensor_watflow": {
+        "name": "sensor_watflow",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_watflow/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["l/h"] }
+      },
+      "sensor_watpressure": {
+        "name": "sensor_watpressure",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_watpressure/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["kPa"] }
+      },
+      "sensor_wattemp": {
+        "name": "sensor_wattemp",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_wattemp/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["°C"] }
+      },
+      "sensor_weight": {
+        "name": "sensor_weight",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_weight/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["kg"] }
+      },
+      "sensor_wind": {
+        "name": "sensor_wind",
+        "addr": "/rt:dev/rn:zigbee/ad:1/sv:sensor_wind/ad:1009",
+        "enabled": true,
+        "props": { "sup_units": ["km/h"] }
+      }
     }
   }
 ]
