@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.1.9 (28.07.2025)
+
+- Added icon.
+
 ## 0.1.8 (28.07.2025)
 
 - Added logo.
