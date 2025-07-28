@@ -1,15 +1,21 @@
 configuration:
   hub_ip:
-    name: Miðlari IP (valkvæmt)
-    description: Láttu autt til að uppgötva sjálfkrafa.
-  username:
-    name: Notandanafn
-    description: Notandanafn þitt fyrir staðbundið API/MQTT aðgang að Smarthub.
-  password:
-    name: Lykilorð
-    description: Lykilorðið þitt fyrir staðbundið API/MQTT aðgang að Smarthub.
+    name: IP-tala miðlara (valkvætt)
+    description: Skildu eftir autt til að uppgötva sjálfkrafa.
+  fh_username:
+    name: Notandanafn fyrir staðbundið API
+    description: Notandanafn fyrir staðbundið API/MQTT í Smarthub.
+  fh_password:
+    name: Lykilorð fyrir staðbundið API
+    description: Lykilorð fyrir staðbundið API/MQTT í Smarthub.
+  tp_username:
+    name: Thingsplex notandanafn (valkvætt)
+    description: Notandanafn þitt fyrir Thingsplex.
+  tp_password:
+    name: Thingsplex lykilorð (valkvætt)
+    description: Lykilorðið þitt fyrir Thingsplex.
   demo_mode:
     name: Sýnishamur
-    description: Notaðu skráða stöðu úr raunverulegum Futurehome Smarthub til að líkja eftir tækjum.
+    description: Notaðu upptaka af raunverulegu ástandi úr Futurehome Smarthub til að herma eftir tækjum.
   show_debug_log:
-    name: Sýna aflúsunarskrá
+    name: Sýna villuskýrslu

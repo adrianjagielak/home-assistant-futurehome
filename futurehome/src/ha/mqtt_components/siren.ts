@@ -51,18 +51,6 @@ export interface SirenComponent extends BaseComponent {
   optimistic?: boolean;
 
   /**
-   * The payload that represents the available state.
-   * Default: "online"
-   */
-  payload_available?: string;
-
-  /**
-   * The payload that represents the unavailable state.
-   * Default: "offline"
-   */
-  payload_not_available?: string;
-
-  /**
    * The payload that represents `off` state. If specified, will be used for both comparing to the value in the `state_topic` (see `value_template` and `state_off` for details) and sending as `off` command to the `command_topic`.
    * Default: "OFF"
    */

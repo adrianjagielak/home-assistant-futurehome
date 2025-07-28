@@ -343,18 +343,6 @@ export interface LightComponent extends BaseComponent {
   min_mireds?: number;
 
   /**
-   * The payload that represents the available state.
-   * Default: "online"
-   */
-  payload_available?: string;
-
-  /**
-   * The payload that represents the unavailable state.
-   * Default: "offline"
-   */
-  payload_not_available?: string;
-
-  /**
    * The payload that represents the off state.
    * Default: "OFF"
    */

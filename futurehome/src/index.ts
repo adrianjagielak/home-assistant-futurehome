@@ -7,11 +7,15 @@ import { haUpdateState, haUpdateStateValueReport } from './ha/update_state';
 import { VinculumPd7Device } from './fimp/vinculum_pd7_device';
 import { haUpdateAvailability } from './ha/update_availability';
 import { delay } from './utils';
+import { exposeSmarthubTools, handleInclusionStatusReport } from './ha/admin';
+import { pollVinculum } from './fimp/vinculum';
 
 (async () => {
   const hubIp = process.env.FH_HUB_IP || 'futurehome-smarthub.local';
-  const hubUsername = process.env.FH_USERNAME || '';
-  const hubPassword = process.env.FH_PASSWORD || '';
+  const localApiUsername = process.env.FH_USERNAME || '';
+  const localApiPassword = process.env.FH_PASSWORD || '';
+  const thingsplexUsername = process.env.TP_USERNAME || '';
+  const thingsplexPassword = process.env.TP_PASSWORD || '';
   const demoMode = (process.env.DEMO_MODE || '').toLowerCase().includes('true');
   const showDebugLog = (process.env.SHOW_DEBUG_LOG || '')
     .toLowerCase()
@@ -35,7 +39,7 @@ import { delay } from './utils';
   setHa(ha);
   log.info('Connected to HA broker');
 
-  if (!demoMode && (!hubUsername || !hubPassword)) {
+  if (!demoMode && (!localApiUsername || !localApiPassword)) {
     log.info(
       'Empty username or password in non-demo mode. Removing all Futurehome devices from Home Assistant...',
     );
@@ -57,32 +61,18 @@ import { delay } from './utils';
   log.info('Connecting to Futurehome hub...');
   const fimp = await connectHub({
     hubIp,
-    username: hubUsername,
-    password: hubPassword,
+    username: localApiUsername,
+    password: localApiPassword,
     demo: demoMode,
   });
   fimp.subscribe('#');
   setFimp(fimp);
   log.info('Connected to Futurehome hub');
 
-  const house = await sendFimpMsg({
-    address: '/rt:app/rn:vinculum/ad:1',
-    service: 'vinculum',
-    cmd: 'cmd.pd7.request',
-    val: { cmd: 'get', component: null, param: { components: ['house'] } },
-    val_t: 'object',
-    timeoutMs: 30000,
-  });
+  const house = await pollVinculum('house');
   const hubId = house.val.param.house.hubId;
 
-  const devices = await sendFimpMsg({
-    address: '/rt:app/rn:vinculum/ad:1',
-    service: 'vinculum',
-    cmd: 'cmd.pd7.request',
-    val: { cmd: 'get', component: null, param: { components: ['device'] } },
-    val_t: 'object',
-    timeoutMs: 30000,
-  });
+  const devices = await pollVinculum('device');
 
   const haConfig = retainedMessages.filter((msg) =>
     msg.topic.endsWith('/config'),
@@ -181,14 +171,23 @@ import { delay } from './utils';
         log.error('Failed publishing device', device, e);
       }
     }
+    if (demoMode || (thingsplexUsername && thingsplexPassword)) {
+      Object.assign(
+        commandHandlers,
+        exposeSmarthubTools({
+          hubId,
+          demoMode,
+          hubIp,
+          thingsplexUsername,
+          thingsplexPassword,
+        }).commandHandlers,
+      );
+    }
     setHaCommandHandlers(commandHandlers);
   };
   vinculumDevicesToHa(devices);
 
   let knownDeviceIds = new Set(devices.val.param.device.map((d: any) => d?.id));
-
-  // todo
-  // exposeSmarthubTools();
 
   fimp.on('message', async (topic, buf) => {
     try {
@@ -252,6 +251,11 @@ import { delay } from './utils';
           break;
         }
 
+        case 'evt.thing.inclusion_status_report': {
+          handleInclusionStatusReport(hubId, msg);
+          break;
+        }
+
         default: {
           // Handle any event that matches the pattern: evt.<something>.report
           if (/^evt\..+\.report$/.test(msg.type ?? '')) {
@@ -271,14 +275,7 @@ import { delay } from './utils';
   const pollState = () => {
     log.debug('Refreshing Vinculum state after 30 seconds...');
 
-    sendFimpMsg({
-      address: '/rt:app/rn:vinculum/ad:1',
-      service: 'vinculum',
-      cmd: 'cmd.pd7.request',
-      val: { cmd: 'get', component: null, param: { components: ['state'] } },
-      val_t: 'object',
-      timeoutMs: 30000,
-    }).catch((e) => log.warn('Failed to request state', e));
+    pollVinculum('state').catch((e) => log.warn('Failed to request state', e));
   };
   // Request initial state
   pollState();
@@ -290,14 +287,9 @@ import { delay } from './utils';
   const pollDevices = () => {
     log.debug('Refreshing Vinculum devices after 30 minutes...');
 
-    sendFimpMsg({
-      address: '/rt:app/rn:vinculum/ad:1',
-      service: 'vinculum',
-      cmd: 'cmd.pd7.request',
-      val: { cmd: 'get', component: null, param: { components: ['device'] } },
-      val_t: 'object',
-      timeoutMs: 30000,
-    }).catch((e) => log.warn('Failed to request state', e));
+    pollVinculum('device').catch((e) =>
+      log.warn('Failed to request devices', e),
+    );
   };
   // Poll devices every 30 minutes (1800000 ms)
   if (!demoMode) {

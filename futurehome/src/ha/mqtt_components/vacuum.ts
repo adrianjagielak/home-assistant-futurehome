@@ -40,12 +40,6 @@ export interface VacuumComponent extends BaseComponent {
   json_attributes_topic?: string;
 
   /**
-   * The payload that represents the available state.
-   * Default: "online"
-   */
-  payload_available?: string;
-
-  /**
    * The payload to send to the `command_topic` to begin a spot cleaning cycle.
    * Default: "clean_spot"
    */
@@ -56,12 +50,6 @@ export interface VacuumComponent extends BaseComponent {
    * Default: "locate"
    */
   payload_locate?: string;
-
-  /**
-   * The payload that represents the unavailable state.
-   * Default: "offline"
-   */
-  payload_not_available?: string;
 
   /**
    * The payload to send to the `command_topic` to pause the vacuum.

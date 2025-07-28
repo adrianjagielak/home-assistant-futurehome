@@ -26,18 +26,6 @@ export interface SceneComponent extends BaseComponent {
   payload_on?: string;
 
   /**
-   * The payload that represents the available state.
-   * Default: "online"
-   */
-  payload_available?: string;
-
-  /**
-   * The payload that represents the unavailable state.
-   * Default: "offline"
-   */
-  payload_not_available?: string;
-
-  /**
    * Defines a [template](https://www.home-assistant.io/docs/configuration/templating/#using-value-templates-with-mqtt)
    * to extract the JSON dictionary from messages received on the `json_attributes_topic`.
    * Usage example can be found in [MQTT sensor](https://www.home-assistant.io/integrations/sensor.mqtt/#json-attributes-template-configuration) documentation.

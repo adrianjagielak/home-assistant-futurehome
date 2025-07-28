@@ -2,14 +2,20 @@ configuration:
   hub_ip:
     name: Hub-IP (optional)
     description: Leer lassen für automatische Erkennung.
-  username:
-    name: Benutzername
-    description: Dein Benutzername für den lokalen API/MQTT-Zugang zum Smarthub.
-  password:
-    name: Passwort
-    description: Dein Passwort für den lokalen API/MQTT-Zugang zum Smarthub.
+  fh_username:
+    name: Lokaler API-Benutzername
+    description: Dein Smarthub lokaler API-/MQTT-Benutzername.
+  fh_password:
+    name: Lokales API-Passwort
+    description: Dein Smarthub lokales API-/MQTT-Passwort.
+  tp_username:
+    name: Thingsplex-Benutzername (optional)
+    description: Dein Thingsplex-Benutzername.
+  tp_password:
+    name: Thingsplex-Passwort (optional)
+    description: Dein Thingsplex-Passwort.
   demo_mode:
-    name: Demomodus
-    description: Verwende einen aufgezeichneten Zustand von einem echten Futurehome Smarthub, um Geräte zu simulieren.
+    name: Demo-Modus
+    description: Verwende einen aufgezeichneten Beispielzustand eines echten Futurehome Smarthubs, um Geräte zu simulieren.
   show_debug_log:
     name: Debug-Log anzeigen

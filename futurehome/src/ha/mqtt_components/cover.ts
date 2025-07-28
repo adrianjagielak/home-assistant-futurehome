@@ -48,12 +48,6 @@ export interface CoverComponent extends BaseComponent {
   optimistic?: boolean;
 
   /**
-   * The payload that represents the online state.
-   * Default: "online"
-   */
-  payload_available?: string;
-
-  /**
    * The command payload that closes the cover.
    * Set to `null` to disable the close command.
    * Default: "CLOSE"

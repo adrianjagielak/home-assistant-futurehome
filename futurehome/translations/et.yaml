@@ -1,0 +1,21 @@
+configuration:
+  hub_ip:
+    name: Hubi IP (valikuline)
+    description: Jäta tühjaks automaatseks tuvastamiseks.
+  fh_username:
+    name: Kohaliku API kasutajanimi
+    description: Sinu Smarthubi kohaliku API/MQTT kasutajanimi.
+  fh_password:
+    name: Kohaliku API parool
+    description: Sinu Smarthubi kohaliku API/MQTT parool.
+  tp_username:
+    name: Thingsplexi kasutajanimi (valikuline)
+    description: Sinu Thingsplexi kasutajanimi.
+  tp_password:
+    name: Thingsplexi parool (valikuline)
+    description: Sinu Thingsplexi parool.
+  demo_mode:
+    name: Demorežiim
+    description: Kasuta päris Futurehome Smarthubist salvestatud näidisseisu seadmete simuleerimiseks.
+  show_debug_log:
+    name: Näita silumislogi

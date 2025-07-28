@@ -1,0 +1,21 @@
+configuration:
+  hub_ip:
+    name: IP adresa hubu (voliteľné)
+    description: Nechajte prázdne pre automatické vyhľadanie.
+  fh_username:
+    name: Používateľské meno lokálneho API
+    description: Vaše používateľské meno pre lokálne API/MQTT Smarthubu.
+  fh_password:
+    name: Heslo lokálneho API
+    description: Vaše heslo pre lokálne API/MQTT Smarthubu.
+  tp_username:
+    name: Používateľské meno Thingsplex (voliteľné)
+    description: Vaše používateľské meno pre Thingsplex.
+  tp_password:
+    name: Heslo Thingsplex (voliteľné)
+    description: Vaše heslo pre Thingsplex.
+  demo_mode:
+    name: Demo režim
+    description: Použite uložený stav zo skutočného Futurehome Smarthubu na simuláciu zariadení.
+  show_debug_log:
+    name: Zobraziť ladicí protokol

@@ -1,0 +1,21 @@
+configuration:
+  hub_ip:
+    name: Hub IP (pasirinktinai)
+    description: Palikite tuščią automatiniam aptikimui.
+  fh_username:
+    name: Vietinio API naudotojo vardas
+    description: Jūsų Smarthub vietinio API/MQTT naudotojo vardas.
+  fh_password:
+    name: Vietinio API slaptažodis
+    description: Jūsų Smarthub vietinio API/MQTT slaptažodis.
+  tp_username:
+    name: Thingsplex naudotojo vardas (pasirinktinai)
+    description: Jūsų Thingsplex naudotojo vardas.
+  tp_password:
+    name: Thingsplex slaptažodis (pasirinktinai)
+    description: Jūsų Thingsplex slaptažodis.
+  demo_mode:
+    name: Demonstracinis režimas
+    description: Naudokite įrašytą būsena iš tikro Futurehome Smarthub, kad imituotumėte įrenginius.
+  show_debug_log:
+    name: Rodyti derinimo žurnalą

@@ -1,0 +1,21 @@
+configuration:
+  hub_ip:
+    name: IP хаба (неабавязкова)
+    description: Пакіньце пустым для аўтаматычнага выяўлення.
+  fh_username:
+    name: Лагін лакальнага API
+    description: Ваш лагін для лакальнага API/MQTT у Smarthub.
+  fh_password:
+    name: Пароль лакальнага API
+    description: Ваш пароль для лакальнага API/MQTT у Smarthub.
+  tp_username:
+    name: Лагін Thingsplex (неабавязкова)
+    description: Ваш лагін для Thingsplex.
+  tp_password:
+    name: Пароль Thingsplex (неабавязкова)
+    description: Ваш пароль для Thingsplex.
+  demo_mode:
+    name: Дэманстрацыйны рэжым
+    description: Выкарыстоўвайце запісаны стан з рэальнага Futurehome Smarthub для мадэлявання прылад.
+  show_debug_log:
+    name: Паказваць журнал адладкі

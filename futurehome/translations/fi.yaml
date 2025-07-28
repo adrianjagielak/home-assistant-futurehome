@@ -1,15 +1,21 @@
 configuration:
   hub_ip:
-    name: Keskittimen IP (valinnainen)
-    description: Jätä tyhjäksi automaattista tunnistusta varten.
-  username:
-    name: Käyttäjätunnus
-    description: Paikallisen Smarthub API/MQTT -yhteyden käyttäjätunnus.
-  password:
-    name: Salasana
-    description: Paikallisen Smarthub API/MQTT -yhteyden salasana.
+    name: Hubin IP-osoite (valinnainen)
+    description: Jätä tyhjäksi automaattista etsintää varten.
+  fh_username:
+    name: Paikallinen API-käyttäjätunnus
+    description: Smarthubin paikallinen API/MQTT-käyttäjätunnuksesi.
+  fh_password:
+    name: Paikallinen API-salasana
+    description: Smarthubin paikallinen API/MQTT-salasanasi.
+  tp_username:
+    name: Thingsplex-käyttäjätunnus (valinnainen)
+    description: Thingsplex-käyttäjätunnuksesi.
+  tp_password:
+    name: Thingsplex-salasana (valinnainen)
+    description: Thingsplex-salasanasi.
   demo_mode:
     name: Demotila
-    description: Käytä tallennettua esimerkkitilaa oikeasta Futurehome Smarthubista laitteiden simuloimiseen.
+    description: Käytä tallennettua tilanäytettä oikeasta Futurehome Smarthubista laitteiden simuloimiseen.
   show_debug_log:
-    name: Näytä vianmääritysloki
+    name: Näytä virheloki

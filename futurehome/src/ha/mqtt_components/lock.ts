@@ -62,22 +62,10 @@ export interface LockComponent extends BaseComponent {
   optimistic?: boolean;
 
   /**
-   * The payload that represents the available state.
-   * Default: "online"
-   */
-  payload_available?: string;
-
-  /**
    * The payload sent to the lock to lock it.
    * Default: "LOCK"
    */
   payload_lock?: string;
-
-  /**
-   * The payload that represents the unavailable state.
-   * Default: "offline"
-   */
-  payload_not_available?: string;
 
   /**
    * The payload sent to the lock to unlock it.

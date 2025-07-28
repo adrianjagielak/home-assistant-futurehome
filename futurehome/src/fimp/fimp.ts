@@ -21,7 +21,7 @@ export type FimpResponse = {
   ver?: any;
 };
 
-type FimpValueType =
+export type FimpValueType =
   | 'string'
   | 'int'
   | 'float'
@@ -51,7 +51,7 @@ export async function sendFimpMsg({
   cmd: string;
   val: unknown;
   val_t: FimpValueType;
-  props?: any;
+  props?: Record<string, any>;
   timeoutMs?: number;
 }): Promise<FimpResponse> {
   const uid = uuidv4();
@@ -60,9 +60,9 @@ export async function sendFimpMsg({
     corid: null,
     ctime: new Date().toISOString(),
     props: props,
-    resp_to: 'pt:j1/mt:rsp/rt:app/rn:ha-futurehome/ad:addon',
+    resp_to: 'pt:j1/mt:rsp/rt:cloud/rn:remote-client/ad:smarthome-app',
     serv: service,
-    src: 'ha-futurehome',
+    src: 'smarthome-app',
     tags: [],
     type: cmd,
     uid: uid,
@@ -165,7 +165,7 @@ service: "${service}",
 uid: "${uid}",
 cmd: "${cmd}",
 val: ${JSON.stringify(val)},
-val_t: "${val_t}"
+val_t: "${val_t}"${Object.entries(props).length > 0 ? `\nprops: ${JSON.stringify(props)}` : ''}${timeoutMs != 10000 ? `\ntimeoutMs: ${timeoutMs}` : ''}
 `);
 
     fimp?.publish(topic, message, { qos: 1 });

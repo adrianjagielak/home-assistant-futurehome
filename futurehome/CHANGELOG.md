@@ -3,6 +3,7 @@
 ## 0.1.8 (28.07.2025)
 
 - Added logo.
+- Added support for pairing new devices.
 
 ## 0.1.7 (26.07.2025)
 

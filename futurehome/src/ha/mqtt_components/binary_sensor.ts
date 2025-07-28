@@ -87,12 +87,6 @@ export interface BinarySensorComponent extends BaseComponent {
   off_delay?: number;
 
   /**
-   * The string that represents the `online` state.
-   * Default: "online"
-   */
-  payload_available?: string;
-
-  /**
    * The string that represents the `offline` state.
    * Default: "offline"
    */

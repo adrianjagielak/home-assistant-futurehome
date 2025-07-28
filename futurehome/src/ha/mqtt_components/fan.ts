@@ -155,18 +155,6 @@ export interface FanComponent extends BaseComponent {
   json_attributes_topic?: string;
 
   /**
-   * The payload that represents the available state.
-   * Default: "online"
-   */
-  payload_available?: string;
-
-  /**
-   * The payload that represents the unavailable state.
-   * Default: "offline"
-   */
-  payload_not_available?: string;
-
-  /**
    * The payload that represents the stop state.
    * Default: "OFF"
    */

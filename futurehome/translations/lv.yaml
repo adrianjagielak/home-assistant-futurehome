@@ -1,0 +1,21 @@
+configuration:
+  hub_ip:
+    name: Hub IP (pēc izvēles)
+    description: Atstāj tukšu automātiskai noteikšanai.
+  fh_username:
+    name: Vietējā API lietotājvārds
+    description: Tavs Smarthub vietējais API/MQTT lietotājvārds.
+  fh_password:
+    name: Vietējā API parole
+    description: Tava Smarthub vietējā API/MQTT parole.
+  tp_username:
+    name: Thingsplex lietotājvārds (pēc izvēles)
+    description: Tavs Thingsplex lietotājvārds.
+  tp_password:
+    name: Thingsplex parole (pēc izvēles)
+    description: Tava Thingsplex parole.
+  demo_mode:
+    name: Demonstrācijas režīms
+    description: Izmanto ierakstītu stāvokli no īsta Futurehome Smarthub, lai simulētu ierīces.
+  show_debug_log:
+    name: Rādīt atkļūdošanas žurnālu

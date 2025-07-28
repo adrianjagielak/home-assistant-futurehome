@@ -16,18 +16,6 @@ export interface WaterHeaterComponent extends BaseComponent {
   platform: 'water_heater';
 
   /**
-   * The payload that represents the available state.
-   * Default: "online"
-   */
-  payload_available?: string;
-
-  /**
-   * The payload that represents the unavailable state.
-   * Default: "offline"
-   */
-  payload_not_available?: string;
-
-  /**
    * The MQTT topic to publish commands to change the water heater operation mode.
    */
   mode_command_topic?: string;

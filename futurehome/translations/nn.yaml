@@ -1,15 +1,21 @@
 configuration:
   hub_ip:
-    name: Hub IP (valfritt)
+    name: Hub-IP (valfritt)
     description: La stå tomt for automatisk oppdaging.
-  username:
-    name: Brukarnamn
-    description: Brukarnamnet ditt for lokal API/MQTT-tilgang til Smarthub.
-  password:
-    name: Passord
-    description: Passordet ditt for lokal API/MQTT-tilgang til Smarthub.
+  fh_username:
+    name: Lokalt API-brukarnamn
+    description: Ditt lokale API-/MQTT-brukarnamn for Smarthub.
+  fh_password:
+    name: Lokalt API-passord
+    description: Ditt lokale API-/MQTT-passord for Smarthub.
+  tp_username:
+    name: Thingsplex-brukarnamn (valfritt)
+    description: Ditt brukarnamn for Thingsplex.
+  tp_password:
+    name: Thingsplex-passord (valfritt)
+    description: Ditt passord for Thingsplex.
   demo_mode:
     name: Demomodus
-    description: Bruk eit førehandsopptak frå ein ekte Futurehome Smarthub for å simulere einingar.
+    description: Bruk ein førehandsopptak frå ein ekte Futurehome Smarthub for å simulere einingar.
   show_debug_log:
-    name: Vis feillogg
+    name: Vis feilsøkingslogg

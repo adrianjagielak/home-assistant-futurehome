@@ -57,18 +57,6 @@ export interface EventComponent extends BaseComponent {
   name?: string;
 
   /**
-   * The payload that represents the available state.
-   * Default: "online"
-   */
-  payload_available?: string;
-
-  /**
-   * The payload that represents the unavailable state.
-   * Default: "offline"
-   */
-  payload_not_available?: string;
-
-  /**
    * Defines a [template](https://www.home-assistant.io/docs/configuration/templating/#using-value-templates-with-mqtt)
    * to extract the value and render it to a valid JSON event payload.
    * If the template throws an error, the current state will be used instead.

@@ -12,15 +12,19 @@ This add-on:
 * Fetches all device metadata from the Futurehome hub and maps them to Home Assistant devices/entities.
 * Fetches and updates device states and availability in real time.
 * Supports interaction with devices comparable to the official Futurehome app.
+* Supports pairing and unpairing of devices.
 
 ## Installation
 
+todo: rewrite the installation instructions
+
 1. In the Futurehome app, go to Settings > My household > Smarthub and enable Local API.
-2. (Optional but highly recommended) Block the hub’s internet (WAN) access in your router settings to prevent future firmware updates.
-3. In Home Assistant, enable the **MQTT** integration.
-4. [Add this add-on repository to Home Assistant](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fadrianjagielak%2Fhome-assistant-futurehome) and refresh the page.
-5. Open the **Add-on Store** and search for "Futurehome".
-6. Install, configure, and start the Futurehome add-on.
+2. (Optional) In the Futurehome app go to Settings > ??? > ??? and install Thingsplex integration (Needed for support of pairing new devices).
+3. (Optional but highly recommended) Block the hub’s internet (WAN) access in your router settings to prevent future firmware updates.
+4. In Home Assistant, enable the **MQTT** integration.
+5. [Add this add-on repository to Home Assistant](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fadrianjagielak%2Fhome-assistant-futurehome) and refresh the page.
+6. Open the **Add-on Store** and search for "Futurehome".
+7. Install, configure, and start the Futurehome add-on.
 
 # Futurehome Device Services Compatibility Chart
 
@@ -31,7 +35,6 @@ Devices commonly consist of multiple services: for example, a presence sensor mi
 Some services are more common than others; some are deprecated entirely.
 
 <!--
-todo: pairing
 todo add info about factory reset hub to restore 30 day trial
 -->
 

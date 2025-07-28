@@ -9,12 +9,15 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
+    "axios": "^1.11.0",
     "mqtt": "^5.13.3",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "ws": "^8.18.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",
     "@types/node": "^24.0.15",
+    "@types/ws": "^8.18.1",
     "@typescript-eslint/eslint-plugin": "^8.38.0",
     "@typescript-eslint/parser": "^8.38.0",
     "eslint": "^9.31.0",

@@ -103,16 +103,4 @@ export interface SensorComponent extends BaseComponent {
    * Available variables: `entity_id`. The `entity_id` can be used to reference the entity's attributes.
    */
   last_reset_value_template?: string;
-
-  /**
-   * The payload that represents the available state.
-   * Default: "online"
-   */
-  payload_available?: string;
-
-  /**
-   * The payload that represents the unavailable state.
-   * Default: "offline"
-   */
-  payload_not_available?: string;
 }

@@ -115,22 +115,10 @@ export interface AlarmControlPanelComponent extends BaseComponent {
   payload_arm_custom_bypass?: string;
 
   /**
-   * The payload that represents the available state.
-   * Default: "online"
-   */
-  payload_available?: string;
-
-  /**
    * The payload to disarm your Alarm Panel.
    * Default: "DISARM"
    */
   payload_disarm?: string;
-
-  /**
-   * The payload that represents the unavailable state.
-   * Default: "offline"
-   */
-  payload_not_available?: string;
 
   /**
    * The payload to trigger the alarm on your Alarm Panel.
