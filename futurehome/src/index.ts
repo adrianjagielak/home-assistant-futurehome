@@ -7,7 +7,13 @@ import { haUpdateState, haUpdateStateValueReport } from './ha/update_state';
 import { VinculumPd7Device } from './fimp/vinculum_pd7_device';
 import { haUpdateAvailability } from './ha/update_availability';
 import { delay } from './utils';
-import { exposeSmarthubTools, handleExclusionReport, handleExclusionStatusReport, handleInclusionStatusReport } from './ha/admin';
+import {
+  exposeSmarthubTools,
+  handleExclusionReport,
+  handleExclusionStatusReport,
+  handleInclusionReport,
+  handleInclusionStatusReport,
+} from './ha/admin';
 import { pollVinculum } from './fimp/vinculum';
 
 (async () => {
@@ -264,12 +270,17 @@ import { pollVinculum } from './fimp/vinculum';
           handleInclusionStatusReport(hubId, msg);
           break;
         }
-        
+
         case 'evt.thing.exclusion_status_report': {
           handleExclusionStatusReport(hubId, msg);
           break;
         }
-        
+
+        case 'evt.thing.inclusion_report': {
+          handleInclusionReport();
+          break;
+        }
+
         case 'evt.thing.exclusion_report': {
           handleExclusionReport();
           break;

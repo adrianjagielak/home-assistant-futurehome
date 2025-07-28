@@ -31,7 +31,10 @@ import { sound_switch__components } from '../services/sound_switch';
 import { thermostat__components } from '../services/thermostat';
 import { user_code__components } from '../services/user_code';
 import { water_heater__components } from '../services/water_heater';
-import { connectThingsplexWebSocketAndSend, loginToThingsplex } from '../thingsplex/thingsplex';
+import {
+  connectThingsplexWebSocketAndSend,
+  loginToThingsplex,
+} from '../thingsplex/thingsplex';
 import { abbreviateHaMqttKeys } from './abbreviate_ha_mqtt_keys';
 import { ha, haCommandHandlers } from './globals';
 import { HaDeviceConfig } from './ha_device_config';
@@ -258,35 +261,26 @@ export function haPublishDevice(parameters: {
     Object.assign(handlers, result.commandHandlers);
   }
 
-  const firstSvcAddr =
-    Object.entries(parameters.vinculumDeviceData.services ?? {})?.[0]?.[1]
-      .addr ?? '';
   if (
     parameters.thingsplexUsername &&
     parameters.thingsplexPassword &&
-    parameters.vinculumDeviceData.thing &&
-    (firstSvcAddr.includes('/rn:zigbee/ad:1/') ||
-      firstSvcAddr.includes('/rn:zw/ad:1/'))
+    parameters.vinculumDeviceData.fimp?.address &&
+    (parameters.vinculumDeviceData.fimp?.adapter === 'zigbee' ||
+      parameters.vinculumDeviceData.fimp?.adapter === 'zwave-ad')
   ) {
     const deleteCommandTopic = `${topicPrefix}/delete/command`;
-    const availabilityTopic = `${topicPrefix}/delete/availability`;
     components[`${topicPrefix}_delete_button`] = {
       unique_id: `${topicPrefix}_delete_button`,
       platform: 'button',
       entity_category: 'diagnostic',
-      name: firstSvcAddr.includes('/rn:zigbee/ad:1/')
-        ? 'ZigBee: Unpair Device'
-        : 'Z-Wave: Unpair Device',
+      name:
+        parameters.vinculumDeviceData.fimp?.adapter === 'zigbee'
+          ? 'ZigBee: Unpair Device'
+          : 'Z-Wave: Unpair Device',
       icon: 'mdi:delete-forever',
       command_topic: deleteCommandTopic,
-      availability_topic: availabilityTopic,
-      availability_template: `{% if value == "online" or value == "" %}online{% else %}offline{% endif %}`,
     } as any;
     handlers[deleteCommandTopic] = async (_payload: string) => {
-      ha?.publish(availabilityTopic, 'offline', {
-        retain: true,
-        qos: 2,
-      });
       try {
         const token = await loginToThingsplex({
           host: parameters.hubIp,
@@ -300,25 +294,24 @@ export function haPublishDevice(parameters: {
           },
           [
             {
-              address: firstSvcAddr.includes('/rn:zigbee/ad:1/')
-                ? 'pt:j1/mt:cmd/rt:ad/rn:zigbee/ad:1'
-                : 'pt:j1/mt:evt/rt:ad/rn:zw/ad:1',
-              service: firstSvcAddr.includes('/rn:zigbee/ad:1/')
-                ? 'zigbee'
-                : 'zwave-ad',
+              address:
+                parameters.vinculumDeviceData.fimp?.adapter === 'zigbee'
+                  ? 'pt:j1/mt:cmd/rt:ad/rn:zigbee/ad:1'
+                  : 'pt:j1/mt:evt/rt:ad/rn:zw/ad:1',
+              service:
+                parameters.vinculumDeviceData.fimp?.adapter === 'zigbee'
+                  ? 'zigbee'
+                  : 'zwave-ad',
               cmd: 'cmd.thing.delete',
               val_t: 'str_map',
               val: {
-                address: parameters.vinculumDeviceData.thing,
+                address: parameters.vinculumDeviceData.fimp?.address,
               },
             },
           ],
         );
       } catch (e) {
-        ha?.publish(availabilityTopic, 'online', {
-          retain: true,
-          qos: 2,
-        });
+        log.error('Failed to delete device:', e);
       }
     };
   }

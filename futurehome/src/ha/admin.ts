@@ -340,21 +340,9 @@ export function handleInclusionStatusReport(hubId: string, msg: FimpResponse) {
     case 'ADD_NODE_GET_NODE_INFO':
     case 'ADD_NODE_PROTOCOL_DONE':
       localizedStatus = 'Device added successfully!';
-      pollVinculum('device').catch((e) =>
-        log.warn('Failed to request devices', e),
-      );
-      pollVinculum('state').catch((e) =>
-        log.warn('Failed to request state', e),
-      );
       break;
     case 'ADD_NODE_DONE':
       localizedStatus = 'Done';
-      pollVinculum('device').catch((e) =>
-        log.warn('Failed to request devices', e),
-      );
-      pollVinculum('state').catch((e) =>
-        log.warn('Failed to request state', e),
-      );
       break;
     case 'NET_NODE_INCL_CTRL_OP_FAILED':
       localizedStatus = "Operation failed. The device can't be included.";
@@ -389,12 +377,6 @@ export function handleExclusionStatusReport(hubId: string, msg: FimpResponse) {
       break;
     case 'REMOVE_NODE_DONE':
       localizedStatus = 'Done';
-      pollVinculum('device').catch((e) =>
-        log.warn('Failed to request devices', e),
-      );
-      pollVinculum('state').catch((e) =>
-        log.warn('Failed to request state', e),
-      );
       break;
     case 'NET_NODE_REMOVE_FAILED':
       localizedStatus = "Operation failed. The device can't be excluded.";
@@ -413,6 +395,11 @@ export function handleExclusionStatusReport(hubId: string, msg: FimpResponse) {
       qos: 2,
     },
   );
+}
+
+export function handleInclusionReport() {
+  pollVinculum('device').catch((e) => log.warn('Failed to request devices', e));
+  pollVinculum('state').catch((e) => log.warn('Failed to request state', e));
 }
 
 export function handleExclusionReport() {

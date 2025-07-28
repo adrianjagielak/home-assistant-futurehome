@@ -7,6 +7,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 /**
  * Logs in to the Thingsplex and extracts the tplex token.
+ *
+ * The use of Thingsplex is required for including and excluding devices,
+ * as the regular Local API (SmartHub MQTT broker on port 1884)
+ * does not support inclusion or exclusion commands.
+ *
  * @param username - The login username
  * @param password - The login password
  * @returns The tplex token if login is successful
@@ -54,6 +59,11 @@ export async function loginToThingsplex(parameters: {
 
 /**
  * Connects to the Thingsplex websocket with the tplex token and sends the messages.
+ *
+ * The use of Thingsplex is required for including and excluding devices,
+ * as the regular Local API (SmartHub MQTT broker on port 1884)
+ * does not support inclusion or exclusion commands.
+ *
  * @param token - The tplex token from login
  */
 export function connectThingsplexWebSocketAndSend(
