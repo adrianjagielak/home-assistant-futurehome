@@ -29,16 +29,13 @@
 
    In Home Assistant, go to **Settings > Devices & Services > Integrations** and enable **MQTT**.
 
-5. **Add the Futurehome Add-on Repository**
+5. **Install the Futurehome Add-on**
 
-   Use this link to add the custom repository to your Home Assistant:
-   [Add repository](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fadrianjagielak%2Fhome-assistant-futurehome).
-   Then **refresh** the page.
-
-6. **Install the Add-on**
-
-   * Open the **Add-on Store** and search for **"Futurehome"**.
-   * Install, configure, and start the add-on.
+   Click the button below to install the Futurehome add-on in your Home Assistant:
+   
+   [![Open your Home Assistant instance and show the dashboard of an add-on.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=6b454d71_futurehome&repository_url=https%3A%2F%2Fgithub.com%2Fadrianjagielak%2Fhome-assistant-futurehome)
+   
+   Finally, configure and start the add-on.
 
 <img src="https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/docs/assets/installation_ha_config.jpg" alt="Add-on config screen">
 
