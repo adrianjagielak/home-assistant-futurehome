@@ -1,6 +1,6 @@
 # Futurehome Home Assistant add-on
 
-Futurehome add-on for Home Assistant, designed to be a complete drop-in replacement for the official Futurehome app, with support for all device types compatible with the Futurehome hub. See the [FAQ](https://github.com/adrianjagielak/home-assistant-futurehome#faq) for more details.
+Futurehome add-on for Home Assistant. Designed to be a complete drop-in replacement for the official Futurehome app, with support for all device types compatible with the Futurehome hub. See the [FAQ](https://github.com/adrianjagielak/home-assistant-futurehome#faq) for more details.
 
 ![Home Assistant screenshot](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/docs/assets/home_assistant_screenshot_dark_mode.jpg#gh-dark-mode-only)
 ![Home Assistant screenshot](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/docs/assets/home_assistant_screenshot_light_mode.jpg#gh-light-mode-only)
