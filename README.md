@@ -1,6 +1,6 @@
 # Futurehome Home Assistant add-on
 
-Futurehome add-on for Home Assistant, utilizing reverse-engineered APIs. Designed to be a complete drop-in replacement for the official Futurehome app, with support for all device types compatible with the Futurehome hub.
+Futurehome add-on for Home Assistant, built using both public and reverse-engineered APIs. Designed to be a complete drop-in replacement for the official Futurehome app, with support for all device types compatible with the Futurehome hub.
 
 ![Home Assistant screenshot](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/docs/assets/home_assistant_screenshot_dark_mode.jpg#gh-dark-mode-only)
 ![Home Assistant screenshot](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/docs/assets/home_assistant_screenshot_light_mode.jpg#gh-light-mode-only)
