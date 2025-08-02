@@ -1,6 +1,6 @@
 # Futurehome Home Assistant add-on
 
-Futurehome add-on for Home Assistant, built using both public and reverse-engineered APIs. Designed to be a complete drop-in replacement for the official Futurehome app, with support for all device types compatible with the Futurehome hub.
+Futurehome add-on for Home Assistant, designed to be a complete drop-in replacement for the official Futurehome app, with support for all device types compatible with the Futurehome hub. See the [FAQ](https://github.com/adrianjagielak/home-assistant-futurehome/edit/master/README.md#FAQ) for more details.
 
 ![Home Assistant screenshot](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/docs/assets/home_assistant_screenshot_dark_mode.jpg#gh-dark-mode-only)
 ![Home Assistant screenshot](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/docs/assets/home_assistant_screenshot_light_mode.jpg#gh-light-mode-only)
@@ -91,3 +91,12 @@ Some services are more common than others; some are deprecated entirely.
 | time_parameters | Z-wave service for setting and reading time |
 | version | Device hardware and software versions. Exposed through other means. |
 | virtual_meter_elec | A virtual electricity meter that estimates energy usage by multiplying the device's configured average power consumption with its operating duration. Easily reproducible using Home Assistant's built-in configuration. |
+
+# FAQ
+
+**Q: But I thought Futurehome was going to disable the local API after a short grace period, as stated in the [Subscription FAQ](https://archive.ph/UBjdJ). What gives?**
+
+While that was initially stated, the latest hub firmware keeps the local API open indefinitely. There is currently no built-in mechanism in the firmware to disable it after a certain period—unless you update to a newer firmware. This has also been confirmed in the updated [Subscription FAQ](https://support.futurehome.no/hc/en-no/articles/28158944965277-FAQ-Subscription). 
+
+By using both public and reverse-engineered local APIs, this add-on is able to fully replicate the functionality of the Futurehome app.
+
