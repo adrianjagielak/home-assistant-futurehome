@@ -27,9 +27,9 @@ options:
 schema:
   hub_ip: 'str?'
   fh_username: 'str?'
-  fh_password: 'str?'
+  fh_password: 'password?'
   tp_username: 'str?'
-  tp_password: 'str?'
+  tp_password: 'password?'
   demo_mode: 'bool?'
   show_debug_log: 'bool?'
 
