@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.1.2 (24.09.2025)
+
+- Bumped dependencies (#1, #2, #6).
+
 ## 1.1.1 (24.09.2025)
 
 - Added error handling for invalid FIMP messages.
