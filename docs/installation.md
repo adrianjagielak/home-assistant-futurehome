@@ -27,7 +27,7 @@
 
 4. **Enable MQTT Integration**
 
-   In Home Assistant, go to **Settings > Devices & Services > Integrations** and enable **MQTT**.
+   Add the MQTT integration by going to **Settings → Devices & Services → Integrations → Add integration**, search for and select **MQTT → MQTT**, then choose **"Use the official Mosquitto MQTT Broker add-on"**.
 
 5. **Install the Futurehome Add-on**
 
