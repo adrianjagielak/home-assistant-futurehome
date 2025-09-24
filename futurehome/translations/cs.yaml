@@ -14,6 +14,9 @@ configuration:
   tp_password:
     name: Heslo Thingsplex (volitelné)
     description: Vaše heslo pro Thingsplex.
+  tp_allow_empty:
+    name: Povolit prázdné přihlašovací údaje Thingsplex
+    description: Povolit prázdné uživatelské jméno a/nebo heslo Thingsplex.
   demo_mode:
     name: Demo režim
     description: Použijte uložený stav ze skutečného Futurehome Smarthubu pro simulaci zařízení.

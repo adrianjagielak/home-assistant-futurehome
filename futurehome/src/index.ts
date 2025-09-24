@@ -22,6 +22,7 @@ import { pollVinculum } from './fimp/vinculum';
   const localApiPassword = process.env.FH_PASSWORD || '';
   const thingsplexUsername = process.env.TP_USERNAME || '';
   const thingsplexPassword = process.env.TP_PASSWORD || '';
+  const thingsplexAllowEmpty = (process.env.TP_ALLOW_EMPTY || '').toLowerCase().includes('true');
   const demoMode = (process.env.DEMO_MODE || '').toLowerCase().includes('true');
   const showDebugLog = (process.env.SHOW_DEBUG_LOG || '')
     .toLowerCase()
@@ -166,6 +167,7 @@ import { pollVinculum } from './fimp/vinculum';
           deviceInclusionReport,
           thingsplexUsername,
           thingsplexPassword,
+          thingsplexAllowEmpty,
         });
         await delay(50);
 
@@ -189,7 +191,7 @@ import { pollVinculum } from './fimp/vinculum';
         log.error('Failed publishing device', device, e);
       }
     }
-    if (demoMode || (thingsplexUsername && thingsplexPassword)) {
+    if (demoMode || thingsplexAllowEmpty || (thingsplexUsername && thingsplexPassword)) {
       Object.assign(
         commandHandlers,
         exposeSmarthubTools({

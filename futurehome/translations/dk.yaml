@@ -14,6 +14,9 @@ configuration:
   tp_password:
     name: Thingsplex-adgangskode (valgfri)
     description: Din Thingsplex-adgangskode.
+  tp_allow_empty:
+    name: Tillad tomme Thingsplex-legitimationsoplysninger
+    description: Tillad tomt Thingsplex-brugernavn og/eller adgangskode.
   demo_mode:
     name: Demotilstand
     description: Brug en optaget prøvetilstand fra en rigtig Futurehome Smarthub til at simulere enheder.
