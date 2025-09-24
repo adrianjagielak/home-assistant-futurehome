@@ -6,6 +6,8 @@ Futurehome add-on for Home Assistant. Designed to be a complete drop-in replacem
 
 ![Pairing example](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/docs/assets/pairing.gif)
 
+[Watch the official add-on demo video](https://www.youtube.com/watch?v=dmEy6R49CC0)
+
 ## Features
 
 This add-on:
