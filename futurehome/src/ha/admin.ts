@@ -400,12 +400,150 @@ export function handleExclusionStatusReport(hubId: string, msg: FimpResponse) {
   );
 }
 
-export function handleInclusionReport() {
+export async function handleInclusionReport(parameters: {
+  hubId: string;
+  demoMode: boolean;
+  hubIp: string;
+  thingsplexUsername: string;
+  thingsplexPassword: string;
+  thingsplexAllowEmpty: boolean;
+}) {
+  const topicPrefix = `homeassistant/device/futurehome_${parameters.hubId}_hub`;
+
   pollVinculum('device').catch((e) => log.warn('Failed to request devices', e));
   pollVinculum('state').catch((e) => log.warn('Failed to request state', e));
+
+  if (parameters.demoMode) {
+    ha?.publish(`${topicPrefix}/inclusion_exclusion_status/state`, 'Done', {
+      retain: true,
+      qos: 2,
+    });
+    return;
+  }
+
+  if (
+    !parameters.thingsplexAllowEmpty &&
+    !parameters.thingsplexUsername &&
+    !parameters.thingsplexPassword
+  ) {
+    return;
+  }
+
+  try {
+    const token = await loginToThingsplex({
+      host: parameters.hubIp,
+      username: parameters.thingsplexUsername,
+      password: parameters.thingsplexPassword,
+    });
+    await connectThingsplexWebSocketAndSend(
+      {
+        host: parameters.hubIp,
+        token: token,
+      },
+      [
+        {
+          address: 'pt:j1/mt:cmd/rt:ad/rn:zigbee/ad:1',
+          service: 'zigbee',
+          cmd: 'cmd.thing.inclusion',
+          val: false,
+          val_t: 'bool',
+        },
+        {
+          address: 'pt:j1/mt:cmd/rt:ad/rn:zw/ad:1',
+          service: 'zwave-ad',
+          cmd: 'cmd.thing.inclusion',
+          val: false,
+          val_t: 'bool',
+        },
+      ],
+    );
+    ha?.publish(`${topicPrefix}/inclusion_exclusion_status/state`, 'Done', {
+      retain: true,
+      qos: 2,
+    });
+  } catch (e) {
+    log.error('Failed trying to stop inclusion/exclusion', e);
+    ha?.publish(
+      `${topicPrefix}/inclusion_exclusion_status/state`,
+      'Failed trying to stop inclusion/exclusion.',
+      {
+        retain: true,
+        qos: 2,
+      },
+    );
+  }
 }
 
-export function handleExclusionReport() {
+export async function handleExclusionReport(parameters: {
+  hubId: string;
+  demoMode: boolean;
+  hubIp: string;
+  thingsplexUsername: string;
+  thingsplexPassword: string;
+  thingsplexAllowEmpty: boolean;
+}) {
+  const topicPrefix = `homeassistant/device/futurehome_${parameters.hubId}_hub`;
+
   pollVinculum('device').catch((e) => log.warn('Failed to request devices', e));
   pollVinculum('state').catch((e) => log.warn('Failed to request state', e));
+
+  if (parameters.demoMode) {
+    ha?.publish(`${topicPrefix}/inclusion_exclusion_status/state`, 'Done', {
+      retain: true,
+      qos: 2,
+    });
+    return;
+  }
+
+  if (
+    !parameters.thingsplexAllowEmpty &&
+    !parameters.thingsplexUsername &&
+    !parameters.thingsplexPassword
+  ) {
+    return;
+  }
+
+  try {
+    const token = await loginToThingsplex({
+      host: parameters.hubIp,
+      username: parameters.thingsplexUsername,
+      password: parameters.thingsplexPassword,
+    });
+    await connectThingsplexWebSocketAndSend(
+      {
+        host: parameters.hubIp,
+        token: token,
+      },
+      [
+        {
+          address: 'pt:j1/mt:cmd/rt:ad/rn:zigbee/ad:1',
+          service: 'zigbee',
+          cmd: 'cmd.thing.exclusion',
+          val: false,
+          val_t: 'bool',
+        },
+        {
+          address: 'pt:j1/mt:cmd/rt:ad/rn:zw/ad:1',
+          service: 'zwave-ad',
+          cmd: 'cmd.thing.exclusion',
+          val: false,
+          val_t: 'bool',
+        },
+      ],
+    );
+    ha?.publish(`${topicPrefix}/inclusion_exclusion_status/state`, 'Done', {
+      retain: true,
+      qos: 2,
+    });
+  } catch (e) {
+    log.error('Failed trying to stop inclusion/exclusion', e);
+    ha?.publish(
+      `${topicPrefix}/inclusion_exclusion_status/state`,
+      'Failed trying to stop inclusion/exclusion.',
+      {
+        retain: true,
+        qos: 2,
+      },
+    );
+  }
 }
