@@ -282,12 +282,26 @@ import { pollVinculum } from './fimp/vinculum';
         }
 
         case 'evt.thing.inclusion_report': {
-          handleInclusionReport();
+          handleInclusionReport({
+            hubId,
+            demoMode,
+            hubIp,
+            thingsplexUsername,
+            thingsplexPassword,
+            thingsplexAllowEmpty,
+          });
           break;
         }
 
         case 'evt.thing.exclusion_report': {
-          handleExclusionReport();
+          handleExclusionReport({
+            hubId,
+            demoMode,
+            hubIp,
+            thingsplexUsername,
+            thingsplexPassword,
+            thingsplexAllowEmpty,
+          });
           break;
         }
 
