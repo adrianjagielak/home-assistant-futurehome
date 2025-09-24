@@ -7,6 +7,8 @@ Futurehome add-on for Home Assistant. Designed to be a complete drop-in replacem
 
 ![Pairing example](https://raw.githubusercontent.com/adrianjagielak/home-assistant-futurehome/refs/heads/master/docs/assets/pairing.gif)
 
+[Watch the official add-on demo video](https://www.youtube.com/watch?v=dmEy6R49CC0)
+
 ## Features
 
 This add-on:
@@ -96,7 +98,7 @@ Some services are more common than others; some are deprecated entirely.
 
 **Q: But I thought Futurehome was going to disable the local API after a short grace period, as stated in the [Subscription FAQ](https://archive.ph/UBjdJ). What gives?**
 
-While that was initially stated, the latest hub firmware keeps the local API open indefinitely. There is currently no built-in mechanism in the firmware to disable it after a certain period, unless you update to a newer firmware. This has also been confirmed in the updated [Subscription FAQ](https://support.futurehome.no/hc/en-no/articles/28158944965277-FAQ-Subscription). 
+While that was initially stated, the latest hub firmware keeps the local API open indefinitely. There is currently no built-in mechanism in the firmware to disable it after a certain period, unless you update to a newer firmware. This has also been confirmed in the updated [Subscription FAQ](https://support.futurehome.no/hc/en-no/articles/28158944965277-FAQ-Subscription).
 
 By using both public and reverse-engineered local APIs, this add-on is able to fully replicate the functionality of the Futurehome app.
 

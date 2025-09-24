@@ -1,5 +1,11 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.1.0 (24.09.2025)
+
+- Stop inclusion/exclusion after the first device is added/removed, just like in the official app.
+- Add configuration checkbox for allowing empty Thingsplex credentials (#3).
+- Improved GUI security by hiding passwords by default (#4, #5) (thanks @Andbli !).
+
 ## 1.0.2 (16.09.2025)
 
 - Added logging the initial devices response.
