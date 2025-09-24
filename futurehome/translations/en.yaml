@@ -14,6 +14,9 @@ configuration:
   tp_password:
     name: Thingsplex Password (Optional)
     description: Your Thingsplex password.
+  tp_allow_empty:
+    name: Allow Empty Thingsplex Credentials
+    description: Allow empty Thingsplex username and/or password.
   demo_mode:
     name: Demo Mode
     description: Use a sample recorded state from a real Futurehome Smarthub to simulate devices.

@@ -14,6 +14,9 @@ configuration:
   tp_password:
     name: Thingsplex-salasana (valinnainen)
     description: Thingsplex-salasanasi.
+  tp_allow_empty:
+    name: Salli tyhjät Thingsplex-tunnistetiedot
+    description: Salli tyhjä Thingsplex-käyttäjätunnus ja/tai salasana.
   demo_mode:
     name: Demotila
     description: Käytä tallennettua tilanäytettä oikeasta Futurehome Smarthubista laitteiden simuloimiseen.

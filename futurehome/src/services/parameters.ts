@@ -20,7 +20,7 @@ export function parameters__components(
   const commandHandlers: CommandHandlers = {};
   const stateTopic = `${topicPrefix}/state`;
 
-  // Fetch cached state for this service to discover known parameters :contentReference[oaicite:2]{index=2}
+  // Fetch cached state for this service to discover known parameters
   const currentState = haGetCachedState({ topic: stateTopic })?.[svc.addr];
   const paramMap = currentState?.param;
   if (!paramMap) {
@@ -31,7 +31,7 @@ export function parameters__components(
   // Single MQTT topic for setting any parameter
   const setParamTopic = `${topicPrefix}${svc.addr}/set_param/command`;
 
-  // Iterate over each parameter in the cached state :contentReference[oaicite:3]{index=3}
+  // Iterate over each parameter in the cached state
   for (const [paramId, param] of Object.entries(paramMap)) {
     const valueType = (param as any).value_type as string;
     const uniqueId = `${svc.addr}_${paramId}`;

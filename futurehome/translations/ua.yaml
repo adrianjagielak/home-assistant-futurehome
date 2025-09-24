@@ -14,6 +14,9 @@ configuration:
   tp_password:
     name: Пароль Thingsplex (необов’язково)
     description: Ваш пароль для Thingsplex.
+  tp_allow_empty:
+    name: Дозволити порожні облікові дані Thingsplex
+    description: Дозволити порожнє ім’я користувача та/або пароль Thingsplex.
   demo_mode:
     name: Демонстраційний режим
     description: Використовуйте записаний стан із реального Futurehome Smarthub для імітації пристроїв.

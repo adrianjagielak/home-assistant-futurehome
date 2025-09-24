@@ -208,6 +208,7 @@ export function haPublishDevice(parameters: {
   deviceInclusionReport: InclusionReport | undefined;
   thingsplexUsername: string;
   thingsplexPassword: string;
+  thingsplexAllowEmpty: boolean;
 }): { commandHandlers: CommandHandlers } {
   const components: { [key: string]: HaMqttComponent } = {};
   const handlers: CommandHandlers = {};
@@ -261,8 +262,8 @@ export function haPublishDevice(parameters: {
   }
 
   if (
-    parameters.thingsplexUsername &&
-    parameters.thingsplexPassword &&
+    (parameters.thingsplexAllowEmpty ||
+      (parameters.thingsplexUsername && parameters.thingsplexPassword)) &&
     parameters.vinculumDeviceData.fimp?.address &&
     parameters.vinculumDeviceData.fimp?.adapter
   ) {

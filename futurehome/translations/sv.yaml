@@ -14,6 +14,9 @@ configuration:
   tp_password:
     name: Thingsplex-lösenord (valfritt)
     description: Ditt lösenord för Thingsplex.
+  tp_allow_empty:
+    name: Tillåt tomma Thingsplex-uppgifter
+    description: Tillåt tomt Thingsplex-användarnamn och/eller lösenord.
   demo_mode:
     name: Demoläge
     description: Använd ett inspelat exempel från en riktig Futurehome Smarthub för att simulera enheter.

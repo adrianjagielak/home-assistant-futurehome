@@ -14,6 +14,9 @@ configuration:
   tp_password:
     name: Thingsplex lykilorð (valkvætt)
     description: Lykilorðið þitt fyrir Thingsplex.
+  tp_allow_empty:
+    name: Leyfa tómar Thingsplex-auðkenningar
+    description: Leyfa tómt Thingsplex-notandanafn og/eða lykilorð.
   demo_mode:
     name: Sýnishamur
     description: Notaðu upptaka af raunverulegu ástandi úr Futurehome Smarthub til að herma eftir tækjum.

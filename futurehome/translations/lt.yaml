@@ -14,6 +14,9 @@ configuration:
   tp_password:
     name: Thingsplex slaptažodis (pasirinktinai)
     description: Jūsų Thingsplex slaptažodis.
+  tp_allow_empty:
+    name: Leisti tuščius „Thingsplex“ prisijungimo duomenis
+    description: Leisti tuščią „Thingsplex“ vartotojo vardą ir (arba) slaptažodį.
   demo_mode:
     name: Demonstracinis režimas
     description: Naudokite įrašytą būsena iš tikro Futurehome Smarthub, kad imituotumėte įrenginius.
