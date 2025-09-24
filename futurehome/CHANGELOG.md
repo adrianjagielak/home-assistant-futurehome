@@ -1,5 +1,10 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.1.1 (24.09.2025)
+
+- Added error handling for invalid FIMP messages.
+- Updated installation.md - clarified that users must select the MQTT Integration instead of the hub’s MQTT server, with step-by-step guidance provided (@Andbli).
+
 ## 1.1.0 (24.09.2025)
 
 - Stop inclusion/exclusion after the first device is added/removed, just like in the official app.
