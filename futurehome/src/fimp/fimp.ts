@@ -82,7 +82,24 @@ export async function sendFimpMsg({
     }, timeoutMs);
 
     const onResponse = (topic: string, buffer: any) => {
-      const msg = JSON.parse(buffer.toString());
+      let bufferToString;
+      try {
+        bufferToString = buffer.toString();
+      } catch (e) {
+        log.warn('Invalid message received from hub MQTT broker', e);
+        return;
+      }
+
+      let msg;
+      try {
+        msg = JSON.parse(bufferToString);
+      } catch (e) {
+        log.warn(
+          `Invalid FIMP message received from hub MQTT broker\nMessage: ${bufferToString}`,
+          e,
+        );
+        return;
+      }
 
       if (msg.corid === uid) {
         if (msg.type === 'evt.error.report') {
