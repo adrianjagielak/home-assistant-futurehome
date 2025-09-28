@@ -2380,5 +2380,79 @@
         "name": "sensor_wind"
       }
     ]
+  },
+  {
+    "id": 1011,
+    "services": [
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:out_lvl_switch/ad:1011_0",
+        "attributes": [
+          {
+            "name": "lvl",
+            "values": [
+              {
+                "ts": "2025-09-26 12:39:19 +0200",
+                "val": 22,
+                "val_t": "int"
+              }
+            ]
+          },
+          {
+            "name": "binary",
+            "values": [
+              {
+                "ts": "2025-09-26 12:39:19 +0200",
+                "val": true,
+                "val_t": "bool"
+              }
+            ]
+          }
+        ],
+        "name": "out_lvl_switch"
+      },
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:1011_0",
+        "attributes": [
+          {
+            "name": "state",
+            "values": [
+              {
+                "ts": "2025-09-08 21:06:32 +0200",
+                "val": "UP",
+                "val_t": "string"
+              }
+            ]
+          }
+        ],
+        "name": "dev_sys"
+      },
+      {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:1011_0",
+        "attributes": [
+          {
+            "name": "meter",
+            "values": [
+              {
+                "props": {
+                  "delta_t": "774",
+                  "prv_data": "31.290001",
+                  "unit": "kWh"
+                },
+                "ts": "2025-09-26 18:32:21 +0200",
+                "val": 49.6100006103516,
+                "val_t": "float"
+              },
+              {
+                "props": { "unit": "W" },
+                "ts": "2025-09-26 18:32:21 +0200",
+                "val": 0,
+                "val_t": "float"
+              }
+            ]
+          }
+        ],
+        "name": "meter_elec"
+      }
+    ]
   }
 ]

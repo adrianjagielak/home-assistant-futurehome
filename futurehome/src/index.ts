@@ -80,9 +80,7 @@ import { pollVinculum } from './fimp/vinculum';
   const hubId = house.val.param.house.hubId;
 
   const devices = await pollVinculum('device');
-  log.debug(
-    `FIMP devices:\n${JSON.stringify(devices, null, 0)}`,
-  );
+  log.debug(`FIMP devices:\n${JSON.stringify(devices, null, 0)}`);
 
   const haConfig = retainedMessages.filter((msg) =>
     msg.topic.endsWith('/config'),
@@ -191,7 +189,11 @@ import { pollVinculum } from './fimp/vinculum';
         log.error('Failed publishing device', device, e);
       }
     }
-    if (demoMode || thingsplexAllowEmpty || (thingsplexUsername && thingsplexPassword)) {
+    if (
+      demoMode ||
+      thingsplexAllowEmpty ||
+      (thingsplexUsername && thingsplexPassword)
+    ) {
       Object.assign(
         commandHandlers,
         exposeSmarthubTools({

@@ -2518,5 +2518,128 @@
         "props": { "sup_units": ["km/h"] }
       }
     }
+  },
+  {
+    "client": { "name": "Spisestue" },
+    "fimp": { "adapter": "zwave-ad", "address": "6", "group": "ch_0" },
+    "functionality": "lighting",
+    "id": 1011,
+    "lrn": true,
+    "model": "zw_411_4_8705",
+    "param": {
+      "dimValue": 3,
+      "energy": 49.6100006103516,
+      "power": "off",
+      "timestamp": "2025-09-26 18:32:21 +0200",
+      "wattage": 0,
+      "zwaveConfigParameters": []
+    },
+    "problem": false,
+    "room": 1,
+    "services": {
+      "dev_sys": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:1011_0",
+        "enabled": true,
+        "intf": [
+          "cmd.config.get_report",
+          "cmd.config.set",
+          "cmd.group.add_members",
+          "cmd.group.delete_members",
+          "cmd.group.get_members",
+          "cmd.ping.send",
+          "evt.config.report",
+          "evt.group.members_report",
+          "evt.ping.report"
+        ],
+        "props": { "is_secure": false, "is_unsecure": true }
+      },
+      "indicator_ctrl": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:indicator_ctrl/ad:1011_0",
+        "enabled": true,
+        "intf": [
+          "cmd.indicator.identify",
+          "cmd.indicator.set_visual_element"
+        ],
+        "props": { "is_secure": false, "is_unsecure": true }
+      },
+      "meter_elec": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:1011_0",
+        "enabled": true,
+        "intf": [
+          "cmd.meter.get_report",
+          "cmd.meter.reset",
+          "evt.meter.report"
+        ],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "sup_export_units": [],
+          "sup_units": ["kWh", "W"]
+        }
+      },
+      "out_lvl_switch": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:out_lvl_switch/ad:1011_0",
+        "enabled": true,
+        "intf": [
+          "cmd.binary.set",
+          "cmd.lvl.get_report",
+          "cmd.lvl.set",
+          "cmd.lvl.start",
+          "cmd.lvl.stop",
+          "evt.binary.report",
+          "evt.lvl.report"
+        ],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "max_lvl": 100,
+          "min_lvl": 0
+        }
+      },
+      "scene_ctrl": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:scene_ctrl/ad:1011_0",
+        "enabled": true,
+        "intf": ["evt.scene.report"],
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "sup_scenes": [
+            "1.key_pressed_1_time",
+            "1.key_released",
+            "1.key_held_down",
+            "1.key_pressed_2_times",
+            "1.key_pressed_3_times",
+            "1.key_pressed_4_times",
+            "1.key_pressed_5_times",
+            "2.key_pressed_1_time",
+            "2.key_released",
+            "2.key_held_down",
+            "2.key_pressed_2_times",
+            "2.key_pressed_3_times",
+            "2.key_pressed_4_times",
+            "2.key_pressed_5_times"
+          ]
+        }
+      },
+      "version": {
+        "addr": "/rt:dev/rn:zw/ad:1/sv:version/ad:1011_0",
+        "enabled": true,
+        "intf": ["cmd.version.get_report", "evt.version.report"],
+        "props": { "is_secure": false, "is_unsecure": true }
+      }
+    },
+    "supports": ["clear", "poll"],
+    "thing": 1,
+    "type": {
+      "subtype": null,
+      "supported": {
+        "appliance": [],
+        "blinds": [],
+        "fan": [],
+        "heater": [],
+        "light": []
+      },
+      "type": "light"
+    }
   }
 ]
