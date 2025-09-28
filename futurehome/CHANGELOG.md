@@ -1,7 +1,12 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.3.1 (28.09.2025)
+
+- Revert upgrading dependencies.
+
 ## 1.3.0 (28.09.2025)
 
+- Upgrade dependencies.
 - Use proper `light` entity for out_lvl_switch if the device type is "light", instead of generic `number` level switch (thanks @Andbli for help!).
 
 ## 1.2.1 (26.09.2025)
