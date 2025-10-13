@@ -17,6 +17,18 @@ configuration:
   tp_allow_empty:
     name: Allow Empty Thingsplex Credentials
     description: Allow empty Thingsplex username and/or password.
+  custom_mqtt_host:
+    name: Custom MQTT Host (Optional)
+    description: Your custom MQTT broker host.
+  custom_mqtt_port:
+    name: Custom MQTT Port (Optional)
+    description: Your custom MQTT broker port.
+  custom_mqtt_user:
+    name: Custom MQTT Username (Optional)
+    description: Your custom MQTT broker username.
+  custom_mqtt_pwd:
+    name: Custom MQTT Password (Optional)
+    description: Your custom MQTT broker password.
   demo_mode:
     name: Demo Mode
     description: Use a sample recorded state from a real Futurehome Smarthub to simulate devices.

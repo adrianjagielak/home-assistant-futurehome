@@ -32,6 +32,10 @@ schema:
   tp_username: 'str?'
   tp_password: 'password?'
   tp_allow_empty: 'bool?'
+  custom_mqtt_host: 'str?'
+  custom_mqtt_port: 'int?'
+  custom_mqtt_user: 'str?'
+  custom_mqtt_pwd: 'password?'
   demo_mode: 'bool?'
   show_debug_log: 'bool?'
 

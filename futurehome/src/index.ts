@@ -22,16 +22,22 @@ import { pollVinculum } from './fimp/vinculum';
   const localApiPassword = process.env.FH_PASSWORD || '';
   const thingsplexUsername = process.env.TP_USERNAME || '';
   const thingsplexPassword = process.env.TP_PASSWORD || '';
-  const thingsplexAllowEmpty = (process.env.TP_ALLOW_EMPTY || '').toLowerCase().includes('true');
+  const thingsplexAllowEmpty = (process.env.TP_ALLOW_EMPTY || '')
+    .toLowerCase()
+    .includes('true');
   const demoMode = (process.env.DEMO_MODE || '').toLowerCase().includes('true');
   const showDebugLog = (process.env.SHOW_DEBUG_LOG || '')
     .toLowerCase()
     .includes('true');
 
-  const mqttHost = process.env.MQTT_HOST || '';
-  const mqttPort = Number(process.env.MQTT_PORT || '1883');
-  const mqttUsername = process.env.MQTT_USER || '';
-  const mqttPassword = process.env.MQTT_PWD || '';
+  const mqttHost = process.env.CUSTOM_MQTT_HOST || process.env.MQTT_HOST || '';
+  const mqttPort = Number(
+    process.env.CUSTOM_MQTT_PORT || process.env.MQTT_PORT || '1883',
+  );
+  const mqttUsername =
+    process.env.CUSTOM_MQTT_USER || process.env.MQTT_USER || '';
+  const mqttPassword =
+    process.env.CUSTOM_MQTT_PWD || process.env.MQTT_PWD || '';
 
   setupLogger({ showDebugLog });
 
