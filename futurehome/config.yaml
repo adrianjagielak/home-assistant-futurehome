@@ -1,6 +1,6 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Futurehome
-version: '1.5.0'
+version: '1.6.0'
 slug: futurehome
 description: Local Futurehome Smarthub integration
 url: 'https://github.com/adrianjagielak/home-assistant-futurehome'
