@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.5.0 (16.10.2025)
+
+- Reverted: Add ability to specify a custom MQTT broker.
+
 ## 1.4.0 (13.10.2025)
 
 - Added ability to specify a custom MQTT broker.
