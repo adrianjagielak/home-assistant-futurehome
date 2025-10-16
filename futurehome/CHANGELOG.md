@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.6.1 (16.10.2025)
+
+- Tweaked 'Ignore Availability Reports' setting.
+
 ## 1.6.0 (16.10.2025)
 
 - Added setting to always treat all devices as up.
