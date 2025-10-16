@@ -270,10 +270,13 @@ import { pollVinculum } from './fimp/vinculum';
 
         case 'evt.network.all_nodes_report': {
           const devicesAvailability = msg.val;
-          if (!devicesAvailability || ignoreAvailabilityReports) {
+          if (!devicesAvailability) {
             return;
           }
           for (const deviceAvailability of devicesAvailability) {
+            if (ignoreAvailabilityReports) {
+              deviceAvailability.status = 'UP';
+            }
             haUpdateAvailability({ hubId, deviceAvailability });
             await delay(50);
           }
