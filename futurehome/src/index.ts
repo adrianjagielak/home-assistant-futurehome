@@ -22,7 +22,14 @@ import { pollVinculum } from './fimp/vinculum';
   const localApiPassword = process.env.FH_PASSWORD || '';
   const thingsplexUsername = process.env.TP_USERNAME || '';
   const thingsplexPassword = process.env.TP_PASSWORD || '';
-  const thingsplexAllowEmpty = (process.env.TP_ALLOW_EMPTY || '').toLowerCase().includes('true');
+  const thingsplexAllowEmpty = (process.env.TP_ALLOW_EMPTY || '')
+    .toLowerCase()
+    .includes('true');
+  const ignoreAvailabilityReports = (
+    process.env.IGNORE_AVAILABILITY_REPORTS || ''
+  )
+    .toLowerCase()
+    .includes('true');
   const demoMode = (process.env.DEMO_MODE || '').toLowerCase().includes('true');
   const showDebugLog = (process.env.SHOW_DEBUG_LOG || '')
     .toLowerCase()
@@ -263,7 +270,7 @@ import { pollVinculum } from './fimp/vinculum';
 
         case 'evt.network.all_nodes_report': {
           const devicesAvailability = msg.val;
-          if (!devicesAvailability) {
+          if (!devicesAvailability || ignoreAvailabilityReports) {
             return;
           }
           for (const deviceAvailability of devicesAvailability) {

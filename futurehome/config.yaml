@@ -22,6 +22,7 @@ options:
   tp_username: ''
   tp_password: ''
   tp_allow_empty: false
+  ignore_availability_reports: false
   demo_mode: false
   show_debug_log: false
 
@@ -32,6 +33,7 @@ schema:
   tp_username: 'str?'
   tp_password: 'password?'
   tp_allow_empty: 'bool?'
+  ignore_availability_reports: 'bool?'
   demo_mode: 'bool?'
   show_debug_log: 'bool?'
 

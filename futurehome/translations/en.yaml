@@ -17,6 +17,9 @@ configuration:
   tp_allow_empty:
     name: Allow Empty Thingsplex Credentials
     description: Allow empty Thingsplex username and/or password.
+  ignore_availability_reports:
+    name: Ignore Availability Reports
+    description: Sometimes the hub incorrectly reports some devices as down. This setting forces all devices to always be treated as up.
   demo_mode:
     name: Demo Mode
     description: Use a sample recorded state from a real Futurehome Smarthub to simulate devices.

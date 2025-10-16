@@ -11,6 +11,7 @@ export FH_PASSWORD=$(bashio::config 'fh_password')
 export TP_USERNAME=$(bashio::config 'tp_username')
 export TP_PASSWORD=$(bashio::config 'tp_password')
 export TP_ALLOW_EMPTY=$(bashio::config 'tp_allow_empty')
+export IGNORE_AVAILABILITY_REPORTS=$(bashio::config 'ignore_availability_reports')
 export DEMO_MODE=$(bashio::config 'demo_mode')
 export SHOW_DEBUG_LOG=$(bashio::config 'show_debug_log')
 
