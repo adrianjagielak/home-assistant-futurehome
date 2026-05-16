@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.6.2 (16.05.2026)
+
+- Fix invalid device_class + unit_of_measurement combinations for HA 2026.5 (#32).
+
 ## 1.6.1 (16.10.2025)
 
 - Tweaked 'Ignore Availability Reports' setting.
