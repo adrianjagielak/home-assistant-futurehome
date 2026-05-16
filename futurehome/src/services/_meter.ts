@@ -370,15 +370,24 @@ export function _meter__components(
           break;
       }
 
+      // Map FIMP unit names to HA-compatible unit_of_measurement values
+      const haUnit =
+        unit === 'power_factor' ? '' :
+        unit === 'VAr' ? 'var' :
+        unit === 'kVArh' ? 'kvarh' : unit;
+
       const component: SensorComponent = {
         unique_id: componentId,
         platform: 'sensor',
         entity_category: 'diagnostic',
         name: friendlyName,
-        unit_of_measurement: unit,
         state_class: stateClass,
         value_template: `{{ value_json['${svc.addr}'].meter.${unit}.val | default(0) }}`,
       };
+
+      if (haUnit) {
+        component.unit_of_measurement = haUnit;
+      }
 
       if (deviceClass) {
         component.device_class = deviceClass;
@@ -460,15 +469,23 @@ export function _meter__components(
           break;
       }
 
+      // Map FIMP unit names to HA-compatible unit_of_measurement values
+      const haUnit =
+        unit === 'VAr' ? 'var' :
+        unit === 'kVArh' ? 'kvarh' : unit;
+
       const component: SensorComponent = {
         unique_id: componentId,
         platform: 'sensor',
         entity_category: 'diagnostic',
         name: friendlyName,
-        unit_of_measurement: unit,
         state_class: stateClass,
         value_template: `{{ value_json['${svc.addr}'].meter_export.${unit}.val | default(0) }}`,
       };
+
+      if (haUnit) {
+        component.unit_of_measurement = haUnit;
+      }
 
       if (deviceClass) {
         component.device_class = deviceClass;
@@ -510,14 +527,25 @@ export function _meter__components(
 
       // Determine unit based on value name
       let unit = '';
-      if (
+      const isPhasePower =
         valueName.startsWith('p_') ||
         valueName.startsWith('p1') ||
         valueName.startsWith('p2') ||
-        valueName.startsWith('p3') ||
-        valueName === 'dc_p'
-      ) {
+        valueName.startsWith('p3');
+      if (isPhasePower && valueName.includes('_react')) {
+        unit = 'var';
+      } else if (isPhasePower && valueName.includes('_apparent')) {
+        unit = 'VA';
+      } else if (isPhasePower || valueName === 'dc_p') {
         unit = 'W';
+      } else if (
+        (valueName.startsWith('e_') ||
+          valueName.startsWith('e1') ||
+          valueName.startsWith('e2') ||
+          valueName.startsWith('e3')) &&
+        valueName.includes('_react')
+      ) {
+        unit = 'kvarh';
       } else if (
         valueName.startsWith('e_') ||
         valueName.startsWith('e1') ||
@@ -565,9 +593,9 @@ export function _meter__components(
       }
 
       // Set suggested display precision
-      if (unit === 'kWh') {
+      if (unit === 'kWh' || unit === 'kvarh') {
         component.suggested_display_precision = 3;
-      } else if (unit === 'W' || unit === 'V' || unit === 'A') {
+      } else if (unit === 'W' || unit === 'V' || unit === 'A' || unit === 'var' || unit === 'VA') {
         component.suggested_display_precision = 1;
       } else if (unit === 'Hz') {
         component.suggested_display_precision = 2;

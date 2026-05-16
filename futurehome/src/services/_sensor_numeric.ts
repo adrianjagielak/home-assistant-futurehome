@@ -72,12 +72,15 @@ export function _sensor_numeric__components(
 
   if (!data) return undefined;
 
-  const device_class = data[0];
+  let device_class = data[0];
   const name = data[1];
   let unit = svc.props?.sup_units?.[0] ?? data[2];
   if (unit === 'C') unit = '°C';
   if (unit === 'F') unit = '°F';
   if (unit === 'kph') unit = 'km/h';
+  if (unit === 'Lux') unit = 'lx';
+  // HA rejects illuminance + %; drop device_class for percentage-reporting sensors
+  if (device_class === 'illuminance' && unit === '%') device_class = undefined;
   const state_class = data[3];
 
   return {
