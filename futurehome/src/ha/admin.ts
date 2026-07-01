@@ -1,5 +1,6 @@
 import { CommandHandlers } from './publish_device';
 import { HaDeviceConfig } from './ha_device_config';
+import { HaMqttComponent } from './mqtt_components/_component';
 import { ha } from './globals';
 import { log } from '../logger';
 import { abbreviateHaMqttKeys } from './abbreviate_ha_mqtt_keys';
@@ -9,6 +10,7 @@ import {
   loginToThingsplex,
 } from '../thingsplex/thingsplex';
 import { pollVinculum } from '../fimp/vinculum';
+import { hubModeCommandHandlers, hubModeSelectComponent } from './hub_mode';
 
 const inclusionExclusionNotRunningValues = [
   'Ready',
@@ -41,38 +43,39 @@ export function exposeSmarthubTools(parameters: {
   hubIp: string;
   thingsplexUsername: string;
   thingsplexPassword: string;
+  // Available Futurehome house modes (e.g. ["home", "away", "sleep", "vacation"]).
+  modeIds: string[];
+  // Inclusion/exclusion tooling requires Thingsplex credentials, so it is only
+  // exposed when those are available. The house `Mode` select is always exposed.
+  includeInclusionExclusionTools: boolean;
 }): {
   commandHandlers: CommandHandlers;
 } {
   // e.g. "homeassistant/device/futurehome_123456_hub"
   const topicPrefix = `homeassistant/device/futurehome_${parameters.hubId}_hub`;
 
-  if (!initializedState) {
-    ha?.publish(`${topicPrefix}/inclusion_exclusion_status/state`, 'Ready', {
-      retain: true,
-      qos: 2,
-    });
-    initializedState = true;
-  }
-
   const configTopic = `${topicPrefix}/config`;
 
   const deviceId = `futurehome_${parameters.hubId}_hub`;
 
-  const config: HaDeviceConfig = {
-    device: {
-      identifiers: deviceId,
-      name: 'Futurehome Smarthub',
-      manufacturer: 'Futurehome',
-      model: 'Smarthub',
-      serial_number: parameters.hubId,
-    },
-    origin: {
-      name: 'futurehome',
-      support_url:
-        'https://github.com/adrianjagielak/home-assistant-futurehome',
-    },
-    components: {
+  const components: { [key: string]: HaMqttComponent } = {
+    [`${deviceId}_mode`]: hubModeSelectComponent({
+      hubId: parameters.hubId,
+      deviceId,
+      modeIds: parameters.modeIds,
+    }),
+  };
+
+  if (parameters.includeInclusionExclusionTools) {
+    if (!initializedState) {
+      ha?.publish(`${topicPrefix}/inclusion_exclusion_status/state`, 'Ready', {
+        retain: true,
+        qos: 2,
+      });
+      initializedState = true;
+    }
+
+    Object.assign(components, {
       [`${deviceId}_inclusion_exclusion_status`]: {
         unique_id: `${deviceId}_inclusion_exclusion_status`,
         platform: 'sensor',
@@ -124,7 +127,23 @@ export function exposeSmarthubTools(parameters: {
         availability_topic: `${topicPrefix}/inclusion_exclusion_status/state`,
         availability_template: `{% if ${[...inclusionExclusionNotRunningValues, ...inclusionExclusionStartingStoppingValues].map((v) => `value == "${v}"`).join(' or ')} %}offline{% else %}online{% endif %}`,
       } as any,
+    });
+  }
+
+  const config: HaDeviceConfig = {
+    device: {
+      identifiers: deviceId,
+      name: 'Futurehome Smarthub',
+      manufacturer: 'Futurehome',
+      model: 'Smarthub',
+      serial_number: parameters.hubId,
     },
+    origin: {
+      name: 'futurehome',
+      support_url:
+        'https://github.com/adrianjagielak/home-assistant-futurehome',
+    },
+    components,
     qos: 2,
   };
 
@@ -135,6 +154,11 @@ export function exposeSmarthubTools(parameters: {
   });
 
   const handlers: CommandHandlers = {
+    ...hubModeCommandHandlers({
+      hubId: parameters.hubId,
+      demoMode: parameters.demoMode,
+      modeIds: parameters.modeIds,
+    }),
     [`${topicPrefix}/start_inclusion/command`]: async (payload) => {
       if (parameters.demoMode) {
         ha?.publish(
