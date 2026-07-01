@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.8.0 (01.07.2026)
+
+- Expose the battery maintenance status (e.g. `replace_now`) as a diagnostic "Battery status" sensor for devices that support the `replace_*` battery events. Previously this was not surfaced at all, so a device could report a full battery level while actually needing its battery replaced.
+
 ## 1.7.0 (01.07.2026)
 
 - Added support for the Futurehome house mode (Home/Away/Sleep/Vacation). The current mode is exposed as a `Mode` selector on the Smarthub device, updates in real time (e.g. when a Futurehome Modeswitch button is pressed), and can be changed from Home Assistant.

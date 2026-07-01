@@ -32,6 +32,26 @@ export function battery__components(
     };
   }
 
+  // Battery maintenance status (e.g. "replace_now"). A device can report a full
+  // battery level while still asking to be replaced, so when it supports the
+  // replace_* events this is surfaced as its own diagnostic sensor. The hub
+  // reports the current state as a plain string in the `state` attribute.
+  const supEvents: string[] = svc.props?.sup_events ?? [];
+  if (
+    supEvents.some(
+      (event) => typeof event === 'string' && event.startsWith('replace'),
+    )
+  ) {
+    components[`${svc.addr}_state`] = {
+      unique_id: `${svc.addr}_state`,
+      platform: 'sensor',
+      entity_category: 'diagnostic',
+      icon: 'mdi:battery-heart-variant',
+      name: 'Battery status',
+      value_template: `{{ value_json['${svc.addr}'].state | default('ok', true) }}`,
+    };
+  }
+
   return {
     components: components,
   };
