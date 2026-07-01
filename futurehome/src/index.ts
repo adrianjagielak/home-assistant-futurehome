@@ -15,6 +15,13 @@ import {
   handleInclusionStatusReport,
 } from './ha/admin';
 import { pollVinculum } from './fimp/vinculum';
+import {
+  FALLBACK_MODE_IDS,
+  extractModeIds,
+  handleModeNotify,
+  publishHubModeFromHouseResponse,
+} from './ha/hub_mode';
+import { publishSceneEvent } from './ha/scene_events';
 
 (async () => {
   const hubIp = process.env.FH_HUB_IP || 'futurehome-smarthub.local';
@@ -85,6 +92,19 @@ import { pollVinculum } from './fimp/vinculum';
 
   const house = await pollVinculum('house');
   const hubId = house.val.param.house.hubId;
+
+  // Discover the available house modes (e.g. Home/Away/Sleep/Vacation) and
+  // publish the current one, so the hub's "Mode" select entity can be exposed
+  // and kept in sync. This is what the physical Futurehome Modeswitch controls.
+  const modesResponse = await pollVinculum('mode').catch((e) => {
+    log.warn('Failed to request house modes', e);
+    return undefined;
+  });
+  const discoveredModeIds = extractModeIds(modesResponse);
+  const modeIds = discoveredModeIds.length
+    ? discoveredModeIds
+    : FALLBACK_MODE_IDS;
+  publishHubModeFromHouseResponse({ hubId, houseResponse: house });
 
   const devices = await pollVinculum('device');
   log.debug(`FIMP devices:\n${JSON.stringify(devices, null, 0)}`);
@@ -196,22 +216,26 @@ import { pollVinculum } from './fimp/vinculum';
         log.error('Failed publishing device', device, e);
       }
     }
-    if (
+    // Always publish the Smarthub device (so the house "Mode" select is
+    // available); the inclusion/exclusion tooling additionally requires
+    // Thingsplex credentials.
+    const includeInclusionExclusionTools = !!(
       demoMode ||
       thingsplexAllowEmpty ||
       (thingsplexUsername && thingsplexPassword)
-    ) {
-      Object.assign(
-        commandHandlers,
-        exposeSmarthubTools({
-          hubId,
-          demoMode,
-          hubIp,
-          thingsplexUsername,
-          thingsplexPassword,
-        }).commandHandlers,
-      );
-    }
+    );
+    Object.assign(
+      commandHandlers,
+      exposeSmarthubTools({
+        hubId,
+        demoMode,
+        hubIp,
+        thingsplexUsername,
+        thingsplexPassword,
+        modeIds,
+        includeInclusionExclusionTools,
+      }).commandHandlers,
+    );
     setHaCommandHandlers(commandHandlers);
   };
   vinculumDevicesToHa(devices);
@@ -317,14 +341,32 @@ import { pollVinculum } from './fimp/vinculum';
           break;
         }
 
+        case 'evt.pd7.notify': {
+          // House mode changes (e.g. from a Futurehome Modeswitch) are
+          // broadcast as Vinculum notifications.
+          handleModeNotify({ hubId, msg });
+          break;
+        }
+
         default: {
           // Handle any event that matches the pattern: evt.<something>.report
           if (/^evt\..+\.report$/.test(msg.type ?? '')) {
+            const attrName = msg.type!.split('.')[1];
             haUpdateStateValueReport({
               topic,
               value: msg.val,
-              attrName: msg.type!.split('.')[1],
+              attrName,
             });
+
+            // Momentary scene controllers (buttons, remotes, the Futurehome
+            // Modeswitch, …) are also surfaced as Home Assistant `event`
+            // entities so every press can drive automations.
+            if (attrName === 'scene') {
+              publishSceneEvent({
+                addr: topic.replace(/^pt:j1\/mt:evt/, ''),
+                value: msg.val,
+              });
+            }
           }
         }
       }
@@ -343,6 +385,19 @@ import { pollVinculum } from './fimp/vinculum';
   // Then poll every 30 seconds
   if (!demoMode) {
     setInterval(pollState, 30 * 1000);
+  }
+
+  const pollHubMode = () => {
+    pollVinculum('house')
+      .then((houseResponse) =>
+        publishHubModeFromHouseResponse({ hubId, houseResponse }),
+      )
+      .catch((e) => log.warn('Failed to refresh house mode', e));
+  };
+  // Keep the house "Mode" entity in sync even if a change notification is
+  // missed (the Modeswitch may not emit a device-level event we can observe).
+  if (!demoMode) {
+    setInterval(pollHubMode, 30 * 1000);
   }
 
   const pollDevices = () => {

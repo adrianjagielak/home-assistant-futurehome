@@ -1,5 +1,10 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.7.0 (01.07.2026)
+
+- Added support for the Futurehome house mode (Home/Away/Sleep/Vacation). The current mode is exposed as a `Mode` selector on the Smarthub device, updates in real time (e.g. when a Futurehome Modeswitch button is pressed), and can be changed from Home Assistant.
+- Scene controllers (`scene_ctrl`, e.g. the Futurehome Modeswitch) now also expose an [`Event`](https://www.home-assistant.io/integrations/event/) entity, so momentary button presses can trigger automations (the previous `Scene` sensor was stuck on `unknown` and could not react to repeated presses).
+
 ## 1.6.2 (16.05.2026)
 
 - Fix invalid device_class + unit_of_measurement combinations for HA 2026.5 (#32).

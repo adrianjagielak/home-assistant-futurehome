@@ -1,8 +1,8 @@
 // Maps a Futurehome “scene_ctrl” service to MQTT entities
 // ─────────────────────────────────────────────────────────────
-// FIMP ➞ HA state paths used by the value templates
+// FIMP ➞ HA
+//   evt.scene.report  →  <topicPrefix><addr>/scene/event  (Home Assistant event)
 //   value_json[svc.addr].scene   – last reported scene name (string)
-//   value_json[svc.addr].lvl     – last reported level          (int)
 //
 // HA ➞ FIMP commands
 //   <topicPrefix><addr>/scene/command   →  cmd.scene.set
@@ -14,6 +14,11 @@ import {
   VinculumPd7Service,
 } from '../fimp/vinculum_pd7_device';
 import { HaMqttComponent } from '../ha/mqtt_components/_component';
+import {
+  buildSceneEventTypes,
+  registerSceneEventTopic,
+  sceneEventStateTopic,
+} from '../ha/scene_events';
 import {
   CommandHandlers,
   ServiceComponentsCreationResult,
@@ -31,19 +36,37 @@ export function scene_ctrl__components(
   const components: Record<string, HaMqttComponent> = {};
   const commandHandlers: CommandHandlers = {};
 
-  // ───────────── read-only entities ─────────────
+  const supScenes: string[] = svc.props?.sup_scenes ?? [];
+
   if (svc.intf?.includes('evt.scene.report')) {
+    // Scene controllers are momentary/stateless, so a plain sensor is stuck on
+    // `unknown` and can't drive automations on repeated presses. The `event`
+    // platform fires the entity's trigger on every reported scene instead, so
+    // it's the entity to use in automations. The sensor is kept for backwards
+    // compatibility (it shows the last reported scene).
+    const eventStateTopic = sceneEventStateTopic(topicPrefix, svc.addr);
+    registerSceneEventTopic(svc.addr, eventStateTopic);
+
+    components[`${svc.addr}_scene_event`] = {
+      unique_id: `${svc.addr}_scene_event`,
+      platform: 'event',
+      name: 'Scene',
+      icon: 'mdi:gesture-tap-button',
+      state_topic: eventStateTopic,
+      event_types: buildSceneEventTypes(supScenes),
+    };
+
     components[`${svc.addr}_scene`] = {
       unique_id: `${svc.addr}_scene`,
       platform: 'sensor',
-      name: 'Scene',
+      entity_category: 'diagnostic',
+      name: 'Scene (last value)',
       unit_of_measurement: '',
       value_template: `{{ value_json['${svc.addr}'].scene }}`,
     };
   }
 
   // ───────────── writeable “select” (scene activator) ─────────────
-  const supScenes: string[] = svc.props?.sup_scenes ?? [];
   if (svc.intf?.includes('cmd.scene.set') && supScenes.length) {
     const commandTopic = `${topicPrefix}${svc.addr}/scene/command`;
 

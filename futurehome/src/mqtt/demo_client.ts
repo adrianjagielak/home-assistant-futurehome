@@ -61,7 +61,25 @@ export class DemoFimpMqttClient implements IMqttClient {
       ) {
         sendResponse({
           type: 'evt.pd7.response',
-          val: { param: { house: { hubId: '000000004c38b232' } } },
+          val: { param: { house: { hubId: '000000004c38b232', mode: 'home' } } },
+        });
+      } else if (
+        msg.serv == 'vinculum' &&
+        msg.type == 'cmd.pd7.request' &&
+        msg.val?.param?.components?.includes('mode')
+      ) {
+        sendResponse({
+          type: 'evt.pd7.response',
+          val: {
+            param: {
+              mode: [
+                { id: 'home' },
+                { id: 'away' },
+                { id: 'sleep' },
+                { id: 'vacation' },
+              ],
+            },
+          },
         });
       } else if (
         msg.serv == 'vinculum' &&
