@@ -175,6 +175,36 @@ const haStateCache: Record<
   Record<string, Record<string, any>> // payload (addr → { attr → value })
 > = {};
 
+/**
+ * Maps a FIMP service address
+ * (e.g. "/rt:dev/rn:zw/ad:1/sv:scene_ctrl/ad:86_0") to the Home Assistant
+ * device state topic that should carry its value.
+ *
+ * This is required because some services never appear in the periodic Vinculum
+ * `state` poll and therefore never get an entry in `haStateCache`. The most
+ * prominent example is a momentary scene controller such as the Futurehome
+ * Modeswitch / Modusbryter (a Z-Wave device): it only ever emits
+ * `evt.scene.report` events when a button is pressed, and its `scene`
+ * attribute is not part of the polled state.
+ *
+ * Without this mapping those live events would be dropped in
+ * `haUpdateStateValueReport` (because the address is not present in any cached
+ * payload), leaving the "Scene" sensor stuck at "unknown" forever.
+ *
+ * The mapping is populated both from the device config (see
+ * `haPublishDevice`) and from every state poll below.
+ */
+const addrToStateTopic: Record<string, string> = {};
+
+/**
+ * Registers the Home Assistant device state topic that owns a given FIMP
+ * service address, so that live `evt.*.report` events for services missing
+ * from the periodic state poll can still be routed to the correct state topic.
+ */
+export function registerServiceStateTopic(addr: string, stateTopic: string) {
+  addrToStateTopic[addr] = stateTopic;
+}
+
 const attributeTypeKeyMap: Record<string, string> = {
   alarm: 'event',
   meter: 'props.unit',
@@ -271,12 +301,17 @@ export function haUpdateState(parameters: {
 }) {
   const stateTopic = `homeassistant/device/futurehome_${parameters.hubId}_${parameters.deviceState.id?.toString()}/state`;
 
-  const haState: Record<string, Record<string, any>> = {};
+  // Start from the previously cached payload so that values learned from live
+  // `evt.*.report` events (e.g. a scene controller's last reported scene) are
+  // preserved across polls that do not include that service. The poll only
+  // ever refreshes/adds attributes, it never drops previously known ones.
+  const previous = haStateCache[stateTopic] ?? {};
+  const haState: Record<string, Record<string, any>> = { ...previous };
 
   for (const service of parameters.deviceState.services || []) {
     if (!service.addr) continue;
 
-    const serviceState: Record<string, any> = {};
+    const serviceState: Record<string, any> = { ...(previous[service.addr] ?? {}) };
 
     for (const attr of service.attributes || []) {
       const processedValue = processAttributeValues(
@@ -289,6 +324,7 @@ export function haUpdateState(parameters: {
     }
 
     haState[service.addr] = serviceState;
+    registerServiceStateTopic(service.addr, stateTopic);
   }
 
   log.debug(`Publishing HA state "${stateTopic}"`);
@@ -327,6 +363,20 @@ export function haUpdateStateValueReport(parameters: {
   // Strip the FIMP envelope so we end up with "/rt:dev/…/ad:x_y"
   const addr = parameters.topic.replace(/^pt:j1\/mt:evt/, '');
   const typeKey = getTypeKey(parameters.attrName);
+
+  // Some services (most notably momentary scene controllers such as the
+  // Futurehome Modeswitch / Modusbryter) never appear in the periodic state
+  // poll, so their address has no entry in any cached payload yet. Seed one
+  // from the address→topic mapping registered from the device config, so the
+  // live event below is applied instead of being silently dropped.
+  if (
+    !Object.values(haStateCache).some((payload) => payload[addr]) &&
+    addrToStateTopic[addr]
+  ) {
+    const stateTopic = addrToStateTopic[addr];
+    haStateCache[stateTopic] ??= {};
+    haStateCache[stateTopic][addr] ??= {};
+  }
 
   for (const [stateTopic, payload] of Object.entries(haStateCache)) {
     if (!payload[addr]) continue;

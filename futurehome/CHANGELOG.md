@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.6.3 (01.07.2026)
+
+- Fixed Modeswitch/Modusbryter (and other scene controllers) staying stuck at `unknown`. Live `evt.scene.report` button presses are now delivered to the "Scene" entity even for services that never appear in the periodic state poll.
+
 ## 1.6.2 (16.05.2026)
 
 - Fix invalid device_class + unit_of_measurement combinations for HA 2026.5 (#32).

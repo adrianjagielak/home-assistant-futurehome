@@ -38,6 +38,7 @@ import { abbreviateHaMqttKeys } from './abbreviate_ha_mqtt_keys';
 import { ha } from './globals';
 import { HaDeviceConfig } from './ha_device_config';
 import { HaMqttComponent } from './mqtt_components/_component';
+import { registerServiceStateTopic } from './update_state';
 
 export type ServiceComponentsCreationResult = {
   components: { [key: string]: HaMqttComponent };
@@ -228,6 +229,12 @@ export function haPublishDevice(parameters: {
     if (!svc.enabled) {
       continue;
     }
+
+    // Register the address→state-topic mapping so that live `evt.*.report`
+    // events for services that never appear in the periodic state poll (e.g. a
+    // Modeswitch/Modusbryter scene controller) can still be routed to this
+    // device's state topic instead of being dropped.
+    registerServiceStateTopic(svc.addr, `${topicPrefix}/state`);
     // Skip publishing services that are already represented by higher-level MQTT entities
     if (
       !shouldPublishService(
