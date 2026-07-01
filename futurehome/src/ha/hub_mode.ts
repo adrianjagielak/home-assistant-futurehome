@@ -137,22 +137,36 @@ export function publishHubModeFromHouseResponse(parameters: {
 
 /**
  * Handles a Vinculum `evt.pd7.notify` message and, when it reports a house mode
- * change (`component: "mode"`, `param: { current, prev }`), updates the Home
- * Assistant "Mode" entity. This is what reflects a Futurehome Modeswitch button
- * press (or an app / automation mode change) in Home Assistant in real time.
+ * change, updates the Home Assistant "Mode" entity. This is what reflects a
+ * Futurehome Modeswitch button press (or an app / automation mode change) in
+ * Home Assistant in real time.
+ *
+ * A mode change is broadcast on the hub component (`component: "hub"`,
+ * `id: "mode"`). The new value has been observed both nested as
+ * `param.mode.current` (see `primefimp` `Hub`/`HubMode`) and flat as
+ * `param.current` (see the `edge-iqcontrols` / `tpflow` references), so both
+ * are handled; the defensive `component: "mode"` case is handled too.
  */
 export function handleModeNotify(parameters: {
   hubId: string;
   msg: FimpResponse;
 }): void {
   const notify = parameters.msg.val;
-  if (!notify || notify.component !== 'mode') {
+  if (!notify) {
+    return;
+  }
+  if (notify.component !== 'hub' && notify.component !== 'mode') {
     return;
   }
 
+  const param = notify.param ?? {};
   const current =
-    (typeof notify.param?.current === 'string' && notify.param.current) ||
-    (typeof notify.id === 'string' && notify.id) ||
+    (typeof param.mode === 'object' &&
+      param.mode &&
+      typeof param.mode.current === 'string' &&
+      param.mode.current) ||
+    (typeof param.current === 'string' && param.current) ||
+    (typeof param.mode === 'string' && param.mode) ||
     undefined;
 
   if (current) {
