@@ -5,20 +5,20 @@
 
 set -e
 
-export FH_HUB_IP=$(bashio::config 'hub_ip')
-export FH_USERNAME=$(bashio::config 'fh_username')
-export FH_PASSWORD=$(bashio::config 'fh_password')
-export TP_USERNAME=$(bashio::config 'tp_username')
-export TP_PASSWORD=$(bashio::config 'tp_password')
-export TP_ALLOW_EMPTY=$(bashio::config 'tp_allow_empty')
-export IGNORE_AVAILABILITY_REPORTS=$(bashio::config 'ignore_availability_reports')
-export DEMO_MODE=$(bashio::config 'demo_mode')
-export SHOW_DEBUG_LOG=$(bashio::config 'show_debug_log')
+export FH_HUB_IP=${FH_HUB_IP:-$(bashio::config 'hub_ip')}
+export FH_USERNAME=${FH_USERNAME:-$(bashio::config 'fh_username')}
+export FH_PASSWORD=${FH_PASSWORD:-$(bashio::config 'fh_password')}
+export TP_USERNAME=${TP_USERNAME:-$(bashio::config 'tp_username')}
+export TP_PASSWORD=${TP_PASSWORD:-$(bashio::config 'tp_password')}
+export TP_ALLOW_EMPTY=${TP_ALLOW_EMPTY:-$(bashio::config 'tp_allow_empty')}
+export IGNORE_AVAILABILITY_REPORTS=${IGNORE_AVAILABILITY_REPORTS:-$(bashio::config 'ignore_availability_reports')}
+export DEMO_MODE=${DEMO_MODE:-$(bashio::config 'demo_mode')}
+export SHOW_DEBUG_LOG=${SHOW_DEBUG_LOG:-$(bashio::config 'show_debug_log')}
 
-export MQTT_HOST=$(bashio::services mqtt "host")
-export MQTT_PORT=$(bashio::services mqtt "port")
-export MQTT_USER=$(bashio::services mqtt "username")
-export MQTT_PWD=$(bashio::services mqtt "password")
+export MQTT_HOST=${MQTT_HOST:-$(bashio::services mqtt "host")}
+export MQTT_PORT=${MQTT_PORT:-$(bashio::services mqtt "port")}
+export MQTT_USER=${MQTT_USER:-$(bashio::services mqtt "username")}
+export MQTT_PWD=${MQTT_PWD:-$(bashio::services mqtt "password")}
 
 export LOG_LEVEL=${LOG_LEVEL:-info}
 
