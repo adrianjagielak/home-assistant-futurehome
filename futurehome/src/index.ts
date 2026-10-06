@@ -1,4 +1,3 @@
-// Deploy pipeline test (GitHub push -> Arcane webhook -> build & redeploy)
 import { connectHub, connectHA, RetainedMessage } from './client';
 import { log, setupLogger } from './logger';
 import { FimpResponse, sendFimpMsg, setFimp } from './fimp/fimp';
