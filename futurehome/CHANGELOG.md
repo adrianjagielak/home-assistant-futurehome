@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.8.3 (06.10.2026)
+
+- Fix water/fire/gas/heat alarms getting stuck active. Devices clear these with a single "idle" notification, which the hub sometimes files under a different event than the one raised (e.g. `level_drop: deactiv` after `leak: activ`), so the leak sensor stayed on forever. For these single-hazard alarm services a newer `deactiv` report now clears all events, both in the polled state (using the hub's timestamps) and for live reports. Multi-hazard services such as `alarm_burglar` are unchanged.
+
 ## 1.8.2 (06.10.2026)
 
 - Numeric sensor templates no longer error (flooding the log) when a device advertises a sensor service it never reports, e.g. `sensor_accelx/y/z` and `sensor_seismicint` on Øye; the entity keeps its current state.
