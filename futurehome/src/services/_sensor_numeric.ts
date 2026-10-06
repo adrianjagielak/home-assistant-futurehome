@@ -92,7 +92,12 @@ export function _sensor_numeric__components(
         device_class: device_class,
         state_class: state_class,
         unit_of_measurement: unit,
-        value_template: `{{ value_json['${svc.addr}'].sensor }}`,
+        // Devices may advertise sensor services they never report (e.g.
+        // sensor_accel*/sensor_seismicint on Øye). An empty render makes HA
+        // ignore the update instead of logging a template error.
+        value_template:
+          `{% set svc = value_json.get('${svc.addr}') %}` +
+          `{% if svc is mapping and svc.get('sensor') is not none %}{{ svc.get('sensor') }}{% endif %}`,
       },
     },
   };

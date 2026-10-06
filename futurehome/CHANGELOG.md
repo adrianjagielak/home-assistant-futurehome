@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.8.2 (06.10.2026)
+
+- Numeric sensor templates no longer error (flooding the log) when a device advertises a sensor service it never reports, e.g. `sensor_accelx/y/z` and `sensor_seismicint` on Øye; the entity keeps its current state.
+
 ## 1.8.1 (06.10.2026)
 
 - Fix device availability: `evt.network.all_nodes_report` identifies nodes by their adapter address (e.g. Z-Wave node ID), which was used as the device ID. Devices were shown as available/unavailable based on an unrelated node's status (e.g. a lock marked unavailable because a flood sensor was down). Node addresses are now mapped to devices via `fimp.adapter`/`fimp.address`, and stale availability topics published under node addresses are removed.
