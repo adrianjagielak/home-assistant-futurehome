@@ -5,8 +5,12 @@ import { haCommandHandlers, setHa, setHaCommandHandlers } from './ha/globals';
 import { CommandHandlers, haPublishDevice } from './ha/publish_device';
 import { haUpdateState, haUpdateStateValueReport } from './ha/update_state';
 import { VinculumPd7Device } from './fimp/vinculum_pd7_device';
-import { haUpdateAvailability } from './ha/update_availability';
+import {
+  deviceIdsForNode,
+  haUpdateAvailability,
+} from './ha/update_availability';
 import { delay } from './utils';
+import { v4 as uuidv4 } from 'uuid';
 import {
   exposeSmarthubTools,
   handleExclusionReport,
@@ -206,10 +210,7 @@ import { publishSceneEvent } from './ha/scene_events';
           )
         ) {
           // Set initial availability
-          haUpdateAvailability({
-            hubId,
-            deviceAvailability: { address: deviceId, status: 'UP' },
-          });
+          haUpdateAvailability({ hubId, deviceId, status: 'UP' });
           await delay(50);
         }
       } catch (e) {
@@ -241,6 +242,22 @@ import { publishSceneEvent } from './ha/scene_events';
   vinculumDevicesToHa(devices);
 
   let knownDeviceIds = new Set(devices.val.param.device.map((d: any) => d?.id));
+  let knownDevices: VinculumPd7Device[] = devices.val.param.device;
+
+  // Remove retained availability topics that don't belong to a known device
+  // (older versions published availability under node addresses).
+  for (const msg of retainedMessages) {
+    const match = msg.topic.match(
+      new RegExp(
+        `^homeassistant/device/futurehome_${hubId}_(.+)/availability$`,
+      ),
+    );
+    if (match && !knownDeviceIds.has(Number(match[1]))) {
+      log.debug('Removing stale availability topic', msg.topic);
+      ha?.publish(msg.topic, '', { retain: true, qos: 2 });
+      await delay(50);
+    }
+  }
 
   fimp.on('message', async (topic, buf) => {
     try {
@@ -286,6 +303,7 @@ import { publishSceneEvent } from './ha/scene_events';
             }
 
             knownDeviceIds = newDeviceIds;
+            knownDevices = devices;
 
             vinculumDevicesToHa(msg);
           }
@@ -298,11 +316,21 @@ import { publishSceneEvent } from './ha/scene_events';
             return;
           }
           for (const deviceAvailability of devicesAvailability) {
-            if (ignoreAvailabilityReports) {
-              deviceAvailability.status = 'UP';
+            const address = deviceAvailability?.address?.toString();
+            if (!address) {
+              continue;
             }
-            haUpdateAvailability({ hubId, deviceAvailability });
-            await delay(50);
+            const status = ignoreAvailabilityReports
+              ? 'UP'
+              : deviceAvailability.status;
+            for (const deviceId of deviceIdsForNode({
+              devices: knownDevices,
+              topic,
+              address,
+            })) {
+              haUpdateAvailability({ hubId, deviceId, status });
+              await delay(50);
+            }
           }
           break;
         }
@@ -410,6 +438,34 @@ import { publishSceneEvent } from './ha/scene_events';
   // Poll devices every 30 minutes (1800000 ms)
   if (!demoMode) {
     setInterval(pollDevices, 30 * 60 * 1000);
+  }
+
+  // The Z-Wave adapter only sends evt.network.all_nodes_report on its own
+  // occasionally, so ask for it to get availability right after startup and
+  // keep it up to date. The report is handled by the FIMP message handler.
+  const pollNodeAvailability = () => {
+    fimp.publish(
+      'pt:j1/mt:cmd/rt:ad/rn:zw/ad:1',
+      JSON.stringify({
+        corid: null,
+        ctime: new Date().toISOString(),
+        props: {},
+        resp_to: 'pt:j1/mt:rsp/rt:cloud/rn:remote-client/ad:smarthome-app',
+        serv: 'zwave-ad',
+        src: 'smarthome-app',
+        tags: [],
+        type: 'cmd.network.get_all_nodes',
+        uid: uuidv4(),
+        val: null,
+        val_t: 'null',
+        ver: '1',
+      }),
+      { qos: 1 },
+    );
+  };
+  if (!demoMode) {
+    pollNodeAvailability();
+    setInterval(pollNodeAvailability, 5 * 60 * 1000);
   }
 
   ha.on('message', (topic, buf) => {
