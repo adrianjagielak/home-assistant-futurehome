@@ -1,5 +1,16 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 1.8.1 (06.10.2026)
+
+- Fix device availability: `evt.network.all_nodes_report` identifies nodes by their adapter address (e.g. Z-Wave node ID), which was used as the device ID. Devices were shown as available/unavailable based on an unrelated node's status (e.g. a lock marked unavailable because a flood sensor was down). Node addresses are now mapped to devices via `fimp.adapter`/`fimp.address`, and stale availability topics published under node addresses are removed.
+- Sleeping battery devices (`SLEEP` status) are no longer marked unavailable.
+- Request the Z-Wave node report on startup and every 5 minutes, so availability is correct without waiting for the hub to send it.
+- Fix the lock "Access Granted"/"Last Access" entities reading a non-existent `access_report` attribute; access reports are stored under `usercode`.
+- Fix lock alarm sensors (e.g. "RF Lock", "Keypad Lock") erroring and staying unknown until that event has occurred; they now report `off`.
+- Fix the user code "Clear User" text input receiving the whole device state JSON as its value ("state is too long").
+- Fix schedule "Slot Active"/"Active Schedule Count" always reporting off/0 due to Jinja loop scoping.
+- Alarm and schedule templates no longer error (flooding the log) when a device has not reported that service; the entity keeps its current state.
+
 ## 1.8.0 (01.07.2026)
 
 - Expose the battery maintenance status (e.g. `replace_now`) as a diagnostic "Battery status" sensor for devices that support the `replace_*` battery events. Previously this was not surfaced at all, so a device could report a full battery level while actually needing its battery replaced.

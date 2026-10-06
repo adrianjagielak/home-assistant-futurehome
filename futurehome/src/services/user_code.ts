@@ -18,6 +18,23 @@ export function user_code__components(
   const components: Record<string, HaMqttComponent> = {};
   const commandHandlers: CommandHandlers = {};
 
+  // Jinja prelude binding `svc` to this service's state, or `none` when the
+  // service is absent from the device state payload.
+  const svcState = `{% set svc = value_json.get('${svc.addr}') %}{% set svc = svc if svc is mapping else none %}`;
+
+  // Access reports are stored under the FIMP attribute name `usercode`
+  // (older payloads may use `access_report`).
+  const accessReport =
+    `${svcState}` +
+    `{% set report = (svc.get('usercode') or svc.get('access_report')) if svc else none %}` +
+    `{% set report = report if report is mapping else none %}`;
+
+  // Write-only text inputs must not subscribe to the shared device state topic,
+  // otherwise HA would use the whole JSON payload as their state. Give them a
+  // dedicated topic that is never published to.
+  const writeOnlyStateTopic = (name: string) =>
+    `${topicPrefix}${svc.addr}/${name}/state`;
+
   // Extract supported properties
   const supUsercodes = svc.props?.sup_usercodes || [];
   const supUserstatus = svc.props?.sup_userstatus || [];
@@ -68,7 +85,10 @@ export function user_code__components(
       platform: 'binary_sensor',
       device_class: 'lock',
       name: 'Access Granted',
-      value_template: `{{ (value_json['${svc.addr}'].access_report.permission == 'granted') | iif('ON', 'OFF') }}`,
+      // Renders empty (HA ignores the update) until an access report exists.
+      value_template:
+        `${accessReport}` +
+        `{% if report and report.get('permission') is not none %}{{ (report.get('permission') == 'granted') | iif('ON', 'OFF') }}{% endif %}`,
     };
 
     // Create sensor for last access event details
@@ -77,7 +97,9 @@ export function user_code__components(
       platform: 'sensor',
       name: 'Last Access',
       icon: 'mdi:account-clock',
-      value_template: `{% set access = value_json['${svc.addr}'].access_report %}{% if access %}{{ access.event | default('unknown') }} by {{ access.alias | default('unknown') }} ({{ access.identification | default('unknown') }}){% else %}No access{% endif %}`,
+      value_template:
+        `${accessReport}` +
+        `{% if report %}{{ report.get('event') or 'unknown' }} by {{ report.get('alias') or 'unknown' }} ({{ report.get('identification') or 'unknown' }}){% else %}No access{% endif %}`,
     };
   }
 
@@ -257,6 +279,7 @@ export function user_code__components(
       min: 5, // minimum: "pin:1"
       max: 10, // maximum: "rfid:999"
       command_topic: clearUserTopic,
+      state_topic: writeOnlyStateTopic('clear_user'),
     };
 
     commandHandlers[clearUserTopic] = async (payload: string) => {
