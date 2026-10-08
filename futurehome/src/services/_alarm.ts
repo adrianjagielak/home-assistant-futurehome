@@ -284,7 +284,18 @@ export function _alarm__components(
       platform: 'binary_sensor',
       device_class: device_class,
       name: name,
-      value_template: `{{ (value_json['${svc.addr}'].alarm.${event}.status == 'activ') | iif('ON', 'OFF') }}`,
+      // The `alarm` attribute only contains events that have actually been
+      // reported, and devices may advertise alarm services they never report
+      // at all (e.g. alarm_power on plugs). An empty render makes HA ignore
+      // the update (keeping the current state) when the service is absent; a
+      // present service without this event means the alarm is not active.
+      value_template:
+        `{% set svc = value_json.get('${svc.addr}') %}` +
+        `{% if svc is mapping %}` +
+        `{% set alarm = svc.get('alarm') %}` +
+        `{% set evt = alarm.get('${event}') if alarm is mapping else none %}` +
+        `{{ ((evt.get('status') if evt is mapping else none) == 'activ') | iif('ON', 'OFF') }}` +
+        `{% endif %}`,
     };
 
     if (svc.intf?.includes('cmd.alarm.clear')) {

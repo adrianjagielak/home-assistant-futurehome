@@ -35,6 +35,27 @@ export function schedule_entry__components(
 
   const slots = svc.props?.slots || 1;
 
+  // Jinja prelude binding `entries` to this service's state map, or `none` when
+  // the service is absent from the device state payload (it is only present
+  // once the device has sent a schedule report).
+  const entriesPrelude = `{% set entries = value_json.get('${svc.addr}') %}{% set entries = entries if entries is mapping else none %}`;
+
+  // Renders `field` of the schedule entry for `slot` (or `fallback` if the
+  // entry lacks it). Renders empty when no entry for the slot exists, which
+  // makes HA ignore the update instead of logging template/number errors.
+  const slotFieldTemplate = (
+    slot: number,
+    field: keyof ScheduleEntry,
+    fallback?: number,
+  ) =>
+    `${entriesPrelude}` +
+    `{% set ns = namespace(value='') %}` +
+    `{% if entries %}{% for key, entry in entries.items() %}` +
+    `{% if entry is mapping and (entry.get('slot') | int(0)) == ${slot} %}` +
+    `{% set ns.value = entry.get('${field}', ${fallback ?? "''"}) %}` +
+    `{% endif %}{% endfor %}{% endif %}` +
+    `{{ ns.value }}`;
+
   // For each slot, create management controls
   for (let slot = 1; slot <= slots; slot++) {
     const slotPrefix = `${svc.addr}_slot_${slot}`;
@@ -52,7 +73,7 @@ export function schedule_entry__components(
       mode: 'box',
       command_topic: userIdCommandTopic,
       optimistic: false,
-      value_template: `{% set entries = value_json['${svc.addr}'] %}{% for key, entry in entries.items() %}{% if entry.slot == ${slot} %}{{ entry.user_id }}{% endif %}{% endfor %}`,
+      value_template: slotFieldTemplate(slot, 'user_id'),
       icon: 'mdi:account-key',
     };
 
@@ -69,7 +90,7 @@ export function schedule_entry__components(
       mode: 'box',
       command_topic: yearStartCommandTopic,
       optimistic: false,
-      value_template: `{% set entries = value_json['${svc.addr}'] %}{% for key, entry in entries.items() %}{% if entry.slot == ${slot} %}{{ entry.year_start | default(0) }}{% endif %}{% endfor %}`,
+      value_template: slotFieldTemplate(slot, 'year_start', 0),
       icon: 'mdi:calendar-start',
     };
 
@@ -86,7 +107,7 @@ export function schedule_entry__components(
       mode: 'box',
       command_topic: monthStartCommandTopic,
       optimistic: false,
-      value_template: `{% set entries = value_json['${svc.addr}'] %}{% for key, entry in entries.items() %}{% if entry.slot == ${slot} %}{{ entry.month_start | default(1) }}{% endif %}{% endfor %}`,
+      value_template: slotFieldTemplate(slot, 'month_start', 1),
       icon: 'mdi:calendar-month',
     };
 
@@ -103,7 +124,7 @@ export function schedule_entry__components(
       mode: 'box',
       command_topic: dayStartCommandTopic,
       optimistic: false,
-      value_template: `{% set entries = value_json['${svc.addr}'] %}{% for key, entry in entries.items() %}{% if entry.slot == ${slot} %}{{ entry.day_start | default(1) }}{% endif %}{% endfor %}`,
+      value_template: slotFieldTemplate(slot, 'day_start', 1),
       icon: 'mdi:calendar-today',
     };
 
@@ -120,7 +141,7 @@ export function schedule_entry__components(
       mode: 'box',
       command_topic: hourStartCommandTopic,
       optimistic: false,
-      value_template: `{% set entries = value_json['${svc.addr}'] %}{% for key, entry in entries.items() %}{% if entry.slot == ${slot} %}{{ entry.hour_start | default(0) }}{% endif %}{% endfor %}`,
+      value_template: slotFieldTemplate(slot, 'hour_start', 0),
       icon: 'mdi:clock-start',
     };
 
@@ -137,7 +158,7 @@ export function schedule_entry__components(
       mode: 'box',
       command_topic: minuteStartCommandTopic,
       optimistic: false,
-      value_template: `{% set entries = value_json['${svc.addr}'] %}{% for key, entry in entries.items() %}{% if entry.slot == ${slot} %}{{ entry.minute_start | default(0) }}{% endif %}{% endfor %}`,
+      value_template: slotFieldTemplate(slot, 'minute_start', 0),
       icon: 'mdi:clock-start',
     };
 
@@ -154,7 +175,7 @@ export function schedule_entry__components(
       mode: 'box',
       command_topic: yearEndCommandTopic,
       optimistic: false,
-      value_template: `{% set entries = value_json['${svc.addr}'] %}{% for key, entry in entries.items() %}{% if entry.slot == ${slot} %}{{ entry.year_end | default(99) }}{% endif %}{% endfor %}`,
+      value_template: slotFieldTemplate(slot, 'year_end', 99),
       icon: 'mdi:calendar-end',
     };
 
@@ -171,7 +192,7 @@ export function schedule_entry__components(
       mode: 'box',
       command_topic: monthEndCommandTopic,
       optimistic: false,
-      value_template: `{% set entries = value_json['${svc.addr}'] %}{% for key, entry in entries.items() %}{% if entry.slot == ${slot} %}{{ entry.month_end | default(12) }}{% endif %}{% endfor %}`,
+      value_template: slotFieldTemplate(slot, 'month_end', 12),
       icon: 'mdi:calendar-month',
     };
 
@@ -188,7 +209,7 @@ export function schedule_entry__components(
       mode: 'box',
       command_topic: dayEndCommandTopic,
       optimistic: false,
-      value_template: `{% set entries = value_json['${svc.addr}'] %}{% for key, entry in entries.items() %}{% if entry.slot == ${slot} %}{{ entry.day_end | default(31) }}{% endif %}{% endfor %}`,
+      value_template: slotFieldTemplate(slot, 'day_end', 31),
       icon: 'mdi:calendar-today',
     };
 
@@ -205,7 +226,7 @@ export function schedule_entry__components(
       mode: 'box',
       command_topic: hourEndCommandTopic,
       optimistic: false,
-      value_template: `{% set entries = value_json['${svc.addr}'] %}{% for key, entry in entries.items() %}{% if entry.slot == ${slot} %}{{ entry.hour_end | default(23) }}{% endif %}{% endfor %}`,
+      value_template: slotFieldTemplate(slot, 'hour_end', 23),
       icon: 'mdi:clock-end',
     };
 
@@ -222,7 +243,7 @@ export function schedule_entry__components(
       mode: 'box',
       command_topic: minuteEndCommandTopic,
       optimistic: false,
-      value_template: `{% set entries = value_json['${svc.addr}'] %}{% for key, entry in entries.items() %}{% if entry.slot == ${slot} %}{{ entry.minute_end | default(59) }}{% endif %}{% endfor %}`,
+      value_template: slotFieldTemplate(slot, 'minute_end', 59),
       icon: 'mdi:clock-end',
     };
 
@@ -255,7 +276,11 @@ export function schedule_entry__components(
       name: `Schedule Slot ${slot} Active`,
       entity_category: 'diagnostic',
       device_class: 'connectivity',
-      value_template: `{% set entries = value_json['${svc.addr}'] %}{% set found = false %}{% for key, entry in entries.items() %}{% if entry.slot == ${slot} and entry.year_start is defined %}{% set found = true %}{% endif %}{% endfor %}{{ found | iif('ON', 'OFF') }}`,
+      value_template:
+        `${entriesPrelude}` +
+        `{% if entries %}{% set ns = namespace(found=false) %}` +
+        `{% for key, entry in entries.items() %}{% if entry is mapping and (entry.get('slot') | int(0)) == ${slot} and entry.get('year_start') is not none %}{% set ns.found = true %}{% endif %}{% endfor %}` +
+        `{{ ns.found | iif('ON', 'OFF') }}{% endif %}`,
       icon: 'mdi:calendar-clock',
     };
 
@@ -440,7 +465,11 @@ export function schedule_entry__components(
     name: 'Active Schedule Count',
     entity_category: 'diagnostic',
     state_class: 'measurement',
-    value_template: `{% set entries = value_json['${svc.addr}'] %}{% set count = 0 %}{% for key, entry in entries.items() %}{% if entry.year_start is defined %}{% set count = count + 1 %}{% endif %}{% endfor %}{{ count }}`,
+    value_template:
+      `${entriesPrelude}` +
+      `{% if entries %}{% set ns = namespace(count=0) %}` +
+      `{% for key, entry in entries.items() %}{% if entry is mapping and entry.get('year_start') is not none %}{% set ns.count = ns.count + 1 %}{% endif %}{% endfor %}` +
+      `{{ ns.count }}{% endif %}`,
     icon: 'mdi:calendar-check',
   };
 
