@@ -260,6 +260,13 @@ import { publishSceneEvent } from './ha/scene_events';
   }
 
   fimp.on('message', async (topic, buf) => {
+    // `pt:j1c1/` topics carry gzip-compressed payloads (e.g. energy prices),
+    // which nothing here uses. Skip them instead of failing JSON.parse.
+    if (topic.startsWith('pt:j1c1/')) {
+      log.debug(`Ignoring compressed FIMP message on topic "${topic}"`);
+      return;
+    }
+
     try {
       const msg: FimpResponse = JSON.parse(buf.toString());
       log.debug(
@@ -278,7 +285,7 @@ import { publishSceneEvent } from './ha/scene_events';
           }
 
           // Handle vinculum 'device's
-          const devices = msg.val.param.device;
+          const devices = msg.val?.param?.device;
           if (devices) {
             const newDeviceIds = new Set(devices.map((d: any) => d?.id));
 
