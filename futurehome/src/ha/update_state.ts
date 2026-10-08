@@ -182,6 +182,33 @@ const attributeTypeKeyMap: Record<string, string> = {
   param: 'parameter_id',
 };
 
+// Alarm services where every event describes the same hazard (e.g. `leak` and
+// `level_drop` on alarm_water). Devices clear these with a single "idle"
+// notification, which the hub sometimes files under a different event than
+// the one that was raised (e.g. `level_drop: deactiv` after `leak: activ`),
+// leaving the raised event active forever. For these services any newer
+// `deactiv` report therefore clears all events. Services such as
+// alarm_burglar are excluded: one event ending (tamper) must not clear a
+// different, real one (intrusion).
+const singleHazardAlarmServices = new Set([
+  'alarm_water',
+  'alarm_fire',
+  'alarm_gas',
+  'alarm_heat',
+]);
+
+function isSingleHazardAlarm(serviceName?: string, attrName?: string) {
+  return (
+    attrName === 'alarm' &&
+    !!serviceName &&
+    singleHazardAlarmServices.has(serviceName)
+  );
+}
+
+function serviceNameFromAddr(addr: string): string | undefined {
+  return addr.match(/\/sv:([^/]+)\//)?.[1];
+}
+
 function getNestedValue(obj: any, path: string): any {
   if (!obj) return undefined;
   return path
@@ -207,7 +234,11 @@ function extractTypeDiscriminator(
 /**
  * Helper function to process multiple values for an attribute, handling typed values
  */
-function processAttributeValues(values: any[], attrName?: string): any {
+function processAttributeValues(
+  values: any[],
+  attrName?: string,
+  serviceName?: string,
+): any {
   if (!values || values.length === 0) {
     return undefined;
   }
@@ -244,6 +275,7 @@ function processAttributeValues(values: any[], attrName?: string): any {
 
   // Group by (normalized) discriminator, keeping only the latest per type
   const typeMap: Record<string, any> = {};
+  const typeTs: Record<string, number> = {};
 
   for (const { v, key } of entriesWithType) {
     if (!typeMap[key]) {
@@ -252,6 +284,21 @@ function processAttributeValues(values: any[], attrName?: string): any {
           ? { ...v.val }
           : { val: v.val }; // wrap primitives like meter readings
       typeMap[key] = payload;
+      typeTs[key] = v.ts ? new Date(v.ts).getTime() : 0;
+    }
+  }
+
+  if (isSingleHazardAlarm(serviceName, attrName)) {
+    const latestClear = Math.max(
+      0,
+      ...Object.keys(typeMap)
+        .filter((key) => typeMap[key]?.status === 'deactiv')
+        .map((key) => typeTs[key]),
+    );
+    for (const key of Object.keys(typeMap)) {
+      if (typeMap[key]?.status === 'activ' && typeTs[key] < latestClear) {
+        typeMap[key] = { ...typeMap[key], status: 'deactiv' };
+      }
     }
   }
 
@@ -282,6 +329,7 @@ export function haUpdateState(parameters: {
       const processedValue = processAttributeValues(
         attr.values || [],
         attr.name,
+        service.name,
       );
       if (processedValue !== undefined) {
         serviceState[attr.name] = processedValue;
@@ -364,6 +412,22 @@ export function haUpdateStateValueReport(parameters: {
     } else {
       // Handle regular value update (non-typed)
       payload[addr][parameters.attrName] = parameters.value;
+    }
+
+    // A cleared single-hazard alarm clears all of its events (see
+    // singleHazardAlarmServices).
+    const alarms = payload[addr][parameters.attrName];
+    if (
+      isSingleHazardAlarm(serviceNameFromAddr(addr), parameters.attrName) &&
+      parameters.value?.status === 'deactiv' &&
+      alarms &&
+      typeof alarms === 'object'
+    ) {
+      for (const [event, alarm] of Object.entries<any>(alarms)) {
+        if (alarm?.status === 'activ') {
+          alarms[event] = { ...alarm, status: 'deactiv' };
+        }
+      }
     }
 
     log.debug(
