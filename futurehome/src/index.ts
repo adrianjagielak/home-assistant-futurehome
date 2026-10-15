@@ -296,8 +296,12 @@ import { publishSceneEvent } from './ha/scene_events';
               (id) => !newDeviceIds.has(id),
             );
 
-            log.info(`Added devices: ${addedDeviceIds}`);
-            log.info(`Removed devices: ${removedDeviceIds}`);
+            if (addedDeviceIds.length) {
+              log.info(`Added devices: ${addedDeviceIds}`);
+            }
+            if (removedDeviceIds.length) {
+              log.info(`Removed devices: ${removedDeviceIds}`);
+            }
 
             for (const id of removedDeviceIds) {
               const topic = `homeassistant/device/futurehome_${hubId}_${id}/config`;
