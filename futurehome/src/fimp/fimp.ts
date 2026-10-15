@@ -103,6 +103,7 @@ export async function sendFimpMsg({
 
       if (msg.corid === uid) {
         if (msg.type === 'evt.error.report') {
+          clearTimeout(timeout);
           fimp?.removeListener('message', onResponse);
 
           const error = new Error(
@@ -123,28 +124,6 @@ export async function sendFimpMsg({
         return;
       }
 
-      if (msg.topic === `pt:j1/mt:evt${address}`) {
-        if (msg.type === 'evt.error.report') {
-          fimp?.removeListener('message', onResponse);
-
-          const error = new Error(
-            `Received FIMP response for message ${uid}: error (evt.error.report) (matched using topic)`,
-          );
-          log.warn(error.message, error.stack);
-          reject(error);
-          return;
-        }
-
-        log.debug(
-          `Received FIMP response for message ${uid} (matched using topic).`,
-        );
-
-        clearTimeout(timeout);
-        fimp?.removeListener('message', onResponse);
-        resolve(msg);
-        return;
-      }
-
       const hasValidType = msg.type != null && msg.type.startsWith('evt.');
       const reqCmdParts = cmd.split('.');
       const resCmdParts = msg.type?.split('.') ?? [];
@@ -155,12 +134,15 @@ export async function sendFimpMsg({
       const reqEndsWithSetAndResEndsWithReport =
         reqCmdParts[2] === 'set' && resCmdParts[2] === 'report';
       const sameService = msg.serv === service;
+      // Only a report from the addressed device, not another device of the same type
+      const sameDevice = topic === `pt:j1/mt:evt${address}`;
       if (
         hasValidType &&
         hasThreeParts &&
         middlePartMatches &&
         (endsWithLastPart || reqEndsWithSetAndResEndsWithReport) &&
-        sameService
+        sameService &&
+        sameDevice
       ) {
         log.debug(
           `Received FIMP response for message ${uid} (matched using event name).`,
