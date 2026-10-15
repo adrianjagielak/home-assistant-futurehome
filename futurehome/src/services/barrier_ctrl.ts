@@ -23,7 +23,6 @@ export function barrier_ctrl__components(
   // Main cover component
   const commandTopic = `${topicPrefix}${svc.addr}/command`;
   const positionCommandTopic = `${topicPrefix}${svc.addr}/set_position`;
-  const stopCommandTopic = `${topicPrefix}${svc.addr}/stop`;
 
   // Determine device class based on device type/functionality
   let deviceClass: CoverDeviceClass;
@@ -73,11 +72,6 @@ export function barrier_ctrl__components(
     coverComponent.position_template = `{{ value_json['${svc.addr}'].position | default(0) }}`;
     coverComponent.position_closed = 0;
     coverComponent.position_open = 100;
-  }
-
-  // Add stop command if supported
-  if (svc.intf?.includes('cmd.op.stop')) {
-    coverComponent.command_topic = stopCommandTopic;
   }
 
   components[svc.addr] = coverComponent;
@@ -152,19 +146,6 @@ export function barrier_ctrl__components(
           },
         });
       }
-    };
-  }
-
-  // Stop command handler (separate topic if needed)
-  if (svc.intf?.includes('cmd.op.stop')) {
-    commandHandlers[stopCommandTopic] = async (_payload: string) => {
-      await sendFimpMsg({
-        address: svc.addr,
-        service: 'barrier_ctrl',
-        cmd: 'cmd.op.stop',
-        val_t: 'null',
-        val: null,
-      });
     };
   }
 
