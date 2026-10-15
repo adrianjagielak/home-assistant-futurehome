@@ -175,6 +175,28 @@ const haStateCache: Record<
   Record<string, Record<string, any>> // payload (addr → { attr → value })
 > = {};
 
+// Last state payload published per state topic, to skip identical republishes
+// from the 30 s state poll.
+const lastPublished: Record<string, { json: string; at: number }> = {};
+
+// Unchanged state is still republished this often, so a broker that lost its
+// retained messages (e.g. restarted without persistence) gets it back.
+const REPUBLISH_UNCHANGED_MS = 30 * 60 * 1000;
+
+/** Publishes `payload` to `stateTopic` unless it is unchanged; returns whether it published. */
+function publishState(stateTopic: string, payload: object): boolean {
+  const json = JSON.stringify(payload);
+  const last = lastPublished[stateTopic];
+  const now = Date.now();
+  if (last && last.json === json && now - last.at < REPUBLISH_UNCHANGED_MS) {
+    return false;
+  }
+  log.debug(`Publishing HA state "${stateTopic}"`);
+  ha?.publish(stateTopic, json, { retain: true, qos: 2 });
+  lastPublished[stateTopic] = { json, at: now };
+  return true;
+}
+
 const attributeTypeKeyMap: Record<string, string> = {
   alarm: 'event',
   meter: 'props.unit',
@@ -311,11 +333,13 @@ function processAttributeValues(
  *
  * Example MQTT topic produced for hub 123456 and device id 1:
  *   homeassistant/device/futurehome_123456_1/state
+ *
+ * Returns whether anything was published (unchanged state is skipped).
  */
 export function haUpdateState(parameters: {
   hubId: string;
   deviceState: DeviceState;
-}) {
+}): boolean {
   const stateTopic = `homeassistant/device/futurehome_${parameters.hubId}_${parameters.deviceState.id?.toString()}/state`;
 
   const haState: Record<string, Record<string, any>> = {};
@@ -339,11 +363,10 @@ export function haUpdateState(parameters: {
     haState[service.addr] = serviceState;
   }
 
-  log.debug(`Publishing HA state "${stateTopic}"`);
-  ha?.publish(stateTopic, JSON.stringify(haState), { retain: true, qos: 2 });
-
   // ---- cache state for later incremental updates ----
   haStateCache[stateTopic] = haState;
+
+  return publishState(stateTopic, haState);
 }
 
 /**
@@ -430,13 +453,20 @@ export function haUpdateStateValueReport(parameters: {
       }
     }
 
-    log.debug(
-      `Publishing updated state value for "${addr}" to "${stateTopic}"`,
-    );
-    ha?.publish(stateTopic, JSON.stringify(payload), { retain: true, qos: 2 });
+    publishState(stateTopic, payload);
 
     haStateCache[stateTopic] = payload;
   }
+}
+
+/**
+ * Forgets a removed device's state and clears its retained state topic.
+ */
+export function haRemoveState(parameters: { hubId: string; deviceId: string }) {
+  const stateTopic = `homeassistant/device/futurehome_${parameters.hubId}_${parameters.deviceId}/state`;
+  delete haStateCache[stateTopic];
+  delete lastPublished[stateTopic];
+  ha?.publish(stateTopic, '', { retain: true, qos: 2 });
 }
 
 export function haGetCachedState(parameters: { topic: string }) {

@@ -3,7 +3,11 @@ import { log, setupLogger } from './logger';
 import { FimpResponse, sendFimpMsg, setFimp } from './fimp/fimp';
 import { haCommandHandlers, setHa, setHaCommandHandlers } from './ha/globals';
 import { CommandHandlers, haPublishDevice } from './ha/publish_device';
-import { haUpdateState, haUpdateStateValueReport } from './ha/update_state';
+import {
+  haRemoveState,
+  haUpdateState,
+  haUpdateStateValueReport,
+} from './ha/update_state';
 import { VinculumPd7Device } from './fimp/vinculum_pd7_device';
 import {
   deviceIdsForNode,
@@ -279,8 +283,9 @@ import { publishSceneEvent } from './ha/scene_events';
           const devicesState = msg.val?.param?.state?.devices;
           if (devicesState) {
             for (const deviceState of devicesState) {
-              haUpdateState({ hubId, deviceState });
-              await delay(50);
+              if (haUpdateState({ hubId, deviceState })) {
+                await delay(50);
+              }
             }
           }
 
@@ -306,6 +311,9 @@ import { publishSceneEvent } from './ha/scene_events';
 
               const availTopic = `homeassistant/device/futurehome_${hubId}_${id}/availability`;
               ha?.publish(availTopic, '', { retain: true, qos: 2 });
+              await delay(50);
+
+              haRemoveState({ hubId, deviceId: String(id) });
               await delay(50);
             }
 
