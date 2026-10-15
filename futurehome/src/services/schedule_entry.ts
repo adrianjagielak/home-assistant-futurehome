@@ -8,6 +8,7 @@ import {
   CommandHandlers,
   ServiceComponentsCreationResult,
 } from '../ha/publish_device';
+import { haGetCachedState } from '../ha/update_state';
 
 interface ScheduleEntry {
   slot: number;
@@ -290,12 +291,22 @@ export function schedule_entry__components(
     const getCurrentScheduleEntry = async (
       slotNum: number,
     ): Promise<ScheduleEntry | null> => {
-      // This would need to be implemented to get the current state from the cached state
-      // For now, we'll construct a basic entry with required fields
-      return {
-        slot: slotNum,
-        user_id: 1, // Default user ID
-      };
+      const entries = haGetCachedState({ topic: `${topicPrefix}/state` })?.[
+        svc.addr
+      ];
+      const entry = Object.values<any>(entries ?? {}).find(
+        (e) => Number(e?.slot) === slotNum,
+      );
+      if (!entry) {
+        // A slot without a stored entry starts on user 1 until its user ID is set
+        return { slot: slotNum, user_id: 1 };
+      }
+      // int_map: keep numeric fields only, so the entry can be sent back as-is
+      return Object.fromEntries(
+        Object.entries(entry)
+          .map(([k, v]) => [k, Number(v)])
+          .filter(([, v]) => !Number.isNaN(v)),
+      ) as ScheduleEntry;
     };
 
     // Helper function to update a schedule entry field

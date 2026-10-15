@@ -34,7 +34,7 @@ export function complex_alarm_system__components(
       await sendFimpMsg({
         address: svc.addr,
         service: svcName,
-        cmd: 'cmd.alarm.silences',
+        cmd: 'cmd.alarm.silence',
         val_t: 'null',
         val: null,
       });

@@ -61,7 +61,7 @@ export function out_lvl_switch__components(
             const currentState = haGetCachedState({
               topic: `${topicPrefix}/state`,
             })?.[svc.addr];
-            if (currentState.lvl > 0) {
+            if (currentState?.lvl > 0) {
               return;
             }
 
