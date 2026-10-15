@@ -60,8 +60,13 @@ function makeClient(
   return new Promise((resolve, reject) => {
     const client = demo ? new DemoFimpMqttClient() : new RealMqttClient();
     client.connect(url, { port, username, password, protocolVersion: 4 });
-    client.once('connect', () => resolve(client));
-    client.once('error', reject);
+    client.once('connect', () => {
+      // Keep a listener after connecting: an 'error' without one crashes the process
+      client.off('error', reject);
+      client.on('error', (e) => log.warn(`MQTT error (${url})`, e));
+      resolve(client);
+    });
+    client.on('error', reject);
   });
 }
 
@@ -99,7 +104,8 @@ async function waitForHARetainedMessages(
     client.on('message', messageHandler);
     client.on('error', errorHandler);
 
-    client.subscribe('#', { qos: 1 }, (err) => {
+    // All discovery, state and command topics of this add-on live here
+    client.subscribe('homeassistant/device/#', { qos: 1 }, (err) => {
       if (err) {
         cleanup();
         reject(err);
