@@ -344,6 +344,8 @@ export function doorman__components(
       name: 'Clear User Slot',
       entity_category: 'config',
       command_topic: clearUserCommandTopic,
+      // Write-only: never published, so the device state JSON isn't used as the value
+      state_topic: `${topicPrefix}${svc.addr}/clear_user/state`,
       min: 1,
       max: 2,
       pattern: '^[0-9]{1,2}$',
@@ -370,17 +372,22 @@ export function doorman__components(
     // This is typically handled automatically by the hub, but we can expose manual trigger
     const integrationCommandTopic = `${topicPrefix}${svc.addr}/start_integration/command`;
 
+    // The user enters the integration PIN, instead of a fixed well-known code
     components[`${svc.addr}_start_integration`] = {
       unique_id: `${svc.addr}_start_integration`,
-      platform: 'button',
-      name: 'Start Integration',
+      platform: 'text',
+      name: 'Start Integration (PIN)',
       entity_category: 'config',
-      device_class: 'restart',
+      mode: 'password',
+      min: 4,
+      max: 10,
+      pattern: '^[0-9]{4,10}$',
       command_topic: integrationCommandTopic,
+      state_topic: `${topicPrefix}${svc.addr}/start_integration/state`,
     };
 
-    commandHandlers[integrationCommandTopic] = async (_payload: string) => {
-      // Start integration with default PIN code (this should be customized)
+    commandHandlers[integrationCommandTopic] = async (payload: string) => {
+      if (!/^[0-9]{4,10}$/.test(payload)) return;
       await sendFimpMsg({
         address: svc.addr,
         service: 'doorman',
@@ -389,7 +396,7 @@ export function doorman__components(
         val: {
           slot_number: '0',
           code_type: 'pin',
-          code: '123456', // Default code - should be configurable
+          code: payload,
         },
       });
     };

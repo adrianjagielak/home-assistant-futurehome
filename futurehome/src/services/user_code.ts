@@ -168,6 +168,7 @@ export function user_code__components(
         min: minCodeLength + 4, // minimum: "1:a:1234"
         max: maxCodeLength + 20, // reasonable max including slot and alias
         command_topic: addPinUserTopic,
+        state_topic: writeOnlyStateTopic('add_pin_user'),
       };
 
       commandHandlers[addPinUserTopic] = async (payload: string) => {
@@ -225,6 +226,7 @@ export function user_code__components(
         min: 6, // minimum: "1:a:xx"
         max: 50, // reasonable max for RFID codes
         command_topic: addRfidUserTopic,
+        state_topic: writeOnlyStateTopic('add_rfid_user'),
       };
 
       commandHandlers[addRfidUserTopic] = async (payload: string) => {
