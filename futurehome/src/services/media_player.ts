@@ -112,6 +112,8 @@ export function media_player__components(
       value_template: `{{ 'ON' if value_json['${svc.addr}'].mute else 'OFF' }}`,
       payload_on: 'true',
       payload_off: 'false',
+      state_on: 'ON',
+      state_off: 'OFF',
       icon: 'mdi:volume-off',
     };
 
@@ -144,6 +146,8 @@ export function media_player__components(
       value_template: `{{ 'ON' if value_json['${svc.addr}'].playbackmode.${mode} else 'OFF' }}`,
       payload_on: 'true',
       payload_off: 'false',
+      state_on: 'ON',
+      state_off: 'OFF',
       icon: getPlaybackModeIcon(mode),
     };
 

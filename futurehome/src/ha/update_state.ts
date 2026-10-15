@@ -243,17 +243,6 @@ function processAttributeValues(
     return undefined;
   }
 
-  // Special handling for "param" attributes
-  if (attrName === 'param') {
-    const paramMap: Record<string, any> = {};
-    for (const entry of values) {
-      if (entry.parameter_id) {
-        paramMap[entry.parameter_id] = { ...entry };
-      }
-    }
-    return paramMap;
-  }
-
   // Sort by timestamp to get the latest values first (only if ts exists)
   const sortedValues = [...values].sort((a, b) => {
     const tsA = a.ts ? new Date(a.ts).getTime() : 0;

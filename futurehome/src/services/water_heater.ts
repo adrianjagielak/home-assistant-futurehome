@@ -101,7 +101,7 @@ export function water_heater__components(
     modes: haModes.length > 0 ? haModes : ['off', 'heat_pump'],
     mode_command_topic: modeCommandTopic,
     mode_state_topic: stateTopic,
-    mode_state_template: `{{ value_json['${svc.addr}'].mode | default('off') }}`,
+    mode_state_template: `{% set mode = value_json['${svc.addr}'].mode | default('off') %}{{ ${JSON.stringify(Object.fromEntries(supModes.map((m: string) => [m, mapFimpToHaMode(m)])))}.get(mode, mode) }}`,
     optimistic: false,
     min_temp: minTemp,
     max_temp: maxTemp,

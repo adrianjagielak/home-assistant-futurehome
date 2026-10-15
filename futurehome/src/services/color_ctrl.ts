@@ -84,7 +84,7 @@ export function color_ctrl__components(
       // Zigbee style - direct temperature value in Kelvin
       lightComponent.color_temp_command_topic = colorTempCommandTopic;
       lightComponent.color_temp_state_topic = stateTopic;
-      lightComponent.color_temp_value_template = `{{ (1000000 / value_json['${svc.addr}'].temp) | round(0) }}`; // Convert Kelvin to mireds
+      lightComponent.color_temp_value_template = `{{ (1000000 / value_json['${svc.addr}'].color.temp) | round(0) }}`; // Convert Kelvin to mireds
       lightComponent.min_mireds = 153; // ~6500K
       lightComponent.max_mireds = 370; // ~2700K
     } else if (
@@ -95,7 +95,7 @@ export function color_ctrl__components(
       lightComponent.color_temp_command_topic = colorTempCommandTopic;
       lightComponent.color_temp_state_topic = stateTopic;
       // Estimate color temperature from warm_w/cold_w ratio
-      lightComponent.color_temp_value_template = `{{ (153 + (217 * (value_json['${svc.addr}'].warm_w / (value_json['${svc.addr}'].warm_w + value_json['${svc.addr}'].cold_w + 0.001)))) | round(0) }}`;
+      lightComponent.color_temp_value_template = `{{ (153 + (217 * (value_json['${svc.addr}'].color.warm_w / (value_json['${svc.addr}'].color.warm_w + value_json['${svc.addr}'].color.cold_w + 0.001)))) | round(0) }}`;
       lightComponent.min_mireds = 153; // ~6500K (cold)
       lightComponent.max_mireds = 370; // ~2700K (warm)
     }

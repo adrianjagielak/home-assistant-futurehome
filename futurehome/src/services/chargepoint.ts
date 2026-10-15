@@ -67,6 +67,8 @@ export function chargepoint__components(
       value_template: `{{ value_json['${svc.addr}'].cable_lock | default(false) | iif('ON', 'OFF') }}`,
       payload_on: 'true',
       payload_off: 'false',
+      state_on: 'ON',
+      state_off: 'OFF',
       name: 'Cable Lock',
       icon: 'mdi:lock',
       entity_category: 'config',

@@ -28,7 +28,7 @@ export function battery__components(
       platform: 'binary_sensor',
       entity_category: 'diagnostic',
       device_class: 'battery',
-      value_template: `{{ (value_json['${svc.addr}'].alarm.status == 'activ') | iif('ON', 'OFF') }}`,
+      value_template: `{{ (((value_json['${svc.addr}'].alarm | default({})).low_battery | default({})).status == 'activ') | iif('ON', 'OFF') }}`,
     };
   }
 

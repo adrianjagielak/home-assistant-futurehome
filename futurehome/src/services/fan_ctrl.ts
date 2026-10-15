@@ -27,6 +27,7 @@ export function fan_ctrl__components(
         optimistic: false,
         preset_modes: supModes,
         preset_mode_command_topic: commandTopic,
+        preset_mode_state_topic: `${topicPrefix}/state`,
         preset_mode_value_template: `{{ value_json['${svc.addr}'].mode }}`,
         // Fan is considered "on" if mode is not off/stop
         state_value_template: `{{ 'ON' if value_json['${svc.addr}'].mode not in ['off', 'stop'] else 'OFF' }}`,

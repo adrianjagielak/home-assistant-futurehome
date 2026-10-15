@@ -70,6 +70,7 @@ export function barrier_ctrl__components(
   // Add position support if available
   if (supportsPosition) {
     coverComponent.set_position_topic = positionCommandTopic;
+    coverComponent.position_topic = `${topicPrefix}/state`;
     coverComponent.position_template = `{{ value_json['${svc.addr}'].position | default(0) }}`;
     coverComponent.position_closed = 0;
     coverComponent.position_open = 100;

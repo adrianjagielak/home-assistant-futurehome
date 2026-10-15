@@ -125,7 +125,7 @@ export function thermostat__components(
     mode_command_topic: modeCommandTopic,
     // mode_state_topic seems to be required for mode state to be reported correctly in HA
     mode_state_topic: stateTopic,
-    mode_state_template: `{{ value_json['${svc.addr}'].mode | default('off') }}`,
+    mode_state_template: `{% set mode = value_json['${svc.addr}'].mode | default('off') %}{{ ${JSON.stringify(Object.fromEntries(supModes.map((m: string) => [m, mapFimpToHaMode(m)])))}.get(mode, mode) }}`,
     optimistic: false,
     temp_step: supStep,
     temperature_unit: 'C',

@@ -36,7 +36,7 @@ export function parameters__components(
     const valueType = (param as any).value_type as string;
     const uniqueId = `${svc.addr}_${paramId}`;
     const name = paramId.replace(/_/g, ' ');
-    const valueTemplate = `{{ value_json['${svc.addr}'].param.${paramId}.value }}`;
+    const valueTemplate = `{{ value_json['${svc.addr}'].param['${paramId}'].value }}`;
 
     if (valueType === 'bool') {
       components[uniqueId] = {
@@ -44,7 +44,9 @@ export function parameters__components(
         platform: 'switch',
         name,
         state_topic: stateTopic,
-        value_template: valueTemplate,
+        value_template: `{{ value_json['${svc.addr}'].param['${paramId}'].value | iif('ON', 'OFF') }}`,
+        state_on: 'ON',
+        state_off: 'OFF',
         command_topic: setParamTopic,
         payload_on: `{"parameter_id":"${paramId}","value_type":"${valueType}","value":true}`,
         payload_off: `{"parameter_id":"${paramId}","value_type":"${valueType}","value":false}`,
@@ -71,6 +73,7 @@ export function parameters__components(
         state_topic: stateTopic,
         value_template: valueTemplate,
         command_topic: setParamTopic,
+        command_template: `{"parameter_id":"${paramId}","value_type":"${valueType}","value":{{ value | tojson }}}`,
       };
     }
   }
